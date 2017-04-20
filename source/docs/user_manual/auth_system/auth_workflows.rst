@@ -1,7 +1,8 @@
 .. _authentication_workflow:
 
+*****************************
 User Authentication Workflows
-=============================
+*****************************
 
 .. _figure_authusage_1:
 
@@ -15,7 +16,7 @@ User Authentication Workflows
    Generic user workflow
 
 HTTP(S) authentication
-----------------------
+======================
 
 One of the most common resource connections is via HTTP(S), e.g. web mapping
 servers, and authentication method plugins often work for these types of
@@ -37,7 +38,7 @@ upon connection.
    Configuring a WMS connection for HTTP BASIC
 
 Database authentication
------------------------
+=======================
 
 Connections to database resources are generally stored as key=value pairs, which
 will expose usernames and (optionally) passwords, if *not* using an
@@ -57,7 +58,7 @@ key=value will be an abstracted representation of the credentials, e.g.
    Configuring a Postgres SSL-with-PKI connection
 
 OAuth 2.0 workflow
-------------------
+==================
 
 The OAuth2 authentication method plugin adds `OAuth 2.0 client`_ support to QGIS
 for the following OAuth 2.0 grant flows (with `OAuth 2.0 specification`_ section
@@ -91,12 +92,12 @@ links):
 .. _o2 library: https://github.com/pipacs/o2
 
 OAuth 2.0 grant flow overview
-.............................
+-----------------------------
 
 .. overview diagram
 
 Default Web browser
-~~~~~~~~~~~~~~~~~~~
+...................
 
 OAuth 2.0, as a protocol, does not manage user authentication, which can be done
 by a variety of identity providers. Accessing those providers is generally done
@@ -112,18 +113,19 @@ any particular API, instead relying upon the user's default Web browser, OAuth
    OAuth2 plugin relies upon the user's default Web browser because:
 
    * Maintaining a secure Web browser, at the level of other browser projects,
-     within QGIS would be arduous
+     within QGIS would be arduous.
    * Current user authentication state in the user's browser, e.g. Single Sign
-     On, offering fewer steps for some grant flows, would not be preserved
+     On, offering fewer steps for some grant flows, would not be preserved.
    * The OAuth 2.0 specification for native applications does not recommend the
      use of embedded Web browsers, aka user-agents, when the user's default is
-     available (`OAuth 2.0 for Native Apps`_ draft)
+     available (`OAuth 2.0 for Native Apps`_ draft).
 
-   .. _OAuth 2.0 for Native Apps: https://tools.ietf.org/html/draft-ietf-oauth-native-apps-03#section-8.1
+.. _OAuth 2.0 for Native Apps: https://tools.ietf.org/html/draft-ietf-oauth-native-apps-03#section-8.1
 
-**Example OAuth 2.0 Authorization Code grant flow QGIS <--> Web browser session**
+Example OAuth 2.0 Authorization Code grant flow QGIS <--> Web browser session
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. User configures a connection to a protected resource with OAuth2 plugin.
+#. User configures a connection to a protected resource with OAuth2 plugin.
 
    .. _figure_auth_oauth2_config_authcode:
 
@@ -132,7 +134,7 @@ any particular API, instead relying upon the user's default Web browser, OAuth
    .. figure:: /static/user_manual/auth_system/auth-oauth2-config-authcode.png
       :align: center
 
-2. User attempts initial connection to OAuth2-protected resource and is asked to
+#. User attempts initial connection to OAuth2-protected resource and is asked to
    log in (authenticate).
 
    .. _figure_auth_oauth2_google_authenticate:
@@ -142,7 +144,7 @@ any particular API, instead relying upon the user's default Web browser, OAuth
    .. figure:: /static/user_manual/auth_system/auth-oauth2-google-authenticate.png
       :align: center
 
-3. User authorizes the application for access to a particular resource.
+#. User authorizes the application for access to a particular resource.
 
    .. _figure_auth_oauth2_google_authorize_app:
 
@@ -151,7 +153,7 @@ any particular API, instead relying upon the user's default Web browser, OAuth
    .. figure:: /static/user_manual/auth_system/auth-oauth2-google-authorize-app.png
       :align: center
 
-4. User has verified authorization code request for application.
+#. User has verified authorization code request for application.
 
    .. _figure_auth_oauth2_google_verification_done:
 
@@ -168,12 +170,12 @@ any particular API, instead relying upon the user's default Web browser, OAuth
       Also, the ``Close window`` link may not work in some browsers if they
       restrict the closing of some tabs/windows by Javascript.
 
-5. OAuth2 plugin requests (in the background) an access token for the
+#. OAuth2 plugin requests (in the background) an access token for the
    application using the authorization code. Upon success, the access token is
    cached and used in subsequent requests to the protected resource.
 
 Local reply server
-~~~~~~~~~~~~~~~~~~
+..................
 
 For grant flows that require a redirect URL to communicate token request
 responses to QGIS, the plugin temporarily spawns a local HTTP server, on a
@@ -196,8 +198,8 @@ prompt to authorize connections to the QGIS application.
 
 .. note::
 
-   If needed, you can revert or adjust this firewall configuration by accessing the
-   ``Advanced settings`` in the OS Control Panel.
+   If needed, you can revert or adjust this firewall configuration by accessing
+   the ``Advanced settings`` in the OS Control Panel.
 
    .. _figure_auth_oauth2_firewall_win_control_panel:
 
@@ -225,11 +227,7 @@ ports or port ranges set in your OAuth2 configurations.
 .. _auth_oath2_access_tokens:
 
 Resource access tokens
-~~~~~~~~~~~~~~~~~~~~~~
-
-.. |tokens| image:: /static/user_manual/auth_system/auth-oauth2-delete-tokens.png
-   :width: 50pt
-   :height: 14pt
+......................
 
 By default, access tokens are cached by the OAuth2 plugin *only* for the
 duration of the QGIS work session, then removed upon quitting QGIS. However,
@@ -245,14 +243,14 @@ directory:
 *  on |win| in :file:`C:\\Users\\user\\.qgis2\\oauth2-cache`
 
 In situations where the cached token needs to be manually deleted, the user can
-click the |tokens| button within the OAuth2 configuration GUI. If the button is
-not active, then no tokens have been cached.
+click the **[** |close| **tokens]** button within the OAuth2 configuration GUI.
+If the button is not active, then no tokens have been cached.
 
 Configuring OAuth 2.0 connections
-.................................
+---------------------------------
 
 The configuration GUI for the OAuth2 plugin has sections divided into tabs:
-:guilabel:`Defined` (default) and :guilabel:`Custom`. This allows for maximum
+:guilabel:`Defined` (default) and :guilabel:`Configure`. This allows for maximum
 flexibility for choosing from well-known or predefined enterprise identity
 providers as well as providers that require non-standard or extended
 configurations.
@@ -263,7 +261,7 @@ configurations.
    parameter pairs* (at bottom of GUI) can be applied to either.
 
 Defined OAuth 2.0 configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+...............................
 
 The :guilabel:`Defined` tab allows for selecting predefined configurations for
 particular identity providers, e.g. Google, etc, and grant flows. This is the
@@ -290,8 +288,8 @@ configuration files:
 
    and...
 
-*  on |nix| and |osx| in :file:`~/.qgis2/oauth2_configs`
-*  on |win| in :file:`C:\\Users\\user\\.qgis2\\oauth2_configs`
+*  on |nix| and |osx| in :file:`~/.qgis3/oauth2_configs`
+*  on |win| in :file:`C:\\Users\\user\\.qgis3\\oauth2_configs`
 
 In addition to the standard directories to search, you can add an extra
 directory within the GUI.
@@ -305,7 +303,8 @@ directory within the GUI.
 
    Loaded predefined configurations
 
-**Deploying defined OAuth2 configuration files**
+Deploying defined OAuth2 configuration files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Predefined OAuth2 configurations are simple `JSON-formatted`_ files, with a
 *single* configuration per file. This allows configurations to be swapped out
@@ -327,9 +326,10 @@ being loaded.
    part of the GUI its export function, which will generate proper JSON files
    for deployment.
 
-**Example OAuth2 JSON-formatted configuration file**
+Example OAuth2 JSON-formatted configuration file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: json
 
    {
     "accessMethod" : 0,
@@ -341,6 +341,7 @@ being loaded.
     "grantFlow" : 0,
     "id" : "nchu3w6",
     "name" : "Work - OAuth2 login",
+    "objectName": "",
     "password" : "",
     "persistToken" : true,
     "queryPairs" :  {
@@ -359,7 +360,9 @@ being loaded.
     "version" : 1
    }
 
-Refer to the next section for descriptions of similarly named keys and their possible values. There are several items in the configuration that are not exposed in the GUI and are described here:
+Refer to the next section for descriptions of similarly named keys and their
+possible values. There are several items in the configuration that are not
+exposed in the GUI and are described here:
 
 *  ``configType`` (required): 0 = Defined; 1 = Custom (this should be 1 if
    exported from the GUI).
@@ -379,29 +382,24 @@ Refer to the next section for descriptions of similarly named keys and their pos
 .. _auth_oauth2_custom_config:
 
 Custom OAuth 2.0 configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+..............................
 
-.. |oauthimport| image:: /static/user_manual/auth_system/auth-oauth2-config-import.png
-   :width: 20pt
-   :height: 18pt
-
-.. |oauthexport| image:: /static/user_manual/auth_system/auth-oauth2-config-export.png
-   :width: 19pt
-   :height: 18pt
-
-The :guilabel:`Custom` tab allows you to fully customize the configuration of
+The :guilabel:`Configure` tab allows you to fully customize the configuration of
 the supported grant flows. Configurations are saved in the authentication
 system's database (not JSON-formatted files), making them as portable as other
 authentication method configurations.
 
-**Import/Export**
+Import/Export
+^^^^^^^^^^^^^
 
-Once a configuration is edited and tested, you can use the **export**
-|oauthexport| button to output a JSON-formatted file for use as a predefined
-OAuth2 configuration. Similarly, you can use the **import** |oauthimport| button
-to load an existing OAuth2 JSON-formatted file with the ``.json`` extension.
+Once a configuration is edited and tested, you can use the |export_conf|
+:sup:`export configuration` button to output a JSON-formatted file for use as a
+predefined OAuth2 configuration. Similarly, you can use the |import_conf|
+:sup:`import configuration` button to load an existing OAuth2 JSON-formatted
+file with the ``.json`` extension.
 
-**Grant flows**
+Grant flows
+^^^^^^^^^^^
 
 Each grant flow has slightly different *required* and *optional* fields, as well
 as some non-applicable fields. The GUI with show/hide the fields relative to the
@@ -436,44 +434,46 @@ Here are the fields for each grant flow:
 
    Resource Owner Password Credentials grant flow
 
-**GUI field descriptions**
+GUI field descriptions
+^^^^^^^^^^^^^^^^^^^^^^
 
-*  ``Grant flow``: The selected OAuth 2.0 grant flow.
-*  ``Description``: Short description of the configuration (useful for when
+*  :guilabel:`Grant flow`: The selected OAuth 2.0 grant flow.
+*  :guilabel:`Description`: Short description of the configuration (useful for when
    listed as a predefined OAuth2 configuration file read from the file system).
-*  ``Request URL``: Where to send Authorization Code and Implicit initial
+*  :guilabel:`Request URL`: Where to send Authorization Code and Implicit initial
    requests.
-*  ``Token URL``: Where to send request for access token.
-*  ``Refresh Token URL``: Where to send request when attempting to refresh a
+*  :guilabel:`Token URL`: Where to send a request for the access token.
+*  :guilabel:`Refresh Token URL`: Where to send request when attempting to refresh a
    token.
-*  ``Redirect URL``: Where to redirect the user's browser upon finishing
+*  :guilabel:`Redirect URL`: Where to redirect the user's browser upon finishing
    verification for Authorization Code or Implicit grant flows. This **must**
    match the redirect URL registered with the authorizing application at the
    authorization server. This will always be the plugin's local reply server,
    but the port **should** be different for each configuration, and ideally
    above 1024. The *optional* path may be needed by some authorization servers.
-*  ``Client ID``: The identification of your registered authorizing application
+*  :guilabel:`Client ID`: The identification of your registered authorizing application
    at the authorization server, where it is usually generated.
-*  ``Client Secret``: Password for client, used in Authorization Code and
+*  :guilabel:`Client Secret`: Password for the client, used in Authorization
+   Code and
    Resource Owner Password Credentials grant flows.
-*  ``Username``: Username for Resource Owner Password Credentials grant flow.
-*  ``Password``: Password for Resource Owner Password Credentials grant flow.
-*  ``Scope``: A space-delimited list of authorization-server-approved
+*  :guilabel:`Username`: Username for Resource Owner Password Credentials grant flow.
+*  :guilabel:`Password`: Password for Resource Owner Password Credentials grant flow.
+*  :guilabel:`Scope`: A space-delimited list of authorization-server-approved
    permissions. This should be as limited to only what is needed.
-*  ``State``: A value that is passed between client and server during flow.
+*  :guilabel:`State`: A value that is passed between client and server during flow.
    (Currently not supported.)
-*  ``API Key``: Optional token used in some resource server requests.
-*  ``Token Session`` (Advanced): Whether to persist the access token between
+*  :guilabel:`API Key`: Optional token used in some resource server requests.
+*  :guilabel:`Token Session`` (Advanced): Whether to persist the access token between
    QGIS launches. See :ref:`Resource access tokens <auth_oath2_access_tokens>`.
-*  ``Access Method`` (Advanced): Which method should be used to pass the access
+*  :guilabel:`Access Method` (Advanced): Which method should be used to pass the access
    token to the resource server: Header, Form (Post only), or URL Query.
-*  ``Request Timeout`` (Advanced): Separate timeout for OAuth grant flow
+*  :guilabel:`Request Timeout` (Advanced): Separate timeout for OAuth grant flow
    requests from standard QGIS network requests.
 
 .. TODO: add reviewing OAuth2 plugin's debug output in Log Messages Panel tab
 
 PKI authentication
-------------------
+==================
 
 When configuring PKI components within the authentication system, you have the
 option of importing components into the database or referencing component files
@@ -523,7 +523,7 @@ accustomed to the workflow.
    settings in the Options dialog.
 
 Authorities
-...........
+-----------
 
 You can manage available Certificate Authorities (CAs) from the **Authorities**
 tab in the **Certificate manager** from the **Authentication** tab of
@@ -632,7 +632,7 @@ editor.
    field, note that encrypted certificates are not supported.
 
 Identities
-..........
+----------
 
 You can manage available client identity bundles from the :guilabel:`Identities`
 tab in the :guilabel:`Certificate manager` from the **Authentication** tab of the
@@ -697,7 +697,7 @@ can not be imported.
    PKCS#12 identity import
 
 Handling bad layers
--------------------
+===================
 
 Occasionally, the authentication configuration ID that is saved with a project
 file is no longer valid, possibly because the current authentication database
@@ -733,7 +733,7 @@ and editing the string.
    Edit bad layer's authentication config ID
 
 Changing authentication config ID
----------------------------------
+=================================
 
 Occasionally, you will need to change the authenticationn configuration ID that
 is associated with accessing a resource. There are instances where this is
@@ -768,7 +768,7 @@ useful:
    editing the ID.
 
 QGIS Server support
--------------------
+===================
 
 When using a project file, with layers that have authentication configurations,
 as a basis for a map in QGIS Server, there are a couple of additional setup
@@ -796,7 +796,7 @@ web-accessible directories.
    environment immediately after accessing
 
 SSL server exceptions
----------------------
+=====================
 
 .. _figure_auth_server_1:
 

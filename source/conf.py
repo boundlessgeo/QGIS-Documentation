@@ -374,6 +374,8 @@ rst_epilog = """
    :width: 1.5em
 .. |clip| image:: /static/common/clip.png
    :width: 1.5em
+.. |close| image:: /static/common/mIconClose.png
+   :width: 1em
 .. |collapseTree| image:: /static/common/mActionCollapseTree.png
    :width: 1.5em
 .. |color|  image:: /static/common/color.png
@@ -502,6 +504,8 @@ rst_epilog = """
 .. |expandNewTree| image:: /static/common/mActionExpandNewTree.png
    :width: 1.5em
 .. |expandTree| image:: /static/common/mActionExpandTree.png
+   :width: 1.5em
+.. |export_conf| image:: /static/common/export.png
    :width: 1.5em
 .. |exportMapServer| image:: /static/common/mActionExportMapServer.png
    :width: 1.5em
@@ -736,6 +740,8 @@ rst_epilog = """
 .. |identify| image:: /static/common/mActionIdentify.png
    :width: 1.5em
 .. |import| image:: /static/common/mIconImport.gif
+   :width: 1.5em
+.. |import_conf| image:: /static/common/import.png
    :width: 1.5em
 .. |importGPX| image:: /static/common/import_gpx.png
    :width: 1.5em
