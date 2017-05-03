@@ -57,8 +57,8 @@ key=value will be an abstracted representation of the credentials, e.g.
 
    Configuring a Postgres SSL-with-PKI connection
 
-OAuth 2.0 workflow
-==================
+OAuth 2.0 workflows
+===================
 
 The OAuth2 authentication method plugin adds `OAuth 2.0 client`_ support to QGIS
 for the following OAuth 2.0 grant flows (with `OAuth 2.0 specification`_ section
@@ -91,10 +91,141 @@ links):
 .. _section 1.5: http://tools.ietf.org/html/rfc6749#section-1.5
 .. _o2 library: https://github.com/pipacs/o2
 
-OAuth 2.0 grant flow overview
------------------------------
+OAuth 2.0 grant flows overview
+------------------------------
 
-.. overview diagram
+OAuth2 grant flows rely on the interaction between different "actors",
+it is important do define them precisely in order to understand how the
+different grant flows work.
+
+* **Resource owner**: is the person (generally you) that owns the resource that needs to be accessed
+* **Resource server**: server hosting protected data (for example, an OGC server hosting your geodata or Google hosting your profile)
+* **Client**: application requesting access to the *Resource server* (this is normally a web server but in the context of this plugin it is the QGIS application)
+* **Authorization server**: the server issuing *access tokens* to the *Client*, this is often the same server as the *Resource server*
+
+OAuth2 provides different grant flows to fulfill the needs of different
+scenarios, they differentiate expecially regarding the trust that can
+be given to the involved actors.
+
+We are going to examine the grant flows implemented by the OAuth2 plugin
+in the next sub-chapters.
+
+Authorization code grant flow
+.............................
+
+This is the most complex grant flow, it is typically used when the
+client (i.e. QGIS) needs to access a protected API by using an authorization
+code released by the authorization server.
+
+This flow allows the client to retrieve a long-lived *access token*
+and an optional *refresh token* that can be used to obtain a new
+*access token* when it expires.
+
+This grant flow requires user (resource owner) interaction through a
+web browser and the access token is never made visible to the browser
+or to the resource owner but only to the client.
+
+An example might help to clarify this flow.
+
+Roles involved:
+
+* Resource owner: you
+* Resource server: an OGC server
+* Authorization server: a server that supports OAuth2
+* Client: QGIS
+
+Please note that in all the real-world implementation that use the well known
+OAuth2 authorization servers (Google, Twitter, Github etc.) the client is
+a web application running on a web server, while the resource server is the
+API provided by the well knows OAuth2 providers.
+
+This workflow assumes that the client (QGIS) needs to be registered as an
+application and have a client ID (and usually a client secret).
+
+When QGIS first try to access the resource server (for instance
+by issuing a GetCapabilities request), the OAuth2 authorization
+grant flow dance begins:
+
+#. the client is redirected to the authorization server asking for an authorization code request
+#. the authorization server asks the resource owner to log in and authorize the request (this happens inside a web browser)
+#. if the resource owner authorizes the request, the client receives the authorization code
+#. the client exchange the authorization code with an access token calling the authorization server
+#. finally the client has an access token that can use to call the resource server API
+
+.. _figure_auth_oauth2_authorization_code_gf:
+
+.. only:: html
+
+.. figure:: /static/user_manual/auth_system/auth-oauth2-authorization-code-gf.png
+   :align: center
+
+
+Implicit grant flow
+.............................
+
+This grant flow is normally used when the client is running in
+a web browser (QGIS in our scenario), the refresh token is not
+supported by this grant flow.
+
+Example:
+
+* Resource owner: you
+* Resource server: an OGC server
+* Authorization server: a server that supports OAuth2
+* Client: QGIS
+
+
+When QGIS first try to access the OGC server (for instance
+by issuing a GetCapabilities request), the OAuth2 implicit
+grant flow dance begins:
+
+#. the client is redirected to the authorization server asking for an access token
+#. the authorization server asks the resource owner to log in and authorize the request (this happens inside a web browser)
+#. if the resource owner authorizes the request, the client receives the access token
+#. finally the client has an access token that can use to call the resource server API
+
+.. _figure_auth_oauth2_implicit_gf:
+
+.. only:: html
+
+.. figure:: /static/user_manual/auth_system/auth-oauth2-implicit-gf.png
+   :align: center
+
+
+Resource owner passsword credentials grant flow
+...............................................
+
+This grant flow is normally used when the client and the
+authorization server have absolute mutual trust: the resource
+owner credentials are given to the client and then to the
+authorization server.
+
+
+Example:
+
+* Resource owner: you
+* Resource server: an OGC server
+* Authorization server: a server that supports OAuth2
+* Client: QGIS
+
+
+When QGIS first try to access the OGC server (for instance
+by issuing a GetCapabilities request), the OAuth2 password credentials
+grant flow dance begins:
+
+#. the client knows the resource owner credentials (username and password) and calls the authorization server asking for an access token
+#. if the credentials are valid and the user is authorized, the client receives an access token and a refresh token
+#. finally the client has an access token that can use to call the resource server API
+
+
+.. _figure_auth_oauth2_resource_owner_gf:
+
+.. only:: html
+
+.. figure:: /static/user_manual/auth_system/auth-oauth2-resource-owner-gf.png
+  :align: center
+
+
 
 Default Web browser
 ...................
@@ -568,8 +699,8 @@ the |propertiesWidget| :sup:`Show information for certificate`.
    Certificate info dialog
 
 You can edit the :guilabel:`trust policy` |selectString| for any selected
-certificate within the chain. Any change in trust policy to a selected 
-certificate will not be saved to the database unless the |fileSave| 
+certificate within the chain. Any change in trust policy to a selected
+certificate will not be saved to the database unless the |fileSave|
 :sup:`Save certificate trust policy change to database` button is clicked
 *per* selected certification. Closing the dialog will **not** apply the
 policy changes.
