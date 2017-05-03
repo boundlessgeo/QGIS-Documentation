@@ -98,10 +98,15 @@ OAuth2 grant flows rely on the interaction between different "actors",
 it is important do define them precisely in order to understand how the
 different grant flows work.
 
-* **Resource owner**: is the person (generally you) that owns the resource that needs to be accessed
-* **Resource server**: server hosting protected data (for example, an OGC server hosting your geodata or Google hosting your profile)
-* **Client**: application requesting access to the *Resource server* (this is normally a web server but in the context of this plugin it is the QGIS application)
-* **Authorization server**: the server issuing *access tokens* to the *Client*, this is often the same server as the *Resource server*
+* **Resource owner**: is the person (generally you) that owns the resource
+  that needs to be accessed
+* **Resource server**: server hosting protected data (for example, an OGC
+  server hosting your geodata or Google hosting your profile)
+* **Client**: application requesting access to the *Resource server* (this is
+  normally a web server but in the context of this plugin it is the QGIS
+  application)
+* **Authorization server**: the server issuing *access tokens* to the
+  *Client*, this is often the same server as the *Resource server*
 
 OAuth2 provides different grant flows to fulfill the needs of different
 scenarios, they differentiate expecially regarding the trust that can
@@ -146,11 +151,16 @@ When QGIS first try to access the resource server (for instance
 by issuing a GetCapabilities request), the OAuth2 authorization
 grant flow dance begins:
 
-#. the client is redirected to the authorization server asking for an authorization code request
-#. the authorization server asks the resource owner to log in and authorize the request (this happens inside a web browser)
-#. if the resource owner authorizes the request, the client receives the authorization code
-#. the client exchange the authorization code with an access token calling the authorization server
-#. finally the client has an access token that can use to call the resource server API
+#. the client is redirected to the authorization server asking for an
+   authorization code request;
+#. the authorization server asks the resource owner to log in and authorize
+   the request (this happens inside a web browser);
+#. if the resource owner authorizes the request, the client receives the
+   authorization code;
+#. the client exchange the authorization code with an access token calling
+   the authorization server;
+#. finally the client has an access token that can use to call the resource
+   server API.
 
 .. _figure_auth_oauth2_authorization_code_gf:
 
@@ -159,9 +169,10 @@ grant flow dance begins:
 .. figure:: /static/user_manual/auth_system/auth-oauth2-authorization-code-gf.png
    :align: center
 
+   Authorization code grant flow
 
 Implicit grant flow
-.............................
+...................
 
 This grant flow is normally used when the client is running in
 a web browser (QGIS in our scenario), the refresh token is not
@@ -179,10 +190,14 @@ When QGIS first try to access the OGC server (for instance
 by issuing a GetCapabilities request), the OAuth2 implicit
 grant flow dance begins:
 
-#. the client is redirected to the authorization server asking for an access token
-#. the authorization server asks the resource owner to log in and authorize the request (this happens inside a web browser)
-#. if the resource owner authorizes the request, the client receives the access token
-#. finally the client has an access token that can use to call the resource server API
+#. the client is redirected to the authorization server asking for an access
+   token;
+#. the authorization server asks the resource owner to log in and authorize
+   the request (this happens inside a web browser);
+#. if the resource owner authorizes the request, the client receives the
+   access token;
+#. finally the client has an access token that can use to call the resource
+   server API.
 
 .. _figure_auth_oauth2_implicit_gf:
 
@@ -190,6 +205,8 @@ grant flow dance begins:
 
 .. figure:: /static/user_manual/auth_system/auth-oauth2-implicit-gf.png
    :align: center
+
+   Implicit grant flow
 
 
 Resource owner passsword credentials grant flow
@@ -209,13 +226,16 @@ Example:
 * Client: QGIS
 
 
-When QGIS first try to access the OGC server (for instance
-by issuing a GetCapabilities request), the OAuth2 password credentials
-grant flow dance begins:
+When QGIS first try to access the OGC server (for instance by issuing a
+GetCapabilities request), the OAuth2 password credentials grant flow dance
+begins:
 
-#. the client knows the resource owner credentials (username and password) and calls the authorization server asking for an access token
-#. if the credentials are valid and the user is authorized, the client receives an access token and a refresh token
-#. finally the client has an access token that can use to call the resource server API
+#. the client knows the resource owner credentials (username and password) and
+   calls the authorization server asking for an access token;
+#. if the credentials are valid and the user is authorized, the client receives
+   an access token and a refresh token;
+#. finally the client has an access token that can use to call the resource
+   server API.
 
 
 .. _figure_auth_oauth2_resource_owner_gf:
@@ -223,9 +243,9 @@ grant flow dance begins:
 .. only:: html
 
 .. figure:: /static/user_manual/auth_system/auth-oauth2-resource-owner-gf.png
-  :align: center
+   :align: center
 
-
+   Resource owner passsword credentials grant flow
 
 Default Web browser
 ...................
