@@ -132,17 +132,12 @@ or to the resource owner but only to the client.
 
 An example might help to clarify this flow.
 
-Roles involved:
+.. note::
 
-* Resource owner: you
-* Resource server: an OGC server
-* Authorization server: a server that supports OAuth2
-* Client: QGIS
-
-Please note that in all the real-world implementation that use the well known
-OAuth2 authorization servers (Google, Twitter, Github etc.) the client is
-a web application running on a web server, while the resource server is the
-API provided by the well knows OAuth2 providers.
+   Please note that in all the real-world implementation that use the
+   well known OAuth2 authorization servers (Google, Twitter, Github etc.)
+   the client is a web application running on a web server, while the
+   resource server is the API provided by the well knows OAuth2 providers.
 
 This workflow assumes that the client (QGIS) needs to be registered as an
 application and have a client ID (and usually a client secret).
@@ -178,13 +173,7 @@ This grant flow is normally used when the client is running in
 a web browser (QGIS in our scenario), the refresh token is not
 supported by this grant flow.
 
-Example:
-
-* Resource owner: you
-* Resource server: an OGC server
-* Authorization server: a server that supports OAuth2
-* Client: QGIS
-
+Let's look at an example.
 
 When QGIS first try to access the OGC server (for instance
 by issuing a GetCapabilities request), the OAuth2 implicit
@@ -217,14 +206,7 @@ authorization server have absolute mutual trust: the resource
 owner credentials are given to the client and then to the
 authorization server.
 
-
-Example:
-
-* Resource owner: you
-* Resource server: an OGC server
-* Authorization server: a server that supports OAuth2
-* Client: QGIS
-
+Let's look at an example.
 
 When QGIS first try to access the OGC server (for instance by issuing a
 GetCapabilities request), the OAuth2 password credentials grant flow dance
