@@ -109,8 +109,27 @@ different grant flows work.
   *Client*, this is often the same server as the *Resource server*
 
 OAuth2 provides different grant flows to fulfill the needs of different
-scenarios, they differentiate expecially regarding the trust that can
+scenarios, they differentiate especially regarding the trust that can
 be given to the involved actors.
+
+If you require a user's permission to access resources, i.e., the user is
+the **Access token owner**, the grant flow to use will depend on the **Client
+type** and if either you trust it enough to handle the end user's authorization
+credentials (**first party** or trusted client) or not (**third party**
+client). See :ref:`figure_auth_oauth2_what_grant_to_use` figure to decide
+which is the best grant flow for your case.
+
+.. _figure_auth_oauth2_what_grant_to_use:
+
+.. figure:: /static/user_manual/auth_system/auth-oauth2-what-grant-to-use.png
+   :align: center
+
+   What grant flow should you use
+
+.. note::
+
+   Machine owned Access token and Web app client type where not implement yet.
+   That is why they are faded in the above figure.
 
 We are going to examine the grant flows implemented by the OAuth2 plugin
 in the next sub-chapters.
@@ -159,12 +178,10 @@ grant flow dance begins:
 
 .. _figure_auth_oauth2_authorization_code_gf:
 
-.. only:: html
-
 .. figure:: /static/user_manual/auth_system/auth-oauth2-authorization-code-gf.png
    :align: center
 
-   Authorization code grant flow
+   Authorization code grant flow example
 
 Implicit grant flow
 ...................
@@ -190,12 +207,10 @@ grant flow dance begins:
 
 .. _figure_auth_oauth2_implicit_gf:
 
-.. only:: html
-
 .. figure:: /static/user_manual/auth_system/auth-oauth2-implicit-gf.png
    :align: center
 
-   Implicit grant flow
+   Implicit grant flow example
 
 
 Resource owner passsword credentials grant flow
@@ -222,12 +237,10 @@ begins:
 
 .. _figure_auth_oauth2_resource_owner_gf:
 
-.. only:: html
-
 .. figure:: /static/user_manual/auth_system/auth-oauth2-resource-owner-gf.png
    :align: center
 
-   Resource owner passsword credentials grant flow
+   Resource owner passsword credentials grant flow example
 
 Default Web browser
 ...................
