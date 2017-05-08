@@ -20,3 +20,9 @@ OPEN-GEOSPATIAL-CONSORTIUM. Web map service (1.3.0) implementation specification
 
 POSTGIS-PROJECT. Spatial support for postgresql. http://postgis.refractions.net/ , 2013.
 
+INTERNET ENGINEERING TASK FORCE. The OAuth 2.0 Authorization Framework. https://tools.ietf.org/html/rfc6749, 2012
+
+ALEX BILBIE. A Guide To OAuth 2.0 Grants. https://alexbilbie.com/guide-to-oauth-2-grants/ , 2017.
+
+JOHANN REINKE. Understanding OAuth2. http://www.bubblecode.net/en/2016/01/22/understanding-oauth2/ , 2016.
+
