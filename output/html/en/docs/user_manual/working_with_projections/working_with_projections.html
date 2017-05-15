@@ -1,0 +1,496 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with Projections</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="QGIS User Guide" href="../index.html" />
+    <link rel="next" title="QGIS Browser" href="../qgis_browser/qgis_browser.html" />
+    <link rel="prev" title="QGIS Configuration" href="../introduction/qgis_configuration.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/working_with_projections/working_with_projections.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../qgis_browser/qgis_browser.html" title="QGIS Browser"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../introduction/qgis_configuration.html" title="QGIS Configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="../introduction/qgis_configuration.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="../qgis_browser/qgis_browser.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="working-with-projections">
+<span id="label-projections"></span><h1>Working with Projections<a class="headerlink" href="#working-with-projections" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#overview-of-projection-support" id="id1">Overview of Projection Support</a></li>
+<li><a class="reference internal" href="#global-projection-specification" id="id2">Global Projection Specification</a></li>
+<li><a class="reference internal" href="#define-on-the-fly-otf-reprojection" id="id3">Define On The Fly (OTF) Reprojection</a></li>
+<li><a class="reference internal" href="#custom-coordinate-reference-system" id="id4">Custom Coordinate Reference System</a></li>
+<li><a class="reference internal" href="#default-datum-transformations" id="id5">Default datum transformations</a></li>
+</ul>
+</div>
+<p id="index-0">QGIS allows users to define a global and project-wide CRS (coordinate
+reference system) for layers without a pre-defined CRS. It also allows the user
+to define custom coordinate reference systems and supports on-the-fly (OTF)
+projection of vector and raster layers. All of these features allow the user to
+display layers with different CRSs and have them overlay properly.</p>
+<div class="section" id="overview-of-projection-support">
+<span id="index-1"></span><h2><a class="toc-backref" href="#id1">Overview of Projection Support</a><a class="headerlink" href="#overview-of-projection-support" title="Permalink to this headline">¶</a></h2>
+<p>QGIS has support for approximately 2,700 known CRSs. Definitions for each CRS are stored in a SQLite database that is installed with QGIS. Normally,
+you do not need to manipulate the database directly. In fact, doing so may
+cause projection support to fail. Custom CRSs are stored in a user database. See
+section <a class="reference internal" href="#sec-custom-projections"><em>Custom Coordinate Reference System</em></a> for information on managing your custom
+coordinate reference systems.</p>
+<p>The CRSs available in QGIS are based on those defined by the European Petroleum
+Search Group (EPSG) and the Institut Geographique National de France (IGNF) and
+are largely abstracted from the spatial reference tables used in GDAL. EPSG
+identifiers are present in the database and can be used to specify a CRS in
+QGIS.</p>
+<p>In order to use OTF projection, either your data must contain information about its
+coordinate reference system or you will need to define a global, layer or
+project-wide CRS. For PostGIS layers, QGIS uses the spatial reference identifier
+that was specified when the layer was created. For data supported by OGR, QGIS
+relies on the presence of a recognized means of specifying the CRS. In the case
+of shapefiles, this means a file containing the well-known text (<span class="target" id="index-2"></span>WKT)
+specification of the CRS. This projection file has the same base name as the
+shapefile and a <tt class="file docutils literal"><span class="pre">.prj</span></tt> extension. For example, a shapefile named
+<tt class="file docutils literal"><span class="pre">alaska.shp</span></tt> would have a corresponding projection file named
+<tt class="file docutils literal"><span class="pre">alaska.prj</span></tt>.</p>
+<p>Whenever you select a new CRS, the layer units will automatically be
+changed in the <em class="guilabel">General</em> tab of the <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a>
+<em class="guilabel">Project Properties</em> dialog under the <em class="guilabel">Project</em> (Gnome,
+OS X) or <em class="guilabel">Settings</em> (KDE, Windows) menu.</p>
+</div>
+<div class="section" id="global-projection-specification">
+<span id="index-3"></span><h2><a class="toc-backref" href="#id2">Global Projection Specification</a><a class="headerlink" href="#global-projection-specification" title="Permalink to this headline">¶</a></h2>
+<p>QGIS starts each new project using the global default projection. The global
+default CRS is EPSG:4326 - WGS 84 (<tt class="docutils literal"><span class="pre">proj=longlat</span> <span class="pre">+ellps=WGS84</span> <span class="pre">+datum=WGS84</span> <span class="pre">+no_defs</span></tt>),
+and it comes predefined in QGIS. This default can be changed via the
+<strong>[Select...]</strong> button in the first section, which is used to define the default
+coordinate reference system for new projects, as shown in
+<a class="reference internal" href="#figure-projection-1">figure_projection_1</a>. This choice will be saved for use in subsequent QGIS
+sessions.</p>
+<p id="figure-projection-1"><strong>Figure Projection 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/crsdialog.png" src="../../../_images/crsdialog.png" />
+<p class="caption">CRS tab in the QGIS Options Dialog</p>
+</div>
+<p>When you use layers that do not have a CRS, you need to define how QGIS
+responds to these layers. This can be done globally or project-wide in the
+<em class="guilabel">CRS</em> tab under <em class="menuselection">Settings ‣</em> <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a>
+<em class="guilabel">Options</em>.</p>
+<p>The options shown in <a class="reference internal" href="#figure-projection-1">figure_projection_1</a> are:</p>
+<ul class="simple">
+<li><img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Prompt for CRS</em></li>
+<li><img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Use project CRS</em></li>
+<li><img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Use default CRS displayed below</em></li>
+</ul>
+<p>If you want to define the coordinate reference system for a certain layer
+without CRS information, you can also do that in the <em class="guilabel">General</em> tab
+of the raster and vector properties dialog (see <a class="reference internal" href="../working_with_raster/raster_properties.html#label-generaltab"><em>General Menu</em></a> for
+rasters and <a class="reference internal" href="../working_with_vector/vector_properties.html#vectorgeneralmenu"><em>General Menu</em></a> for vectors). If your layer already has a CRS
+defined, it will be displayed as shown in <a class="reference internal" href="../working_with_vector/vector_properties.html#figure-vector-general-1"><em>General menu in vector layers properties dialog</em></a>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>CRS in the Map Legend</strong></p>
+<p class="last">Right-clicking on a layer in the Map Legend (section <a class="reference internal" href="../introduction/general_tools.html#label-legend"><em>Layers Panel</em></a>)
+provides two CRS shortcuts. <em class="guilabel">Set layer CRS</em> takes you directly
+to the Coordinate Reference System Selector dialog (see <a class="reference internal" href="#figure-projection-2">figure_projection_2</a>).
+<em class="guilabel">Set project CRS from Layer</em> redefines the project CRS using
+the layer&#8217;s CRS.</p>
+</div>
+</div>
+<div class="section" id="define-on-the-fly-otf-reprojection">
+<h2><a class="toc-backref" href="#id3">Define On The Fly (OTF) Reprojection</a><a class="headerlink" href="#define-on-the-fly-otf-reprojection" title="Permalink to this headline">¶</a></h2>
+<p>QGIS supports OTF reprojection for both raster and vector data. However, OTF is
+not activated by default. To use OTF projection, you must activate the
+<a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable on the fly CRS transformation</em> checkbox in the
+<em class="guilabel">CRS</em> tab of the <a class="reference internal" href="../../../_images/mActionProjectProperties.png"><img alt="projectProperties" src="../../../_images/mActionProjectProperties.png" style="width: 1.5em;" /></a> <em class="menuselection">Project
+Properties</em> dialog.</p>
+<p><strong>There are three ways to do this:</strong></p>
+<ol class="arabic simple">
+<li>Select <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <em class="menuselection">Project Properties</em> from the
+<em class="menuselection">Project</em> (Gnome, OSX) or <em class="menuselection">Settings</em> (KDE,
+Windows) menu.</li>
+<li>Click on the <img alt="geographic" src="../../../_images/geographic.png" /> <sup>CRS status</sup> icon in the lower right-hand
+corner of the status bar.</li>
+<li>Turn OTF on by default in the <em class="guilabel">CRS</em> tab of the
+<em class="guilabel">Options</em> dialog by selecting <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+<em class="guilabel">Enable &#8216;on the fly&#8217; reprojection by default</em> or <em class="guilabel">Automatically
+enable &#8216;on the fly&#8217; reprojection if layers have different CRS</em>.</li>
+</ol>
+<p>If you have already loaded a layer and you want to enable OTF projection, the
+best practice is to open the <em class="guilabel">CRS</em> tab of the <em class="guilabel">Project
+Properties</em> dialog, select a CRS, and activate the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+<em class="guilabel">Enable &#8216;on the fly&#8217; CRS transformation</em> checkbox.
+The <img alt="geographic" src="../../../_images/geographic.png" /> <sup>CRS status</sup> icon will no longer be greyed out, and all
+layers will be OTF projected to the CRS shown next to the icon.</p>
+<p id="index-4"><strong>Figure Projection 2:</strong></p>
+<div class="figure align-center" id="figure-projection-2">
+<img alt="../../../_images/projectionDialog.png" src="../../../_images/projectionDialog.png" />
+<p class="caption">Project Properties Dialog</p>
+</div>
+<p>The <em class="guilabel">CRS</em> tab of the <em class="guilabel">Project Properties</em> dialog contains
+five important components, as shown in <a class="reference internal" href="#figure-projection-2">Figure_projection_2</a> and described below:</p>
+<ol class="arabic simple">
+<li><strong>Enable &#8216;on the fly&#8217; CRS transformation</strong> &#8212; This checkbox is used to
+enable or disable OTF projection. When off, each layer is drawn using the
+coordinates as read from the data source, and the components described below
+are inactive. When on, the coordinates in each layer are projected to the
+coordinate reference system defined for the map canvas.</li>
+<li><strong>Filter</strong> &#8212; If you know the EPSG code, the identifier, or the name for a
+coordinate reference system, you can use the search feature to find it.
+Enter the EPSG code, the identifier or the name.</li>
+<li><strong>Recently used coordinate reference systems</strong> &#8212; If you have certain CRSs
+that you frequently use in your everyday GIS work, these will be displayed
+in this list. Click on one of these items to select the associated CRS.</li>
+<li><strong>Coordinate reference systems of the world</strong> &#8212; This is a list of all CRSs
+supported by QGIS, including Geographic, Projected and Custom coordinate
+reference systems. To define a CRS, select it from the list by expanding
+the appropriate node and selecting the CRS. The active CRS is preselected.</li>
+<li><strong>PROJ.4 text</strong> &#8212; This is the CRS string used by the PROJ.4 projection
+engine. This text is read-only and provided for informational purposes.</li>
+</ol>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Project Properties Dialog</strong></p>
+<p>If you open the <em class="guilabel">Project Properties</em> dialog from the
+<em class="menuselection">Project</em> menu, you must click on the <em class="guilabel">CRS</em>
+tab to view the CRS settings.</p>
+<p class="last">Opening the dialog from the <img alt="geographic" src="../../../_images/geographic.png" /> <sup>CRS status</sup> icon will
+automatically bring the <em class="guilabel">CRS</em> tab to the front.</p>
+</div>
+</div>
+<div class="section" id="custom-coordinate-reference-system">
+<span id="sec-custom-projections"></span><h2><a class="toc-backref" href="#id4">Custom Coordinate Reference System</a><a class="headerlink" href="#custom-coordinate-reference-system" title="Permalink to this headline">¶</a></h2>
+<p id="index-5">If QGIS does not provide the coordinate reference system you need, you can
+define a custom CRS. To define a CRS, select <a class="reference internal" href="../../../_images/mActionCustomProjection.png"><img alt="customProjection" src="../../../_images/mActionCustomProjection.png" style="width: 1.5em;" /></a>
+<em class="guilabel">Custom CRS...</em> from the <em class="menuselection">Settings</em> menu. Custom CRSs
+are stored in your QGIS user database. In addition to your custom CRSs, this
+database also contains your spatial bookmarks and other custom data.</p>
+<p id="figure-projection-3"><strong>Figure Projection 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/customProjectionDialog.png" src="../../../_images/customProjectionDialog.png" />
+<p class="caption">Custom CRS Dialog</p>
+</div>
+<p id="index-6">Defining a custom CRS in QGIS requires a good understanding of the PROJ.4
+projection library. To begin, refer to &#8220;Cartographic Projection Procedures
+for the UNIX Environment - A User&#8217;s Manual&#8221; by Gerald I. Evenden, U.S.
+Geological Survey Open-File Report 90-284, 1990 (available at
+<a class="reference external" href="ftp://ftp.remotesensing.org/proj/OF90-284.pdf">ftp://ftp.remotesensing.org/proj/OF90-284.pdf</a>).</p>
+<p>This manual describes the use of the <tt class="docutils literal"><span class="pre">proj.4</span></tt> and related command line
+utilities. The cartographic parameters used with <tt class="docutils literal"><span class="pre">proj.4</span></tt> are described in
+the user manual and are the same as those used by QGIS.</p>
+<p>The <em class="guilabel">Custom Coordinate Reference System Definition</em> dialog requires
+only two parameters to define a user CRS:</p>
+<ol class="arabic simple">
+<li>A descriptive name</li>
+<li>The cartographic parameters in PROJ.4 format</li>
+</ol>
+<p>To create a new CRS, click the <a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> <sup>Add new CRS</sup> button and
+enter a descriptive name and the CRS parameters.</p>
+<p>Note that the <em class="guilabel">Parameters</em> must begin with a <tt class="docutils literal"><span class="pre">+proj=</span></tt> block,
+to represent the new coordinate reference system.</p>
+<p>You can test your CRS parameters to see if they give sane results. To do this,
+enter known WGS 84 latitude and longitude values in <em class="guilabel">North</em> and
+<em class="guilabel">East</em> fields, respectively. Click on <strong>[Calculate]</strong>, and compare the
+results with the known values in your coordinate reference system.</p>
+</div>
+<div class="section" id="default-datum-transformations">
+<h2><a class="toc-backref" href="#id5">Default datum transformations</a><a class="headerlink" href="#default-datum-transformations" title="Permalink to this headline">¶</a></h2>
+<p id="index-7">OTF depends on being able to transform data into a &#8216;default CRS&#8217;, and
+QGIS uses WGS84. For some CRS there are a number of transforms
+available. QGIS allows you to define the transformation used otherwise
+QGIS uses a default transformation.</p>
+<p>In the <em class="guilabel">CRS</em> tab under <em class="menuselection">Settings ‣</em> <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a>
+<em class="guilabel">Options</em> you can:</p>
+<ul class="simple">
+<li>set QGIS to ask you when it needs define a transformation using <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" />
+<em class="guilabel">Ask for datum transformation when no default is defined</em></li>
+<li>edit a list of user defaults for transformations.</li>
+</ul>
+<p>QGIS asks which transformation to use by opening a dialogue box
+displaying PROJ.4 text describing the source and destination
+transforms. Further information may be found by hovering over a
+transform. User defaults can be saved by selecting
+<img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Remember selection</em>.</p>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../qgis_browser/qgis_browser.html" title="QGIS Browser"
+             >next</a></li>
+        <li class="right" >
+          <a href="../introduction/qgis_configuration.html" title="QGIS Configuration"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

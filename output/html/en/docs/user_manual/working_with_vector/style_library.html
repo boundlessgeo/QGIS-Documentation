@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Symbol Library</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Working with Vector Data" href="index.html" />
+    <link rel="next" title="The Vector Properties Dialog" href="vector_properties.html" />
+    <link rel="prev" title="Supported Data Formats" href="supported_data.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/working_with_vector/style_library.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="vector_properties.html" title="The Vector Properties Dialog"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="supported_data.html" title="Supported Data Formats"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Working with Vector Data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="supported_data.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="vector_properties.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="the-symbol-library">
+<span id="vector-symbol-library"></span><h1>The Symbol Library<a class="headerlink" href="#the-symbol-library" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#the-style-manager" id="id2">The Style Manager</a><ul>
+<li><a class="reference internal" href="#groups-and-smart-groups" id="id3">Groups and smart groups</a></li>
+<li><a class="reference internal" href="#add-edit-remove-symbol" id="id4">Add, Edit, Remove Symbol</a></li>
+<li><a class="reference internal" href="#share-symbols" id="id5">Share symbols</a></li>
+<li><a class="reference internal" href="#color-ramp" id="id6">Color Ramp</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-symbol-selector" id="id7">The symbol Selector</a><ul>
+<li><a class="reference internal" href="#marker-symbols" id="id8">Marker Symbols</a></li>
+<li><a class="reference internal" href="#line-symbols" id="id9">Line Symbols</a></li>
+<li><a class="reference internal" href="#polygon-symbols" id="id10">Polygon Symbols</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="the-style-manager">
+<span id="vector-style-manager"></span><span id="index-0"></span><h2><a class="toc-backref" href="#id2">The Style Manager</a><a class="headerlink" href="#the-style-manager" title="Permalink to this headline">¶</a></h2>
+<p>The Symbol Library is the place where users can manage and create generic symbols
+to be used in several QGIS projects. You can open it with the <em class="menuselection">Settings
+‣ Style Manager</em> or from the <strong>Style</strong> tab in the vector layer&#8217;s
+<em class="menuselection">Properties</em>. It allows users to:</p>
+<ul class="simple">
+<li>create, edit and remove symbols</li>
+<li>organize symbols in custom groups</li>
+<li>export and import symbols.</li>
+</ul>
+<p id="figure-symbol-1"><strong>Figure Symbol 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/stylemanager.png" src="../../../_images/stylemanager.png" />
+<p class="caption">The Style Manager</p>
+</div>
+<div class="section" id="groups-and-smart-groups">
+<h3><a class="toc-backref" href="#id3">Groups and smart groups</a><a class="headerlink" href="#groups-and-smart-groups" title="Permalink to this headline">¶</a></h3>
+<p>You can organize symbols into different categories. These categories, listed in
+the panel at the left, can be static (called <strong>Group</strong>) or dynamic (named
+<strong>Smart Group</strong>). A group is smart when its symbols are dynamically fetched
+according to conditions set. See <a class="reference internal" href="#figure-symbol-2">figure_symbol_2</a>:</p>
+<p>To create a group, right click on an existing group or on the main <strong>Groups</strong>
+directory in the left of the dialog.
+You can also select a group and click the <a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> <sup>Add Group</sup>
+button. The new group will be a sub-group of the selected one.</p>
+<p>Create <strong>Smart Group</strong> is similar to creating group, but instead select
+<strong>Smart Groups</strong>. The dialog box allows user to choose the expression to
+select symbols in order to appear in the smart group (contains some tags,
+member of a group, have a string in its name, etc.). Any symbol that satisfies
+the entered condition(s) is automatically added to the smart group.</p>
+<p id="figure-symbol-2"><strong>Figure Symbol 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/create_smartgroup.png" src="../../../_images/create_smartgroup.png" />
+<p class="caption">Creating a Smart Group</p>
+</div>
+<p>To remove a group or a smart group, right click on the group and select
+<em class="menuselection">Remove Group</em> or select it and push
+<a class="reference internal" href="../../../_images/symbologyRemove.png"><img alt="signMinus" src="../../../_images/symbologyRemove.png" style="width: 1.5em;" /></a> <sup>Remove Group</sup> button.</p>
+<p>Unlike the smart groups that automatically fetch their belonged symbols,
+simple groups are filled by the user.
+To add a symbol into a group, you can either right click on a symbol, choose
+<em class="menuselection">Apply Group</em> and then the group name. There is a second
+way to add several symbols into a group: just select the group, click
+<a class="reference internal" href="../../../_images/mActionChangeLabelProperties.png"><img alt="changeLabelProperties" src="../../../_images/mActionChangeLabelProperties.png" style="width: 1.5em;" /></a> and choose <em class="menuselection">Group Symbols</em>. All
+symbols display a checkbox that allows you to add the symbol into the selected
+groups. When selection is finished, you can click the same button, and
+choose <em class="menuselection">Finish Grouping</em>.</p>
+<p>All the symbols that are not placed under a custom group belong
+to a default group named <strong>Ungrouped</strong>.</p>
+</div>
+<div class="section" id="add-edit-remove-symbol">
+<h3><a class="toc-backref" href="#id4">Add, Edit, Remove Symbol</a><a class="headerlink" href="#add-edit-remove-symbol" title="Permalink to this headline">¶</a></h3>
+<p>Selecting a group returns in the right panel, if applicable, the list of symbols
+of the group (including its subgroups). These symbols are organized in four
+different tabs:</p>
+<ul class="simple">
+<li><strong>Marker</strong> for point symbols</li>
+<li><strong>Line</strong> for linear symbols</li>
+<li><strong>Fill</strong> for surface symbols</li>
+<li>and <a class="reference internal" href="#id1">Color Ramp</a></li>
+</ul>
+<p>To delete a symbol you no longer need, just select it and click <a class="reference internal" href="../../../_images/symbologyRemove.png"><img alt="signMinus" src="../../../_images/symbologyRemove.png" style="width: 1.5em;" /></a>
+<sup>Remove item</sup> (also available through right-click).
+The symbol will be deleted from the local symbols database.</p>
+<p>The symbol list can be modified by adding new symbols with <a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a>
+<sup>Add item</sup> button or modifying existing ones with <a class="reference internal" href="../../../_images/symbologyEdit.png"><img alt="symbologyEdit" src="../../../_images/symbologyEdit.png" style="width: 1.5em;" /></a>
+<sup>Edit item</sup>.
+See <a class="reference internal" href="#the-symbol-selector">The Symbol Selector</a> for further information.</p>
+</div>
+<div class="section" id="share-symbols">
+<h3><a class="toc-backref" href="#id5">Share symbols</a><a class="headerlink" href="#share-symbols" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionSharing.png"><img alt="sharing" src="../../../_images/mActionSharing.png" style="width: 1.5em;" /></a> <sup>Share item</sup> tool, at the right bottom of the Style
+Library dialog, offers options to easily share symbols with others: users can
+indeed export their symbols and import symbols to their library.</p>
+<p><strong>Exporting symbols</strong></p>
+<p>You can export the selected symbols to PNG, SVG or XML file formats.
+Exporting to PNG or SVG (both not available for color ramp symbols) creates
+a file for each selected symbol, and the SVG folder can be added to SVG Paths
+in <em class="menuselection">Settings ‣ Options</em> to e.g. share these symbols on a network.
+The XML format generates a single file containing all the selected symbols.
+This file can then be imported in another user&#8217;s style library.</p>
+<p><strong>Importing symbols</strong></p>
+<p>You can extend your symbols library by importing new symbols. Just select <a class="reference internal" href="../../../_images/mActionSharing.png"><img alt="sharing" src="../../../_images/mActionSharing.png" style="width: 1.5em;" /></a>
+<em class="menuselection">Import</em> from the drop-down list at the right bottom of the dialog.
+In the new dialog, you&#8217;ll need to :</p>
+<ul class="simple">
+<li>indicate the source of the symbols (it can be a <tt class="docutils literal"><span class="pre">.xml</span></tt> file on the disk or an url),</li>
+<li>give the name of the group under which the symbols will be put</li>
+<li>select the symbols you want to add to your library</li>
+<li>and press <strong>Import</strong>.</li>
+</ul>
+<p>Note that import and export options are also available through right-click.</p>
+<p id="figure-symbol-3"><strong>Figure Symbol 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/import_styles.png" src="../../../_images/import_styles.png" />
+<p class="caption">Importing symbols</p>
+</div>
+</div>
+<div class="section" id="color-ramp">
+<span id="id1"></span><h3><a class="toc-backref" href="#id6">Color Ramp</a><a class="headerlink" href="#color-ramp" title="Permalink to this headline">¶</a></h3>
+<p id="index-1">The Color ramp tab in the Style Manager presents different types of
+color ramps you can use to style layers.</p>
+<p>To create a custom color ramp, activate the Color ramp tab and click the
+<a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> <sup>Add item</sup> button. The button reveals a drop-down list to
+choose the ramp type: Gradient, Random, colorBrewer, or cpt-city.</p>
+<p>The first three have options for number of steps and/or multiple stops in
+the color ramp. You can use the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Invert</em> option while
+classifying the data with a color ramp. See <a class="reference internal" href="#figure-symbol-4">figure_symbol_4</a> for an
+example of custom color ramp and <a class="reference internal" href="#figure-symbol-4a">figure_symbol_4a</a> for the cpt-city dialog.</p>
+<p id="figure-symbol-4"><strong>Figure Symbol 4:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/customColorRampGradient.png" src="../../../_images/customColorRampGradient.png" />
+<p class="caption">Example of custom gradient color ramp with multiple stops</p>
+</div>
+<p>The cpt-city option opens a new dialog with hundreds of themes included &#8216;out of the box&#8217;.</p>
+<p id="figure-symbol-4a"><strong>Figure Symbol 4a:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/cpt-cityColorRamps.png" src="../../../_images/cpt-cityColorRamps.png" />
+<p class="caption">cpt-city dialog with hundreds of color ramps</p>
+</div>
+</div>
+</div>
+<div class="section" id="the-symbol-selector">
+<span id="symbol-selector"></span><h2><a class="toc-backref" href="#id7">The symbol Selector</a><a class="headerlink" href="#the-symbol-selector" title="Permalink to this headline">¶</a></h2>
+<p>The Symbol selector is the main dialog to design a symbol.
+You can create or edit Marker, Line or Fill Symbols.</p>
+<p id="figure-symbol-5"><strong>Figure Symbol 5:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/symbolselector.png" src="../../../_images/symbolselector.png" />
+<p class="caption">Designing a Marker symbol</p>
+</div>
+<p>For each kind of symbols, you will find always the same dialog structure:</p>
+<ul>
+<li><p class="first">at the top left side a dynamic symbol representation, updated as soon as
+symbol properties evolve</p>
+</li>
+<li><p class="first">under the symbol representation, the symbol tree shows symbol layers that
+are combined afterwards to shape a new global symbol. A symbol can consist of
+several <em class="guilabel">Symbol layers</em>.
+Settings will be shown later in this chapter.</p>
+</li>
+<li><p class="first">at the right you can setup some parameters that apply to the global symbol:</p>
+<ul class="simple">
+<li><strong>unit</strong>: it can be millimeter, pixel or map unit</li>
+<li><strong>transparency</strong></li>
+<li><strong>color</strong>: when this parameter is changed by the user, its value is echoed to all
+unlocked sub-symbols color</li>
+<li><strong>size</strong> and <strong>rotation</strong> for marker symbol</li>
+<li><strong>width</strong> for line symbol</li>
+</ul>
+<p>Note that the <em class="guilabel">Data-defined override</em> button beside the last layer-related
+parameters is inactive until the symbol is applied to a layer.
+Once the symbol is connected to a layer, this button offers access to the
+<a class="reference internal" href="vector_properties.html#size-assistant"><em>size assistant</em></a> dialog which helps to create proportional
+or multivariate analysis rendering.</p>
+</li>
+<li><p class="first">under these parameters are displayed items of the symbols library you can choose from.
+This list of symbols can be filtered by selecting a group in the drop-down list
+just above.</p>
+</li>
+</ul>
+<p>According to the level selected in the symbol tree,
+you&#8217;ll get enabled different tools at the bottom of the dialog to :</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> add new symbol layer: you can imbricate as many symbols as you want</li>
+<li><a class="reference internal" href="../../../_images/symbologyRemove.png"><img alt="signMinus" src="../../../_images/symbologyRemove.png" style="width: 1.5em;" /></a> remove the selected symbol layer</li>
+<li>lock colors of symbol layer: a <a class="reference internal" href="../../../_images/locked.png"><img alt="locked" src="../../../_images/locked.png" style="width: 1.5em;" /></a> locked color stays unchanged when
+user changes the color at the global (or upper) symbol level</li>
+<li><a class="reference internal" href="../../../_images/mActionDuplicateLayer.png"><img alt="duplicateLayer" src="../../../_images/mActionDuplicateLayer.png" style="width: 1.5em;" /></a> duplicate a (group of) symbol layer(s)</li>
+<li>move up or down the symbol layer</li>
+<li>apply <a class="reference internal" href="vector_properties.html#draw-effects"><em>special effects</em></a> to the symbol layer</li>
+<li>save the designed symbol into your symbol library</li>
+<li>or choose in the <em class="guilabel">Advanced</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> drop-down list, to
+<strong>clip features to canvas extent</strong>.</li>
+</ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Note that once you have set the size in the lower levels of the
+<em class="guilabel">Symbol layers</em> dialog, the size of the whole symbol can be changed
+with the <em class="guilabel">Size</em> (for marker symbol) or the <em class="guilabel">Width</em> (for line
+symbol) menu in the first level again. The size of the lower levels changes
+accordingly, while the size ratio is maintained.</p>
+</div>
+<p>More detailed settings can be made when clicking on the lower level in the
+Symbol tree. You can change each <em class="guilabel">Symbol layers</em> properties and according
+to the symbol type, you get different settings.</p>
+<div class="section" id="marker-symbols">
+<span id="vector-marker-symbols"></span><h3><a class="toc-backref" href="#id8">Marker Symbols</a><a class="headerlink" href="#marker-symbols" title="Permalink to this headline">¶</a></h3>
+<p>Marker symbols have several symbol layer types:</p>
+<ul class="simple">
+<li>Ellipse marker</li>
+<li>Font marker</li>
+<li>Simple marker (default)</li>
+<li>SVG marker</li>
+<li>Vector Field marker</li>
+</ul>
+<p>For each marker symbol, you can set the following properties:</p>
+<ul class="simple">
+<li><em class="guilabel">Symbol layer type</em>: You have the option to use Ellipse markers,
+Font markers, Simple markers, SVG markers and Vector Field markers.</li>
+<li><em class="guilabel">colors</em></li>
+<li><em class="guilabel">Size</em></li>
+<li><em class="guilabel">Outline style</em></li>
+<li><em class="guilabel">Outline width</em></li>
+<li><em class="guilabel">Angle</em></li>
+<li><em class="guilabel">Offset X,Y</em>: You can shift the symbol in the x- or y-direction.</li>
+<li><em class="guilabel">Anchor point</em></li>
+<li><em class="guilabel">Data defined properties ...</em></li>
+</ul>
+</div>
+<div class="section" id="line-symbols">
+<h3><a class="toc-backref" href="#id9">Line Symbols</a><a class="headerlink" href="#line-symbols" title="Permalink to this headline">¶</a></h3>
+<p>Line marker symbols have only two symbol layer types:</p>
+<ul class="simple">
+<li>Marker line</li>
+<li>Simple line (default)</li>
+</ul>
+<p>The default symbol layer type draws a simple line whereas the other display a
+marker point regularly on the line. You can choose different location: vertex,
+last and first vertex, interval, central point or on every curve point. Marker
+line can have offset along the line or offset line. Finally,
+<em class="guilabel">rotation</em> allows you to change the orientation of the
+symbol.</p>
+<p>The following settings are available:</p>
+<ul class="simple">
+<li><em class="guilabel">colour</em></li>
+<li><em class="guilabel">Pen width</em></li>
+<li><em class="guilabel">Offset</em></li>
+<li><em class="guilabel">Pen style</em></li>
+<li><em class="guilabel">Join style</em></li>
+<li><em class="guilabel">Cap style</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use custom dash pattern</em></li>
+<li><em class="guilabel">Dash pattern unit</em></li>
+<li><em class="guilabel">Data defined properties ...</em></li>
+</ul>
+</div>
+<div class="section" id="polygon-symbols">
+<h3><a class="toc-backref" href="#id10">Polygon Symbols</a><a class="headerlink" href="#polygon-symbols" title="Permalink to this headline">¶</a></h3>
+<p>Polygon marker symbols have also several symbol layer types:</p>
+<ul class="simple">
+<li>Centroid fill</li>
+<li>Gradient fill</li>
+<li>Line pattern fill</li>
+<li>Point pattern fill</li>
+<li>Raster image fill</li>
+<li>SVG fill</li>
+<li>Shapeburst fill</li>
+<li>Simple fill (default)</li>
+<li>Outline: Marker line (same as line marker)</li>
+<li>Outline: simple line (same as line marker)</li>
+</ul>
+<p>The following settings are available:</p>
+<ul class="simple">
+<li><em class="guilabel">Colors</em> for the border and the fill.</li>
+<li><em class="guilabel">Fill style</em></li>
+<li><em class="guilabel">Border style</em></li>
+<li><em class="guilabel">Border width</em></li>
+<li><em class="guilabel">Offset X,Y</em></li>
+<li><em class="guilabel">Data defined properties ...</em></li>
+</ul>
+<p>Using the color combo box, you can drag and drop color for one color button
+to another button, copy-paste color, pick color from somewhere, choose a color
+from the palette or from  recent or standard color. The combo box allows you to
+fill in the feature with transparency. You can also just click the button to open the
+palette dialog. Note that you can import color from some external software
+like GIMP.</p>
+<p>With the &#8216;Raster image fill&#8217; you can fill polygons with a tiled raster image.
+Options include (data defined) file name, opacity, image size (in pixels, mm or map units),
+coordinate mode (feature or view) and rotation.</p>
+<p>&#8216;Gradient Fill&#8217; <em class="guilabel">Symbol layer type</em> allows you to select
+between a <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Two color</em>
+and <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Color ramp</em> setting. You can use the
+<a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Feature centroid</em> as <em class="guilabel">Referencepoint</em>.
+All fills &#8216;Gradient Fill` <em class="guilabel">Symbol layer type</em> is also
+available through the <em class="guilabel">Symbol</em> menu of the Categorized and
+Graduated Renderer and through the <em class="guilabel">Rule properties</em> menu of
+the Rule-based renderer.</p>
+<p>Other possibility is to choose a &#8216;shapeburst
+fill&#8217; which is a buffered gradient fill, where a gradient is drawn from
+the boundary of a polygon towards the polygon&#8217;s centre. Configurable
+parameters include distance from the boundary to shade, use of color ramps or
+simple two color gradients, optional blurring of the fill and offsets.</p>
+<p>It is possible to only draw polygon borders inside the polygon. Using
+&#8216;Outline: Simple line&#8217; select <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Draw line
+only inside polygon</em>.</p>
+<p><strong>Note:</strong> When geometry type is polygon, you can choose to disable the
+automatic clipping of lines/polygons to the canvas extent. In
+some cases this clipping results in unfavourable symbology (eg
+centroid fills where the centroid must always be the actual
+feature&#8217;s centroid).</p>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="vector_properties.html" title="The Vector Properties Dialog"
+             >next</a></li>
+        <li class="right" >
+          <a href="supported_data.html" title="Supported Data Formats"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >Working with Vector Data</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

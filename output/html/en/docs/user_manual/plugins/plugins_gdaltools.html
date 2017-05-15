@@ -1,0 +1,570 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>GDAL Tools Plugin</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Plugins" href="plugins_index.html" />
+    <link rel="next" title="Geometry Checker Plugin" href="plugins_geometry_checker.html" />
+    <link rel="prev" title="fTools Plugin" href="plugins_ftools.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/plugins/plugins_gdaltools.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="plugins_geometry_checker.html" title="Geometry Checker Plugin"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="plugins_ftools.html" title="fTools Plugin"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="plugins_index.html" accesskey="U">Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="plugins_ftools.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="plugins_geometry_checker.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="gdal-tools-plugin">
+<span id="label-plugingdaltools"></span><h1>GDAL Tools Plugin<a class="headerlink" href="#gdal-tools-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#what-is-gdal-tools" id="id1">What is GDAL Tools?</a><ul>
+<li><a class="reference internal" href="#the-gdal-library" id="id2">The GDAL Library</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#list-of-gdal-tools" id="id3">List of GDAL tools</a><ul>
+<li><a class="reference internal" href="#projections" id="id4">Projections</a></li>
+<li><a class="reference internal" href="#conversion" id="id5">Conversion</a></li>
+<li><a class="reference internal" href="#extraction" id="id6">Extraction</a></li>
+<li><a class="reference internal" href="#analysis" id="id7">Analysis</a></li>
+<li><a class="reference internal" href="#miscellaneous" id="id8">Miscellaneous</a></li>
+<li><a class="reference internal" href="#gdal-tools-settings" id="id9">GDAL Tools Settings</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="what-is-gdal-tools">
+<span id="whatsgdal"></span><h2><a class="toc-backref" href="#id1">What is GDAL Tools?</a><a class="headerlink" href="#what-is-gdal-tools" title="Permalink to this headline">¶</a></h2>
+<p>The GDAL Tools plugin offers a GUI to the collection of tools in the Geospatial
+Data Abstraction Library, <a class="reference external" href="http://gdal.osgeo.org">http://gdal.osgeo.org</a> . These are raster management
+tools to query, re-project, warp and merge a wide variety of raster formats. Also
+included are tools to create a contour (vector) layer, or a shaded relief from
+a raster DEM, and to make a VRT (Virtual Raster Tile in XML format) from a
+collection of one or more raster files. These tools are available when the
+plugin is installed and activated.</p>
+<div class="section" id="the-gdal-library">
+<h3><a class="toc-backref" href="#id2">The GDAL Library</a><a class="headerlink" href="#the-gdal-library" title="Permalink to this headline">¶</a></h3>
+<p>The GDAL library consists of a set of command line programs, each with a large
+list of options. Users comfortable with running commands from a terminal may
+prefer the command line, with access to the full set of options. The GDAL Tools
+plugin offers an easy interface to the tools, exposing only the most popular
+options.</p>
+</div>
+</div>
+<div class="section" id="list-of-gdal-tools">
+<h2><a class="toc-backref" href="#id3">List of GDAL tools</a><a class="headerlink" href="#list-of-gdal-tools" title="Permalink to this headline">¶</a></h2>
+<p id="figure-gdal-tools-1"><strong>Figure GDAL Tools 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/raster_menu.png" src="../../../_images/raster_menu.png" />
+<p class="caption">The <em>GDALTools</em> menu list</p>
+</div>
+<div class="section" id="projections">
+<h3><a class="toc-backref" href="#id4">Projections</a><a class="headerlink" href="#projections" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/warp.png"><img alt="gdalWarp" src="../../../_images/warp.png" style="width: 1.5em;" /></a> <em class="guilabel">Warp (Reproject)</em></td>
+<td>This utility is an image mosaicing, reprojection and
+warping utility. The program can reproject to any
+supported projection, and can also apply GCPs stored
+with the image if the image is &#8220;raw&#8221; with control
+information. For more information, you can read on
+the GDAL website <a class="reference external" href="http://www.gdal.org/gdalwarp.html">http://www.gdal.org/gdalwarp.html</a>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/projection-add.png"><img alt="gdalAssignProjection" src="../../../_images/projection-add.png" style="width: 1.5em;" /></a> <em class="guilabel">Assign projection</em></td>
+<td>This tool allows you to assign projection to rasters
+that are already georeferenced but miss projection
+information. Also with its help, it is possible to
+alter existing projection definitions. Both single
+file and batch mode are supported. For more
+information, please visit the utility page at the
+GDAL site, <a class="reference external" href="http://www.gdal.org/gdalwarp.html">http://www.gdal.org/gdalwarp.html</a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/projection-export.png"><img alt="gdalExtractProjection" src="../../../_images/projection-export.png" style="width: 1.5em;" /></a>
+<em class="guilabel">Extract projection</em></td>
+<td>This utility helps you to extract projection
+information from an input file. If you want to
+extract projection information from a whole
+directory, you can use the batch mode. It creates
+both <tt class="file docutils literal"><span class="pre">.prj</span></tt> and <tt class="file docutils literal"><span class="pre">.wld</span></tt> files.</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+</div>
+<div class="section" id="conversion">
+<h3><a class="toc-backref" href="#id5">Conversion</a><a class="headerlink" href="#conversion" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/rasterize.png"><img alt="gdalRasterize" src="../../../_images/rasterize.png" style="width: 1.5em;" /></a> <em class="guilabel">Rasterize</em></td>
+<td>This program burns vector geometries (points, lines
+and polygons) into the raster band(s) of a raster
+image. Vectors are read from OGR-supported vector
+formats. Note that the vector data must in the same
+coordinate system as the raster data; on the fly
+reprojection is not provided. For more information see
+<a class="reference external" href="http://www.gdal.org/gdal_rasterize.html">http://www.gdal.org/gdal_rasterize.html</a>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/polygonize.png"><img alt="gdalPolygonize" src="../../../_images/polygonize.png" style="width: 1.5em;" /></a> <em class="guilabel">Polygonize</em></td>
+<td>This utility creates vector polygons for all connected
+regions of pixels in the raster sharing a common pixel
+value. Each polygon is created with an attribute
+indicating the pixel value of that polygon.  The
+utility will create the output vector datasource if it
+does not already exist, defaulting to ESRI shapefile
+format. See also
+<a class="reference external" href="http://www.gdal.org/gdal_polygonize.html">http://www.gdal.org/gdal_polygonize.html</a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/translate.png"><img alt="gdalTranslate" src="../../../_images/translate.png" style="width: 1.5em;" /></a> <em class="guilabel">Translate</em></td>
+<td>This utility can be used to convert raster data
+between different formats, potentially performing some
+operations like subsetting, resampling, and rescaling
+pixels in the process. For more information you can
+read on <a class="reference external" href="http://www.gdal.org/gdal_translate.html">http://www.gdal.org/gdal_translate.html</a>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/raster-rgb.png"><img alt="gdalRasterRGB" src="../../../_images/raster-rgb.png" style="width: 1.5em;" /></a> <em class="guilabel">RGB to PCT</em></td>
+<td>This utility will compute an optimal pseudocolor
+table for a given RGB image using a median cut
+algorithm on a downsampled RGB histogram. Then it
+converts the image into a pseudocolored image using
+the color table. This conversion utilizes
+Floyd-Steinberg dithering (error diffusion) to
+maximize output image visual quality. The utility is
+also described at <a class="reference external" href="http://www.gdal.org/rgb2pct.html">http://www.gdal.org/rgb2pct.html</a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/raster-rgb.png"><img alt="gdalRasterRGB" src="../../../_images/raster-rgb.png" style="width: 1.5em;" /></a> <em class="guilabel">PCT to RGB</em></td>
+<td>This utility will convert a pseudocolor band on the
+input file into an output RGB file of the desired
+format. For more information, see
+<a class="reference external" href="http://www.gdal.org/pct2rgb.html">http://www.gdal.org/pct2rgb.html</a>.</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+</div>
+<div class="section" id="extraction">
+<h3><a class="toc-backref" href="#id6">Extraction</a><a class="headerlink" href="#extraction" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/contour.png"><img alt="gdalContour" src="../../../_images/contour.png" style="width: 1.5em;" /></a> <em class="guilabel">Contour</em></td>
+<td>This program generates a vector contour file from the
+input raster elevation model (DEM).
+On <a class="reference external" href="http://www.gdal.org/gdal_contour.html">http://www.gdal.org/gdal_contour.html</a>, you can find
+more information.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/raster-clip.png"><img alt="gdalRasterClip" src="../../../_images/raster-clip.png" style="width: 1.5em;" /></a> <em class="guilabel">Clipper</em></td>
+<td>This utility allows you to clip (extract subset)
+rasters using selected extent or based on mask layer
+bounds. More information can be found at
+<a class="reference external" href="http://www.gdal.org/gdal_translate.html">http://www.gdal.org/gdal_translate.html</a>.</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+</div>
+<div class="section" id="analysis">
+<h3><a class="toc-backref" href="#id7">Analysis</a><a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/sieve.png"><img alt="gdalSieve" src="../../../_images/sieve.png" style="width: 1.5em;" /></a> <em class="guilabel">Sieve</em></td>
+<td>This utility removes raster polygons smaller than a
+provided threshold size (in pixels) and replaces
+them with the pixel value of the largest neighbor
+polygon. The result can be written back to the
+existing raster band, or copied into a new file. For
+more information, see
+<a class="reference external" href="http://www.gdal.org/gdal_sieve.html">http://www.gdal.org/gdal_sieve.html</a>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/nearblack.png"><img alt="gdalNearblack" src="../../../_images/nearblack.png" style="width: 1.5em;" /></a> <em class="guilabel">Near Black</em></td>
+<td>This utility will scan an image and try to set all
+pixels that are nearly black (or nearly white) around
+the edge to exactly black (or white). This is often
+used to &#8220;fix up&#8221; lossy compressed aerial photos so
+that color pixels can be treated as transparent when
+mosaicing. See also
+<a class="reference external" href="http://www.gdal.org/nearblack.html">http://www.gdal.org/nearblack.html</a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/fillnodata.png"><img alt="gdalFillNoData" src="../../../_images/fillnodata.png" style="width: 1.5em;" /></a> <em class="guilabel">Fill nodata</em></td>
+<td>This utility fills selected raster regions (usually
+nodata areas) by interpolation from valid pixels
+around the edges of the areas. On
+<a class="reference external" href="http://www.gdal.org/gdal_fillnodata.html">http://www.gdal.org/gdal_fillnodata.html</a>, you can find
+more information.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/proximity.png"><img alt="gdalProximity" src="../../../_images/proximity.png" style="width: 1.5em;" /></a><em class="guilabel">Proximity</em></td>
+<td>This utility generates a raster proximity map
+indicating the distance from the center of each pixel
+to the center of the nearest pixel identified as a
+target pixel. Target pixels are those in the source
+raster for which the raster pixel value is in the set
+of target pixel values. For more information see
+<a class="reference external" href="http://www.gdal.org/gdal_proximity.html">http://www.gdal.org/gdal_proximity.html</a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/grid.png"><img alt="gdalGrid" src="../../../_images/grid.png" style="width: 1.5em;" /></a> <em class="guilabel">Grid (Interpolation)</em></td>
+<td>This utility creates a regular grid (raster) from the
+scattered data read from the OGR datasource. Input
+data will be interpolated to fill grid nodes with
+values, and you can choose from various interpolation
+methods. The utility is also described on the GDAL
+website, <a class="reference external" href="http://www.gdal.org/gdal_grid.html">http://www.gdal.org/gdal_grid.html</a>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/gdal_dem.png"><img alt="gdalDem" src="../../../_images/gdal_dem.png" style="width: 1.5em;" /></a> <em class="guilabel">DEM (Terrain models)</em></td>
+<td>Tools to analyze and visualize DEMs. It can create a
+shaded relief, a slope, an aspect, a color relief, a
+Terrain Ruggedness Index, a Topographic Position Index
+and a roughness map from any GDAL-supported elevation
+raster. For more information, see
+<a class="reference external" href="http://www.gdal.org/gdaldem.html">http://www.gdal.org/gdaldem.html</a>.</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+</div>
+<div class="section" id="miscellaneous">
+<h3><a class="toc-backref" href="#id8">Miscellaneous</a><a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/vrt.png"><img alt="gdalVrt" src="../../../_images/vrt.png" style="width: 1.5em;" /></a> <em class="guilabel">Build Virtual Raster (Catalog)</em></td>
+<td>This program builds a VRT (Virtual Dataset) that is a
+mosaic of the list of input GDAL datasets. See also
+<a class="reference external" href="http://www.gdal.org/gdalbuildvrt.html">http://www.gdal.org/gdalbuildvrt.html</a>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/merge.png"><img alt="gdalMerge" src="../../../_images/merge.png" style="width: 1.5em;" /></a> <em class="guilabel">Merge</em></td>
+<td>This utility will automatically mosaic a set of
+images. All the images must be in the same coordinate
+system and have a matching number of bands, but they
+may be overlapping, and at different resolutions. In
+areas of overlap, the last image will be copied over
+earlier ones. The utility is also described at
+<a class="reference external" href="http://www.gdal.org/gdal_merge.html">http://www.gdal.org/gdal_merge.html</a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/raster-info.png"><img alt="rasterInfo" src="../../../_images/raster-info.png" style="width: 1.5em;" /></a> <em class="guilabel">Information</em></td>
+<td>This utility lists various information about a
+GDAL-supported raster dataset.
+On <a class="reference external" href="http://www.gdal.org/gdalinfo.html">http://www.gdal.org/gdalinfo.html</a>, you can find
+more information.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/raster-overview.png"><img alt="gdalRasterOverview" src="../../../_images/raster-overview.png" style="width: 1.5em;" /></a> <em class="guilabel">Build Overviews</em></td>
+<td>The gdaladdo utility can be used to build or rebuild
+overview images for most supported file formats with
+one of several downsampling algorithms. For more
+information, see <a class="reference external" href="http://www.gdal.org/gdaladdo.html">http://www.gdal.org/gdaladdo.html</a>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/tileindex.png"><img alt="gdalTileindex" src="../../../_images/tileindex.png" style="width: 1.5em;" /></a> <em class="guilabel">Tile Index</em></td>
+<td>This utility builds a shapefile with a record for
+each input raster file, an attribute containing the
+filename, and a polygon geometry outlining the raster.
+See also <a class="reference external" href="http://www.gdal.org/gdaltindex.html">http://www.gdal.org/gdaltindex.html</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gdal-tools-settings">
+<h3><a class="toc-backref" href="#id9">GDAL Tools Settings</a><a class="headerlink" href="#gdal-tools-settings" title="Permalink to this headline">¶</a></h3>
+<p>Use this dialog to embed your GDAL variables.</p>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="plugins_geometry_checker.html" title="Geometry Checker Plugin"
+             >next</a></li>
+        <li class="right" >
+          <a href="plugins_ftools.html" title="fTools Plugin"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="plugins_index.html" >Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

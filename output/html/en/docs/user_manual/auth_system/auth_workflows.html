@@ -1,0 +1,1072 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User Authentication Workflows</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Authentication System" href="index.html" />
+    <link rel="next" title="Security Considerations" href="auth_considerations.html" />
+    <link rel="prev" title="Authentication System Overview" href="auth_overview.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/auth_system/auth_workflows.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="auth_considerations.html" title="Security Considerations"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="auth_overview.html" title="Authentication System Overview"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Authentication System</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="auth_overview.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="auth_considerations.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <div class="section" id="user-authentication-workflows">
+<span id="authentication-workflow"></span><h1>User Authentication Workflows<a class="headerlink" href="#user-authentication-workflows" title="Permalink to this headline">¶</a></h1>
+<p id="figure-authusage-1"><strong>Figure Authentication usage 1</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-user-usage.png" src="../../../_images/auth-user-usage.png" />
+<p class="caption">Generic user workflow</p>
+</div>
+<div class="section" id="http-s-authentication">
+<h2>HTTP(S) authentication<a class="headerlink" href="#http-s-authentication" title="Permalink to this headline">¶</a></h2>
+<p>One of the most common resource connections is via HTTP(S), e.g. web mapping
+servers, and authentication method plugins often work for these types of
+connections. Method plugins have access to the HTTP request object and can
+manipulate both the request as well as its headers. This allows for many forms
+of internet-based authentication. When connecting via HTTP(S) using the standard
+username/password authentication method will attempt HTTP BASIC authentication
+upon connection.</p>
+<p id="figure-auth-https-1"><strong>Figure HTTP(S) authentication 1</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-http-basic-wms.png" src="../../../_images/auth-http-basic-wms.png" />
+<p class="caption">Configuring a WMS connection for HTTP BASIC</p>
+</div>
+</div>
+<div class="section" id="database-authentication">
+<h2>Database authentication<a class="headerlink" href="#database-authentication" title="Permalink to this headline">¶</a></h2>
+<p>Connections to database resources are generally stored as key=value pairs, which
+will expose usernames and (optionally) passwords, if <em>not</em> using an
+authentication configuration. When configuring with the new auth system, the
+key=value will be an abstracted representation of the credentials, e.g.
+<cite>authfg=81t21b9</cite></p>
+<p id="figure-auth-database-1"><strong>Figure Database Authentication 1</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-db-ssl-pki.png" src="../../../_images/auth-db-ssl-pki.png" />
+<p class="caption">Configuring a Postgres SSL-with-PKI connection</p>
+</div>
+</div>
+<div class="section" id="oauth-2-0-workflows">
+<h2>OAuth 2.0 workflows<a class="headerlink" href="#oauth-2-0-workflows" title="Permalink to this headline">¶</a></h2>
+<p>The OAuth2 authentication method plugin adds <a class="reference external" href="https://tools.ietf.org/html/rfc6749#section-1.1">OAuth 2.0 client</a> support to QGIS
+for the following OAuth 2.0 grant flows (with <a class="reference external" href="http://tools.ietf.org/html/rfc6749">OAuth 2.0 specification</a> section
+links):</p>
+<ul class="simple">
+<li><strong>Authorization Code</strong> (<a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-4.1">section 4.1</a>)</li>
+<li><strong>Implicit</strong> (<a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-4.2">section 4.2</a>)</li>
+<li><strong>Resource Owner Password Credentials</strong> (<a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-4.3">section 4.3</a>)</li>
+<li><strong>Refresh Token</strong> (<a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-1.5">section 1.5</a>)</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <strong>Client Credentials</strong> grant flow (<a class="reference external" href="http://tools.ietf.org/html/rfc6749#section-4.4">section 4.4</a>) is currently
+unsupported. Once supported it will be useful for the unattended
+(machine-to-machine) flow needed by QGIS Server when serving projects that
+contain layers with OAuth2-protected data sources.</p>
+<p class="last"><em>Development note</em>: The plugin is built upon the open-source <a class="reference external" href="https://github.com/pipacs/o2">o2 library</a>,
+which provides support for the OAuth2 standard in Qt applications. Any work
+towards further grant support or additional features for the OAuth2 plugin
+should consider extending that library&#8217;s functionality as a starting point,
+if applicable.</p>
+</div>
+<div class="section" id="oauth-2-0-grant-flows-overview">
+<h3>OAuth 2.0 grant flows overview<a class="headerlink" href="#oauth-2-0-grant-flows-overview" title="Permalink to this headline">¶</a></h3>
+<p>OAuth2 grant flows rely on the interaction between different &#8220;actors&#8221;,
+it is important do define them precisely in order to understand how the
+different grant flows work.</p>
+<ul class="simple">
+<li><strong>Resource owner</strong>: is the person (generally you) that owns the resource
+that needs to be accessed</li>
+<li><strong>Resource server</strong>: server hosting protected data (for example, an OGC
+server hosting your geodata or Google hosting your profile)</li>
+<li><strong>Client</strong>: application requesting access to the <em>Resource server</em> (this is
+normally a web server but in the context of this plugin it is the QGIS
+application)</li>
+<li><strong>Authorization server</strong>: the server issuing <em>access tokens</em> to the
+<em>Client</em>, this is often the same server as the <em>Resource server</em></li>
+</ul>
+<p>OAuth2 provides different grant flows to fulfill the needs of different
+scenarios, they differentiate especially regarding the trust that can
+be given to the involved actors.</p>
+<p>If you require a user&#8217;s permission to access resources, i.e., the user is
+the <strong>Access token owner</strong>, the grant flow to use will depend on the <strong>Client
+type</strong> and if either you trust it enough to handle the end user&#8217;s authorization
+credentials (<strong>first party</strong> or trusted client) or not (<strong>third party</strong>
+client). See <a class="reference internal" href="#figure-auth-oauth2-what-grant-to-use"><em>What grant flow should you use</em></a> figure to decide
+which is the best grant flow for your case.</p>
+<div class="figure align-center" id="figure-auth-oauth2-what-grant-to-use">
+<img alt="../../../_images/auth-oauth2-what-grant-to-use.png" src="../../../_images/auth-oauth2-what-grant-to-use.png" />
+<p class="caption">What grant flow should you use</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Machine owned Access token and Web app client type where not implement yet.
+That is why they are faded in the above figure.</p>
+</div>
+<p>We are going to examine the grant flows implemented by the OAuth2 plugin
+in the next sub-chapters.</p>
+<div class="section" id="authorization-code-grant-flow">
+<h4>Authorization code grant flow<a class="headerlink" href="#authorization-code-grant-flow" title="Permalink to this headline">¶</a></h4>
+<p>This is the most complex grant flow, it is typically used when the
+client (i.e. QGIS) needs to access a protected API by using an authorization
+code released by the authorization server.</p>
+<p>This flow allows the client to retrieve a long-lived <em>access token</em>
+and an optional <em>refresh token</em> that can be used to obtain a new
+<em>access token</em> when it expires.</p>
+<p>This grant flow requires user (resource owner) interaction through a
+web browser and the access token is never made visible to the browser
+or to the resource owner but only to the client.</p>
+<p>An example might help to clarify this flow.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Please note that in all the real-world implementation that use the
+well known OAuth2 authorization servers (Google, Twitter, Github etc.)
+the client is a web application running on a web server, while the
+resource server is the API provided by the well knows OAuth2 providers.</p>
+</div>
+<p>This workflow assumes that the client (QGIS) needs to be registered as an
+application and have a client ID (and usually a client secret).</p>
+<p>When QGIS first try to access the resource server (for instance
+by issuing a GetCapabilities request), the OAuth2 authorization
+grant flow dance begins:</p>
+<ol class="arabic simple">
+<li>the client is redirected to the authorization server asking for an
+authorization code request;</li>
+<li>the authorization server asks the resource owner to log in and authorize
+the request (this happens inside a web browser);</li>
+<li>if the resource owner authorizes the request, the client receives the
+authorization code;</li>
+<li>the client exchange the authorization code with an access token calling
+the authorization server;</li>
+<li>finally the client has an access token that can use to call the resource
+server API.</li>
+</ol>
+<div class="figure align-center" id="figure-auth-oauth2-authorization-code-gf">
+<img alt="../../../_images/auth-oauth2-authorization-code-gf.png" src="../../../_images/auth-oauth2-authorization-code-gf.png" />
+<p class="caption">Authorization code grant flow example</p>
+</div>
+</div>
+<div class="section" id="implicit-grant-flow">
+<h4>Implicit grant flow<a class="headerlink" href="#implicit-grant-flow" title="Permalink to this headline">¶</a></h4>
+<p>This grant flow is normally used when the client is running in
+a web browser (QGIS in our scenario), the refresh token is not
+supported by this grant flow.</p>
+<p>Let&#8217;s look at an example.</p>
+<p>When QGIS first try to access the OGC server (for instance
+by issuing a GetCapabilities request), the OAuth2 implicit
+grant flow dance begins:</p>
+<ol class="arabic simple">
+<li>the client is redirected to the authorization server asking for an access
+token;</li>
+<li>the authorization server asks the resource owner to log in and authorize
+the request (this happens inside a web browser);</li>
+<li>if the resource owner authorizes the request, the client receives the
+access token;</li>
+<li>finally the client has an access token that can use to call the resource
+server API.</li>
+</ol>
+<div class="figure align-center" id="figure-auth-oauth2-implicit-gf">
+<img alt="../../../_images/auth-oauth2-implicit-gf.png" src="../../../_images/auth-oauth2-implicit-gf.png" />
+<p class="caption">Implicit grant flow example</p>
+</div>
+</div>
+<div class="section" id="resource-owner-passsword-credentials-grant-flow">
+<h4>Resource owner passsword credentials grant flow<a class="headerlink" href="#resource-owner-passsword-credentials-grant-flow" title="Permalink to this headline">¶</a></h4>
+<p>This grant flow is normally used when the client and the
+authorization server have absolute mutual trust: the resource
+owner credentials are given to the client and then to the
+authorization server.</p>
+<p>Let&#8217;s look at an example.</p>
+<p>When QGIS first try to access the OGC server (for instance by issuing a
+GetCapabilities request), the OAuth2 password credentials grant flow dance
+begins:</p>
+<ol class="arabic simple">
+<li>the client knows the resource owner credentials (username and password) and
+calls the authorization server asking for an access token;</li>
+<li>if the credentials are valid and the user is authorized, the client receives
+an access token and a refresh token;</li>
+<li>finally the client has an access token that can use to call the resource
+server API.</li>
+</ol>
+<div class="figure align-center" id="figure-auth-oauth2-resource-owner-gf">
+<img alt="../../../_images/auth-oauth2-resource-owner-gf.png" src="../../../_images/auth-oauth2-resource-owner-gf.png" />
+<p class="caption">Resource owner passsword credentials grant flow example</p>
+</div>
+</div>
+<div class="section" id="default-web-browser">
+<h4>Default Web browser<a class="headerlink" href="#default-web-browser" title="Permalink to this headline">¶</a></h4>
+<p>OAuth 2.0, as a protocol, does not manage user authentication, which can be done
+by a variety of identity providers. Accessing those providers is generally done
+via URLs in a Web browser or via a published API. The OAuth2 plugin tries to be
+agnostic to the differences between such providers; and, as such does not use
+any particular API, instead relying upon the user&#8217;s default Web browser, OAuth
+2.0 standards and flexible configuration.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>While QGIS, being a Qt-based application, can easily support its own Web
+browser <em>within</em> a window of the application for user authentication, the
+OAuth2 plugin relies upon the user&#8217;s default Web browser because:</p>
+<ul class="last simple">
+<li>Maintaining a secure Web browser, at the level of other browser projects,
+within QGIS would be arduous.</li>
+<li>Current user authentication state in the user&#8217;s browser, e.g. Single Sign
+On, offering fewer steps for some grant flows, would not be preserved.</li>
+<li>The OAuth 2.0 specification for native applications does not recommend the
+use of embedded Web browsers, aka user-agents, when the user&#8217;s default is
+available (<a class="reference external" href="https://tools.ietf.org/html/draft-ietf-oauth-native-apps-03#section-8.1">OAuth 2.0 for Native Apps</a> draft).</li>
+</ul>
+</div>
+<div class="section" id="example-oauth-2-0-authorization-code-grant-flow-qgis-web-browser-session">
+<h5>Example OAuth 2.0 Authorization Code grant flow QGIS &lt;&#8211;&gt; Web browser session<a class="headerlink" href="#example-oauth-2-0-authorization-code-grant-flow-qgis-web-browser-session" title="Permalink to this headline">¶</a></h5>
+<ol class="arabic">
+<li><p class="first">User configures a connection to a protected resource with OAuth2 plugin.</p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-config-authcode.png" src="../../../_images/auth-oauth2-config-authcode.png" />
+</div>
+</li>
+<li><p class="first">User attempts initial connection to OAuth2-protected resource and is asked to
+log in (authenticate).</p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-google-authenticate.png" src="../../../_images/auth-oauth2-google-authenticate.png" />
+</div>
+</li>
+<li><p class="first">User authorizes the application for access to a particular resource.</p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-google-authorize-app.png" src="../../../_images/auth-oauth2-google-authorize-app.png" />
+</div>
+</li>
+<li><p class="first">User has verified authorization code request for application.</p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-google-verification-done.png" src="../../../_images/auth-oauth2-google-verification-done.png" />
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Due to a limitation on the Windows platform, the QGIS application may not
+automatically come to the forefront after verification.</p>
+<p class="last">Also, the <tt class="docutils literal"><span class="pre">Close</span> <span class="pre">window</span></tt> link may not work in some browsers if they
+restrict the closing of some tabs/windows by Javascript.</p>
+</div>
+</li>
+<li><p class="first">OAuth2 plugin requests (in the background) an access token for the
+application using the authorization code. Upon success, the access token is
+cached and used in subsequent requests to the protected resource.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="local-reply-server">
+<h4>Local reply server<a class="headerlink" href="#local-reply-server" title="Permalink to this headline">¶</a></h4>
+<p>For grant flows that require a redirect URL to communicate token request
+responses to QGIS, the plugin temporarily spawns a local HTTP server, on a
+user-defined port, to listen for redirect URL requests from the user&#8217;s default
+Web browser.</p>
+<p>On OS platforms with application firewalls, this local server may trigger a user
+prompt to authorize connections to the QGIS application.</p>
+<p><strong>Example of Windows 10 firewall configuration</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-firewall-win.png" src="../../../_images/auth-oauth2-firewall-win.png" />
+<p class="caption">Prompt to allow connections to QGIS executable</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If needed, you can revert or adjust this firewall configuration by accessing
+the <tt class="docutils literal"><span class="pre">Advanced</span> <span class="pre">settings</span></tt> in the OS Control Panel.</p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-firewall-win-control-panel.png" src="../../../_images/auth-oauth2-firewall-win-control-panel.png" />
+<p class="caption">Access firewall configuration</p>
+</div>
+<div class="last figure align-center">
+<img alt="../../../_images/auth-oauth2-firewall-win-advanced.png" src="../../../_images/auth-oauth2-firewall-win-advanced.png" />
+<p class="caption">Executable&#8217;s configuration (<tt class="docutils literal"><span class="pre">qgis-bin</span></tt>)</p>
+</div>
+</div>
+<p>On OS platforms with port-based firewalls, you will need to allow access to the
+ports or port ranges set in your OAuth2 configurations.</p>
+</div>
+<div class="section" id="resource-access-tokens">
+<span id="auth-oath2-access-tokens"></span><h4>Resource access tokens<a class="headerlink" href="#resource-access-tokens" title="Permalink to this headline">¶</a></h4>
+<p>By default, access tokens are cached by the OAuth2 plugin <em>only</em> for the
+duration of the QGIS work session, then removed upon quitting QGIS. However,
+some access tokens may expire before QGIS is quit. In this case, the plugin will
+attempt a refresh of the token, if possible, in the background. Failing this,
+the user will be prompted to restart the appropriate grant flow.</p>
+<p>If you have set some OAuth2 plugin configurations to <em>persist</em> the token across
+QGIS launches, the cached tokens are saved to individual files in the following
+directory:</p>
+<ul class="simple">
+<li>on <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> and <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> in <tt class="file docutils literal"><span class="pre">~/.qgis2/oauth2-cache</span></tt></li>
+<li>on <a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a> in <tt class="file docutils literal"><span class="pre">C:\Users\user\.qgis2\oauth2-cache</span></tt></li>
+</ul>
+<p>In situations where the cached token needs to be manually deleted, the user can
+click the <strong>[</strong> <a class="reference internal" href="../../../_images/mIconClose.png"><img alt="close" src="../../../_images/mIconClose.png" style="width: 1em;" /></a> <strong>tokens]</strong> button within the OAuth2 configuration GUI.
+If the button is not active, then no tokens have been cached.</p>
+</div>
+</div>
+<div class="section" id="configuring-oauth-2-0-connections">
+<h3>Configuring OAuth 2.0 connections<a class="headerlink" href="#configuring-oauth-2-0-connections" title="Permalink to this headline">¶</a></h3>
+<p>The configuration GUI for the OAuth2 plugin has sections divided into tabs:
+<em class="guilabel">Defined</em> (default) and <em class="guilabel">Configure</em>. This allows for maximum
+flexibility for choosing from well-known or predefined enterprise identity
+providers as well as providers that require non-standard or extended
+configurations.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While a configuration can only be Defined or Custom, the configurable <em>query
+parameter pairs</em> (at bottom of GUI) can be applied to either.</p>
+</div>
+<div class="section" id="defined-oauth-2-0-configuration">
+<h4>Defined OAuth 2.0 configuration<a class="headerlink" href="#defined-oauth-2-0-configuration" title="Permalink to this headline">¶</a></h4>
+<p>The <em class="guilabel">Defined</em> tab allows for selecting predefined configurations for
+particular identity providers, e.g. Google, etc, and grant flows. This is the
+default tab because OAuth2 <em>authentication</em> generally occurs within the user&#8217;s
+browser, i.e. selecting a predefined identity provider configuration is quicker
+if there are configuration files found during startup of QGIS or from a
+user-specified folder.</p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-config-defined.png" src="../../../_images/auth-oauth2-config-defined.png" />
+<p class="caption">OAuth2 default configuration</p>
+</div>
+<p>Upon startup, the OAuth2 plugin will look in the following directories for
+configuration files:</p>
+<ul>
+<li><p class="first"><tt class="file docutils literal"><span class="pre">oauth2_configs</span></tt> inside of QGIS&#8217;s <tt class="docutils literal"><span class="pre">Package</span> <span class="pre">Data</span> <span class="pre">Path</span></tt>, which you can
+locate by launching QGIS and reviewing output in the <em class="guilabel">Log Messages
+Panel</em> under the <em class="guilabel">General</em> tab.</p>
+<p>and...</p>
+</li>
+<li><p class="first">on <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> and <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> in <tt class="file docutils literal"><span class="pre">~/.qgis3/oauth2_configs</span></tt></p>
+</li>
+<li><p class="first">on <a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a> in <tt class="file docutils literal"><span class="pre">C:\Users\user\.qgis3\oauth2_configs</span></tt></p>
+</li>
+</ul>
+<p>In addition to the standard directories to search, you can add an extra
+directory within the GUI.</p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-config-defined-extra.png" src="../../../_images/auth-oauth2-config-defined-extra.png" />
+<p class="caption">Loaded predefined configurations</p>
+</div>
+<div class="section" id="deploying-defined-oauth2-configuration-files">
+<h5>Deploying defined OAuth2 configuration files<a class="headerlink" href="#deploying-defined-oauth2-configuration-files" title="Permalink to this headline">¶</a></h5>
+<p>Predefined OAuth2 configurations are simple <a class="reference external" href="http://www.json.org/">JSON-formatted</a> files, with a
+<em>single</em> configuration per file. This allows configurations to be swapped out
+via filesystem tools without affecting other configurations. Also, any syntax
+error within one configuration will not keep <em>all</em> configurations files from
+being loaded.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Not all parts of an OAuth 2.0 grant flow make sense to have in a predefined
+configuration that will be shared amongst users. For example, the
+username/password of the <strong>Resource Owner Password Credentials</strong> grant flow
+should not be saved within a configuration, as this needs to change per user.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Instead of creating predefined OAuth2 configuration files by hand, consider
+using the <a class="reference internal" href="#auth-oauth2-custom-config"><em>Custom OAuth 2.0 configuration</em></a>
+part of the GUI its export function, which will generate proper JSON files
+for deployment.</p>
+</div>
+</div>
+<div class="section" id="example-oauth2-json-formatted-configuration-file">
+<h5>Example OAuth2 JSON-formatted configuration file<a class="headerlink" href="#example-oauth2-json-formatted-configuration-file" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
+ <span class="nt">&quot;accessMethod&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="nt">&quot;apiKey&quot;</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;clientId&quot;</span> <span class="p">:</span> <span class="s2">&quot;myapp.apps.googleusercontent.com&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;clientSecret&quot;</span> <span class="p">:</span> <span class="s2">&quot;bh02HkMPpfHkd7DMuTJopN06&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;configType&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+ <span class="nt">&quot;description&quot;</span> <span class="p">:</span> <span class="s2">&quot;Example Google OAuth2 configuration&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;grantFlow&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+ <span class="nt">&quot;id&quot;</span> <span class="p">:</span> <span class="s2">&quot;nchu3w6&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;Work - OAuth2 login&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;objectName&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;password&quot;</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;persistToken&quot;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+ <span class="nt">&quot;queryPairs&quot;</span> <span class="p">:</span>  <span class="p">{</span>
+  <span class="nt">&quot;somekey&quot;</span> <span class="p">:</span> <span class="s2">&quot;somevalue&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;somekey2&quot;</span> <span class="p">:</span> <span class="s2">&quot;somevalue2&quot;</span>
+ <span class="p">},</span>
+ <span class="nt">&quot;redirectPort&quot;</span> <span class="p">:</span> <span class="mi">7077</span><span class="p">,</span>
+ <span class="nt">&quot;redirectUrl&quot;</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;refreshTokenUrl&quot;</span> <span class="p">:</span> <span class="s2">&quot;https://www.googleapis.com/oauth2/v4/token&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;requestTimeout&quot;</span> <span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+ <span class="nt">&quot;requestUrl&quot;</span> <span class="p">:</span> <span class="s2">&quot;https://accounts.google.com/o/oauth2/v2/auth&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;scope&quot;</span> <span class="p">:</span> <span class="s2">&quot;https://www.googleapis.com/auth/drive.readonly&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;state&quot;</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;tokenUrl&quot;</span> <span class="p">:</span> <span class="s2">&quot;https://www.googleapis.com/oauth2/v4/token&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;username&quot;</span> <span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;version&quot;</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Refer to the next section for descriptions of similarly named keys and their
+possible values. There are several items in the configuration that are not
+exposed in the GUI and are described here:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">configType</span></tt> (required): 0 = Defined; 1 = Custom (this should be 1 if
+exported from the GUI).</li>
+<li><tt class="docutils literal"><span class="pre">id</span></tt> (required): A <em>unique</em> id, used to identify the configuration by the
+plugin (if using the Custom configuration GUI&#8217;s export function, this will be
+auto-generated).</li>
+<li><tt class="docutils literal"><span class="pre">version</span></tt> (required): This reflects the version of the JSON keys/values
+supported by the plugin.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is recommended to use the Custom configuration GUI&#8217;s export function, then
+edit the resulting file, as some values can be cumbersome to determine.</p>
+</div>
+</div>
+</div>
+<div class="section" id="custom-oauth-2-0-configuration">
+<span id="auth-oauth2-custom-config"></span><h4>Custom OAuth 2.0 configuration<a class="headerlink" href="#custom-oauth-2-0-configuration" title="Permalink to this headline">¶</a></h4>
+<p>The <em class="guilabel">Configure</em> tab allows you to fully customize the configuration of
+the supported grant flows. Configurations are saved in the authentication
+system&#8217;s database (not JSON-formatted files), making them as portable as other
+authentication method configurations.</p>
+<div class="section" id="import-export">
+<h5>Import/Export<a class="headerlink" href="#import-export" title="Permalink to this headline">¶</a></h5>
+<p>Once a configuration is edited and tested, you can use the <a class="reference internal" href="../../../_images/export.png"><img alt="export_conf" src="../../../_images/export.png" style="width: 1.5em;" /></a>
+<sup>export configuration</sup> button to output a JSON-formatted file for use as a
+predefined OAuth2 configuration. Similarly, you can use the <a class="reference internal" href="../../../_images/import.png"><img alt="import_conf" src="../../../_images/import.png" style="width: 1.5em;" /></a>
+<sup>import configuration</sup> button to load an existing OAuth2 JSON-formatted
+file with the <tt class="docutils literal"><span class="pre">.json</span></tt> extension.</p>
+</div>
+<div class="section" id="grant-flows">
+<h5>Grant flows<a class="headerlink" href="#grant-flows" title="Permalink to this headline">¶</a></h5>
+<p>Each grant flow has slightly different <em>required</em> and <em>optional</em> fields, as well
+as some non-applicable fields. The GUI with show/hide the fields relative to the
+selected grant flow.</p>
+<p>Here are the fields for each grant flow:</p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-config-custom-authcode.png" src="../../../_images/auth-oauth2-config-custom-authcode.png" />
+<p class="caption">Authorization Code grant flow</p>
+</div>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-config-custom-implicit.png" src="../../../_images/auth-oauth2-config-custom-implicit.png" />
+<p class="caption">Implicit grant flow</p>
+</div>
+<div class="figure align-center">
+<img alt="../../../_images/auth-oauth2-config-custom-resowner.png" src="../../../_images/auth-oauth2-config-custom-resowner.png" />
+<p class="caption">Resource Owner Password Credentials grant flow</p>
+</div>
+</div>
+<div class="section" id="gui-field-descriptions">
+<h5>GUI field descriptions<a class="headerlink" href="#gui-field-descriptions" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><em class="guilabel">Grant flow</em>: The selected OAuth 2.0 grant flow.</li>
+<li><em class="guilabel">Description</em>: Short description of the configuration (useful for when
+listed as a predefined OAuth2 configuration file read from the file system).</li>
+<li><em class="guilabel">Request URL</em>: Where to send Authorization Code and Implicit initial
+requests.</li>
+<li><em class="guilabel">Token URL</em>: Where to send a request for the access token.</li>
+<li><em class="guilabel">Refresh Token URL</em>: Where to send request when attempting to refresh a
+token.</li>
+<li><em class="guilabel">Redirect URL</em>: Where to redirect the user&#8217;s browser upon finishing
+verification for Authorization Code or Implicit grant flows. This <strong>must</strong>
+match the redirect URL registered with the authorizing application at the
+authorization server. This will always be the plugin&#8217;s local reply server,
+but the port <strong>should</strong> be different for each configuration, and ideally
+above 1024. The <em>optional</em> path may be needed by some authorization servers.</li>
+<li><em class="guilabel">Client ID</em>: The identification of your registered authorizing application
+at the authorization server, where it is usually generated.</li>
+<li><em class="guilabel">Client Secret</em>: Password for the client, used in Authorization
+Code and
+Resource Owner Password Credentials grant flows.</li>
+<li><em class="guilabel">Username</em>: Username for Resource Owner Password Credentials grant flow.</li>
+<li><em class="guilabel">Password</em>: Password for Resource Owner Password Credentials grant flow.</li>
+<li><em class="guilabel">Scope</em>: A space-delimited list of authorization-server-approved
+permissions. This should be as limited to only what is needed.</li>
+<li><em class="guilabel">State</em>: A value that is passed between client and server during flow.
+(Currently not supported.)</li>
+<li><em class="guilabel">API Key</em>: Optional token used in some resource server requests.</li>
+<li><em class="guilabel">Token Session`</em> (Advanced): Whether to persist the access token between
+QGIS launches. See <a class="reference internal" href="#auth-oath2-access-tokens"><em>Resource access tokens</em></a>.</li>
+<li><em class="guilabel">Access Method</em> (Advanced): Which method should be used to pass the access
+token to the resource server: Header, Form (Post only), or URL Query.</li>
+<li><em class="guilabel">Request Timeout</em> (Advanced): Separate timeout for OAuth grant flow
+requests from standard QGIS network requests.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pki-authentication">
+<h2>PKI authentication<a class="headerlink" href="#pki-authentication" title="Permalink to this headline">¶</a></h2>
+<p>When configuring PKI components within the authentication system, you have the
+option of importing components into the database or referencing component files
+stored on your filesystem. The latter may be useful if such components change
+frequently, or where the components will be replaced by a system administrator.
+In either instance you will need to store any passphrase needed to access
+private keys within the database.</p>
+<p id="figure-auth-pki-1"><strong>Figure PKI authentication 1</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-pki-config.png" src="../../../_images/auth-pki-config.png" />
+<p class="caption">PKI configuration workflow</p>
+</div>
+<p>All PKI components can be managed in separate editors within the <strong>Certificate
+Manager</strong>, which can be accessed in the <em class="guilabel">Authentication</em> tab in QGIS
+<cite>Options</cite> dialog (<em class="menuselection">Settings ‣ Options</em>) by clicking the
+<strong>[Manage certificates]</strong> button.</p>
+<p id="figure-auth-pki-2"><strong>Figure PKI authentication 2</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-open-Certificate-manager.png" src="../../../_images/auth-open-Certificate-manager.png" />
+<p class="caption">Opening the Certificate Manager</p>
+</div>
+<p>In the <strong>Certificate manager</strong>, there are editors for <strong>Identities</strong>,
+<strong>Servers</strong> and <strong>Authorities</strong>. Each of these are contained in their own tabs,
+and are described below in the order they are encountered in the workflow chart
+above.  The tab order is relative to frequently accessed editors once you are
+accustomed to the workflow.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Because all authentication system edits write immediately to the
+authentication database, there is no need to click the <em class="guilabel">Options</em>
+dialog <strong>[OK]</strong> button for any changes to be saved. This is unlike other
+settings in the Options dialog.</p>
+</div>
+<div class="section" id="authorities">
+<h3>Authorities<a class="headerlink" href="#authorities" title="Permalink to this headline">¶</a></h3>
+<p>You can manage available Certificate Authorities (CAs) from the <strong>Authorities</strong>
+tab in the <strong>Certificate manager</strong> from the <strong>Authentication</strong> tab of
+the QGIS <strong>Options</strong> dialog.</p>
+<p>As referenced in the workflow chart above, the first step is to import or
+reference a file of CAs. This step is optional, and may be unnecessary if your
+PKI trust chain originates from root CAs already installed in your operating
+system (OS), such as a certificate from a commercial certificate vendor. If your
+authenticating root CA is not in the OS&#8217;s trusted root CAs, it will need to be
+imported or have its file system path referenced. (Contact your system
+administrator if unsure.)</p>
+<p id="figure-auth-pki-3"><strong>Figure PKI authentication 3</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-editor-authorities.png" src="../../../_images/auth-editor-authorities.png" />
+<p class="caption">Authorities editor</p>
+</div>
+<p>By default, the root CAs from your OS are available; however, their trust
+settings are not inherited. You should review the certificate trust policy
+settings, especially if your OS root CAs have had their policies adjusted. Any
+certificate that is expired will be set to untrusted and will not be used in
+secure server connections, unless you specifically override its trust policy. To
+see the QGIS-discoverable trust chain for any certificate, select it and click
+the <a class="reference internal" href="../../../_images/mActionPropertiesWidget.png"><img alt="propertiesWidget" src="../../../_images/mActionPropertiesWidget.png" style="width: 1.5em;" /></a> <sup>Show information for certificate</sup>.</p>
+<p id="figure-auth-pki-4"><strong>Figure PKI authentication 4</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-authority-imported_cert-info-chain.png" src="../../../_images/auth-authority-imported_cert-info-chain.png" />
+<p class="caption">Certificate info dialog</p>
+</div>
+<p>You can edit the <em class="guilabel">trust policy</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> for any selected
+certificate within the chain. Any change in trust policy to a selected
+certificate will not be saved to the database unless the <a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a>
+<sup>Save certificate trust policy change to database</sup> button is clicked
+<em>per</em> selected certification. Closing the dialog will <strong>not</strong> apply the
+policy changes.</p>
+<p id="figure-auth-pki-5"><strong>Figure PKI authentication 5</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-authority-edit-trust_save-not-close.png" src="../../../_images/auth-authority-edit-trust_save-not-close.png" />
+<p class="caption">Saving the trust policy changes</p>
+</div>
+<p>You can review the filtered CAs, both intermediate and root certificates, that
+will be trusted for secure connections or change the default trust policy by
+clicking the <a class="reference internal" href="../../../_images/mActionTransformSettings.png"><img alt="transformSettings" src="../../../_images/mActionTransformSettings.png" style="width: 1.5em;" /></a> <strong>Options</strong> button.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Changing the default trust policy may result in problems with secure
+connections.</p>
+</div>
+<p id="figure-auth-pki-6"><strong>Figure PKI authentication 6</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-editor-authorities_utilities-menu.png" src="../../../_images/auth-editor-authorities_utilities-menu.png" />
+<p class="caption">Authorities options menu</p>
+</div>
+<p>You can import CAs or save a file system path from a file that contains multiple
+CAs, or import individual CAs. The standard PEM format for files that contain
+multiple CA chain certifications has the root cert at the bottom of the file and
+all subsequently signed child certificates above, towards the beginning of the
+file.</p>
+<p>The CA certificate import dialog will find all CA certificates within the file,
+regardless of order, and also offers the option to import certificates that are
+considered invalid (in case you want to override their trust policy). You can
+override the trust policy upon import, or do so later within the <strong>Authorities</strong>
+editor.</p>
+<p id="figure-auth-pki-7"><strong>Figure PKI authentication 7</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-authority-import.png" src="../../../_images/auth-authority-import.png" />
+<p class="caption">Import certificates dialog</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are pasting certificate information into the <em class="guilabel">PEM text</em>
+field, note that encrypted certificates are not supported.</p>
+</div>
+</div>
+<div class="section" id="identities">
+<h3>Identities<a class="headerlink" href="#identities" title="Permalink to this headline">¶</a></h3>
+<p>You can manage available client identity bundles from the <em class="guilabel">Identities</em>
+tab in the <em class="guilabel">Certificate manager</em> from the <strong>Authentication</strong> tab of the
+QGIS <strong>Options</strong> dialog. An identity is what authenticates you against a
+PKI-enabled service and usually consists of a client certificate and
+private key, either as separate files or combined into a single &#8220;bundled&#8221;
+file. The bundle or private key is often passphrase-protected.</p>
+<p>Once you have any Certificate Authorities (CAs) imported you can optionally
+import any identity bundles into the authentication database. If you do not wish
+to store the identities, you can reference their component file system paths
+within an individual authentication configuration.</p>
+<p id="figure-auth-pki-identities-1"><strong>Figure PKI identities authentication 1</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-editor-identities.png" src="../../../_images/auth-editor-identities.png" />
+<p class="caption">Identities editor</p>
+</div>
+<p>When importing an identity bundle, it can be passphrase-protected or
+unprotected, and can contain CA certificates forming a trust chain. Trust chain
+certifications will not be imported here; they can be added separately under the
+<em class="guilabel">Authorities</em> tab.</p>
+<p>Upon import the bundle&#8217;s certificate and private key will be stored in the
+database, with the key&#8217;s storage encrypted using the QGIS master password.
+Subsequent usage of the stored bundle from the database will only require input
+of the master password.</p>
+<p>Personal identity bundles consisting of PEM/DER (.pem/.der) and PKCS#12
+(.p12/.pfx) components are supported. If a key or bundle is
+passphrase-protected, the password will be required to validate the component
+prior to import. Likewise, if the client certificate in the bundle is invalid
+(for example, its effective date has not yet started or has elapsed) the bundle
+can not be imported.</p>
+<p id="figure-auth-pki-identities-2"><strong>Figure PKI identities authentication 2</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-identity-import_paths.png" src="../../../_images/auth-identity-import_paths.png" />
+<p class="caption">PEM/DER identity import</p>
+</div>
+<p id="figure-auth-pki-identities-3"><strong>Figure PKI identities authentication 3</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-identity-import_bundle-valid.png" src="../../../_images/auth-identity-import_bundle-valid.png" />
+<p class="caption">PKCS#12 identity import</p>
+</div>
+</div>
+</div>
+<div class="section" id="handling-bad-layers">
+<h2>Handling bad layers<a class="headerlink" href="#handling-bad-layers" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally, the authentication configuration ID that is saved with a project
+file is no longer valid, possibly because the current authentication database
+is different than when the project was last saved, or due to a credentials
+mismatch. In such cases the <em class="guilabel">Handle bad layers</em> dialog will be
+presented upon QGIS launch.</p>
+<p id="figure-auth-pki-badlayers-1"><strong>Figure PKI authentication Bad layers 1</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-handle-bad-layers.png" src="../../../_images/auth-handle-bad-layers.png" />
+<p class="caption">Handle bad layers with authentication</p>
+</div>
+<p>If a data source is found to have an authentication configuration ID associated
+with it, you will be able to edit it. Doing so will automatically edit the data
+source string, much in the same way as opening the project file in a text editor
+and editing the string.</p>
+<p id="figure-auth-pki-badlayers-2"><strong>Figure PKI authentication Bad layers 2</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-handle-bad-layers-edit.png" src="../../../_images/auth-handle-bad-layers-edit.png" />
+<p class="caption">Edit bad layer&#8217;s authentication config ID</p>
+</div>
+</div>
+<div class="section" id="changing-authentication-config-id">
+<h2>Changing authentication config ID<a class="headerlink" href="#changing-authentication-config-id" title="Permalink to this headline">¶</a></h2>
+<p>Occasionally, you will need to change the authenticationn configuration ID that
+is associated with accessing a resource. There are instances where this is
+useful:</p>
+<ul class="simple">
+<li><em>Resource auth config ID is no longer valid</em> - This can occur when you have
+switched auth databases add need to <em>align</em> a new configuration to the ID
+already associated with a resource.</li>
+<li><em>Shared project files</em> - If you intended to share projects between users, e.g.
+via a shared file server, you can <em>predefine</em> a 7-character (containing
+<strong>a-z</strong> and/or <strong>0-9</strong>) that is associated with the resource. Then, individual
+users change the ID of an authentication configuration that is specific to
+their credentials of the resource. When the project is opened, the ID is found
+in the authentication database, but the credentials are different per user.</li>
+</ul>
+<p id="figure-auth-id-1"><strong>Figure Authentication ID 1</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-change-config-id.png" src="../../../_images/auth-change-config-id.png" />
+<p class="caption">Changing a layer&#8217;s authentication config ID (unlocked yellow text field)</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Changing the auth config ID is considered an advanced operation and should
+only be done with full knowledge as to why it is necessary. This is why there
+is a lock button that needs clicked, to unlock the ID&#8217;s text field prior to
+editing the ID.</p>
+</div>
+</div>
+<div class="section" id="qgis-server-support">
+<h2>QGIS Server support<a class="headerlink" href="#qgis-server-support" title="Permalink to this headline">¶</a></h2>
+<p>When using a project file, with layers that have authentication configurations,
+as a basis for a map in QGIS Server, there are a couple of additional setup
+steps necessary for QGIS to load the resources:</p>
+<ul class="simple">
+<li>Authentication database needs to be available</li>
+<li>Authentication database&#8217;s master password needs to be available</li>
+</ul>
+<p>When instantiating the authentication system, Server will create or use
+<tt class="file docutils literal"><span class="pre">qgis-auth.db</span></tt> in <tt class="file docutils literal"><span class="pre">~/.qgis2/</span></tt> or the directory defined by the
+<tt class="docutils literal"><span class="pre">QGIS_AUTH_DB_DIR_PATH</span></tt> environment variable. It may be that the Server&#8217;s user
+has no HOME directory, in which case, use the environment variable to define a
+directory that the Server&#8217;s user has read/write permissions and is not located
+within the web-accessible directories.</p>
+<p>To pass the master password to Server, write it to the first line of file at a
+path on the file system readable by the Server processes user and defined using
+the <tt class="docutils literal"><span class="pre">QGIS_AUTH_PASSWORD_FILE</span></tt> environment variable. Ensure to limit the file
+as only readable by the Server&#8217;s process user and to not store the file within
+web-accessible directories.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">QGIS_AUTH_PASSWORD_FILE</span></tt> variable will be removed from the Server
+environment immediately after accessing</p>
+</div>
+</div>
+<div class="section" id="ssl-server-exceptions">
+<h2>SSL server exceptions<a class="headerlink" href="#ssl-server-exceptions" title="Permalink to this headline">¶</a></h2>
+<p id="figure-auth-server-1"><strong>Figure Server authentication 1</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-ssl-config.png" src="../../../_images/auth-ssl-config.png" />
+<p class="caption">SSL server exception</p>
+</div>
+<p>You can manage SSL server configurations and exceptions from the <strong>Servers</strong> tab
+in the <strong>Authentication</strong> section of the QGIS <strong>Options</strong> dialog.</p>
+<p>Sometimes, when connecting to an SSL server, there are errors with the SSL
+&#8220;handshake&#8221; or the server&#8217;s certificate. You can ignore those errors or create
+an SSL server configuration as an exception. This is similar to how web browsers
+allow you to override SSL errors, but with more granular control.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You should not create an SSL server configuration unless you have complete
+knowledge of the entire SSL setup between the server and client. Instead,
+report the issue to the server administrator.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some PKI setups use a completely different CA trust chain to validate client
+identities than the chain used to validate the SSL server certificate. In
+such circumstances, any configuration created for the connecting server will
+not necessarily fix an issue with the validation of your client identity, and
+only your client identity&#8217;s issuer or server administrator can fix the issue.</p>
+</div>
+<p>You can pre-configure an SSL server configuration by clicking the <a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a>
+button.  Alternatively, you can add a configuration when an SSL error occurs
+during a connection and you are presented with an <strong>SSL Error</strong> dialog (where
+the error can be ignored temporarily or saved to the database and ignored):</p>
+<p id="figure-auth-server-2"><strong>Figure Server authentication 2</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-server-exception.png" src="../../../_images/auth-server-exception.png" />
+<p class="caption">Manually adding configuration</p>
+</div>
+<p id="figure-auth-server-3"><strong>Figure Server authentication 3</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-server-error-add-exception.png" src="../../../_images/auth-server-error-add-exception.png" />
+<p class="caption">Adding configuration during SSL error</p>
+</div>
+<p>Once an SSL configuration is saved to the database, it can be edited or deleted.</p>
+<p id="figure-auth-server-4"><strong>Figure Server authentication 4</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-editor-servers.png" src="../../../_images/auth-editor-servers.png" />
+<p class="caption">Existing SSL configuration</p>
+</div>
+<p id="figure-auth-server-5"><strong>Figure Server authentication 5</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/auth-server-edit.png" src="../../../_images/auth-server-edit.png" />
+<p class="caption">Editing an existing SSL configuration</p>
+</div>
+<p>If you want to pre-configure an SSL configuration and the import dialog is not
+working for your server&#8217;s connection, you can manually trigger a connection via
+the <strong>Python Console</strong> by running the following code (replace
+<tt class="docutils literal"><span class="pre">https://bugreports.qt-project.org</span></tt> with the URL of your server):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">PyQt4.QtNetwork</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">QNetworkRequest</span><span class="p">(</span><span class="n">QUrl</span><span class="p">(</span><span class="s">&#39;https://bugreports.qt-project.org&#39;</span><span class="p">))</span>
+<span class="n">reply</span> <span class="o">=</span> <span class="n">QgsNetworkAccessManager</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will open an SSL error dialog if any errors occur, where you can choose to
+save the configuration to the database.</p>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="auth_considerations.html" title="Security Considerations"
+             >next</a></li>
+        <li class="right" >
+          <a href="auth_overview.html" title="Authentication System Overview"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >Authentication System</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

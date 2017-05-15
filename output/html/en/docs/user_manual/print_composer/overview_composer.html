@@ -1,0 +1,839 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview of the Print Composer</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Print Composer" href="index.html" />
+    <link rel="next" title="Composer Items" href="composer_items/index.html" />
+    <link rel="prev" title="Print Composer" href="index.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/print_composer/overview_composer.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="composer_items/index.html" title="Composer Items"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Print Composer"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Print Composer</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="index.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="composer_items/index.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="overview-of-the-print-composer">
+<span id="overview-composer"></span><h1>Overview of the Print Composer<a class="headerlink" href="#overview-of-the-print-composer" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#sample-session" id="id1">Sample Session</a></li>
+<li><a class="reference internal" href="#the-composer-manager" id="id2">The Composer Manager</a></li>
+<li><a class="reference internal" href="#menus-tools-and-panels-of-the-print-composer" id="id3">Menus, tools and panels of the print composer</a><ul>
+<li><a class="reference internal" href="#tools" id="id4">Tools</a></li>
+<li><a class="reference internal" href="#composer-menu" id="id5">Composer Menu</a></li>
+<li><a class="reference internal" href="#settings-menu" id="id6">Settings Menu</a></li>
+<li><a class="reference internal" href="#edit-menu" id="id7">Edit Menu</a><ul>
+<li><a class="reference internal" href="#copy-cut-and-paste-items" id="id8">Copy/Cut and Paste Items</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#view-menu" id="id9">View Menu</a><ul>
+<li><a class="reference internal" href="#navigation-tools" id="id10">Navigation Tools</a></li>
+<li><a class="reference internal" href="#hide-and-show-panels" id="id11">Hide and Show Panels</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#composition-tab" id="id12">Composition Tab</a><ul>
+<li><a class="reference internal" href="#page-size-and-settings" id="id13">Page size and settings</a></li>
+<li><a class="reference internal" href="#export-settings" id="id14">Export settings</a></li>
+<li><a class="reference internal" href="#grid-and-guides" id="id15">Grid and guides</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-history-tab-revert-and-restore-actions" id="id16">Command History Tab: Revert and Restore actions</a></li>
+<li><a class="reference internal" href="#items-tab" id="id17">Items Tab</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The Print Composer provides growing layout and printing capabilities. It allows
+you to add elements such as the QGIS map canvas, text labels, images, legends,
+scale bars, basic shapes, arrows, attribute tables and HTML frames. You can size,
+group, align, position and rotate each element and adjust their properties to
+create your layout. The layout can be printed or exported to image formats,
+PostScript, PDF or to SVG (export to SVG is not working properly with some
+recent Qt4 versions; you should try and check individually on your system).
+You can save the layout as a template and load it again in another session. Finally,
+generating several maps based on a template can be done through the atlas generator.</p>
+<span class="target" id="index-0"></span><div class="section" id="sample-session">
+<span id="index-1"></span><h2><a class="toc-backref" href="#id1">Sample Session</a><a class="headerlink" href="#sample-session" title="Permalink to this headline">¶</a></h2>
+<p>Before you start to work with the Print Composer, you need to load some raster
+or vector layers in the QGIS map canvas and adapt their properties to suit your
+own convenience. After everything is rendered and symbolized to your liking,
+click the <a class="reference internal" href="../../../_images/mActionNewComposer.png"><img alt="newComposer" src="../../../_images/mActionNewComposer.png" style="width: 1.5em;" /></a> <sup>New Print Composer</sup> icon in the toolbar or
+choose <em class="menuselection">File ‣ New Print Composer</em>. You will be prompted to
+choose a title for the new Composer.</p>
+<p>To demonstrate how to create a map please follow the next instructions.</p>
+<ol class="arabic simple">
+<li>On the left side, select the <a class="reference internal" href="../../../_images/mActionAddMap.png"><img alt="addMap" src="../../../_images/mActionAddMap.png" style="width: 1.5em;" /></a> <sup>Add new map</sup> toolbar button
+and draw a rectangle on the canvas holding down the left mouse button.
+Inside the drawn rectangle the QGIS map view to the canvas.</li>
+<li>Select the <a class="reference internal" href="../../../_images/mActionScaleBar.png"><img alt="scaleBar" src="../../../_images/mActionScaleBar.png" style="width: 1.5em;" /></a> <sup>Add new scalebar</sup> toolbar button and click
+with the left mouse button on the Print Composer canvas. A scalebar will be
+added to the canvas.</li>
+<li>Select the <a class="reference internal" href="../../../_images/mActionAddLegend.png"><img alt="addLegend" src="../../../_images/mActionAddLegend.png" style="width: 1.5em;" /></a> <sup>Add new legend</sup> toolbar button and draw a
+rectangle on the canvas holding down the left mouse button.
+Inside the drawn rectangle the legend will be drawn.</li>
+<li>Select the <a class="reference internal" href="../../../_images/mActionSelect.png"><img alt="select" src="../../../_images/mActionSelect.png" style="width: 1.5em;" /></a> <sup>Select/Move item</sup> icon to select the map on
+the canvas and move it a bit.</li>
+<li>While the map item is still selected you can also change the size of the map item.
+Click while holding down the left mouse button, in a white little rectangle in one
+of the corners of the map item and drag it to a new location to change it&#8217;s size.</li>
+<li>Click the <em class="guilabel">Item Properties</em> tab on the left lower panel and find the setting
+for the orientation. Change the value of the setting <em class="guilabel">Map orientation</em> to
+&#8216;15.00° &#8216;. You should see the orientation of the map item change.</li>
+<li>Now, you can print or export your print composition to image formats, PDF or to SVG
+with the export tools in Composer menu.</li>
+<li>Finally, you can save your print composition within the project file with the
+<a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a> <sup>Save Project</sup> button.</li>
+</ol>
+<p>You can add multiple elements to the Composer. It is also possible to have more
+than one map view or legend or scale bar in the Print Composer canvas, on one or
+several pages. Each element has its own properties and, in the case of the map,
+its own extent. If you want to remove any elements from the Composer canvas you
+can do that with the <tt class="kbd docutils literal"><span class="pre">Delete</span></tt> or the <tt class="kbd docutils literal"><span class="pre">Backspace</span></tt> key.</p>
+</div>
+<div class="section" id="the-composer-manager">
+<span id="composer-manager"></span><span id="index-2"></span><h2><a class="toc-backref" href="#id2">The Composer Manager</a><a class="headerlink" href="#the-composer-manager" title="Permalink to this headline">¶</a></h2>
+<p>The Composer Manager is the main window to manage print composers in the project.
+It helps you add new print composer, duplicate an existing one, rename or delete it.
+To open the composer manager dialog, click on the <a class="reference internal" href="../../../_images/mActionComposerManager.png"><img alt="composerManager" src="../../../_images/mActionComposerManager.png" style="width: 1.5em;" /></a>
+<sup>Composer Manager</sup> button in the toolbar or choose <em class="menuselection">Composer
+‣ Composer Manager</em>. It can also be reached from the main window of QGIS with
+<em class="menuselection">Project ‣ Composer Manager</em>.</p>
+<p id="figure-composer-manager"><strong>Figure Composer Manager:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/print_composer_manager.png" src="../../../_images/print_composer_manager.png" />
+<p class="caption">The Print Composer Manager</p>
+</div>
+<p>The composer manager lists in its upper part all the available print composers in the project.
+The bottom part shows tools that help to:</p>
+<ul class="simple">
+<li>show the selected composer(s): you can open multiple print composers in one-click</li>
+<li>duplicate the selected composer (available only if one print composer is selected):
+it creates a new composer using the selected composer as template.
+You&#8217;ll be prompted to choose a new title for the new composer</li>
+<li>rename the composer (also available only if one print composer is selected):
+You&#8217;ll be prompted to choose a new title for the composer. Note that you can
+also rename the composer by double-clicking on its title in the upper part</li>
+<li>remove the composer: the selected print composer(s) will be deleted from the project.</li>
+</ul>
+<p>With the Composer Manager, it&#8217;s also possible to create new print composers as an
+empty composer or from a saved template. By default, QGIS will look for templates
+in user directory (<tt class="file docutils literal"><span class="pre">~/.qgis2/composer_templates</span></tt>) or application&#8217;s one
+(<tt class="file docutils literal"><span class="pre">ApplicationFolder/composer_templates</span></tt>).
+QGIS will retrieve all the available templates and propose them in the combobox.
+The selected template will be used to create a new composer when clicking
+<em class="guilabel">Add</em> button.
+You can also save composer templates in another folder.
+Choosing <em>specific</em> in the template list offers the ability to select such
+template and use it to create a new print composer.</p>
+</div>
+<div class="section" id="menus-tools-and-panels-of-the-print-composer">
+<h2><a class="toc-backref" href="#id3">Menus, tools and panels of the print composer</a><a class="headerlink" href="#menus-tools-and-panels-of-the-print-composer" title="Permalink to this headline">¶</a></h2>
+<p>Opening the Print Composer provides you with a blank canvas that represents
+the paper surface when using the print option. Initially you find buttons on
+the left beside the canvas to add map composer items: the current QGIS map canvas,
+text labels, images, legends, scale bars, basic shapes, arrows, attribute tables
+and HTML frames. In this toolbar you also find toolbar buttons to navigate,
+zoom in on an area and pan the view on the composer and toolbar buttons to
+select a map composer item and to move the contents of the map item.</p>
+<p><a class="reference internal" href="#figure-composer-overview">Figure_composer_overview</a> shows the initial view of the Print Composer before
+any elements are added.</p>
+<p id="figure-composer-overview"><strong>Figure Composer Overview:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/print_composer_blank.png" src="../../../_images/print_composer_blank.png" />
+<p class="caption">Print Composer</p>
+</div>
+<p>On the right beside the canvas you find two panels.
+The upper panel holds the tabs <em class="guilabel">Items</em> and <em class="guilabel">Command History</em>
+and the lower panel holds the tabs <em class="guilabel">Composition</em>, <em class="guilabel">Item properties</em>
+and <em class="guilabel">Atlas generation</em>.</p>
+<ul class="simple">
+<li>The <em class="guilabel">Items</em> tab provides a list of all map composer items added to the canvas.</li>
+<li>The <em class="guilabel">Command history</em> tab displays a history of all changes applied
+to the Print Composer layout. With a mouse click, it is possible to undo and
+redo layout steps back and forth to a certain status.</li>
+<li>The <em class="guilabel">Composition</em> tab allows you to set paper size, orientation, the page
+background, number of pages and print quality for the output file in dpi. Furthermore,
+you can also activate the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Print as raster</em> checkbox. This means
+all items will be converted to raster before printing or saving as PostScript or PDF.
+In this tab, you can also customize settings for grid and smart guides.</li>
+<li>The <em class="guilabel">Item Properties</em> tab displays the properties for the selected
+item. Click the <a class="reference internal" href="../../../_images/mActionSelect.png"><img alt="select" src="../../../_images/mActionSelect.png" style="width: 1.5em;" /></a> <sup>Select/Move item</sup> icon to select
+an item (e.g., legend, scale bar or label) on the canvas. Then click the
+<em class="guilabel">Item Properties</em> tab and customize the settings for the selected
+item.</li>
+<li>The <em class="guilabel">Atlas generation</em> tab allows you to enable the generation of an
+atlas for the current Composer and gives access to its parameters.</li>
+</ul>
+<p>In the bottom part of the Print Composer window, you can find a status bar with
+mouse position, current page number, a combo box to set the zoom level,
+the number of selected items if applicable and, in the case of atlas generation,
+the number of features.</p>
+<p>In the upper part of the Print composer window, you can find menus and other toolbars.
+All Print Composer tools are available in menus and as icons in a toolbar.
+See a list of tools in <a class="reference internal" href="#table-composer-1">table_composer_1</a>.</p>
+<p>The toolbars and the tabs can be switched off and on using the right mouse button
+over any toolbar or through <em class="menuselection">View ‣ Toolbars</em> or
+<em class="menuselection">View ‣ Panels</em>.</p>
+<div class="section" id="tools">
+<span id="composer-tools"></span><span id="index-3"></span><h3><a class="toc-backref" href="#id4">Tools</a><a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils" id="table-composer-1">
+<colgroup>
+<col width="18%" />
+<col width="31%" />
+<col width="17%" />
+<col width="34%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Icon</th>
+<th class="head">Purpose</th>
+<th class="head">Icon</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a></td>
+<td>Save Project</td>
+<td><a class="reference internal" href="../../../_images/mActionNewComposer.png"><img alt="newComposer" src="../../../_images/mActionNewComposer.png" style="width: 1.5em;" /></a></td>
+<td>New Composer</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionDuplicateComposer.png"><img alt="duplicateComposer" src="../../../_images/mActionDuplicateComposer.png" style="width: 1.5em;" /></a></td>
+<td>Duplicate Composer</td>
+<td><a class="reference internal" href="../../../_images/mActionComposerManager.png"><img alt="composerManager" src="../../../_images/mActionComposerManager.png" style="width: 1.5em;" /></a></td>
+<td>Composer Manager</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionFileOpen.png"><img alt="fileOpen" src="../../../_images/mActionFileOpen.png" style="width: 1.5em;" /></a></td>
+<td>Load from template</td>
+<td><a class="reference internal" href="../../../_images/mActionFileSaveAs.png"><img alt="fileSaveAs" src="../../../_images/mActionFileSaveAs.png" style="width: 1.5em;" /></a></td>
+<td>Save as template</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionFilePrint.png"><img alt="filePrint" src="../../../_images/mActionFilePrint.png" style="width: 1.5em;" /></a></td>
+<td>Print or export as PostScript</td>
+<td><a class="reference internal" href="../../../_images/mActionSaveMapAsImage.png"><img alt="saveMapAsImage" src="../../../_images/mActionSaveMapAsImage.png" style="width: 1.5em;" /></a></td>
+<td>Export to an image format</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionSaveAsSVG.png"><img alt="saveAsSVG" src="../../../_images/mActionSaveAsSVG.png" style="width: 1.5em;" /></a></td>
+<td>Export print composition to SVG</td>
+<td><a class="reference internal" href="../../../_images/mActionSaveAsPDF.png"><img alt="saveAsPDF" src="../../../_images/mActionSaveAsPDF.png" style="width: 1.5em;" /></a></td>
+<td>Export as PDF</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionUndo.png"><img alt="undo" src="../../../_images/mActionUndo.png" style="width: 1.5em;" /></a></td>
+<td>Revert last change</td>
+<td><a class="reference internal" href="../../../_images/mActionRedo.png"><img alt="redo" src="../../../_images/mActionRedo.png" style="width: 1.5em;" /></a></td>
+<td>Restore last change</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionZoomFullExtent.png"><img alt="zoomFullExtent" src="../../../_images/mActionZoomFullExtent.png" style="width: 1.5em;" /></a></td>
+<td>Zoom to full extent</td>
+<td><a class="reference internal" href="../../../_images/mActionZoomActual.png"><img alt="zoomActual" src="../../../_images/mActionZoomActual.png" style="width: 1.5em;" /></a></td>
+<td>Zoom to 100%</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionZoomIn.png"><img alt="zoomIn" src="../../../_images/mActionZoomIn.png" style="width: 1.5em;" /></a></td>
+<td>Zoom in</td>
+<td><a class="reference internal" href="../../../_images/mActionZoomIn.png"><img alt="zoomIn" src="../../../_images/mActionZoomIn.png" style="width: 1.5em;" /></a></td>
+<td>Zoom out</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionDraw.png"><img alt="draw" src="../../../_images/mActionDraw.png" style="width: 1.5em;" /></a></td>
+<td>Refresh View</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionPan.png"><img alt="pan" src="../../../_images/mActionPan.png" style="width: 1.5em;" /></a></td>
+<td>Pan</td>
+<td><a class="reference internal" href="../../../_images/mActionZoomToArea.png"><img alt="zoomToArea" src="../../../_images/mActionZoomToArea.png" style="width: 1.5em;" /></a></td>
+<td>Zoom to specific region</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionSelect.png"><img alt="select" src="../../../_images/mActionSelect.png" style="width: 1.5em;" /></a></td>
+<td>Select/Move item in print composition</td>
+<td><a class="reference internal" href="../../../_images/mActionMoveItemContent.png"><img alt="moveItemContent" src="../../../_images/mActionMoveItemContent.png" style="width: 1.5em;" /></a></td>
+<td>Move content within an item</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAddMap.png"><img alt="addMap" src="../../../_images/mActionAddMap.png" style="width: 1.5em;" /></a></td>
+<td>Add new map from QGIS map canvas</td>
+<td><a class="reference internal" href="../../../_images/mActionAddImage.png"><img alt="addImage" src="../../../_images/mActionAddImage.png" style="width: 1.5em;" /></a></td>
+<td>Add image to print composition</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionLabel.png"><img alt="label" src="../../../_images/mActionLabel.png" style="width: 1.5em;" /></a></td>
+<td>Add label to print composition</td>
+<td><a class="reference internal" href="../../../_images/mActionAddLegend.png"><img alt="addLegend" src="../../../_images/mActionAddLegend.png" style="width: 1.5em;" /></a></td>
+<td>Add new legend to print composition</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionScaleBar.png"><img alt="scaleBar" src="../../../_images/mActionScaleBar.png" style="width: 1.5em;" /></a></td>
+<td>Add scale bar to print composition</td>
+<td><a class="reference internal" href="../../../_images/mActionAddBasicShape.png"><img alt="addBasicShape" src="../../../_images/mActionAddBasicShape.png" style="width: 1.5em;" /></a></td>
+<td>Add basic shape to print composition</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionAddArrow.png"><img alt="addArrow" src="../../../_images/mActionAddArrow.png" style="width: 1.5em;" /></a></td>
+<td>Add arrow to print composition</td>
+<td><a class="reference internal" href="../../../_images/mActionOpenTable.png"><img alt="openTable" src="../../../_images/mActionOpenTable.png" style="width: 1.5em;" /></a></td>
+<td>Add attribute table to print composition</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAddHtml.png"><img alt="addHtml" src="../../../_images/mActionAddHtml.png" style="width: 1.5em;" /></a></td>
+<td>Add an HTML frame</td>
+<td><a class="reference internal" href="../../../_images/mActionAddNodesShape.png"><img alt="addNodesShape" src="../../../_images/mActionAddNodesShape.png" style="width: 1.5em;" /></a></td>
+<td>Add nodes shape to print composition</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionEditNodesShape.png"><img alt="editNodesShape" src="../../../_images/mActionEditNodesShape.png" style="width: 1.5em;" /></a></td>
+<td>Edit a nodes shape</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionGroupItems.png"><img alt="groupItems" src="../../../_images/mActionGroupItems.png" style="width: 1.5em;" /></a></td>
+<td>Group items of print composition</td>
+<td><a class="reference internal" href="../../../_images/mActionUngroupItems.png"><img alt="ungroupItems" src="../../../_images/mActionUngroupItems.png" style="width: 1.5em;" /></a></td>
+<td>Ungroup items of print composition</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/locked.png"><img alt="locked" src="../../../_images/locked.png" style="width: 1.5em;" /></a></td>
+<td>Lock Selected Items</td>
+<td><a class="reference internal" href="../../../_images/unlocked.png"><img alt="unlocked" src="../../../_images/unlocked.png" style="width: 1.5em;" /></a></td>
+<td>Unlock All items</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionRaiseItems.png"><img alt="raiseItems" src="../../../_images/mActionRaiseItems.png" style="width: 1.5em;" /></a></td>
+<td>Raise selected items</td>
+<td><a class="reference internal" href="../../../_images/mActionLowerItems.png"><img alt="lowerItems" src="../../../_images/mActionLowerItems.png" style="width: 1.5em;" /></a></td>
+<td>Lower selected items</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionMoveItemsToTop.png"><img alt="moveItemsToTop" src="../../../_images/mActionMoveItemsToTop.png" style="width: 1.5em;" /></a></td>
+<td>Move selected items to top</td>
+<td><a class="reference internal" href="../../../_images/mActionMoveItemsToBottom.png"><img alt="moveItemsToBottom" src="../../../_images/mActionMoveItemsToBottom.png" style="width: 1.5em;" /></a></td>
+<td>Move selected items to bottom</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAlignLeft.png"><img alt="alignLeft" src="../../../_images/mActionAlignLeft.png" style="width: 1.5em;" /></a></td>
+<td>Align selected items left</td>
+<td><a class="reference internal" href="../../../_images/mActionAlignRight.png"><img alt="alignRight" src="../../../_images/mActionAlignRight.png" style="width: 1.5em;" /></a></td>
+<td>Align selected items right</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionAlignHCenter.png"><img alt="alignHCenter" src="../../../_images/mActionAlignHCenter.png" style="width: 1.5em;" /></a></td>
+<td>Align selected items center</td>
+<td><a class="reference internal" href="../../../_images/mActionAlignVCenter.png"><img alt="alignVCenter" src="../../../_images/mActionAlignVCenter.png" style="width: 1.5em;" /></a></td>
+<td>Align selected items center vertical</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAlignTop.png"><img alt="alignTop" src="../../../_images/mActionAlignTop.png" style="width: 1.5em;" /></a></td>
+<td>Align selected items top</td>
+<td><a class="reference internal" href="../../../_images/mActionAlignBottom.png"><img alt="alignBottom" src="../../../_images/mActionAlignBottom.png" style="width: 1.5em;" /></a></td>
+<td>Align selected items bottom</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mIconAtlas.png"><img alt="atlas" src="../../../_images/mIconAtlas.png" style="width: 1.5em;" /></a></td>
+<td>Preview Atlas</td>
+<td><a class="reference internal" href="../../../_images/mActionAtlasFirst.png"><img alt="atlasFirst" src="../../../_images/mActionAtlasFirst.png" style="width: 1.5em;" /></a></td>
+<td>First Feature</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAtlasPrev.png"><img alt="atlasPrev" src="../../../_images/mActionAtlasPrev.png" style="width: 1.5em;" /></a></td>
+<td>Previous Feature</td>
+<td><a class="reference internal" href="../../../_images/mActionAtlasNext.png"><img alt="atlasNext" src="../../../_images/mActionAtlasNext.png" style="width: 1.5em;" /></a></td>
+<td>Next Feature</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionAtlasLast.png"><img alt="atlasLast" src="../../../_images/mActionAtlasLast.png" style="width: 1.5em;" /></a></td>
+<td>Last feature</td>
+<td><a class="reference internal" href="../../../_images/mActionFilePrint.png"><img alt="filePrint" src="../../../_images/mActionFilePrint.png" style="width: 1.5em;" /></a></td>
+<td>Print Atlas</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionSaveMapAsImage.png"><img alt="saveMapAsImage" src="../../../_images/mActionSaveMapAsImage.png" style="width: 1.5em;" /></a></td>
+<td>Export Atlas as Image</td>
+<td><a class="reference internal" href="../../../_images/mActionAtlasSettings.png"><img alt="atlasSettings" src="../../../_images/mActionAtlasSettings.png" style="width: 1.5em;" /></a></td>
+<td>Atlas Settings</td>
+</tr>
+</tbody>
+</table>
+<p>Table Composer 1: Print Composer Tools</p>
+</div>
+<div class="section" id="composer-menu">
+<h3><a class="toc-backref" href="#id5">Composer Menu</a><a class="headerlink" href="#composer-menu" title="Permalink to this headline">¶</a></h3>
+<p>With the <em class="menuselection">Composer ‣ Save Project</em> action, you can save
+the project file directly from the print composer window.
+The <em class="menuselection">Composer</em> menu also provides actions to:</p>
+<ul class="simple">
+<li>Create a new and blank print composer with <a class="reference internal" href="../../../_images/mActionNewComposer.png"><img alt="newComposer" src="../../../_images/mActionNewComposer.png" style="width: 1.5em;" /></a> <sup>New Composer...</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionDuplicateComposer.png"><img alt="duplicateComposer" src="../../../_images/mActionDuplicateComposer.png" style="width: 1.5em;" /></a> <sup>Duplicate Composer...</sup> : Create a new print composer
+by duplicating the current one</li>
+<li>Open the <a class="reference internal" href="../../../_images/mActionComposerManager.png"><img alt="composerManager" src="../../../_images/mActionComposerManager.png" style="width: 1.5em;" /></a> <sup>Composer Manager...</sup></li>
+<li><em class="guilabel">Print Composers...</em> : Open an existing print composer</li>
+</ul>
+<p>Once the layout is designed, with <a class="reference internal" href="../../../_images/mActionFileSaveAs.png"><img alt="fileSaveAs" src="../../../_images/mActionFileSaveAs.png" style="width: 1.5em;" /></a> <sup>Save as template</sup>
+and <a class="reference internal" href="../../../_images/mActionFileOpen.png"><img alt="fileOpen" src="../../../_images/mActionFileOpen.png" style="width: 1.5em;" /></a> <sup>Add items from template</sup> icons, you can save
+the current state of a Print Composer session as a <tt class="file docutils literal"><span class="pre">.qpt</span></tt> template
+and load its item again in another session.</p>
+<p>In the <em class="menuselection">Composer</em> menu, there are also powerful ways to share
+geographical information produced with QGIS that can be included in reports or
+published. These tools are <a class="reference internal" href="../../../_images/mActionSaveMapAsImage.png"><img alt="saveMapAsImage" src="../../../_images/mActionSaveMapAsImage.png" style="width: 1.5em;" /></a> <sup>Export as Image...</sup>,
+<a class="reference internal" href="../../../_images/mActionSaveAsPDF.png"><img alt="saveAsPDF" src="../../../_images/mActionSaveAsPDF.png" style="width: 1.5em;" /></a> <sup>Export as PDF...</sup>, <a class="reference internal" href="../../../_images/mActionSaveAsSVG.png"><img alt="saveAsSVG" src="../../../_images/mActionSaveAsSVG.png" style="width: 1.5em;" /></a> <sup>Export as
+SVG...</sup> and <a class="reference internal" href="../../../_images/mActionFilePrint.png"><img alt="filePrint" src="../../../_images/mActionFilePrint.png" style="width: 1.5em;" /></a> <sup>Print...</sup>.</p>
+</div>
+<div class="section" id="settings-menu">
+<h3><a class="toc-backref" href="#id6">Settings Menu</a><a class="headerlink" href="#settings-menu" title="Permalink to this headline">¶</a></h3>
+<p>From <em class="menuselection">Settings ‣ Composer Options</em> you can set some options
+that will be used as default on any composer during your work.</p>
+<ul class="simple">
+<li><em class="guilabel">Compositions defaults</em> let you specify the default font to use.</li>
+<li>With <em class="guilabel">Grid appearance</em>, you can set the grid style and its color.
+There are three types of grid: <strong>Dots</strong>, <strong>Solid</strong> lines and <strong>Crosses</strong>.</li>
+<li><em class="guilabel">Grid and guide defaults</em> defines spacing, offset and tolerance of the grid.</li>
+</ul>
+</div>
+<div class="section" id="edit-menu">
+<h3><a class="toc-backref" href="#id7">Edit Menu</a><a class="headerlink" href="#edit-menu" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="copy-cut-and-paste-items">
+<h4><a class="toc-backref" href="#id8">Copy/Cut and Paste Items</a><a class="headerlink" href="#copy-cut-and-paste-items" title="Permalink to this headline">¶</a></h4>
+<p>The print composer includes actions to use the common Copy/Cut/Paste functionality
+for the items in the layout. As usual first you need to select the items using
+one of the options seen above; at this point the actions can be found in the
+<em class="menuselection">Edit</em> menu.
+When using the Paste action, the elements will be pasted according to the current
+mouse position. Using the <em class="menuselection">Edit ‣ Paste in Place</em> action or
+pressing <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+V</span></tt> will paste the items into the current page, at the
+same position they were in their initial page. It ensures to copy/paste items at
+the same place, from page to page.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">HTML items can not be copied in this way. As a workaround, use the <strong>[Add Frame]</strong>
+button in the <em class="menuselection">Item Properties</em> tab.</p>
+</div>
+</div>
+</div>
+<div class="section" id="view-menu">
+<h3><a class="toc-backref" href="#id9">View Menu</a><a class="headerlink" href="#view-menu" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="navigation-tools">
+<h4><a class="toc-backref" href="#id10">Navigation Tools</a><a class="headerlink" href="#navigation-tools" title="Permalink to this headline">¶</a></h4>
+<p>To navigate in the canvas layout, the Print Composer provides some general tools:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/mActionZoomIn.png"><img alt="zoomIn" src="../../../_images/mActionZoomIn.png" style="width: 1.5em;" /></a> <sup>Zoom In</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionZoomOut.png"><img alt="zoomOut" src="../../../_images/mActionZoomOut.png" style="width: 1.5em;" /></a> <sup>Zoom Out</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionZoomFullExtent.png"><img alt="zoomFullExtent" src="../../../_images/mActionZoomFullExtent.png" style="width: 1.5em;" /></a> <sup>Zoom Full</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionZoomActual.png"><img alt="zoomActual" src="../../../_images/mActionZoomActual.png" style="width: 1.5em;" /></a> <sup>Zoom to 100%</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionDraw.png"><img alt="draw" src="../../../_images/mActionDraw.png" style="width: 1.5em;" /></a> <sup>Refresh view</sup> (if you find the view in an inconsistent state)</li>
+<li><cite>Show Grid</cite> behind items.</li>
+<li><cite>Snap Grid</cite> to snap items on the grid.</li>
+<li><cite>Show Guides</cite> to help user to align items. These are red line that you can
+click in the rule (above or at the left side of the layout) and drag and drop
+to the desired location.</li>
+<li><cite>Snap Guides</cite>: allows user to snap items to the guides,</li>
+<li><cite>Smart Guides</cite>: uses other composer items as guides to dynamically snap to as user
+moves or reshapes an item.</li>
+<li><cite>Clear Guides</cite> to remove all current guides.</li>
+<li><cite>Show Bounding box</cite> around the items.</li>
+<li><cite>Show Rules</cite> around the layout.</li>
+<li><cite>Show Pages</cite> or set up pages to transparent. Often composer is used
+to create non-print layouts, e.g. for inclusion in presentations or other
+documents, and it&#8217;s desirable to export the composition using a totally
+transparent background. It&#8217;s sometimes referred to as &#8220;infinite canvas&#8221; in
+other editing packages.</li>
+<li><cite>Toggle Full Screen</cite> makes the composer window to full screen.</li>
+<li><cite>Hide Panels</cite> hides/shows the right panel</li>
+<li><cite>Panels</cite> lists all panels available to hide/show them.</li>
+<li><cite>Toolbars</cite> same as above for toolbars.</li>
+</ul>
+<p>You can change the zoom level also using the mouse wheel or the combo box in the status bar.
+If you need to switch to pan mode while working in the Composer area, you can hold
+the <tt class="kbd docutils literal"><span class="pre">Spacebar</span></tt> or the mouse wheel.
+With <tt class="kbd docutils literal"><span class="pre">Ctrl+Spacebar</span></tt>, you can temporarily switch to Zoom In mode,
+and with <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+Spacebar</span></tt>, to Zoom Out mode.</p>
+</div>
+<div class="section" id="hide-and-show-panels">
+<h4><a class="toc-backref" href="#id11">Hide and Show Panels</a><a class="headerlink" href="#hide-and-show-panels" title="Permalink to this headline">¶</a></h4>
+<p>To maximise the space available to interact with a composition you can use
+<em class="menuselection">View ‣</em> <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Hide panels</em> or press <tt class="kbd docutils literal"><span class="pre">F10</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It&#8217;s also possible to switch to a full screen mode to have more space to
+interact by pressing <tt class="kbd docutils literal"><span class="pre">F11</span></tt> or using <em class="menuselection">View ‣</em> <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+<em class="guilabel">Toggle full screen</em>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="composition-tab">
+<h3><a class="toc-backref" href="#id12">Composition Tab</a><a class="headerlink" href="#composition-tab" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="page-size-and-settings">
+<h4><a class="toc-backref" href="#id13">Page size and settings</a><a class="headerlink" href="#page-size-and-settings" title="Permalink to this headline">¶</a></h4>
+<p>In the <em class="guilabel">Composition</em> tab, you can define the global settings of the
+current composition.</p>
+<p id="figure-composition-1"><strong>Figure Composition 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/composition_settings.png" src="../../../_images/composition_settings.png" />
+<p class="caption">Composition settings in the Print Composer</p>
+</div>
+<p>You can choose one of the <em class="guilabel">Presets</em> formats for your paper sheet,
+or enter your custom <em class="guilabel">width</em>, <em class="guilabel">height</em> and <em class="guilabel">units</em>.
+You can also choose the page <em class="guilabel">Orientation</em> to use.</p>
+<p>Composition can be divided into several pages. For instance, a first page can show
+a map canvas, and a second page can show the attribute table associated with a
+layer, while a third one shows an HTML frame linking to your organization website.
+Set the <em class="guilabel">Number of pages</em> to the desired value. you can also custom the
+<em class="guilabel">Page Background</em> with the color or the symbol you want.</p>
+<p>The Page size options apply to all the pages in the composition. However, you can
+modify the values using the data defined override options (see <a class="reference internal" href="create_output.html#atlas-data-defined-override"><em>Data Defined Override Buttons</em></a>).</p>
+<p>A custom page size can also be set, using the <em class="guilabel">Resize page</em> tool.
+This creates an unique page composition, resizes the page to fit the current
+contents of the composition (with optional margins).</p>
+</div>
+<div class="section" id="export-settings">
+<h4><a class="toc-backref" href="#id14">Export settings</a><a class="headerlink" href="#export-settings" title="Permalink to this headline">¶</a></h4>
+<p>You can define a resolution to use for all exported maps in <em class="guilabel">Export
+resolution</em>. This setting can however be overridden each time you are exporting a map.
+When checked, <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">print as raster</em> means all elements will be
+rasterized before printing or saving as PostScript or PDF.</p>
+<p>While exporting to an image file format, you can choose to generate a world file
+by checking <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">World file on</em> and select a map item.
+The world file is created beside the exported map, has same name and contains
+information to easily georeference it.</p>
+<p id="figure-composition-2"><strong>Figure Composition 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/composition_export.png" src="../../../_images/composition_export.png" />
+<p class="caption">Export Settings in the Print Composer</p>
+</div>
+</div>
+<div class="section" id="grid-and-guides">
+<h4><a class="toc-backref" href="#id15">Grid and guides</a><a class="headerlink" href="#grid-and-guides" title="Permalink to this headline">¶</a></h4>
+<p>You can put some reference marks on your composition paper sheet to help you
+place some items. These marks can be:</p>
+<ul class="simple">
+<li>simple lines (called <strong>Guides</strong>) put at the position you want. To do that,
+ensure that <em class="guilabel">Show Rulers</em> and <em class="guilabel">Show Guides</em> in <em class="menuselection">View</em>
+menu are checked. Then, click and drag from within the ruler to the paper sheet.
+A vertical or horizontal line is added to the paper and you can set its position
+following the coordinates displayed at the left bottom of the composer dialog.</li>
+<li>or regular <strong>Grid</strong>.</li>
+</ul>
+<p>Whether grids or guides should be shown is set in <em class="menuselection">View</em> menu.
+There, you can also decide if they might be used to snap composer items. The
+<em class="guilabel">Grid and guides</em> section lets you customize grid settings like
+<em class="guilabel">Grid spacing</em>, <em class="guilabel">Grid offset</em> and <em class="guilabel">Snap tolerance</em>
+to your need. The tolerance is the maximum distance below which an item is snapped
+to a grid or a guide.</p>
+<p id="figure-composition-3"><strong>Figure Composition 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/composition_guides.png" src="../../../_images/composition_guides.png" />
+<p class="caption">Snapping to grids in the Print Composer</p>
+</div>
+<p>In the <em class="menuselection">Options ‣ Composer</em> menu in QGIS main canvas, you can
+also set the spacing, offset and snap tolerance of the grid as much as its style
+and color. These options are applied by default to any new print composer.</p>
+</div>
+</div>
+<div class="section" id="command-history-tab-revert-and-restore-actions">
+<span id="index-4"></span><h3><a class="toc-backref" href="#id16">Command History Tab: Revert and Restore actions</a><a class="headerlink" href="#command-history-tab-revert-and-restore-actions" title="Permalink to this headline">¶</a></h3>
+<p>During the layout process, it is possible to revert and restore changes.
+This can be done with the revert and restore tools:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/mActionUndo.png"><img alt="undo" src="../../../_images/mActionUndo.png" style="width: 1.5em;" /></a> <sup>Revert last change</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionRedo.png"><img alt="redo" src="../../../_images/mActionRedo.png" style="width: 1.5em;" /></a> <sup>Restore last change</sup></li>
+</ul>
+<p>This can also be done by mouse click within the <em class="guilabel">Command history</em> tab
+(see <a class="reference internal" href="#figure-composer-1">figure_composer_1</a>). The History tab lists the last actions done within the composer.
+Just select the point you want to revert to and once you do new action all
+the actions done after the selected one will be removed.</p>
+<p id="figure-composer-1"><strong>Figure Composer 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/command_hist.png" src="../../../_images/command_hist.png" />
+<p class="caption">Command history in the Print Composer</p>
+</div>
+</div>
+<div class="section" id="items-tab">
+<h3><a class="toc-backref" href="#id17">Items Tab</a><a class="headerlink" href="#items-tab" title="Permalink to this headline">¶</a></h3>
+<p>The <em class="menuselection">Items</em> tab offers some options to manage selection and
+visibility of items.
+All the items added to the print composer canvas are shown in a list and
+selecting an item makes the corresponding row selected in the list as well as
+selecting a row does select the corresponding item in the print composer canvas.
+This is thus a handy way to select an item placed behind another one.
+Note that a selected row is shown as bold.</p>
+<p>For any selected item, you can :</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/mActionShowAllLayers.png"><img alt="showAllLayers" src="../../../_images/mActionShowAllLayers.png" style="width: 1.5em;" /></a> set it visible or not,</li>
+<li><a class="reference internal" href="../../../_images/locked.png"><img alt="locked" src="../../../_images/locked.png" style="width: 1.5em;" /></a> lock or unlock its position,</li>
+<li>order its Z position. You can move up and down each item in the list with a
+click and drag. The upper item in the list will be brought to the foreground
+in the print composer canvas.
+By default, a newly created item is placed in the foreground.</li>
+<li>change the name by double-clicking the text.</li>
+</ul>
+<p>Once you have found the correct position for an item, you can lock it by ticking
+the box in <a class="reference internal" href="../../../_images/locked.png"><img alt="locked" src="../../../_images/locked.png" style="width: 1.5em;" /></a> column. Locked items are <strong>not</strong> selectable on the canvas.
+Locked items can be unlocked by selecting the item in the <em class="menuselection">Items</em>
+tab and unchecking the tickbox or you can use the icons on the toolbar.</p>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="composer_items/index.html" title="Composer Items"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Print Composer"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >Print Composer</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

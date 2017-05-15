@@ -1,0 +1,1217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Editing</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Working with Vector Data" href="index.html" />
+    <link rel="next" title="Virtual layers" href="virtual_layers.html" />
+    <link rel="prev" title="Working with the Attribute Table" href="attribute_table.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/working_with_vector/editing_geometry_attributes.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="virtual_layers.html" title="Virtual layers"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="attribute_table.html" title="Working with the Attribute Table"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Working with Vector Data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="attribute_table.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="virtual_layers.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="editing">
+<h1>Editing<a class="headerlink" href="#editing" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#setting-the-snapping-tolerance-and-search-radius" id="id2">Setting the Snapping Tolerance and Search Radius</a><ul>
+<li><a class="reference internal" href="#index-2" id="id3">Snapping tolerance</a></li>
+<li><a class="reference internal" href="#search-radius" id="id4">Search radius</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#topological-editing" id="id5">Topological editing</a><ul>
+<li><a class="reference internal" href="#enable-topological-editing" id="id6">Enable topological editing</a></li>
+<li><a class="reference internal" href="#avoid-intersections-of-new-polygons" id="id7">Avoid intersections of new polygons</a></li>
+<li><a class="reference internal" href="#enable-snapping-on-intersections" id="id8">Enable snapping on intersections</a></li>
+<li><a class="reference internal" href="#geometry-checker" id="id9">Geometry Checker</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#digitizing-an-existing-layer" id="id10">Digitizing an existing layer</a><ul>
+<li><a class="reference internal" href="#adding-features" id="id11">Adding Features</a></li>
+<li><a class="reference internal" href="#node-tool" id="id12">Node Tool</a><ul>
+<li><a class="reference internal" href="#basic-operations" id="id13">Basic operations</a></li>
+<li><a class="reference internal" href="#the-vertex-editor" id="id14">The Vertex Editor</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cutting-copying-and-pasting-features" id="id15">Cutting, Copying and Pasting Features</a></li>
+<li><a class="reference internal" href="#deleting-selected-features" id="id16">Deleting Selected Features</a></li>
+<li><a class="reference internal" href="#saving-edited-layers" id="id17">Saving Edited Layers</a><ul>
+<li><a class="reference internal" href="#saving-multiple-layers-at-once" id="id18">Saving multiple layers at once</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advanced-digitizing" id="id19">Advanced digitizing</a><ul>
+<li><a class="reference internal" href="#undo-and-redo" id="id20">Undo and Redo</a></li>
+<li><a class="reference internal" href="#rotate-feature-s" id="id21">Rotate Feature(s)</a></li>
+<li><a class="reference internal" href="#simplify-feature" id="id22">Simplify Feature</a></li>
+<li><a class="reference internal" href="#add-part" id="id23">Add Part</a></li>
+<li><a class="reference internal" href="#delete-part" id="id24">Delete Part</a></li>
+<li><a class="reference internal" href="#add-ring" id="id25">Add Ring</a></li>
+<li><a class="reference internal" href="#fill-ring" id="id26">Fill Ring</a></li>
+<li><a class="reference internal" href="#delete-ring" id="id27">Delete Ring</a></li>
+<li><a class="reference internal" href="#reshape-features" id="id28">Reshape Features</a></li>
+<li><a class="reference internal" href="#offset-curves" id="id29">Offset Curves</a></li>
+<li><a class="reference internal" href="#split-features" id="id30">Split Features</a></li>
+<li><a class="reference internal" href="#split-parts" id="id31">Split parts</a></li>
+<li><a class="reference internal" href="#merge-selected-features" id="id32">Merge selected features</a></li>
+<li><a class="reference internal" href="#merge-attributes-of-selected-features" id="id33">Merge attributes of selected features</a></li>
+<li><a class="reference internal" href="#rotate-point-symbols" id="id34">Rotate Point Symbols</a></li>
+<li><a class="reference internal" href="#automatic-tracing" id="id35">Automatic Tracing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-advanced-digitizing-panel" id="id36">The Advanced Digitizing panel</a></li>
+<li><a class="reference internal" href="#creating-new-vector-layers" id="id37">Creating new Vector layers</a><ul>
+<li><a class="reference internal" href="#creating-a-new-shapefile-layer" id="id38">Creating a new Shapefile layer</a></li>
+<li><a class="reference internal" href="#creating-a-new-spatialite-layer" id="id39">Creating a new SpatiaLite layer</a></li>
+<li><a class="reference internal" href="#creating-a-new-gpx-layer" id="id40">Creating a new GPX layer</a></li>
+<li><a class="reference internal" href="#creating-a-new-temporary-scratch-layer" id="id41">Creating a new Temporary Scratch Layer</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>QGIS supports various capabilities for <span class="target" id="index-0"></span>editing OGR,
+SpatiaLite, PostGIS, MSSQL Spatial and Oracle Spatial vector layers and tables.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The procedure for editing GRASS layers is different - see section
+<a class="reference internal" href="../grass_integration/grass_integration.html#grass-digitizing"><em>Digitizing and editing a GRASS vector layer</em></a> for details.</p>
+</div>
+<div class="admonition tip" id="tip-concurrent-edits">
+<p class="first admonition-title">Tip</p>
+<p><strong>Concurrent Edits</strong></p>
+<p class="last">This version of QGIS does not track if somebody else is editing the same feature
+at the same time as you are. The last person to save its edits wins.</p>
+</div>
+<div class="section" id="setting-the-snapping-tolerance-and-search-radius">
+<span id="snapping-tolerance"></span><span id="index-1"></span><h2><a class="toc-backref" href="#id2">Setting the Snapping Tolerance and Search Radius</a><a class="headerlink" href="#setting-the-snapping-tolerance-and-search-radius" title="Permalink to this headline">¶</a></h2>
+<p>For an optimal and accurate edit of the vector layer geometries, we need to set
+an appropriate value of snapping tolerance and search radius for features vertices.</p>
+<div class="section" id="index-2">
+<span id="id1"></span><h3><a class="toc-backref" href="#id3">Snapping tolerance</a><a class="headerlink" href="#index-2" title="Permalink to this headline">¶</a></h3>
+<p><span class="target" id="index-3"></span>Snapping tolerance is the distance QGIS uses to <tt class="docutils literal"><span class="pre">search</span></tt> for the closest
+vertex and/or segment you are trying to connect to when you set a new vertex or
+move an existing vertex. If you aren&#8217;t within the snapping tolerance, QGIS
+will leave the vertex where you release the mouse button, instead of snapping
+it to an existing vertex and/or segment.
+The snapping tolerance setting affects all tools that work with tolerance.</p>
+<ol class="arabic simple">
+<li>A general, project-wide snapping tolerance can be defined by choosing
+<em class="menuselection">Settings ‣</em> <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <em class="menuselection">Options...</em>,
+<em class="guilabel">Digitizing</em> tab.
+You can select between &#8216;To vertex&#8217;, &#8216;To segment&#8217; or &#8216;To vertex and segment&#8217;
+as default snap mode. You can also define a default snapping tolerance and
+a search radius for vertex edits. The tolerance can be set either in map
+units or in pixels. The advantage of choosing pixels is that the snapping
+tolerance doesn&#8217;t have to be changed after zoom operations. In our small
+digitizing project (working with the Alaska dataset), we define the
+snapping units in feet. Your results may vary, but something on the order
+of 300 ft at a scale of 1:10000 should be a reasonable setting.</li>
+<li>A layer-based snapping tolerance that overrides the global snapping options
+can be defined by choosing <em class="menuselection">Settings ‣ Snapping options</em>.
+It enables and adjusts snapping mode
+and tolerance on a layer basis (see <a class="reference internal" href="#figure-edit-1">figure_edit_1</a> ). This dialog offers
+three different modes to select the layer(s) to snap to:<ul>
+<li><em class="guilabel">Current layer</em>: only the active layer is used, a convenient way
+to ensure topology within the layer being edited</li>
+<li><em class="guilabel">All layers</em>: a quick and simple setting for all visible layers
+in the project so that the pointer snaps to all vertices and/or segments.
+In most cases it is sufficient to use this snapping mode.</li>
+<li><em class="guilabel">Advanced</em>: if you need to edit a layer and snap its vertices to another
+layer, ensure the target layer is checked and increase the snapping tolerance
+to a greater value. Furthermore, snapping will never occur to a layer that
+is not checked in the snapping options dialog, regardless of the global
+snapping tolerance. So be sure to mark the checkbox for those layers that
+you need to snap to.</li>
+</ul>
+</li>
+</ol>
+<p id="figure-edit-1"><strong>Figure Edit 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/editProjectSnapping.png" src="../../../_images/editProjectSnapping.png" />
+<p class="caption">Edit snapping options on a layer basis (Advanced mode)</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Control the list of layers to snap</strong></p>
+<p class="last">The <em class="guilabel">Snapping Options</em> dialog is by default populated with parameters
+(mode, tolerance, units) set in the global <em class="guilabel">Digitizing</em> tab.
+To avoid layers being checked by default in the <strong>Advanced</strong> mode and hence
+set snappable, define the <em class="guilabel">Default Snap mode</em> to <tt class="docutils literal"><span class="pre">Off</span></tt>.</p>
+</div>
+<p>Snapping tolerance can be set in <tt class="docutils literal"><span class="pre">pixels</span></tt> or <tt class="docutils literal"><span class="pre">map</span> <span class="pre">units</span></tt> (the units of the
+map view). While in the <strong>Advanced</strong> layer selection mode, it is possible to use
+a snapping tolerance that refers to <tt class="docutils literal"><span class="pre">layer</span> <span class="pre">units</span></tt>, the units of the reprojected
+layer when &#8216;on-the-fly&#8217; CRS transformation is on.</p>
+</div>
+<div class="section" id="search-radius">
+<span id="index-4"></span><h3><a class="toc-backref" href="#id4">Search radius</a><a class="headerlink" href="#search-radius" title="Permalink to this headline">¶</a></h3>
+<p><span class="target" id="index-5"></span>Search radius is the distance QGIS uses to <tt class="docutils literal"><span class="pre">search</span></tt> for the closest vertex
+you are trying to select when you click on the map. If you aren&#8217;t within the
+search radius, QGIS won&#8217;t find and select any vertex for editing.
+Snap tolerance and search radius are set in map units or pixels, so you may
+find you need to experiment to get them set right. If you specify too big of
+a tolerance, QGIS may snap to the wrong vertex, especially if you are dealing
+with a large number of vertices in close proximity. Set search radius too
+small, and it won&#8217;t find anything to move.</p>
+<p>The search radius for vertex edits in layer units can be defined in the
+<em class="guilabel">Digitizing</em> tab under <em class="menuselection">Settings ‣</em> <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a>
+<em class="menuselection">Options</em>. This is the same place where you define the general,
+project-wide snapping tolerance.</p>
+</div>
+</div>
+<div class="section" id="topological-editing">
+<span id="index-6"></span><h2><a class="toc-backref" href="#id5">Topological editing</a><a class="headerlink" href="#topological-editing" title="Permalink to this headline">¶</a></h2>
+<p>Besides layer-based snapping options, you can also define topological
+functionalities in the <em class="guilabel">Snapping options...</em> dialog in the
+<em class="menuselection">Settings</em> (or <em class="menuselection">File</em>) menu. Here, you can
+define <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable topological editing</em>, and/or for polygon
+layers, activate the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Avoid Intersections</em> option.</p>
+<div class="section" id="enable-topological-editing">
+<span id="index-7"></span><h3><a class="toc-backref" href="#id6">Enable topological editing</a><a class="headerlink" href="#enable-topological-editing" title="Permalink to this headline">¶</a></h3>
+<p>The option <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable topological editing</em> is for editing
+and maintaining common boundaries in features mosaics. QGIS &#8216;detects&#8217;
+shared boundary by the features, so you only have to move a common vertex/segment
+once, and QGIS will take care of updating the neighboring features.</p>
+</div>
+<div class="section" id="avoid-intersections-of-new-polygons">
+<span id="index-8"></span><h3><a class="toc-backref" href="#id7">Avoid intersections of new polygons</a><a class="headerlink" href="#avoid-intersections-of-new-polygons" title="Permalink to this headline">¶</a></h3>
+<p>A second topological option called <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Avoid intersections</em>
+prevents you to draw new features that overlap an existing one.
+It is for quicker digitizing of adjacent
+polygons. If you already have one polygon, it is possible with this option
+to digitize the second one such that both intersect, and QGIS then cuts the
+second polygon to the boundary of the existing one. The advantage is that you
+don&#8217;t have to digitize all vertices of the common boundary.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the new geometry is totally covered by existing ones, it gets cleared
+and the new feature will have no geometry when allowed by the provider, otherwise
+saving modifications will make QGIS pop-up an error message.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p><strong>Use cautiously the</strong> <em class="guilabel">Avoid Intersections</em> <strong>option</strong></p>
+<p class="last">Because the option cuts or clears geometry of any overlaping feature from
+any polygon layer, do not forget to uncheck this option once you no longer
+need it otherwise, you can get unexpected geometries.</p>
+</div>
+</div>
+<div class="section" id="enable-snapping-on-intersections">
+<span id="index-9"></span><h3><a class="toc-backref" href="#id8">Enable snapping on intersections</a><a class="headerlink" href="#enable-snapping-on-intersections" title="Permalink to this headline">¶</a></h3>
+<p>Another option is to use <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable snapping on intersection</em>.
+It allows you to snap on an intersection of background layers, even if there&#8217;s no vertex on
+the intersection.</p>
+</div>
+<div class="section" id="geometry-checker">
+<h3><a class="toc-backref" href="#id9">Geometry Checker</a><a class="headerlink" href="#geometry-checker" title="Permalink to this headline">¶</a></h3>
+<p>A core plugin can help the user to find the geometry invalidity. You can find
+more information on this plugin at <a class="reference internal" href="../plugins/plugins_geometry_checker.html#geometry-checker"><em>Geometry Checker Plugin</em></a>.</p>
+</div>
+</div>
+<div class="section" id="digitizing-an-existing-layer">
+<span id="sec-edit-existing-layer"></span><span id="index-10"></span><h2><a class="toc-backref" href="#id10">Digitizing an existing layer</a><a class="headerlink" href="#digitizing-an-existing-layer" title="Permalink to this headline">¶</a></h2>
+<p>By default, QGIS loads layers read-only. This is a safeguard to avoid
+accidentally editing a layer if there is a slip of the mouse.
+However, you can choose to edit any layer as long as the data provider
+supports it, and the underlying data source is writable (i.e., its files are
+not read-only).</p>
+<p>In general, tools for editing vector layers are divided into a digitizing and an advanced
+digitizing toolbar, described in section <a class="reference internal" href="#sec-advanced-edit"><em>Advanced digitizing</em></a>. You can
+select and unselect both under <em class="menuselection">View ‣ Toolbars ‣</em>.
+Using the basic <span class="target" id="index-11"></span>digitizing tools, you can perform the following functions:</p>
+<table border="1" class="docutils" id="table-editing">
+<colgroup>
+<col width="24%" />
+<col width="28%" />
+<col width="21%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Icon</th>
+<th class="head">Purpose</th>
+<th class="head">Icon</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionAllEdits.png"><img alt="allEdits" src="../../../_images/mActionAllEdits.png" style="width: 1.5em;" /></a></td>
+<td>Current edits</td>
+<td><a class="reference internal" href="../../../_images/mActionToggleEditing.png"><img alt="toggleEditing" src="../../../_images/mActionToggleEditing.png" style="width: 1.5em;" /></a></td>
+<td>Toggle editing</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionCapturePoint.png"><img alt="capturePoint" src="../../../_images/mActionCapturePoint.png" style="width: 1.5em;" /></a></td>
+<td>Add Feature: Capture Point</td>
+<td><a class="reference internal" href="../../../_images/mActionCaptureLine.png"><img alt="captureLine" src="../../../_images/mActionCaptureLine.png" style="width: 1.5em;" /></a></td>
+<td>Add Feature: Capture Line</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionCapturePolygon.png"><img alt="capturePolygon" src="../../../_images/mActionCapturePolygon.png" style="width: 1.5em;" /></a></td>
+<td>Add Feature: Capture Polygon</td>
+<td><a class="reference internal" href="../../../_images/mActionMoveFeature.png"><img alt="moveFeature" src="../../../_images/mActionMoveFeature.png" style="width: 1.5em;" /></a></td>
+<td>Move Feature</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionCircularStringCurvePoint.png"><img alt="circularStringCurvePoint" src="../../../_images/mActionCircularStringCurvePoint.png" style="width: 1.5em;" /></a></td>
+<td>Add Circular String</td>
+<td><a class="reference internal" href="../../../_images/mActionCircularStringRadius.png"><img alt="circularStringRadius" src="../../../_images/mActionCircularStringRadius.png" style="width: 1.5em;" /></a></td>
+<td>Add Circular String By Radius</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionNodeTool.png"><img alt="nodeTool" src="../../../_images/mActionNodeTool.png" style="width: 1.5em;" /></a></td>
+<td>Node Tool</td>
+<td><a class="reference internal" href="../../../_images/mActionDeleteSelected.png"><img alt="deleteSelected" src="../../../_images/mActionDeleteSelected.png" style="width: 1.5em;" /></a></td>
+<td>Delete Selected</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionEditCut.png"><img alt="editCut" src="../../../_images/mActionEditCut.png" style="width: 1.5em;" /></a></td>
+<td>Cut Features</td>
+<td><a class="reference internal" href="../../../_images/mActionEditCopy.png"><img alt="editCopy" src="../../../_images/mActionEditCopy.png" style="width: 1.5em;" /></a></td>
+<td>Copy Features</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionEditPaste.png"><img alt="editPaste" src="../../../_images/mActionEditPaste.png" style="width: 1.5em;" /></a></td>
+<td>Paste Features</td>
+<td><a class="reference internal" href="../../../_images/mActionSaveEdits.png"><img alt="saveEdits" src="../../../_images/mActionSaveEdits.png" style="width: 1.5em;" /></a></td>
+<td>Save layer edits</td>
+</tr>
+</tbody>
+</table>
+<p>Table Editing: Vector layer basic editing toolbar</p>
+<p>Note that while using any of the digitizing tools, you can still <a class="reference internal" href="../introduction/general_tools.html#zoom-pan"><em>zoom or pan</em></a> in the map canvas without losing the focus on the tool.</p>
+<p>All <span class="target" id="index-12"></span>editing sessions start by choosing the <a class="reference internal" href="../../../_images/mActionToggleEditing.png"><img alt="toggleEditing" src="../../../_images/mActionToggleEditing.png" style="width: 1.5em;" /></a> <sup>Toggle editing</sup>
+option found in the context menu of a given layer, from the attribute table dialog, the
+digitizing toolbar or the <em class="menuselection">Edit</em> menu.</p>
+<p>Once the layer is in edit mode, additional tool buttons on the editing toolbar
+will become available and markers will appear at the vertices of all features
+unless <em class="guilabel">Show markers only for selected features</em> option under
+<em class="menuselection">Settings ‣ Options... ‣ Digitizing</em> menu is checked.</p>
+<div class="admonition tip" id="tip-save-regularly">
+<p class="first admonition-title">Tip</p>
+<p><strong>Save Regularly</strong></p>
+<p class="last">Remember to <a class="reference internal" href="../../../_images/mActionSaveEdits.png"><img alt="saveEdits" src="../../../_images/mActionSaveEdits.png" style="width: 1.5em;" /></a> <sup>Save Layer Edits</sup> regularly. This will also
+check that your data source can accept all the changes.</p>
+</div>
+<div class="section" id="adding-features">
+<h3><a class="toc-backref" href="#id11">Adding Features</a><a class="headerlink" href="#adding-features" title="Permalink to this headline">¶</a></h3>
+<p>You can use the <a class="reference internal" href="../../../_images/mActionCapturePoint.png"><img alt="capturePoint" src="../../../_images/mActionCapturePoint.png" style="width: 1.5em;" /></a> <sup>Add Feature</sup>,
+<a class="reference internal" href="../../../_images/mActionCaptureLine.png"><img alt="captureLine" src="../../../_images/mActionCaptureLine.png" style="width: 1.5em;" /></a> <sup>Add Feature</sup> or <a class="reference internal" href="../../../_images/mActionCapturePolygon.png"><img alt="capturePolygon" src="../../../_images/mActionCapturePolygon.png" style="width: 1.5em;" /></a>
+<sup>Add Feature</sup> icons on the toolbar to add new feature (point, line and
+polygon) into the current layer.</p>
+<p>The next buttons <a class="reference internal" href="../../../_images/mActionCircularStringCurvePoint.png"><img alt="circularStringCurvePoint" src="../../../_images/mActionCircularStringCurvePoint.png" style="width: 1.5em;" /></a> <sup>Add circular string</sup> or
+<a class="reference internal" href="../../../_images/mActionCircularStringRadius.png"><img alt="circularStringRadius" src="../../../_images/mActionCircularStringRadius.png" style="width: 1.5em;" /></a> <sup>Add circular string by radius</sup> allow users to add
+line or polygon features with a circular geometry.</p>
+<p>To <span class="target" id="index-13"></span>create features with these tools, you first digitize the geometry
+then enter its attributes.
+To digitize the geometry, left-click on the map area to create the first
+point of your new feature.</p>
+<p>For linear or curved geometries, keep on left-clicking for each additional
+point you wish to capture or use <a class="reference internal" href="#tracing"><em>automatic tracing</em></a> capability
+to accelerate the digitization. You can switch back and forth between linear
+<em class="guilabel">Add feature</em> tool and curved <em class="guilabel">Add circular string...</em> tools
+to create compound curved geometry. Pressing <tt class="kbd docutils literal"><span class="pre">Delete</span></tt> or <tt class="kbd docutils literal"><span class="pre">Backspace</span></tt> key
+reverts the last node you add. When you have finished adding points, right-click
+anywhere on the map area to confirm you have finished entering the geometry of
+that feature.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Curved geometries are stored as such only in compatible data provider</strong></p>
+<p class="last">Although QGIS allows to digitize curved geometries within any editable
+data format, you need to be using a data provider (e.g. PostGIS, GML or WFS)
+that supports curves to have features stored as curved, otherwise QGIS
+segmentizes the circular arcs. The memory layer provider also supports curves.</p>
+</div>
+<div class="admonition tip" id="index-14">
+<p class="first admonition-title">Tip</p>
+<p><strong>Customize the digitizing rubber band</strong></p>
+<p class="last">While capturing polygon, the by-default red rubber band can hide underlying
+features or places you&#8217;d like to capture a point. This can be fixed by setting
+a lower opacity (or alpha channel) to the rubber band&#8217;s <em class="guilabel">Fill Color</em>
+in <em class="menuselection">Settings ‣ Options ‣ Digitizing</em> menu.
+You can also avoid the use of the rubber band by checking <em class="guilabel">Don&#8217;t
+update rubber band during node editing</em>.</p>
+</div>
+<p>The attribute window will appear, allowing you to enter the information for
+the new feature. <a class="reference internal" href="#figure-edit-2">Figure_edit_2</a> shows setting attributes for a fictitious new
+river in Alaska. However, in the <em class="guilabel">Digitizing</em> menu under the
+<em class="menuselection">Settings ‣ Options</em> menu, you can also activate:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Suppress attributes pop-up windows after each created
+feature</em> to avoid the form opening</li>
+<li>or <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Reuse last entered attribute values</em> to have fields
+automatically filled at the opening of the form and just have to type changing values.</li>
+</ul>
+<p id="figure-edit-2"><strong>Figure Edit 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/editDigitizing.png" src="../../../_images/editDigitizing.png" />
+<p class="caption">Enter Attribute Values Dialog after digitizing a new vector feature</p>
+</div>
+<p>With the <a class="reference internal" href="../../../_images/mActionMoveFeature.png"><img alt="moveFeature" src="../../../_images/mActionMoveFeature.png" style="width: 1.5em;" /></a> <sup>Move Feature(s)</sup> icon on the toolbar, you can
+move existing features.</p>
+</div>
+<div class="section" id="node-tool">
+<span id="index-15"></span><h3><a class="toc-backref" href="#id12">Node Tool</a><a class="headerlink" href="#node-tool" title="Permalink to this headline">¶</a></h3>
+<p>For shapefile-based or MapInfo layers as well as SpatiaLite, PostgreSQL/PostGIS,
+MSSQL Spatial, and Oracle Spatial tables, the
+<a class="reference internal" href="../../../_images/mActionNodeTool.png"><img alt="nodeTool" src="../../../_images/mActionNodeTool.png" style="width: 1.5em;" /></a> <sup>Node Tool</sup> provides manipulation capabilities of
+feature vertices similar to CAD programs. It is possible to simply select
+multiple vertices at once and to move, add or delete them altogether.
+The node tool also works with &#8216;on the fly&#8217; projection turned on and supports
+the topological editing feature. This tool is, unlike other tools in
+QGIS, persistent, so when some operation is done, selection stays
+active for this feature and tool.</p>
+<p>It is important to set the property <em class="menuselection">Settings ‣</em> <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a>
+<em class="menuselection">Options ‣ Digitizing ‣</em> <em class="guilabel">Search Radius:</em>
+<a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a> to a number greater than zero. Otherwise, QGIS will
+not be able to tell which vertex is being edited and will display a warning.</p>
+<div class="admonition tip" id="tip-vertex-markers">
+<p class="first admonition-title">Tip</p>
+<p><strong>Vertex Markers</strong></p>
+<p class="last">The current version of QGIS supports three kinds of vertex markers:
+&#8216;Semi-transparent circle&#8217;, &#8216;Cross&#8217; and &#8216;None&#8217;. To change the marker style,
+choose <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <em class="menuselection">Options</em> from the
+<em class="menuselection">Settings</em> menu, click on the <em class="guilabel">Digitizing</em>
+tab and select the appropriate entry.</p>
+</div>
+<div class="section" id="basic-operations">
+<h4><a class="toc-backref" href="#id13">Basic operations</a><a class="headerlink" href="#basic-operations" title="Permalink to this headline">¶</a></h4>
+<p id="index-16">Start by activating the <a class="reference internal" href="../../../_images/mActionNodeTool.png"><img alt="nodeTool" src="../../../_images/mActionNodeTool.png" style="width: 1.5em;" /></a> <sup>Node Tool</sup> and selecting a
+feature by clicking on it. Red boxes will appear at each vertex of this feature.</p>
+<ul class="simple">
+<li><strong>Selecting vertices</strong>: You can select vertices by clicking on them one
+at a time, by clicking on an edge to select the vertices at both ends, or
+by clicking and dragging a rectangle around some vertices. When a vertex
+is selected, its color changes to blue. To add more vertices to the current
+selection, hold down the <tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> key while clicking. Hold down
+<tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> when clicking to toggle the selection state of
+vertices (vertices that are currently unselected will be selected as usual,
+but also vertices that are already selected will become unselected).</li>
+<li><strong>Adding vertices</strong>: To add a vertex, simply double click near an edge and
+a new vertex will appear on the edge near to the cursor. Note that the
+vertex will appear on the edge, not at the cursor position; therefore, it
+should be moved if necessary.</li>
+<li><strong>Deleting vertices</strong>: Select the vertices and click the
+<tt class="kbd docutils literal"><span class="pre">Delete</span></tt> key. Deleting all the vertices of a feature generates, if
+compatible with the datasource, a <span class="target" id="index-17"></span>geometryless feature. Note that
+this doesn&#8217;t delete the complete feature, just the geometry part;
+To delete a complete feature use the <a class="reference internal" href="../../../_images/mActionDeleteSelected.png"><img alt="deleteSelected" src="../../../_images/mActionDeleteSelected.png" style="width: 1.5em;" /></a> <sup>Delete Selected</sup> tool.</li>
+<li><strong>Moving vertices</strong>: Select all the vertices you want to move, click on
+a selected vertex or edge and drag in the direction you wish to move. All
+the selected vertices will move together. If snapping is enabled, the whole
+selection can jump to the nearest vertex or line.</li>
+</ul>
+<p>Each change made with the node tool is stored as a separate entry in the
+<em class="guilabel">Undo</em> dialog. Remember that all operations support topological editing when
+this is turned on. On-the-fly projection is also supported, and the node
+tool provides tooltips to identify a vertex by hovering the pointer over it.</p>
+<div class="admonition tip" id="move-all-vertex">
+<p class="first admonition-title">Tip</p>
+<p><strong>Move features with precision</strong></p>
+<p class="last">The <a class="reference internal" href="../../../_images/mActionMoveFeature.png"><img alt="moveFeature" src="../../../_images/mActionMoveFeature.png" style="width: 1.5em;" /></a> <em class="guilabel">Move Feature</em> tool doesn&#8217;t currently allow to
+snap features while moving. Using the <a class="reference internal" href="../../../_images/mActionNodeTool.png"><img alt="nodeTool" src="../../../_images/mActionNodeTool.png" style="width: 1.5em;" /></a> <sup>Node Tool</sup>, select ALL
+the vertices of the feature, click a vertex, drag and snap it to a target vertex:
+the whole feature is moved and snapped to the other feature.</p>
+</div>
+</div>
+<div class="section" id="the-vertex-editor">
+<h4><a class="toc-backref" href="#id14">The Vertex Editor</a><a class="headerlink" href="#the-vertex-editor" title="Permalink to this headline">¶</a></h4>
+<p>With activating the <em class="guilabel">Node Tool</em> on a feature, QGIS opens the
+<em class="guilabel">Vertex Editor</em> panel listing all the vertices of the feature with
+their x, y (z, m if applicable) coordinates and r (for the radius, in case of
+circular geometry). Simply select a row in the table does select the corresponding
+vertex in the map canvas, and vice versa. Simply change a coordinate in the table
+and your vertex position is updated. You can also select multiple rows and delete
+them altogether.</p>
+<p id="figure-edit-3"><strong>Figure Edit 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/vertex_editor_panel.png" src="../../../_images/vertex_editor_panel.png" />
+<p class="caption">Vertex editor panel showing selected nodes</p>
+</div>
+</div>
+</div>
+<div class="section" id="cutting-copying-and-pasting-features">
+<h3><a class="toc-backref" href="#id15">Cutting, Copying and Pasting Features</a><a class="headerlink" href="#cutting-copying-and-pasting-features" title="Permalink to this headline">¶</a></h3>
+<p>Selected features can be cut, copied and pasted between layers in the same
+QGIS project, as long as destination layers are set to <a class="reference internal" href="../../../_images/mActionToggleEditing.png"><img alt="toggleEditing" src="../../../_images/mActionToggleEditing.png" style="width: 1.5em;" /></a>
+<sup>Toggle editing</sup> beforehand.</p>
+<div class="admonition tip" id="tip-polygon-to-line">
+<span id="index-18"></span><p class="first admonition-title">Tip</p>
+<p><strong>Transform polygon into line and vice-versa using copy/paste</strong></p>
+<p class="last">Copy a line feature and paste it in a polygon layer: QGIS pastes in the target
+layer a polygon whose boundary corresponds to the closed geometry of the line
+feature. This is a quick way to generate different geometries of the same data.</p>
+</div>
+<p id="index-19">Features can also be pasted to external applications as text. That is, the
+features are represented in CSV format, with the geometry data appearing in
+the OGC Well-Known Text (WKT) format. WKT features from outside QGIS can also be
+pasted to a layer within QGIS.</p>
+<p>When would the copy and paste function come
+in handy? Well, it turns out that you can edit more than one layer at a time
+and copy/paste features between layers. Why would we want to do this? Say
+we need to do some work on a new layer but only need one or two lakes, not
+the 5,000 on our <tt class="docutils literal"><span class="pre">big_lakes</span></tt> layer. We can create a new layer and use
+copy/paste to plop the needed lakes into it.</p>
+<p>As an example, we will copy some lakes to a new layer:</p>
+<ol class="arabic simple">
+<li>Load the layer you want to copy from (source layer)</li>
+<li>Load or create the layer you want to copy to (target layer)</li>
+<li>Start editing for target layer</li>
+<li>Make the source layer active by clicking on it in the legend</li>
+<li>Use the <a class="reference internal" href="../../../_images/mActionSelectRectangle.png"><img alt="selectRectangle" src="../../../_images/mActionSelectRectangle.png" style="width: 1.5em;" /></a> <sup>Select Features by area or single click</sup>
+tool to select the feature(s) on the source layer</li>
+<li>Click on the <a class="reference internal" href="../../../_images/mActionEditCopy.png"><img alt="editCopy" src="../../../_images/mActionEditCopy.png" style="width: 1.5em;" /></a> <sup>Copy Features</sup> tool</li>
+<li>Make the destination layer active by clicking on it in the legend</li>
+<li>Click on the <a class="reference internal" href="../../../_images/mActionEditPaste.png"><img alt="editPaste" src="../../../_images/mActionEditPaste.png" style="width: 1.5em;" /></a> <sup>Paste Features</sup> tool</li>
+<li>Stop editing and save the changes</li>
+</ol>
+<p>What happens if the source and target layers have different schemas (field
+names and types are not the same)? QGIS populates what matches and ignores
+the rest. If you don&#8217;t care about the attributes being copied to the target
+layer, it doesn&#8217;t matter how you design the fields and data types. If you
+want to make sure everything - the feature and its attributes - gets copied,
+make sure the schemas match.</p>
+<div class="admonition note" id="tip-projections-and-pasting">
+<p class="first admonition-title">Note</p>
+<p><strong>Congruency of Pasted Features</strong></p>
+<p class="last">If your source and destination layers use the same projection, then the
+pasted features will have geometry identical to the source layer. However,
+if the destination layer is a different projection, then QGIS cannot
+guarantee the geometry is identical. This is simply because there are
+small rounding-off errors involved when converting between projections.</p>
+</div>
+<div class="admonition tip" id="tip-copying-string-attributes">
+<p class="first admonition-title">Tip</p>
+<p><strong>Copy string attribute into another</strong></p>
+<p class="last">If you have created a new column in your attribute table with type &#8216;string&#8217;
+and want to paste values from another attribute column that has a greater length
+the length of the column size will be extended to the same amount. This is because
+the GDAL Shapefile driver starting with GDAL/OGR 1.10 knows to auto-extend string
+and integer fields to dynamically accommodate for the length of the data to be inserted.</p>
+</div>
+</div>
+<div class="section" id="deleting-selected-features">
+<h3><a class="toc-backref" href="#id16">Deleting Selected Features</a><a class="headerlink" href="#deleting-selected-features" title="Permalink to this headline">¶</a></h3>
+<p>If we want to delete an entire feature (attribute and geometry), we can do that
+by first selecting the geometry using the regular <a class="reference internal" href="../../../_images/mActionSelectRectangle.png"><img alt="selectRectangle" src="../../../_images/mActionSelectRectangle.png" style="width: 1.5em;" /></a> <sup>Select
+Features by area or single click</sup> tool. Selection can also be done from the attribute
+table. Once you have the selection set, press <tt class="kbd docutils literal"><span class="pre">Delete</span></tt> or <tt class="kbd docutils literal"><span class="pre">Backspace</span></tt>
+key or use the <a class="reference internal" href="../../../_images/mActionDeleteSelected.png"><img alt="deleteSelected" src="../../../_images/mActionDeleteSelected.png" style="width: 1.5em;" /></a> <sup>Delete Selected</sup> tool to delete the
+features. Multiple selected features can be deleted at once.</p>
+<p>The <a class="reference internal" href="../../../_images/mActionEditCut.png"><img alt="editCut" src="../../../_images/mActionEditCut.png" style="width: 1.5em;" /></a> <sup>Cut Features</sup> tool on the digitizing toolbar can
+also be used to delete features. This effectively deletes the feature but
+also places it on a &#8220;spatial clipboard&#8221;. So, we cut the feature to delete.
+We could then use the <a class="reference internal" href="../../../_images/mActionEditPaste.png"><img alt="editPaste" src="../../../_images/mActionEditPaste.png" style="width: 1.5em;" /></a> <sup>Paste Features</sup> tool to put it back,
+giving us a one-level undo capability. Cut, copy, and paste work on the
+currently selected features, meaning we can operate on more than one at a time.</p>
+</div>
+<div class="section" id="saving-edited-layers">
+<h3><a class="toc-backref" href="#id17">Saving Edited Layers</a><a class="headerlink" href="#saving-edited-layers" title="Permalink to this headline">¶</a></h3>
+<p>When a layer is in editing mode, any changes remain in the memory of QGIS.
+Therefore, they are not committed/saved immediately to the data source or disk.
+If you want to save edits to the current layer but want to continue editing
+without leaving the editing mode, you can click the <a class="reference internal" href="../../../_images/mActionSaveEdits.png"><img alt="saveEdits" src="../../../_images/mActionSaveEdits.png" style="width: 1.5em;" /></a>
+<sup>Save Layer Edits</sup> button. When you turn editing mode off with
+<a class="reference internal" href="../../../_images/mActionToggleEditing.png"><img alt="toggleEditing" src="../../../_images/mActionToggleEditing.png" style="width: 1.5em;" /></a> <sup>Toggle editing</sup> (or quit QGIS for that matter),
+you are also asked if you want to save your changes or discard them.</p>
+<p>If the changes cannot be saved (e.g., disk full, or the attributes have values
+that are out of range), the QGIS in-memory state is preserved. This allows
+you to adjust your edits and try again.</p>
+<div class="admonition tip" id="tip-data-integrity">
+<p class="first admonition-title">Tip</p>
+<p><strong>Data Integrity</strong></p>
+<p class="last">It is always a good idea to back up your data source before you start
+editing. While the authors of QGIS have made every effort to preserve the
+integrity of your data, we offer no warranty in this regard.</p>
+</div>
+<div class="section" id="saving-multiple-layers-at-once">
+<span id="index-20"></span><h4><a class="toc-backref" href="#id18">Saving multiple layers at once</a><a class="headerlink" href="#saving-multiple-layers-at-once" title="Permalink to this headline">¶</a></h4>
+<p>This feature allows the digitization of multiple layers. Choose
+<a class="reference internal" href="../../../_images/mActionFileSaveAs.png"><img alt="fileSaveAs" src="../../../_images/mActionFileSaveAs.png" style="width: 1.5em;" /></a> <em class="guilabel">Save for Selected Layers</em> to save all changes you
+made in multiple layers. You also have the opportunity to
+<a class="reference internal" href="../../../_images/mActionRollbackEdits.png"><img alt="rollbackEdits" src="../../../_images/mActionRollbackEdits.png" style="width: 1.5em;" /></a> <em class="guilabel">Rollback for Selected Layers</em>, so that the
+digitization may be withdrawn for all selected layers.
+If you want to stop editing the selected layers, <a class="reference internal" href="../../../_images/mActionCancelEdits.png"><img alt="cancelEdits" src="../../../_images/mActionCancelEdits.png" style="width: 1.5em;" /></a> <em class="guilabel">Cancel
+for Selected Layer(s)</em> is an easy way.</p>
+<p>The same functions are available for editing all layers of the project.</p>
+</div>
+</div>
+</div>
+<div class="section" id="advanced-digitizing">
+<span id="sec-advanced-edit"></span><h2><a class="toc-backref" href="#id19">Advanced digitizing</a><a class="headerlink" href="#advanced-digitizing" title="Permalink to this headline">¶</a></h2>
+<p></p>
+<p></p>
+<table border="1" class="docutils" id="table-advanced-editing">
+<colgroup>
+<col width="23%" />
+<col width="35%" />
+<col width="21%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Icon</th>
+<th class="head">Purpose</th>
+<th class="head">Icon</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/cad.png"><img alt="cad" src="../../../_images/cad.png" style="width: 1.5em;" /></a></td>
+<td>Enable Advanced Digitizing Tools</td>
+<td><a class="reference internal" href="../../../_images/mActionTracing.png"><img alt="tracing" src="../../../_images/mActionTracing.png" style="width: 1.5em;" /></a></td>
+<td>Enable Tracing</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionUndo.png"><img alt="undo" src="../../../_images/mActionUndo.png" style="width: 1.5em;" /></a></td>
+<td>Undo</td>
+<td><a class="reference internal" href="../../../_images/mActionRedo.png"><img alt="redo" src="../../../_images/mActionRedo.png" style="width: 1.5em;" /></a></td>
+<td>Redo</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionRotateFeature.png"><img alt="rotateFeature" src="../../../_images/mActionRotateFeature.png" style="width: 1.5em;" /></a></td>
+<td>Rotate Feature(s)</td>
+<td><a class="reference internal" href="../../../_images/mActionSimplify.png"><img alt="simplifyFeatures" src="../../../_images/mActionSimplify.png" style="width: 2em;" /></a></td>
+<td>Simplify Feature</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAddRing.png"><img alt="addRing" src="../../../_images/mActionAddRing.png" style="width: 2em;" /></a></td>
+<td>Add Ring</td>
+<td><a class="reference internal" href="../../../_images/mActionAddPart.png"><img alt="addPart" src="../../../_images/mActionAddPart.png" style="width: 1.5em;" /></a></td>
+<td>Add Part</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionFillRing.png"><img alt="fillRing" src="../../../_images/mActionFillRing.png" style="width: 1.5em;" /></a></td>
+<td>Fill Ring</td>
+<td><a class="reference internal" href="../../../_images/mActionDeleteRing.png"><img alt="deleteRing" src="../../../_images/mActionDeleteRing.png" style="width: 2em;" /></a></td>
+<td>Delete Ring</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionDeletePart.png"><img alt="deletePart" src="../../../_images/mActionDeletePart.png" style="width: 2em;" /></a></td>
+<td>Delete Part</td>
+<td><a class="reference internal" href="../../../_images/mActionReshape.png"><img alt="reshape" src="../../../_images/mActionReshape.png" style="width: 1.5em;" /></a></td>
+<td>Reshape Features</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionOffsetCurve.png"><img alt="offsetCurve" src="../../../_images/mActionOffsetCurve.png" style="width: 1.5em;" /></a></td>
+<td>Offset Curve</td>
+<td><a class="reference internal" href="../../../_images/mActionSplitFeatures.png"><img alt="splitFeatures" src="../../../_images/mActionSplitFeatures.png" style="width: 1.5em;" /></a></td>
+<td>Split Features</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionSplitParts.png"><img alt="splitParts" src="../../../_images/mActionSplitParts.png" style="width: 1.5em;" /></a></td>
+<td>Split Parts</td>
+<td><a class="reference internal" href="../../../_images/mActionMergeFeatures.png"><img alt="mergeFeatures" src="../../../_images/mActionMergeFeatures.png" style="width: 1.5em;" /></a></td>
+<td>Merge Selected Features</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionMergeFeatureAttributes.png"><img alt="mergeFeatAttributes" src="../../../_images/mActionMergeFeatureAttributes.png" style="width: 1.5em;" /></a></td>
+<td>Merge Attributes of Selected Features</td>
+<td><a class="reference internal" href="../../../_images/mActionRotatePointSymbols.png"><img alt="rotatePointSymbols" src="../../../_images/mActionRotatePointSymbols.png" style="width: 1.5em;" /></a></td>
+<td>Rotate Point Symbols</td>
+</tr>
+</tbody>
+</table>
+<p>Table Advanced Editing: Vector layer advanced editing toolbar</p>
+<div class="section" id="undo-and-redo">
+<span id="index-21"></span><h3><a class="toc-backref" href="#id20">Undo and Redo</a><a class="headerlink" href="#undo-and-redo" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionUndo.png"><img alt="undo" src="../../../_images/mActionUndo.png" style="width: 1.5em;" /></a> <sup>Undo</sup> and <a class="reference internal" href="../../../_images/mActionRedo.png"><img alt="redo" src="../../../_images/mActionRedo.png" style="width: 1.5em;" /></a> <sup>Redo</sup> tools allows you
+to undo or redo vector editing operations. There is also a dockable
+widget, which shows all operations in the undo/redo history (see
+<a class="reference internal" href="#figure-edit-4">Figure_edit_4</a>). This widget is not displayed by default; it can be
+displayed by right clicking on the toolbar and activating the Undo/Redo
+checkbox. Undo/Redo is however active, even if the widget is not displayed.</p>
+<p id="figure-edit-4"><strong>Figure Edit 4:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/redo_undo.png" src="../../../_images/redo_undo.png" />
+<p class="caption">Redo and Undo digitizing steps</p>
+</div>
+<p>When Undo is hit or <tt class="kbd docutils literal"><span class="pre">Ctrl+z</span></tt> (or <tt class="kbd docutils literal"><span class="pre">Cmd+z</span></tt>) pressed, the state of all
+features and attributes are reverted to
+the state before the reverted operation happened. Changes other than normal
+vector editing operations (for example, changes done by a plugin) may or may
+not be reverted, depending on how the changes were performed.</p>
+<p>To use the undo/redo history widget, simply click to select an operation in
+the history list. All features will be reverted to the state they were in
+after the selected operation.</p>
+</div>
+<div class="section" id="rotate-feature-s">
+<span id="rotate-feature"></span><span id="index-22"></span><h3><a class="toc-backref" href="#id21">Rotate Feature(s)</a><a class="headerlink" href="#rotate-feature-s" title="Permalink to this headline">¶</a></h3>
+<p>Use <a class="reference internal" href="../../../_images/mActionRotateFeature.png"><img alt="rotateFeature" src="../../../_images/mActionRotateFeature.png" style="width: 1.5em;" /></a> <sup>Rotate Feature(s)</sup> to rotate one or multiple features
+in the map canvas. Press the <a class="reference internal" href="../../../_images/mActionRotateFeature.png"><img alt="rotateFeature" src="../../../_images/mActionRotateFeature.png" style="width: 1.5em;" /></a> <sup>Rotate Feature(s)</sup> icon and then
+click on the feature to rotate. Either click on the map to place the rotated feature or
+enter an angle in the user input widget. If you want to rotate several features,
+they shall be selected first.</p>
+<p>If you enable the map tool with feature(s) selected, its (their) centroid appears
+and will be the rotation anchor point. If you want to move the anchor point,
+hold the <tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> button  and click on the map to place it.</p>
+<p>If you hold <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> before clicking on the map, the rotation will be done
+in 45 degree steps, which can be modified afterwards in the user input widget.</p>
+<p>To abort feature rotation, you need to click on <a class="reference internal" href="../../../_images/mActionRotateFeature.png"><img alt="rotateFeature" src="../../../_images/mActionRotateFeature.png" style="width: 1.5em;" /></a> <sup>Rotate
+Feature(s)</sup> icon.</p>
+</div>
+<div class="section" id="simplify-feature">
+<span id="index-23"></span><h3><a class="toc-backref" href="#id22">Simplify Feature</a><a class="headerlink" href="#simplify-feature" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionSimplify.png"><img alt="simplifyFeatures" src="../../../_images/mActionSimplify.png" style="width: 2em;" /></a> <sup>Simplify Feature</sup> tool allows you to reduce the
+number of vertices of a feature, as long as the geometry remains valid. With the
+tool you can also simplify many features at once or multi-part features.</p>
+<p>First, click on the feature or drag a rectangle over the features. A dialog where
+you can define a tolerance in <tt class="docutils literal"><span class="pre">map</span> <span class="pre">units</span></tt>, <tt class="docutils literal"><span class="pre">layer</span> <span class="pre">units</span></tt> or <tt class="docutils literal"><span class="pre">pixels</span></tt> pops up
+and a colored and simplified copy of the feature(s), using the given tolerance,
+appears over them. QGIS calculates the amount of vertices that can be deleted
+while maintaining the geometry.
+The higher the tolerance is the more vertices can be deleted. When the expected
+geometry fits your needs just click the <strong>[OK]</strong> button.
+The tolerance you used will be saved when leaving a project or when leaving an edit session.
+So you can go back to the same tolerance the next time when simplifying a feature.</p>
+<p>To abort feature simplification, you need to click on <a class="reference internal" href="../../../_images/mActionSimplify.png"><img alt="simplifyFeatures" src="../../../_images/mActionSimplify.png" style="width: 2em;" /></a>
+<sup>Simplify Feature</sup> icon.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">unlike the feature simplification option in <em class="menuselection">Settings ‣
+Options ‣ Rendering</em> menu which simplifies the geometry just for rendering,
+the <a class="reference internal" href="../../../_images/mActionSimplify.png"><img alt="simplifyFeatures" src="../../../_images/mActionSimplify.png" style="width: 2em;" /></a> <sup>Simplify Feature</sup> tool really modifies feature&#8217;s
+geometry in data source.</p>
+</div>
+</div>
+<div class="section" id="add-part">
+<span id="index-24"></span><h3><a class="toc-backref" href="#id23">Add Part</a><a class="headerlink" href="#add-part" title="Permalink to this headline">¶</a></h3>
+<p>You can <a class="reference internal" href="../../../_images/mActionAddPart.png"><img alt="addPart" src="../../../_images/mActionAddPart.png" style="width: 1.5em;" /></a> <sup>Add Part</sup> to a selected feature generating a
+<span class="target" id="index-25"></span>multipoint, <span class="target" id="index-26"></span>multiline or <span class="target" id="index-27"></span>multipolygon feature. The
+new part must be digitized outside the existing one which should be selected
+beforehand.</p>
+<p>The <a class="reference internal" href="../../../_images/mActionAddPart.png"><img alt="addPart" src="../../../_images/mActionAddPart.png" style="width: 1.5em;" /></a> <sup>Add Part</sup> can also be used to add a geometry to a <span class="target" id="index-28"></span>geometryless
+feature. First, select the feature in the attribute table and digitize the new geometry
+with the <span class="target" id="index-29"></span>Add Part tool.</p>
+</div>
+<div class="section" id="delete-part">
+<span id="index-30"></span><h3><a class="toc-backref" href="#id24">Delete Part</a><a class="headerlink" href="#delete-part" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionDeletePart.png"><img alt="deletePart" src="../../../_images/mActionDeletePart.png" style="width: 2em;" /></a> <sup>Delete Part</sup> tool allows you to <span class="target" id="index-31"></span>delete parts from
+multifeatures (e.g., to delete polygons from a multi-polygon feature). This
+tool works with all multi-part geometries: point, line and polygon. Furthermore,
+it can be used to totally remove the geometric component of a feature.
+To delete a part, simply click within the target part.</p>
+</div>
+<div class="section" id="add-ring">
+<span id="index-32"></span><h3><a class="toc-backref" href="#id25">Add Ring</a><a class="headerlink" href="#add-ring" title="Permalink to this headline">¶</a></h3>
+<p>You can create <span class="target" id="index-33"></span>ring polygons using the <a class="reference internal" href="../../../_images/mActionAddRing.png"><img alt="addRing" src="../../../_images/mActionAddRing.png" style="width: 2em;" /></a>
+<sup>Add Ring</sup> icon in the toolbar. This means that inside an existing area, it
+is possible to digitize further polygons that will occur as a &#8216;hole&#8217;, so
+only the area between the boundaries of the outer and inner polygons remains
+as a ring polygon.</p>
+</div>
+<div class="section" id="fill-ring">
+<span id="index-34"></span><h3><a class="toc-backref" href="#id26">Fill Ring</a><a class="headerlink" href="#fill-ring" title="Permalink to this headline">¶</a></h3>
+<p>You can use the <a class="reference internal" href="../../../_images/mActionFillRing.png"><img alt="fillRing" src="../../../_images/mActionFillRing.png" style="width: 1.5em;" /></a> <sup>Fill Ring</sup> function to add a ring to
+a polygon and add a new feature to the layer at the same time. Using this tool,
+you simply have to digitize a polygon within an existing one. Thus you need not
+first use the <a class="reference internal" href="../../../_images/mActionAddRing.png"><img alt="addRing" src="../../../_images/mActionAddRing.png" style="width: 2em;" /></a> <sup>Add Ring</sup> icon and then the
+<a class="reference internal" href="../../../_images/mActionCapturePolygon.png"><img alt="capturePolygon" src="../../../_images/mActionCapturePolygon.png" style="width: 1.5em;" /></a> <sup>Add feature</sup> function anymore.</p>
+</div>
+<div class="section" id="delete-ring">
+<span id="index-35"></span><h3><a class="toc-backref" href="#id27">Delete Ring</a><a class="headerlink" href="#delete-ring" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionDeleteRing.png"><img alt="deleteRing" src="../../../_images/mActionDeleteRing.png" style="width: 2em;" /></a> <sup>Delete Ring</sup> tool allows you to delete rings within
+an existing polygon, by clicking inside the hole. This tool only works with
+polygon and multi-polygon features. It doesn&#8217;t
+change anything when it is used on the outer ring of the polygon.</p>
+</div>
+<div class="section" id="reshape-features">
+<span id="index-36"></span><h3><a class="toc-backref" href="#id28">Reshape Features</a><a class="headerlink" href="#reshape-features" title="Permalink to this headline">¶</a></h3>
+<p>You can reshape line and polygon features using the <a class="reference internal" href="../../../_images/mActionReshape.png"><img alt="reshape" src="../../../_images/mActionReshape.png" style="width: 1.5em;" /></a>
+<sup>Reshape Features</sup> icon on the toolbar. For lines, it replaces the line
+part from the first to the last intersection with the original line. The
+<a class="reference internal" href="../../../_images/mActionReshape.png"><img alt="reshape" src="../../../_images/mActionReshape.png" style="width: 1.5em;" /></a> <sup>Reshape Features</sup> tool also helps you extend linestring
+geometries: simply begin or end the reshape line at either the first or last
+point of the existing line.</p>
+<p>You can also edit the boundary of a polygon with this tool. First,
+click in the inner area of the polygon next to the point where you want to
+add a new vertex. Then, cross the boundary and add the vertices outside the
+polygon. To finish, right-click in the inner area of the polygon. The tool
+will automatically add a node where the new line crosses the border. The area of
+the polygon is expanded with the area you draw.
+It is also possible to remove part of the area from the polygon, starting the new
+line outside the polygon, adding vertices inside, and ending the line outside
+the polygon with a right click.</p>
+<p>With polygons, reshaping can sometimes lead to unintended results. It is mainly useful
+to replace smaller parts of a polygon, not for major overhauls, and the reshape
+line is not allowed to cross several polygon rings, as this would generate an
+invalid polygon.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The reshape tool may alter the starting position of a polygon ring or a
+closed line. So, the point that is represented &#8216;twice&#8217; will not be the same
+any more. This may not be a problem for most applications, but it is
+something to consider.</p>
+</div>
+</div>
+<div class="section" id="offset-curves">
+<span id="index-37"></span><h3><a class="toc-backref" href="#id29">Offset Curves</a><a class="headerlink" href="#offset-curves" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionOffsetCurve.png"><img alt="offsetCurve" src="../../../_images/mActionOffsetCurve.png" style="width: 1.5em;" /></a> <sup>Offset Curve</sup> tool creates parallel shifts of line layers.
+The tool can be applied to the edited layer (the geometries are modified)
+or also to background layers (in which case it creates copies of the lines /
+rings and adds them to the edited layer).
+It is thus ideally suited for the creation of distance line layers.
+The <em class="guilabel">User Input</em> dialog pops-up, showing the displacement distance.</p>
+<p>To create a shift of a line layer, you must first go into editing mode and activate the
+<a class="reference internal" href="../../../_images/mActionOffsetCurve.png"><img alt="offsetCurve" src="../../../_images/mActionOffsetCurve.png" style="width: 1.5em;" /></a> <sup>Offset Curve</sup> tool. Then click on a feature to shift it.
+Move the mouse and click where wanted or enter the desired distance in the user
+input widget. Your changes may then be saved with the <a class="reference internal" href="../../../_images/mActionSaveEdits.png"><img alt="saveEdits" src="../../../_images/mActionSaveEdits.png" style="width: 1.5em;" /></a> <sup>Save Layer Edits</sup> tool.</p>
+<p>QGIS options dialog (Digitizing tab then <strong>Curve offset tools</strong> section) allows
+you to configure some parameters like <strong>Join style</strong>, <strong>Quadrant segments</strong>,
+<strong>Miter limit</strong>.</p>
+</div>
+<div class="section" id="split-features">
+<span id="index-38"></span><h3><a class="toc-backref" href="#id30">Split Features</a><a class="headerlink" href="#split-features" title="Permalink to this headline">¶</a></h3>
+<p>You can split features using the <a class="reference internal" href="../../../_images/mActionSplitFeatures.png"><img alt="splitFeatures" src="../../../_images/mActionSplitFeatures.png" style="width: 1.5em;" /></a> <sup>Split Features</sup>
+icon on the toolbar. Just draw a line across the feature you want to split.</p>
+</div>
+<div class="section" id="split-parts">
+<span id="index-39"></span><h3><a class="toc-backref" href="#id31">Split parts</a><a class="headerlink" href="#split-parts" title="Permalink to this headline">¶</a></h3>
+<p>In QGIS it is possible to split the parts of a multi part feature so that the
+number of parts is increased. Just draw a line across the part you want to split using
+the <a class="reference internal" href="../../../_images/mActionSplitParts.png"><img alt="splitParts" src="../../../_images/mActionSplitParts.png" style="width: 1.5em;" /></a> <sup>Split Parts</sup> icon.</p>
+</div>
+<div class="section" id="merge-selected-features">
+<span id="index-40"></span><h3><a class="toc-backref" href="#id32">Merge selected features</a><a class="headerlink" href="#merge-selected-features" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionMergeFeatures.png"><img alt="mergeFeatures" src="../../../_images/mActionMergeFeatures.png" style="width: 1.5em;" /></a> <sup>Merge Selected Features</sup> tool allows you to merge
+features. A new dialog will allow you to choose which value to choose between each
+selected features or select a function (Minimum, Maximum, Median, Sum, Skip
+Attribute) to use for each column. If features don&#8217;t have a common boundaries,
+a multipolygon will be created.</p>
+</div>
+<div class="section" id="merge-attributes-of-selected-features">
+<span id="index-41"></span><h3><a class="toc-backref" href="#id33">Merge attributes of selected features</a><a class="headerlink" href="#merge-attributes-of-selected-features" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionMergeFeatureAttributes.png"><img alt="mergeFeatAttributes" src="../../../_images/mActionMergeFeatureAttributes.png" style="width: 1.5em;" /></a> <sup>Merge Attributes of Selected Features</sup> tool
+allows you to apply same attributes to features without merging their boundaries.
+First, select several features. Then
+press the <a class="reference internal" href="../../../_images/mActionMergeFeatureAttributes.png"><img alt="mergeFeatAttributes" src="../../../_images/mActionMergeFeatureAttributes.png" style="width: 1.5em;" /></a> <sup>Merge Attributes of Selected Features</sup> button.
+Now QGIS asks you which attributes are to be applied to all selected objects.
+As a result, all selected objects have the same attribute entries.</p>
+</div>
+<div class="section" id="rotate-point-symbols">
+<span id="index-42"></span><h3><a class="toc-backref" href="#id34">Rotate Point Symbols</a><a class="headerlink" href="#rotate-point-symbols" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionRotatePointSymbols.png"><img alt="rotatePointSymbols" src="../../../_images/mActionRotatePointSymbols.png" style="width: 1.5em;" /></a> <sup>Rotate Point Symbols</sup> allows you to change the rotation
+of point symbols in the map canvas. You must first define a rotation column
+from the attribute table of the point layer in the <em class="guilabel">Advanced</em> menu of the
+<em class="guilabel">Style</em> menu of the <em class="guilabel">Layer Properties</em>. Also, you will need to
+go into the &#8216;SVG marker&#8217; and choose <em class="guilabel">Data defined properties ...</em>.
+Activate <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Angle</em> and choose &#8216;rotation&#8217; as field.
+Without these settings, the tool is inactive.</p>
+<p id="figure-edit-5"><strong>Figure Edit 5:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rotatepointsymbol.png" src="../../../_images/rotatepointsymbol.png" />
+<p class="caption">Rotate Point Symbols</p>
+</div>
+<p>To change the rotation, select a point feature in the map canvas and rotate
+it, holding the left mouse button pressed. A red arrow with the rotation value
+will be visualized (see <a class="reference internal" href="#figure-edit-5">Figure_edit_5</a>). When you release the left mouse
+button again, the value will be updated in the attribute table.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you hold the <tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> key pressed, the rotation will be done in 15
+degree steps.</p>
+</div>
+</div>
+<div class="section" id="automatic-tracing">
+<span id="tracing"></span><span id="index-43"></span><h3><a class="toc-backref" href="#id35">Automatic Tracing</a><a class="headerlink" href="#automatic-tracing" title="Permalink to this headline">¶</a></h3>
+<p>Usually, when using capturing map tools (add feature, add part, add ring, reshape
+and split), you need to click each vertex of the feature.</p>
+<p>Using the automatic tracing mode you can speed up the digitization process.
+Enable the <a class="reference internal" href="../../../_images/mActionTracing.png"><img alt="tracing" src="../../../_images/mActionTracing.png" style="width: 1.5em;" /></a> <sup>Tracing</sup> tool by pushing the icon or pressing
+<tt class="kbd docutils literal"><span class="pre">t</span></tt> key and <a class="reference internal" href="#snapping-tolerance"><em>snap to</em></a> a vertex or segment of a
+feature you want to trace along. Move the mouse over another vertex or segment
+you&#8217;d like to snap and instead of an usual straight line, the digitizing rubber
+band represents a path from the last point you snapped to the current position.
+QGIS actually uses the underlying features topology to build the shortest path
+between the two points. Click and QGIS places the intermediate vertices following
+the path. You no longer need to manually place all the vertices during digitization.</p>
+<p>Tracing requires snapping to be activated in traceable layers to build the path.
+You should also snap to an existing vertex or segment while digitizing and ensure
+that the two nodes are topologically connectable following existing features,
+otherwise QGIS is unable to connect them and thus traces a single straight line.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Adjust map scale or snapping settings for an optimal tracing</strong></p>
+<p class="last">If there are too many features in map display, tracing is disabled to avoid
+potentially long tracing structure preparation and large memory overhead.
+After zooming in or disabling some layers the tracing is enabled again.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Quickly enable or disable automatic tracing by pressing</strong> <tt class="kbd docutils literal"><span class="pre">t</span></tt> <strong>key</strong></p>
+<p class="last">By pressing <tt class="kbd docutils literal"><span class="pre">t</span></tt> key, tracing can be enabled/disabled anytime even while
+digitizing one feature, so it is possible to digitize some parts of the feature
+with tracing enabled and other parts with tracing disabled.
+Tools behave as usual when tracing is disabled.</p>
+</div>
+</div>
+</div>
+<div class="section" id="the-advanced-digitizing-panel">
+<span id="advanced-digitizing-panel"></span><span id="index-44"></span><h2><a class="toc-backref" href="#id36">The Advanced Digitizing panel</a><a class="headerlink" href="#the-advanced-digitizing-panel" title="Permalink to this headline">¶</a></h2>
+<p>When capturing new geometries or geometry parts you also have the possibility to use
+the Advanced Digitizing panel. You can digitize lines exactly parallel or at a specific angle
+or lock lines to specific angles. Furthermore you can enter coordinates directly so that you can
+make a precise definition for your new geometry.</p>
+<p id="figure-advanced-edit-1"><strong>Figure Advanced Edit 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/advanced_digitizing.png" src="../../../_images/advanced_digitizing.png" />
+<p class="caption">The Advanced Digitizing panel</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The tools are not enabled if the map view is in geographic coordinates.</p>
+</div>
+</div>
+<div class="section" id="creating-new-vector-layers">
+<span id="sec-create-vector"></span><span id="index-45"></span><h2><a class="toc-backref" href="#id37">Creating new Vector layers</a><a class="headerlink" href="#creating-new-vector-layers" title="Permalink to this headline">¶</a></h2>
+<p>QGIS allows you to create new shapefile layers, new SpatiaLite layers, new
+GPX layers and New Temporary Scratch Layers. Creation of a new GRASS layer
+is supported within the GRASS plugin.
+Please refer to section <a class="reference internal" href="../grass_integration/grass_integration.html#creating-new-grass-vectors"><em>Creating a new GRASS vector layer</em></a> for more information
+on creating GRASS vector layers.</p>
+<div class="section" id="creating-a-new-shapefile-layer">
+<h3><a class="toc-backref" href="#id38">Creating a new Shapefile layer</a><a class="headerlink" href="#creating-a-new-shapefile-layer" title="Permalink to this headline">¶</a></h3>
+<p>To create a new shape layer for editing, choose <em class="menuselection">New ‣</em>
+<a class="reference internal" href="../../../_images/mActionNewVectorLayer.png"><img alt="newVectorLayer" src="../../../_images/mActionNewVectorLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">New Shapefile Layer...</em> from the
+<em class="menuselection">Layer</em> menu. The <em class="guilabel">New Vector Layer</em> dialog will be
+displayed as shown in <a class="reference internal" href="#figure-edit-6">Figure_edit_6</a>. Choose the type of layer (point, line or
+polygon) and the CRS (coordinate reference system).</p>
+<p>Note that QGIS does not yet support creation of 2.5D features (i.e., features
+with X,Y,Z coordinates).</p>
+<p id="figure-edit-6"><strong>Figure Edit 6:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/editNewVector.png" src="../../../_images/editNewVector.png" />
+<p class="caption">Creating a new Shapefile layer Dialog</p>
+</div>
+<p>To complete the creation of the new shapefile layer, add the desired attributes
+by clicking on the <strong>[Add to attributes list]</strong> button and specifying a name and type for the
+attribute. A first &#8216;id&#8217; column is added as default but can be removed, if not
+wanted. Only <em class="guilabel">Type: real</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>, <em class="guilabel">Type: integer</em>
+<a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>, <em class="guilabel">Type: string</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> and <em class="guilabel">Type:date</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>
+attributes are supported. Additionally and according to the attribute type, you can also define
+the width and precision of the new attribute column. Once you are happy with
+the attributes, click <strong>[OK]</strong> and provide a name for the shapefile. QGIS will
+automatically add a <tt class="file docutils literal"><span class="pre">.shp</span></tt> extension to the name you specify. Once the
+layer has been created, it will be added to the map, and you can edit it in the
+same way as described in section <a class="reference internal" href="#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a> above.</p>
+</div>
+<div class="section" id="creating-a-new-spatialite-layer">
+<span id="vector-create-spatialite"></span><span id="index-46"></span><h3><a class="toc-backref" href="#id39">Creating a new SpatiaLite layer</a><a class="headerlink" href="#creating-a-new-spatialite-layer" title="Permalink to this headline">¶</a></h3>
+<p>To create a new SpatiaLite layer for editing, choose <em class="menuselection">New ‣</em>
+<a class="reference internal" href="../../../_images/mActionNewSpatiaLiteLayer.png"><img alt="newSpatiaLiteLayer" src="../../../_images/mActionNewSpatiaLiteLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">New SpatiaLite Layer...</em> from the
+<em class="menuselection">Layer</em> menu. The <em class="guilabel">New SpatiaLite Layer</em> dialog will
+be displayed as shown in <a class="reference internal" href="#figure-edit-7">Figure_edit_7</a>.</p>
+<p id="figure-edit-7"><strong>Figure Edit 7:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/editNewSpatialite.png" src="../../../_images/editNewSpatialite.png" />
+<p class="caption">Creating a New SpatiaLite layer Dialog</p>
+</div>
+<p>The first step is to select an existing SpatiaLite database or to create a new
+SpatiaLite database. This can be done with the browse button <a class="reference internal" href="../../../_images/browsebutton.png"><img alt="browseButton" src="../../../_images/browsebutton.png" style="width: 2.3em;" /></a> to
+the right of the database field. Then, add a name for the new layer, define
+the layer type, and specify the coordinate reference system with <strong>[Specify CRS]</strong>.
+If desired, you can select <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Create an autoincrementing primary key</em>.</p>
+<p>To define an attribute table for the new SpatiaLite layer, add the names of
+the attribute columns you want to create with the corresponding column type, and
+click on the <strong>[Add to attribute list]</strong> button. Once you are happy with the
+attributes, click <strong>[OK]</strong>. QGIS will automatically add the new layer to the
+legend, and you can edit it in the same way as described in section
+<a class="reference internal" href="#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a> above.</p>
+<p>Further management of SpatiaLite layers can be done with the DB Manager. See
+<a class="reference internal" href="../plugins/plugins_db_manager.html#dbmanager"><em>DB Manager Plugin</em></a>.</p>
+</div>
+<div class="section" id="creating-a-new-gpx-layer">
+<span id="vector-create-gpx"></span><span id="index-47"></span><h3><a class="toc-backref" href="#id40">Creating a new GPX layer</a><a class="headerlink" href="#creating-a-new-gpx-layer" title="Permalink to this headline">¶</a></h3>
+<p>To create a new GPX file, you need to load the GPS plugin first. <em class="menuselection">Plugins ‣</em>
+<a class="reference internal" href="../../../_images/mActionShowPluginManager.png"><img alt="showPluginManager" src="../../../_images/mActionShowPluginManager.png" style="width: 1.5em;" /></a> <em class="menuselection">Plugin Manager...</em> opens the Plugin Manager Dialog.
+Activate the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">GPS Tools</em> checkbox.</p>
+<p>When this plugin is loaded, choose <em class="menuselection">New ‣</em> <a class="reference internal" href="../../../_images/create_gpx.png"><img alt="createGPX" src="../../../_images/create_gpx.png" style="width: 1.5em;" /></a>
+<em class="menuselection">Create new GPX Layer...</em> from the <em class="menuselection">Layer</em> menu.
+In the <em class="guilabel">Save new GPX file as</em> dialog, you can choose where to save the
+new GPX layer.</p>
+</div>
+<div class="section" id="creating-a-new-temporary-scratch-layer">
+<span id="vector-new-scratch-layer"></span><span id="index-48"></span><h3><a class="toc-backref" href="#id41">Creating a new Temporary Scratch Layer</a><a class="headerlink" href="#creating-a-new-temporary-scratch-layer" title="Permalink to this headline">¶</a></h3>
+<p>Empty, editable memory layers can be defined using <em class="menuselection">Layer ‣
+Create Layer ‣ New Temporary Scratch Layer</em>. Here you can even create
+<img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /><em class="guilabel">Multipoint</em>, <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /><em class="guilabel">Multiline</em>
+and <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /><em class="guilabel">Multipolygon</em> Layers beneath <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /><em class="guilabel">Point</em>,
+<img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /><em class="guilabel">Line</em> and <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /><em class="guilabel">Polygon</em> Layers.
+Temporary Scratch Layers are not saved and will be discarded when QGIS is closed.
+See also <a class="reference internal" href="attribute_table.html#paste-into-layer"><em>Paste into new layer</em></a>.</p>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="virtual_layers.html" title="Virtual layers"
+             >next</a></li>
+        <li class="right" >
+          <a href="attribute_table.html" title="Working with the Attribute Table"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >Working with Vector Data</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>QGIS as OGC Data Server</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Working with OGC Data" href="index.html" />
+    <link rel="next" title="Working with GPS Data" href="../working_with_gps/index.html" />
+    <link rel="prev" title="QGIS as OGC Data Client" href="ogc_client_support.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/working_with_ogc/ogc_server_support.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../working_with_gps/index.html" title="Working with GPS Data"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="ogc_client_support.html" title="QGIS as OGC Data Client"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Working with OGC Data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="ogc_client_support.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="../working_with_gps/index.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="qgis-as-ogc-data-server">
+<span id="label-qgisserver"></span><span id="index-0"></span><h1>QGIS as OGC Data Server<a class="headerlink" href="#qgis-as-ogc-data-server" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#qgis-server-installation-on-debian-ubuntu" id="id2">QGIS Server installation on Debian/Ubuntu</a></li>
+<li><a class="reference internal" href="#creating-a-wms-wfs-wcs-server-from-a-qgis-project" id="id3">Creating a WMS/WFS/WCS server from a QGIS project</a><ul>
+<li><a class="reference internal" href="#wms-capabilities" id="id4">WMS capabilities</a></li>
+<li><a class="reference internal" href="#wfs-capabilities" id="id5">WFS capabilities</a></li>
+<li><a class="reference internal" href="#wcs-capabilities" id="id6">WCS capabilities</a></li>
+<li><a class="reference internal" href="#getcapabilities-caching" id="id7">GetCapabilities Caching</a></li>
+<li><a class="reference internal" href="#fine-tuning-your-ows" id="id8">Fine tuning your OWS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#server-configuration-and-supported-parameters" id="id9">Server configuration and supported parameters</a><ul>
+<li><a class="reference internal" href="#extra-parameters-supported-by-all-request-types" id="id10">Extra parameters supported by all request types</a></li>
+<li><a class="reference internal" href="#extra-parameters-supported-by-the-wms-getmap-request" id="id11">Extra parameters supported by the WMS GetMap request</a></li>
+<li><a class="reference internal" href="#extra-parameters-supported-by-the-wms-getfeatureinfo-request" id="id12">Extra parameters supported by the WMS GetFeatureInfo request</a></li>
+<li><a class="reference internal" href="#getprint-request" id="id13">GetPrint request</a></li>
+<li><a class="reference internal" href="#getlegendgraphics-request" id="id14">GetLegendGraphics request</a></li>
+<li><a class="reference internal" href="#getprojectsettings-request" id="id15">GetProjectSettings request</a></li>
+<li><a class="reference internal" href="#dxf-export" id="id16">DXF Export</a></li>
+<li><a class="reference internal" href="#extra-parameters-supported-by-the-wfs-getfeature-request" id="id17">Extra parameters supported by the WFS GetFeature request</a></li>
+<li><a class="reference internal" href="#qgis-server-logging" id="id18">QGIS Server logging</a></li>
+<li><a class="reference internal" href="#short-name-for-layers-groups-and-project" id="id19">Short name for layers, groups and project</a></li>
+<li><a class="reference internal" href="#connection-to-service-file" id="id20">Connection to service file</a></li>
+<li><a class="reference internal" href="#add-fonts-to-your-linux-server" id="id21">Add fonts to your linux server</a></li>
+<li><a class="reference internal" href="#environment-variables" id="id22">Environment variables</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>QGIS Server is an open source WMS 1.3, WFS 1.0.0 and WCS 1 1.1.1
+implementation that, in addition, implements advanced cartographic features for
+thematic mapping. The QGIS Server is a FastCGI/CGI (Common Gateway Interface)
+application written in C++ that works together with a web server (e.g., Apache,
+Lighttpd). It has Python plugin support allowing for fast and efficient
+development and deployment of new features.
+The original development of QGIS Server was funded by the EU projects Orchestra,
+Sany and the city of Uster in Switzerland.</p>
+<span class="target" id="index-1"></span><p id="index-2">QGIS Server uses QGIS as back end for the GIS logic and for map rendering.
+Furthermore, the Qt library is used for graphics and for platform-independent
+C++ programming. In contrast to other WMS software, the QGIS Server uses
+cartographic rules as a configuration language, both for the server
+configuration and for the user-defined cartographic rules.</p>
+<p>As QGIS desktop and QGIS Server use the same visualization libraries, the maps
+that are published on the web look the same as in desktop GIS.</p>
+<p>In the following sections, we will provide a sample configuration to set up
+a QGIS Server on Debian/Ubuntu Linux.
+For user contributed installation instructions on other platforms or
+distributions, we recommend reading one of the following URLs:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://hub.qgis.org/projects/quantum-gis/wiki/QGIS_Server_Tutorial">http://hub.qgis.org/projects/quantum-gis/wiki/QGIS_Server_Tutorial</a></li>
+<li><a class="reference external" href="http://linfiniti.com/2010/08/qgis-mapserver-a-wms-server-for-the-masses/">http://linfiniti.com/2010/08/qgis-mapserver-a-wms-server-for-the-masses/</a></li>
+<li><a class="reference external" href="http://www.itopen.it/qgis-server-python-plugins-ubuntu-setup/">http://www.itopen.it/qgis-server-python-plugins-ubuntu-setup/</a></li>
+</ul>
+<div class="section" id="qgis-server-installation-on-debian-ubuntu">
+<span id="index-3"></span><h2><a class="toc-backref" href="#id2">QGIS Server installation on Debian/Ubuntu</a><a class="headerlink" href="#qgis-server-installation-on-debian-ubuntu" title="Permalink to this headline">¶</a></h2>
+<p>At this point, we will give a short and simple sample installation how-to for
+a minimal working configuration using Apache2 on Debian Squeeze (or with
+negligible variations on Ubuntu 14.04).
+Many other OSs provide packages for QGIS Server, too. If you have to build it
+all from source, please refer to the URLs above.</p>
+<p>Firstly, add the following debian GIS repository:</p>
+<div class="highlight-python"><pre>$ cat /etc/apt/sources.list.d/debian-gis.list
+deb http://qgis.org/debian trusty main
+deb-src http://qgis.org/debian trusty main
+
+$ # Add keys
+$ sudo gpg --keyserver keyserver.ubuntu.com --recv-key 3FF5FFCAD71472C4
+$ sudo gpg --export --armor 3FF5FFCAD71472C4 | sudo apt-key add -
+
+$ # Update package list
+$ sudo apt-get update &amp;&amp; sudo apt-get upgrade</pre>
+</div>
+<p>Now, install QGIS Server:</p>
+<div class="highlight-python"><pre>$ sudo apt-get install qgis-server python-qgis</pre>
+</div>
+<p>Installation of a HelloWorld example plugin for testing the servers. You create
+a directory to hold server plugins. This will be specified in the virtual host
+configuration and passed on to the server through an environment variable:</p>
+<div class="highlight-python"><pre>$ sudo mkdir -p /opt/qgis-server/plugins
+$ cd /opt/qgis-server/plugins
+$ sudo wget https://github.com/elpaso/qgis-helloserver/archive/master.zip
+$ # In case unzip was not installed before:
+$ sudo apt-get install unzip
+$ sudo unzip master.zip
+$ sudo mv qgis-helloserver-master HelloServer</pre>
+</div>
+<p>Install the Apache server in a separate virtual host listening on port 80.
+Enable the rewrite module to pass HTTP BASIC auth headers:</p>
+<div class="highlight-python"><pre>$ sudo a2enmod rewrite
+$ cat /etc/apache2/conf-available/qgis-server-port.conf
+Listen 80
+$ sudo a2enconf qgis-server-port</pre>
+</div>
+<p>This is the virtual host configuration, stored in
+<tt class="file docutils literal"><span class="pre">/etc/apache2/sites-available/001-qgis-server.conf</span></tt> :</p>
+<div class="highlight-python"><pre>&lt;VirtualHost *:80&gt;
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/html
+
+  ErrorLog ${APACHE_LOG_DIR}/qgis-server-error.log
+  CustomLog ${APACHE_LOG_DIR}/qgis-server-access.log combined
+
+  # Longer timeout for WPS... default = 40
+  FcgidIOTimeout 120
+  FcgidInitialEnv LC_ALL "en_US.UTF-8"
+  FcgidInitialEnv PYTHONIOENCODING UTF-8
+  FcgidInitialEnv LANG "en_US.UTF-8"
+  FcgidInitialEnv QGIS_DEBUG 1
+  FcgidInitialEnv QGIS_SERVER_LOG_FILE /tmp/qgis-000.log
+  FcgidInitialEnv QGIS_SERVER_LOG_LEVEL 0
+  FcgidInitialEnv QGIS_PLUGINPATH "/opt/qgis-server/plugins"
+
+  # Needed for QGIS HelloServer plugin HTTP BASIC auth
+  &lt;IfModule mod_fcgid.c&gt;
+      RewriteEngine on
+      RewriteCond %{HTTP:Authorization} .
+      RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  &lt;/IfModule&gt;
+
+  ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+  &lt;Directory "/usr/lib/cgi-bin"&gt;
+      AllowOverride All
+      Options +ExecCGI -MultiViews +FollowSymLinks
+      # for apache2 &gt; 2.4
+      Require all granted
+      #Allow from all
+  &lt;/Directory&gt;
+ &lt;/VirtualHost&gt;</pre>
+</div>
+<p>Now enable the virtual host and restart Apache:</p>
+<div class="highlight-python"><pre>$ sudo a2ensite 001-qgis-server
+$ sudo service apache2 restart</pre>
+</div>
+<p>Test the server with the HelloWorld plugin:</p>
+<div class="highlight-python"><pre>$ wget -q -O - "http://localhost/cgi-bin/qgis_mapserv.fcgi?SERVICE=HELLO"
+HelloServer!</pre>
+</div>
+<p>You can have a look at the default GetCapabilities of the QGIS server at:
+<tt class="file docutils literal"><span class="pre">http://localhost/cgi-bin/qgis_mapserv.fcgi?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetCapabilities</span></tt></p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>If you work with a feature that has many nodes then modifying and adding a
+new feature will fail. In this case it is possible to insert the following
+code into the <tt class="file docutils literal"><span class="pre">001-qgis-server.conf</span></tt> file:</p>
+<div class="last highlight-python"><pre>&lt;IfModule mod_fcgid.c&gt;
+FcgidMaxRequestLen 26214400
+FcgidConnectTimeout 60
+&lt;/IfModule&gt;</pre>
+</div>
+</div>
+</div>
+<div class="section" id="creating-a-wms-wfs-wcs-server-from-a-qgis-project">
+<span id="creating-a-wms-from-a-qgis-project"></span><h2><a class="toc-backref" href="#id3">Creating a WMS/WFS/WCS server from a QGIS project</a><a class="headerlink" href="#creating-a-wms-wfs-wcs-server-from-a-qgis-project" title="Permalink to this headline">¶</a></h2>
+<p>To provide a new QGIS Server WMS, WFS or WCS, we have to create a QGIS project
+file with some data. Here, we use the &#8216;Alaska&#8217; shapefile from the QGIS sample
+dataset. Define the colors and styles of the layers in QGIS and the project CRS,
+if not already defined.</p>
+<p id="figure-server-2"><strong>Figure Server 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/ows_server_definition.png" src="../../../_images/ows_server_definition.png" />
+<p class="caption">Definitions for a QGIS Server WMS/WFS/WCS project</p>
+</div>
+<p>Then, go to the <em class="guilabel">OWS Server</em> menu of the
+<em class="menuselection">Project ‣ Project Properties</em> dialog and provide
+some information about the OWS in the fields under
+<em class="guilabel">Service Capabilities</em>.
+This will appear in the GetCapabilities response of the WMS, WFS or WCS.
+If you don&#8217;t check <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Service capabilities</em>,
+QGIS Server will use the information given in the <tt class="file docutils literal"><span class="pre">wms_metadata.xml</span></tt> file
+located in the <tt class="file docutils literal"><span class="pre">cgi-bin</span></tt> folder.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you&#8217;re using the QGIS project with styling based on SVG files using
+relative paths then you should know that the server considers the path
+relative to its <cite>qgis_mapserv.fcgi</cite> file (not to the <cite>qgs</cite> file).
+So, if you deploy a project on the server and the SVG files are not placed
+accordingly, the output images may not respect the Desktop styling.
+To ensure this doesn&#8217;t happen, you can simply copy the SVG files relative
+to the <cite>qgis_mapserv.fcgi</cite>. You can also create a symbolic link in the
+directory where the fcgi file resides that points to the directory containing
+the SVG files (on Linux/Unix).</p>
+</div>
+<div class="section" id="wms-capabilities">
+<h3><a class="toc-backref" href="#id4">WMS capabilities</a><a class="headerlink" href="#wms-capabilities" title="Permalink to this headline">¶</a></h3>
+<p>In the <em class="guilabel">WMS capabilities</em> section, you can define
+the extent advertised in the WMS GetCapabilities response by entering
+the minimum and maximum X and Y values in the fields under
+<em class="guilabel">Advertised extent</em>.
+Clicking <em class="guilabel">Use Current Canvas Extent</em> sets these values to the
+extent currently displayed in the QGIS map canvas.
+By checking <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">CRS restrictions</em>, you can restrict
+in which coordinate reference systems (CRS) QGIS Server will offer
+to render maps.
+Use the <a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> button below to select those CRSs
+from the Coordinate Reference System Selector, or click <em class="guilabel">Used</em>
+to add the CRSs used in the QGIS project to the list.</p>
+<p>If you have print composers defined in your project, they will be listed in the
+<cite>GetProjectSettings</cite> response, and they can be used by the GetPrint request to
+create prints, using one of the print composer layouts as a template.
+This is a QGIS-specific extension to the WMS 1.3.0 specification.
+If you want to exclude any print composer from being published by the WMS,
+check <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Exclude composers</em> and click the
+<a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> button below.
+Then, select a print composer from the <em class="guilabel">Select print composer</em> dialog
+in order to add it to the excluded composers list.</p>
+<p>If you want to exclude any layer or layer group from being published by the
+WMS, check <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Exclude Layers</em> and click the
+<a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> button below.
+This opens the <em class="guilabel">Select restricted layers and groups</em> dialog, which
+allows you to choose the layers and groups that you don&#8217;t want to be published.
+Use the <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> or <tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> key if you want to select multiple entries.</p>
+<p>You can receive requested GetFeatureInfo as plain text, XML and GML. Default is XML,
+text or GML format depends the output format chosen for the GetFeatureInfo request.</p>
+<p>If you wish, you can check <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Add geometry to feature response</em>.
+This will include in the GetFeatureInfo response the geometries of the
+features in a text format. If you want QGIS Server to advertise specific request URLs
+in the WMS GetCapabilities response, enter the corresponding URL in the
+<em class="guilabel">Advertised URL</em> field.
+Furthermore, you can restrict the maximum size of the maps returned by the
+GetMap request by entering the maximum width and height into the respective
+fields under <em class="guilabel">Maximums for GetMap request</em>.</p>
+<p>If one of your layers uses the Map Tip display (i.e. to show text using
+expressions) this will be listed inside the GetFeatureInfo output. If the
+layer uses a Value Map for one of its attributes, this information will also
+be shown in the GetFeatureInfo output.</p>
+<p>QGIS supports the following requests for WMS service:</p>
+<ul class="simple">
+<li>GetCapabilities</li>
+<li>GetMap</li>
+<li>GetFeatureInfo</li>
+<li>GetLegendGraphic (SLD profile)</li>
+<li>DescribeLayer (SLD profile)</li>
+<li>GetStyles (custom QGIS profile)</li>
+</ul>
+</div>
+<div class="section" id="wfs-capabilities">
+<h3><a class="toc-backref" href="#id5">WFS capabilities</a><a class="headerlink" href="#wfs-capabilities" title="Permalink to this headline">¶</a></h3>
+<p>In the <em class="guilabel">WFS capabilities</em> area you can select the layers you
+want to publish as WFS, and specify if they will allow update, insert and
+delete operations.
+If you enter a URL in the <em class="guilabel">Advertised URL</em> field of the
+<em class="guilabel">WFS capabilities</em> section, QGIS Server will advertise this specific
+URL in the WFS GetCapabilities response.</p>
+<p>QGIS supports the following requests for WFS service:</p>
+<ul class="simple">
+<li>GetCapabilities</li>
+<li>DescribeFeatureType</li>
+<li>GetFeature</li>
+<li>Transaction</li>
+</ul>
+</div>
+<div class="section" id="wcs-capabilities">
+<h3><a class="toc-backref" href="#id6">WCS capabilities</a><a class="headerlink" href="#wcs-capabilities" title="Permalink to this headline">¶</a></h3>
+<p>In the <em class="guilabel">WCS capabilities</em> area, you can select the layers that you
+want to publish as WCS. If you enter a URL in the <em class="guilabel">Advertised URL</em>
+field of the <em class="guilabel">WCS capabilities</em> section, QGIS Server will advertise
+this specific URL in the WCS GetCapabilities response.</p>
+<p>Now, save the session in a project file <tt class="file docutils literal"><span class="pre">alaska.qgs</span></tt>. To provide the
+project as a WMS/WFS, we create a new folder <tt class="docutils literal"><span class="pre">/usr/lib/cgi-bin/project</span></tt> with
+admin privileges and add the project file <tt class="file docutils literal"><span class="pre">alaska.qgs</span></tt> and a copy of the
+<tt class="file docutils literal"><span class="pre">qgis_mapserv.fcgi</span></tt> file - that&#8217;s all.</p>
+<p>Now we test our project WMS, WFS and WCS. Add the WMS, WFS and WCS as described
+in <a class="reference internal" href="ogc_client_support.html#ogc-wms-layers"><em>Loading WMS/WMTS Layers</em></a>, <a class="reference internal" href="ogc_client_support.html#ogc-wfs"><em>WFS and WFS-T Client</em></a> and <a class="reference internal" href="ogc_client_support.html#ogc-wcs"><em>WCS Client</em></a> to QGIS and load
+the data. The URL is:</p>
+<div class="highlight-python"><pre>http://localhost/cgi-bin/project/qgis_mapserv.fcgi</pre>
+</div>
+<p>QGIS supports the following requests for WCS service:</p>
+<ul class="simple">
+<li>GetCapabilities</li>
+<li>DescribeCoverage</li>
+<li>GetCoverage</li>
+</ul>
+</div>
+<div class="section" id="getcapabilities-caching">
+<h3><a class="toc-backref" href="#id7">GetCapabilities Caching</a><a class="headerlink" href="#getcapabilities-caching" title="Permalink to this headline">¶</a></h3>
+<p>In order to improve response time, QGIS Server caches the responses to the <tt class="docutils literal"><span class="pre">GetCapabilities</span></tt> requests.
+When such a request comes, QGIS Server is caching the response and marking the cache valid.
+At the same time, it watches if the project file changes.
+If the project is changed then the cache is marked as invalid and QGIS Server waits for a new request in order to recreate the cache.</p>
+</div>
+<div class="section" id="fine-tuning-your-ows">
+<h3><a class="toc-backref" href="#id8">Fine tuning your OWS</a><a class="headerlink" href="#fine-tuning-your-ows" title="Permalink to this headline">¶</a></h3>
+<p>For vector layers, the <em class="guilabel">Fields</em> menu of the
+<em class="menuselection">Layer ‣ Properties</em> dialog allows you to define for each
+attribute if it will be published or not.
+By default, all the attributes are published by your WMS and WFS.
+If you don&#8217;t want a specific attribute to be published, uncheck the corresponding
+checkbox in the <em class="guilabel">WMS</em> or <em class="guilabel">WFS</em> column.</p>
+<p>You can overlay watermarks over the maps produced by your WMS by adding text
+annotations or SVG annotations to the project file.
+See the Annotation Tools section in <a class="reference internal" href="../introduction/general_tools.html#general-tools"><em>General Tools</em></a> for instructions on
+creating annotations. For annotations to be displayed as watermarks on the WMS
+output, the <em class="guilabel">Fixed map position</em> check box in the
+<em class="guilabel">Annotation text</em> dialog must be unchecked.
+This can be accessed by double clicking the annotation while one of the
+annotation tools is active.
+For SVG annotations, you will need either to set the project to save absolute
+paths (in the <em class="guilabel">General</em> menu of the
+<em class="menuselection">Project ‣ Project Properties</em> dialog) or to manually modify
+the path to the SVG image so that it represents a valid relative path.</p>
+</div>
+</div>
+<div class="section" id="server-configuration-and-supported-parameters">
+<h2><a class="toc-backref" href="#id9">Server configuration and supported parameters</a><a class="headerlink" href="#server-configuration-and-supported-parameters" title="Permalink to this headline">¶</a></h2>
+<p>QGIS Server supports some vendor parameters and requests that greatly enhance the
+possibilities of customising its behavior. The following paragraphs list the vendor
+parameters and the environment variables supported by the server.</p>
+<div class="section" id="extra-parameters-supported-by-all-request-types">
+<h3><a class="toc-backref" href="#id10">Extra parameters supported by all request types</a><a class="headerlink" href="#extra-parameters-supported-by-all-request-types" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><strong>FILE_NAME</strong> parameter: if set, the server response will be sent to the
+client as a file attachment with the specified file name.</p>
+</li>
+<li><p class="first"><strong>MAP</strong> parameter: Similar to MapServer, the <tt class="docutils literal"><span class="pre">MAP</span></tt> parameter can be used to
+specify the path to the QGIS project file. You can specify an absolute path
+or a path relative to the location of the server executable
+(<tt class="file docutils literal"><span class="pre">qgis_mapserv.fcgi</span></tt>).
+If not specified, QGIS Server searches for .qgs files in the directory where
+the server executable is located.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>http://localhost/cgi-bin/qgis_mapserv.fcgi?\
+  REQUEST=GetMap&amp;MAP=/home/qgis/mymap.qgs&amp;...</pre>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can define a <strong>QGIS_PROJECT_FILE</strong> as an environment variable to tell
+the server executable where to find the QGIS project file. This variable
+will be the location where QGIS will look for the project file. If not
+defined it will use the MAP parameter in the request and finally look at
+the server executable directory.</p>
+</div>
+</div>
+<div class="section" id="extra-parameters-supported-by-the-wms-getmap-request">
+<h3><a class="toc-backref" href="#id11">Extra parameters supported by the WMS GetMap request</a><a class="headerlink" href="#extra-parameters-supported-by-the-wms-getmap-request" title="Permalink to this headline">¶</a></h3>
+<p>In the WMS GetMap request, QGIS Server accepts a couple of extra
+parameters in addition to the standard parameters according to the
+OCG WMS 1.3.0 specification:</p>
+<ul>
+<li><p class="first"><strong>DPI</strong> parameter: The <tt class="docutils literal"><span class="pre">DPI</span></tt> parameter can be used to specify the requested
+output resolution.</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>http://localhost/cgi-bin/qgis_mapserv.fcgi?REQUEST=GetMap&amp;DPI=300&amp;...</pre>
+</div>
+</li>
+<li><p class="first"><strong>OPACITIES</strong> parameter: Opacity can be set on layer or group level.
+Allowed values range from 0 (fully transparent) to 255 (fully opaque).</p>
+<p>Example:</p>
+<div class="highlight-python"><pre>http://localhost/cgi-bin/qgis_mapserv.fcgi?\
+  REQUEST=GetMap&amp;LAYERS=mylayer1,mylayer2&amp;OPACITIES=125,200&amp;...</pre>
+</div>
+</li>
+<li><dl class="first docutils">
+<dt><strong>FILTER</strong> parameter: (Available in QGIS 1.8 and above). Subsets of layers</dt>
+<dd><p class="first">can be selected with the <strong>FILTER</strong> parameter. Syntax is basically the same
+as for the QGIS subset string. However, there are some restrictions to avoid
+SQL injections into databases via QGIS server:</p>
+<p>Text strings need to be enclosed with quotes (single quotes for strings,
+double quotes for attributes)
+A space between each word / special character is mandatory.
+Allowed Keywords and special characters are &#8216;AND&#8217;,&#8217;OR&#8217;,&#8217;IN&#8217;,&#8217;=&#8217;,&#8217;&lt;&#8217;,&#8217;&gt;=&#8217;,
+&#8216;&gt;&#8217;,&#8217;&gt;=&#8217;,&#8217;!=*,&#8217;(&#8216;,&#8217;)&#8217;.
+Semicolons in string expressions are not allowed</p>
+<p>Example:</p>
+<div class="last highlight-python"><pre>http://myserver.com/cgi/qgis_mapserv.fcgi?REQUEST=GetMap&amp;LAYERS=mylayer1,mylayer2&amp;FILTER=mylayer1:"OBJECTID" = 3;mylayer2:'text' = 'blabla'&amp;....</pre>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is possible to make attribute searches via GetFeatureInfo and omit
+the X/Y parameter if a FILTER is there. QGIS server then returns info
+about the matching features and generates a combined bounding box in the
+xml output.</p>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>SELECTION</strong> parameter: (Available in QGIS 1.8 and above)</dt>
+<dd><p class="first">Vector features can be selected by passing comma separated lists with
+feature ids in GetMap and GetPrint.</p>
+<p>Example:</p>
+<div class="last highlight-python"><pre>http://myserver.com/cgi/qgis_mapserv.fcgi?REQUEST=GetMap&amp;LAYERS=mylayer1,mylayer2&amp;SELECTION=mylayer1:3,6,9;mylayer2:1,5,6&amp;...</pre>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="extra-parameters-supported-by-the-wms-getfeatureinfo-request">
+<h3><a class="toc-backref" href="#id12">Extra parameters supported by the WMS GetFeatureInfo request</a><a class="headerlink" href="#extra-parameters-supported-by-the-wms-getfeatureinfo-request" title="Permalink to this headline">¶</a></h3>
+<p>QGIS Server WMS GetFeatureInfo requests supports the following extra optional parameters to
+define the tolerance for point, line and polygon layers:</p>
+<ul class="simple">
+<li><strong>FI_POINT_TOLERANCE</strong> parameter: Tolerance for point layers
+<em>GetFeatureInfo</em> request, in pixels.</li>
+<li><strong>FI_LINE_TOLERANCE</strong> parameter: Tolerance for linestring layers
+<em>GetFeatureInfo</em> request, in pixels.</li>
+<li><strong>FI_POLYGON_TOLERANCE</strong> parameter: Tolerance for polygon layers
+<em>GetFeatureInfo</em> request, in pixels.</li>
+</ul>
+</div>
+<div class="section" id="getprint-request">
+<h3><a class="toc-backref" href="#id13">GetPrint request</a><a class="headerlink" href="#getprint-request" title="Permalink to this headline">¶</a></h3>
+<p>QGIS server has the capability to create print composer output in pdf or pixel
+format. Print composer windows in the published project are used as templates.
+In the GetPrint request, the client has the possibility to specify parameters
+of the contained composer maps and labels.</p>
+<p>Example:</p>
+<p>The published project has two composer maps. In the <cite>GetProjectSettings</cite> response,
+they are listed as possible print templates:</p>
+<div class="highlight-python"><pre>&lt;WMS_Capabilities&gt;
+...
+&lt;ComposerTemplates xsi:type="wms:_ExtendedCapabilities"&gt;
+&lt;ComposerTemplate width="297" height="210" name="Druckzusammenstellung 1"&gt;
+&lt;ComposerMap width="171" height="133" name="map0"/&gt;
+&lt;ComposerMap width="49" height="46" name="map1"/&gt;&lt;/ComposerTemplate&gt;
+&lt;/ComposerTemplates&gt;
+...
+&lt;/WMS_Capabilities&gt;</pre>
+</div>
+<p>The client has now the information to request a print output:</p>
+<div class="highlight-python"><pre>http://myserver.com/cgi/qgis_mapserv.fcgi?...&amp;REQUEST=GetPrint&amp;TEMPLATE=Druckzusammenstellung 1&amp;map0:EXTENT=xmin,ymin,xmax,ymax&amp;map0:ROTATION=45&amp;FORMAT=pdf&amp;DPI=300</pre>
+</div>
+<p>Parameters in the GetPrint request are:</p>
+<ul class="simple">
+<li><strong>&lt;map_id&gt;:EXTENT</strong> gives the extent for a composer map as xmin,ymin,xmax,ymax.</li>
+<li><strong>&lt;map_id&gt;:ROTATION</strong> map rotation in degrees</li>
+<li><strong>&lt;map_id&gt;:GRID_INTERVAL_X</strong>, <strong>&lt;map_id&gt;:GRID_INTERVAL_Y</strong> Grid line density for a
+composer map in x- and y-direction</li>
+<li><strong>&lt;map_id&gt;:SCALE</strong> Sets a mapscale to a composer map. This is useful to ensure
+scale based visibility of layers and labels even if client and server may
+have different algorithms to calculate the scale denominator</li>
+<li><strong>&lt;map_id&gt;:LAYERS</strong>, <strong>&lt;map_id&gt;:STYLES</strong> possibility to give layer and styles list
+for composer map (useful in case of overview maps which should have only a
+subset of layers)</li>
+</ul>
+</div>
+<div class="section" id="getlegendgraphics-request">
+<h3><a class="toc-backref" href="#id14">GetLegendGraphics request</a><a class="headerlink" href="#getlegendgraphics-request" title="Permalink to this headline">¶</a></h3>
+<p>Several additional parameters are available to change the size of the legend
+elements:</p>
+<ul class="simple">
+<li><strong>BOXSPACE</strong> space between legend frame and content (mm)</li>
+<li><strong>LAYERSPACE</strong> versical space between layers (mm)</li>
+<li><strong>LAYERTITLESPACE</strong> vertical space between layer title and items following
+(mm)</li>
+<li><strong>SYMBOLSPACE</strong> vertical space between symbol and item following (mm)</li>
+<li><strong>ICONLABELSPACE</strong> horizontal space between symbol and label text (mm)</li>
+<li><strong>SYMBOLWIDTH</strong> width of the symbol preview (mm)</li>
+<li><strong>SYMBOLHEIGHT</strong> height of the symbol preview (mm)</li>
+</ul>
+<p>These parameters change the font properties for layer titles and item labels:</p>
+<ul class="simple">
+<li><strong>LAYERFONTFAMILY / ITEMFONTFAMILY</strong> font family for layer title / item text</li>
+<li><strong>LAYERFONTBOLD / ITEMFONTBOLD</strong> &#8216;TRUE&#8217; to use a bold font</li>
+<li><strong>LAYERFONTSIZE / ITEMFONTSIZE</strong> Font size in point</li>
+<li><strong>LAYERFONTITALIC / ITEMFONTITALIC</strong> &#8216;TRUE&#8217; to use italic font</li>
+<li><strong>LAYERFONTCOLOR / ITEMFONTCOLOR</strong> Hex color code (e.g. #FF0000 for red)</li>
+<li><strong>LAYERTITLE / RULELABEL</strong> (from QGIS 2.4) set them to &#8216;FALSE&#8217; to get only
+the legend graphics without labels</li>
+</ul>
+<p>Contest based legend. These parameters let the client request a legend showing
+only the symbols for the features falling into the requested area:</p>
+<ul class="simple">
+<li><strong>BBOX</strong> the geographical area for which the legend should be built</li>
+<li><strong>CRS / SRS</strong> the coordinate reference system adopted to define the BBOX
+coordinates</li>
+<li><strong>WIDTH / HEIGHT</strong> if set these should match those defined for the GetMap
+request, to let QGIS Server scale symbols according to the map view image
+size.</li>
+</ul>
+<p>Contest based legend features are based on the
+<a class="reference external" href="http://www.mapserver.org/development/rfc/ms-rfc-101.html">UMN MapServer implementation:</a></p>
+</div>
+<div class="section" id="getprojectsettings-request">
+<h3><a class="toc-backref" href="#id15">GetProjectSettings request</a><a class="headerlink" href="#getprojectsettings-request" title="Permalink to this headline">¶</a></h3>
+<p>This request type works similar to <strong>GetCapabilities</strong>, but it is more specific
+to QGIS Server and allows a client to read additional information which is
+not available in the GetCapabilities output:</p>
+<ul class="simple">
+<li>initial visibility of layers</li>
+<li>information about vector attributes and their edit types</li>
+<li>information about layer order and drawing order</li>
+<li>list of layers published in WFS</li>
+</ul>
+</div>
+<div class="section" id="dxf-export">
+<h3><a class="toc-backref" href="#id16">DXF Export</a><a class="headerlink" href="#dxf-export" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to export layers in the DXF format using the GetMap Request. Only
+layers that have read access in the WFS service are exported in the DXF format.
+Here is a valid REQUEST and a documentation of the available parameters:</p>
+<div class="highlight-python"><pre>http://your.server.address/wms/liegenschaftsentwaesserung/abwasser_werkplan?SERVICE=WMS&amp;VERSION=1.3.0&amp;REQUEST=GetMap&amp;LAYERS=Haltungen,Normschacht,Spezialbauwerke&amp;STYLES=&amp;CRS=EPSG%3A21781&amp;BBOX=696136.28844801,245797.12108743,696318.91114315,245939.25832905&amp;WIDTH=1042&amp;HEIGHT=811&amp;FORMAT=application/dxf&amp;FORMAT_OPTIONS=MODE:SYMBOLLAYERSYMBOLOGY;SCALE:250&amp;FILE_NAME=werkplan_abwasser.dxf</pre>
+</div>
+<p>Parameters:</p>
+<ul class="simple">
+<li>FORMAT=application/dxf</li>
+<li>FILE_NAME=yoursuggested_file_name_for_download.dxf</li>
+<li>FORMAT_OPTIONS=see options below, key:value pairs separated by Semicolon</li>
+</ul>
+<p>FORMAT_OPTIONS Parameters:</p>
+<ul class="simple">
+<li><strong>SCALE:scale</strong> to be used for symbology rules, filters and styles (not an
+actual scaling of the data - data remains in the original scale).</li>
+<li><strong>MODE:NOSYMBOLOGY|FEATURESYMBOLOGY|SYMBOLLAYERSYMBOLOGY</strong> corresponds to the
+three export options offered in the QGIS Desktop DXF export dialog.</li>
+<li><strong>LAYERSATTRIBUTES:yourcolumn_with_values_to_be_used_for_dxf_layernames</strong> - if
+not specified, the original QGIS layer names are used.</li>
+<li><strong>USE_TITLE_AS_LAYERNAME</strong> if enabled, the title of the layer will be used as
+layer name.</li>
+</ul>
+</div>
+<div class="section" id="extra-parameters-supported-by-the-wfs-getfeature-request">
+<h3><a class="toc-backref" href="#id17">Extra parameters supported by the WFS GetFeature request</a><a class="headerlink" href="#extra-parameters-supported-by-the-wfs-getfeature-request" title="Permalink to this headline">¶</a></h3>
+<p>In the WFS GetFeature request, QGIS Server accepts two extra parameters in
+addition to the standard parameters according to the OCG WFS 1.1.0
+specification:</p>
+<ul class="simple">
+<li><strong>GeometryName</strong> parameter: this parameter can be used to get the <em>extent</em>
+or the <em>centroid</em> as the geometry or no geometry if <em>none</em> if used (ie
+attribute only). Allowed values are <em>extent</em>, <em>centroid</em> or <em>none</em>.</li>
+<li><strong>StartIndex</strong> parameter: STARTINDEX is standard in WFS 2.0, but it&#8217;s an
+extension for WFS 1.0 which is the only version implemented in QGIS Server.
+STARTINDEX can be used to skip some features in the result set and in
+combination with MAXFEATURES will provide for the ability to use WFS
+GetFeature to page through results. Note that STARTINDEX=0 means start with
+the first feature, skipping none.</li>
+</ul>
+</div>
+<div class="section" id="qgis-server-logging">
+<span id="index-4"></span><span id="id1"></span><h3><a class="toc-backref" href="#id18">QGIS Server logging</a><a class="headerlink" href="#qgis-server-logging" title="Permalink to this headline">¶</a></h3>
+<p>To log requests sent to the server, set the following environment variables:</p>
+<ul>
+<li><p class="first"><strong>QGIS_SERVER_LOG_FILE</strong>: Specify path and filename. Make sure that the
+server has proper permissions for writing to file. File should be created
+automatically, just send some requests to server. If it&#8217;s not there, check
+permissions.</p>
+</li>
+<li><p class="first"><strong>QGIS_SERVER_LOG_LEVEL</strong>: Specify desired log level. Available values are:</p>
+<ul class="simple">
+<li>0 INFO (log all requests),</li>
+<li>1 WARNING,</li>
+<li>2 CRITICAL (log just critical errors, suitable for production purposes).</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python"><pre>SetEnv QGIS_SERVER_LOG_FILE /var/tmp/qgislog.txt
+SetEnv QGIS_SERVER_LOG_LEVEL 0</pre>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li>When using Fcgid module use FcgidInitialEnv instead of SetEnv!</li>
+<li>Server logging is also enabled if executable is compiled in release mode.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="short-name-for-layers-groups-and-project">
+<span id="index-5"></span><h3><a class="toc-backref" href="#id19">Short name for layers, groups and project</a><a class="headerlink" href="#short-name-for-layers-groups-and-project" title="Permalink to this headline">¶</a></h3>
+<p>A number of elements have both a <tt class="docutils literal"><span class="pre">&lt;Name&gt;</span></tt> and a <tt class="docutils literal"><span class="pre">&lt;Title&gt;</span></tt>.
+The <strong>Name</strong> is a text string used for machine-to-machine
+communication while the <strong>Title</strong> is for the benefit of humans.</p>
+<p>For example, a dataset might have the descriptive Title
+“Maximum Atmospheric Temperature” and be requested using the abbreviated
+Name “ATMAX”. User can already set title for layers, groups and project.</p>
+<p>OWS name is based on the name used in layer tree. This name is more a label
+for humans than a name for machine-to-machine communication.</p>
+<p>QGIS Server supports:</p>
+<ul>
+<li><p class="first">short name line edits to layers properties
+You can change this by right clicking on a layer, choose
+<em class="menuselection">Properties ‣ Metadata tab ‣ Description ‣ Short name</em>.</p>
+</li>
+<li><p class="first">WMS data dialog to layer tree group (short name, title, abstract)</p>
+<p>By right clicking on a layer group and selecting the <em class="guilabel">Set Group WMS data</em> option you will get:</p>
+<p id="set-group-wms-data"><strong>Figure set group wms data:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/set_group_wms_data.png" src="../../../_images/set_group_wms_data.png" />
+</div>
+</li>
+<li><p class="first">short name line edits to project properties - add a regexp validator
+<tt class="docutils literal"><span class="pre">&quot;^[A-Za-z][A-Za-z0-9\._-]*&quot;</span></tt> to short name line edit accessible through a
+static method</p>
+</li>
+<li><p class="first">add a regexp validator <tt class="docutils literal"><span class="pre">&quot;^[A-Za-z][A-Za-z0-9\._-]*&quot;</span></tt> to short name line
+edit accessible through a static method</p>
+<p>You can choose a short name for the project root by going to <em class="menuselection">Project properties ‣
+OWS Server ‣ Service capabilities ‣ Short name</em>.</p>
+</li>
+<li><p class="first">add a <tt class="docutils literal"><span class="pre">TreeName</span></tt> element in the <tt class="docutils literal"><span class="pre">fullProjectSettings</span></tt></p>
+</li>
+</ul>
+<p>If a short name has been set for layers, groups or project it is used by
+QGIS Sever as the layer name.</p>
+</div>
+<div class="section" id="connection-to-service-file">
+<h3><a class="toc-backref" href="#id20">Connection to service file</a><a class="headerlink" href="#connection-to-service-file" title="Permalink to this headline">¶</a></h3>
+<p>In order to make apache aware of the PostgreSQL service file (see the
+<a class="reference internal" href="../working_with_vector/supported_data.html#pg-service-file"><em>Service connection file</em></a> section) you need to make
+your <tt class="file docutils literal"><span class="pre">*.conf</span></tt> file look like:</p>
+<div class="highlight-python"><pre>SetEnv PGSERVICEFILE /home/web/.pg_service.conf
+
+&lt;Directory "/home/web/apps2/bin/"&gt;
+  AllowOverride None
+.....</pre>
+</div>
+</div>
+<div class="section" id="add-fonts-to-your-linux-server">
+<span id="add-fonts"></span><h3><a class="toc-backref" href="#id21">Add fonts to your linux server</a><a class="headerlink" href="#add-fonts-to-your-linux-server" title="Permalink to this headline">¶</a></h3>
+<p>Keep in mind that you may use QGIS projects that point to fonts that
+may not exist by default on other machines. This means that if you share the project,
+it may look different on other machines (if the fonts don&#8217;t exist on the target machine).</p>
+<p>In order to ensure this does not happen you just need to install the missing fonts on the target machine.
+Doing this on desktop systems is usually trivial (double clicking the fonts).</p>
+<p>For linux, if you don&#8217;t have a desktop environment installed (or you prefer the command line) you need to:</p>
+<ul>
+<li><p class="first">On Debian based systems:</p>
+<div class="highlight-python"><pre>sudo su
+mkdir -p /usr/local/share/fonts/truetype/myfonts &amp;&amp; cd /usr/local/share/fonts/truetype/myfonts
+
+# copy the fonts from their location
+cp /fonts_location/* .
+
+chown root *
+cd .. &amp;&amp; fc-cache -f -v</pre>
+</div>
+</li>
+<li><p class="first">On Fedora based systems:</p>
+<div class="highlight-python"><pre>sudo su
+mkdir /usr/share/fonts/myfonts &amp;&amp; cd /usr/share/fonts/myfonts
+
+# copy the fonts from their location
+cp /fonts_location/* .
+
+chown root *
+cd .. &amp;&amp; fc-cache -f -v</pre>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="environment-variables">
+<h3><a class="toc-backref" href="#id22">Environment variables</a><a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h3>
+<p>You can configure some aspects of QGIS server by setting <strong>environment
+variables</strong>. For example, to set QGIS server on Apache to use
+/path/to/config/QGIS/QGIS2.ini settings file, add to Apache config:</p>
+<div class="highlight-python"><pre>SetEnv QGIS_OPTIONS_PATH "/path/to/config/"</pre>
+</div>
+<p>or, if using fcgi:</p>
+<div class="highlight-python"><pre>FcgidInitialEnv QGIS_OPTIONS_PATH "/path/to/config/"</pre>
+</div>
+<p>This is a list of the variables supported by QGIS server:</p>
+<ul class="simple">
+<li><strong>QGIS_OPTIONS_PATH</strong>: Specifies the path to the directory with settings.
+It works the same way as QGIS application &#8211;optionspath option. It is looking
+for settings file in &lt;QGIS_OPTIONS_PATH&gt;/QGIS/QGIS2.ini.</li>
+<li><strong>QUERY_STRING</strong>: The query string, normally passed by the web server. This
+variable can be useful while testing QGIS server binary from the command line.</li>
+<li><strong>QGIS_PROJECT_FILE</strong>: the <cite>.qgs</cite> project file, normally passed as a parameter
+in the query string, you can also set it as an environment variable (for
+example by using <cite>mod_rewrite</cite> Apache module).</li>
+<li><strong>QGIS_SERVER_LOG_FILE</strong>: Specify path and filename. Make sure that server
+has proper permissions for writing to file. File should be created
+automatically, just send some requests to server. If it&#8217;s not there, check
+permissions.</li>
+<li><strong>QGIS_SERVER_LOG_LEVEL</strong>: Specify desired log level. See <a class="reference internal" href="#qgis-server-logging"><em>QGIS Server logging</em></a></li>
+<li><strong>MAX_CACHE_LAYERS</strong>: Specify the maximum number of cached layers (default:
+100).</li>
+<li><strong>DISPLAY</strong>: This is used to pass (fake) X server display number (needed on
+Unix-like systems).</li>
+<li><strong>QGIS_PLUGINPATH</strong>: Useful if you are using Python plugins for the server,
+this sets the folder that is searched for Python plugins.</li>
+</ul>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../working_with_gps/index.html" title="Working with GPS Data"
+             >next</a></li>
+        <li class="right" >
+          <a href="ogc_client_support.html" title="QGIS as OGC Data Client"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >Working with OGC Data</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

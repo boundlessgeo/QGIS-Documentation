@@ -1,0 +1,644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using processing algorithms from the console</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="QGIS processing framework" href="index.html" />
+    <link rel="next" title="The history manager" href="history.html" />
+    <link rel="prev" title="The batch processing interface" href="batch.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/processing/console.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="history.html" title="The history manager"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="batch.html" title="The batch processing interface"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">QGIS processing framework</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="batch.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="history.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="using-processing-algorithms-from-the-console">
+<h1>Using processing algorithms from the console<a class="headerlink" href="#using-processing-algorithms-from-the-console" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#calling-algorithms-from-the-python-console" id="id1">Calling algorithms from the Python console</a></li>
+<li><a class="reference internal" href="#additional-functions-for-handling-data" id="id2">Additional functions for handling data</a></li>
+<li><a class="reference internal" href="#creating-scripts-and-running-them-from-the-toolbox" id="id3">Creating scripts and running them from the toolbox</a></li>
+<li><a class="reference internal" href="#documenting-your-scripts" id="id4">Documenting your scripts</a></li>
+<li><a class="reference internal" href="#pre-and-post-execution-script-hooks" id="id5">Pre- and post-execution script hooks</a></li>
+</ul>
+</div>
+<p>The console allows advanced users to increase their productivity and perform
+complex operations that cannot be performed using any of the other GUI elements of
+the processing framework. Models involving several algorithms can be defined using the
+command-line interface, and additional operations such as loops and conditional
+sentences can be added to create more flexible and powerful workflows.</p>
+<p>There is not a processing console in QGIS, but all processing commands are available
+instead from the QGIS built-in Python console. That means that you can incorporate
+those commands into your console work and connect processing algorithms to all the
+other features (including methods from the QGIS API) available from there.</p>
+<p>The code that you can execute from the Python console, even if it does not call
+any specific processing method, can be converted into a new algorithm that you can
+later call from the toolbox, the graphical modeler or any other component,
+just like you do with any other algorithm. In fact, some algorithms that
+you can find in the toolbox are simple scripts.</p>
+<p>In this section, we will see how to use processing algorithms from the QGIS Python console,
+and also how to write algorithms using Python.</p>
+<div class="section" id="calling-algorithms-from-the-python-console">
+<h2><a class="toc-backref" href="#id1">Calling algorithms from the Python console</a><a class="headerlink" href="#calling-algorithms-from-the-python-console" title="Permalink to this headline">¶</a></h2>
+<p>The first thing you have to do is to import the processing functions with the
+following line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">processing</span>
+</pre></div>
+</div>
+<p>Now, there is basically just one (interesting) thing you can do with that
+from the console: execute an algorithm. That is done using the <tt class="docutils literal"><span class="pre">runalg()</span></tt>
+method, which takes the name of the algorithm to execute as its first parameter,
+and then a variable number of additional parameters depending on the requirements
+of the algorithm. So the first thing you need to know is the name of the algorithm
+to execute. That is not the name you see in the toolbox, but rather a unique
+command–line name. To find the right name for your algorithm, you can use the
+<tt class="docutils literal"><span class="pre">algslist()</span></tt> method. Type the following line in your console:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">processing</span><span class="o">.</span><span class="n">alglist</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You will see something like this.</p>
+<div class="highlight-python"><pre>Accumulated Cost (Anisotropic)----------------&gt;saga:accumulatedcost(anisotropic)
+Accumulated Cost (Isotropic)------------------&gt;saga:accumulatedcost(isotropic)
+Add Coordinates to points---------------------&gt;saga:addcoordinatestopoints
+Add Grid Values to Points---------------------&gt;saga:addgridvaluestopoints
+Add Grid Values to Shapes---------------------&gt;saga:addgridvaluestoshapes
+Add Polygon Attributes to Points--------------&gt;saga:addpolygonattributestopoints
+Aggregate-------------------------------------&gt;saga:aggregate
+Aggregate Point Observations------------------&gt;saga:aggregatepointobservations
+Aggregation Index-----------------------------&gt;saga:aggregationindex
+Analytical Hierarchy Process------------------&gt;saga:analyticalhierarchyprocess
+Analytical Hillshading------------------------&gt;saga:analyticalhillshading
+Average With Mask 1---------------------------&gt;saga:averagewithmask1
+Average With Mask 2---------------------------&gt;saga:averagewithmask2
+Average With Thereshold 1---------------------&gt;saga:averagewiththereshold1
+Average With Thereshold 2---------------------&gt;saga:averagewiththereshold2
+Average With Thereshold 3---------------------&gt;saga:averagewiththereshold3
+B-Spline Approximation------------------------&gt;saga:b-splineapproximation
+...</pre>
+</div>
+<p>That&#8217;s a list of all the available algorithms, alphabetically ordered, along with
+their corresponding command-line names.</p>
+<p>You can use a string as a parameter for this method. Instead of returning the
+full list of algorithms, it will only display those that include that string. If,
+for instance, you are looking for an algorithm to calculate slope from a DEM, type
+<tt class="docutils literal"><span class="pre">alglist(&quot;slope&quot;)</span></tt> to get the following result:</p>
+<div class="highlight-python"><pre>DTM Filter (slope-based)----------------------&gt;saga:dtmfilter(slope-based)
+Downslope Distance Gradient-------------------&gt;saga:downslopedistancegradient
+Relative Heights and Slope Positions----------&gt;saga:relativeheightsandslopepositions
+Slope Length----------------------------------&gt;saga:slopelength
+Slope, Aspect, Curvature----------------------&gt;saga:slopeaspectcurvature
+Upslope Area----------------------------------&gt;saga:upslopearea
+Vegetation Index[slope based]-----------------&gt;saga:vegetationindex[slopebased]</pre>
+</div>
+<p>This result might change depending on the algorithms you have available.</p>
+<p>It is easier now to find the algorithm you are looking for and its command-line
+name, in this case <tt class="docutils literal"><span class="pre">saga:slopeaspectcurvature</span></tt>.</p>
+<p>Once you know the command-line name of the algorithm, the next thing to do is to
+determine the right syntax to execute it. That means knowing which parameters are
+needed and the order in which they have to be passed when calling the <tt class="docutils literal"><span class="pre">runalg()</span></tt>
+method. There is a method to describe an algorithm in detail, which can be
+used to get a list of the parameters that an algorithm requires and the outputs
+that it will generate. To get this information, you can use the <tt class="docutils literal"><span class="pre">alghelp(name_of_the_algorithm)</span></tt>
+method. Use the command-line name of the algorithm, not the full descriptive name.</p>
+<p>Calling the method with <tt class="docutils literal"><span class="pre">saga:slopeaspectcurvature</span></tt> as parameter, you get the
+following description:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">processing</span><span class="o">.</span><span class="n">alghelp</span><span class="p">(</span><span class="s">&quot;saga:slopeaspectcurvature&quot;</span><span class="p">)</span>
+<span class="go">ALGORITHM: Slope, Aspect, Curvature</span>
+<span class="go">   ELEVATION &lt;ParameterRaster&gt;</span>
+<span class="go">   METHOD &lt;ParameterSelection&gt;</span>
+<span class="go">   SLOPE &lt;OutputRaster&gt;</span>
+<span class="go">   ASPECT &lt;OutputRaster&gt;</span>
+<span class="go">   CURV &lt;OutputRaster&gt;</span>
+<span class="go">   HCURV &lt;OutputRaster&gt;</span>
+<span class="go">   VCURV &lt;OutputRaster&gt;</span>
+</pre></div>
+</div>
+<p>Now you have everything you need to run any algorithm. As we have already
+mentioned, there is only one single command to execute algorithms: <tt class="docutils literal"><span class="pre">runalg()</span></tt>.
+Its syntax is as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">processing</span><span class="o">.</span><span class="n">runalg</span><span class="p">(</span><span class="n">name_of_the_algorithm</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">paramN</span><span class="p">,</span>
+<span class="go">         Output1, Output2, ..., OutputN)</span>
+</pre></div>
+</div>
+<p>The list of parameters and outputs to add depends on the algorithm you want to
+run, and is exactly the list that the <tt class="docutils literal"><span class="pre">alghelp()</span></tt> method gives you, in the same
+order as shown.</p>
+<p>Depending on the type of parameter, values are introduced differently. The next
+list gives a quick review of how to introduce values for each type of input parameter:</p>
+<ul>
+<li><p class="first">Raster Layer, Vector Layer or Table. Simply use a string with the name that
+identifies the data object to use (the name it has in the QGIS Table of
+Contents) or a filename (if the corresponding layer is not opened, it will be
+opened but not added to the map canvas). If you have an instance of a QGIS
+object representing the layer, you can also pass it as parameter. If the input
+is optional and you do not want to use any data object, use <tt class="docutils literal"><span class="pre">None</span></tt>.</p>
+</li>
+<li><p class="first">Selection. If an algorithm has a selection parameter, the value of that
+parameter should be entered using an integer value. To know the available
+options, you can use the <tt class="docutils literal"><span class="pre">algoptions()</span></tt> command, as shown in the following
+example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">processing</span><span class="o">.</span><span class="n">algoptions</span><span class="p">(</span><span class="s">&quot;saga:slopeaspectcurvature&quot;</span><span class="p">)</span>
+<span class="go">METHOD(Method)</span>
+<span class="go">    0 - [0] Maximum Slope (Travis et al. 1975)</span>
+<span class="go">    1 - [1] Maximum Triangle Slope (Tarboton 1997)</span>
+<span class="go">    2 - [2] Least Squares Fitted Plane (Horn 1981, Costa-Cabral &amp; Burgess 1996)</span>
+<span class="go">    3 - [3] Fit 2.Degree Polynom (Bauer, Rohdenburg, Bork 1985)</span>
+<span class="go">    4 - [4] Fit 2.Degree Polynom (Heerdegen &amp; Beran 1982)</span>
+<span class="go">    5 - [5] Fit 2.Degree Polynom (Zevenbergen &amp; Thorne 1987)</span>
+<span class="go">    6 - [6] Fit 3.Degree Polynom (Haralick 1983)</span>
+</pre></div>
+</div>
+<p>In this case, the algorithm has one such parameter, with seven options.
+Notice that ordering is zero-based.</p>
+</li>
+<li><p class="first">Multiple input. The value is a string with input descriptors separated by
+semicolons (<tt class="docutils literal"><span class="pre">;</span></tt>). As in the case of single layers or tables, each input
+descriptor can be the data object name, or its file path.</p>
+</li>
+<li><p class="first">Table Field from XXX. Use a string with the name of the field to use. This
+parameter is case-sensitive.</p>
+</li>
+<li><p class="first">Fixed Table. Type the list of all table values separated by commas (<tt class="docutils literal"><span class="pre">,</span></tt>) and
+enclosed between quotes (<tt class="docutils literal"><span class="pre">&quot;</span></tt>). Values start on the upper row and go from left
+to right. You can also use a 2-D array of values representing the table.</p>
+</li>
+<li><p class="first">CRS. Enter the EPSG code number of the desired CRS.</p>
+</li>
+<li><p class="first">Extent. You must use a string with <tt class="docutils literal"><span class="pre">xmin</span></tt>, <tt class="docutils literal"><span class="pre">xmax</span></tt>, <tt class="docutils literal"><span class="pre">ymin</span></tt> and <tt class="docutils literal"><span class="pre">ymax</span></tt>
+values separated by commas (<tt class="docutils literal"><span class="pre">,</span></tt>).</p>
+</li>
+</ul>
+<p>Boolean, file, string and numerical parameters do not need any additional
+explanations.</p>
+<p>Input parameters such as strings, booleans, or numerical values have default values.
+To use them, specify <tt class="docutils literal"><span class="pre">None</span></tt> in the corresponding parameter entry.</p>
+<p>For output data objects, type the file path to be used to save it, just as it is
+done from the toolbox. If you want to save the result to a temporary file, use
+<tt class="docutils literal"><span class="pre">None</span></tt>. The extension of the file determines the file format. If you enter a
+file extension not supported by the algorithm, the default
+file format for that output type will be used, and its corresponding extension
+appended to the given file path.</p>
+<p>Unlike when an algorithm is executed from the toolbox, outputs are not added to
+the map canvas if you execute that same algorithm from the Python console. If you
+want to add an output to the map canvas, you have to do it yourself after running the
+algorithm. To do so, you can use QGIS API commands, or, even easier, use one of
+the handy methods provided for such tasks.</p>
+<p>The <tt class="docutils literal"><span class="pre">runalg</span></tt> method returns a dictionary with the output names (the
+ones shown in the algorithm description) as keys and the file paths of
+those outputs as values. You can load those layers by passing the corresponding
+file paths to the <tt class="docutils literal"><span class="pre">load()</span></tt> method.</p>
+</div>
+<div class="section" id="additional-functions-for-handling-data">
+<h2><a class="toc-backref" href="#id2">Additional functions for handling data</a><a class="headerlink" href="#additional-functions-for-handling-data" title="Permalink to this headline">¶</a></h2>
+<p>Apart from the functions used to call algorithms, importing the
+<tt class="docutils literal"><span class="pre">processing</span></tt> package will also import some additional functions that make it
+easier to work with data, particularly vector data. They are just convenience
+functions that wrap some functionality from the QGIS API, usually with a less
+complex syntax. These functions should be used when developing new algorithms,
+as they make it easier to operate with input data.</p>
+<p>Below is a list of some of these commands. More information can be found in the
+classes under the <tt class="docutils literal"><span class="pre">processing/tools</span></tt> package, and also in the example scripts
+provided with QGIS.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">getObject(obj)</span></tt>: Returns a QGIS object (a layer or table) from the passed
+object, which can be a filename or the name of the object in the QGIS Layers List</li>
+<li><tt class="docutils literal"><span class="pre">values(layer,</span> <span class="pre">fields)</span></tt>: Returns the values in the attributes table of a
+vector layer, for the passed fields. Fields can be passed as field names or as
+zero-based field indices. Returns a dict of lists, with the passed field
+identifiers as keys. It considers the existing selection.</li>
+<li><tt class="docutils literal"><span class="pre">features(layer)</span></tt>: Returns an iterator over the features of a vector
+layer, considering the existing selection.</li>
+<li><tt class="docutils literal"><span class="pre">uniqueValues(layer,</span> <span class="pre">field)</span></tt>: Returns a list of unique values for a given
+attribute.  Attributes can be passed as a field name or a zero-based field
+index. It considers the existing selection.</li>
+</ul>
+</div>
+<div class="section" id="creating-scripts-and-running-them-from-the-toolbox">
+<h2><a class="toc-backref" href="#id3">Creating scripts and running them from the toolbox</a><a class="headerlink" href="#creating-scripts-and-running-them-from-the-toolbox" title="Permalink to this headline">¶</a></h2>
+<p>You can create your own algorithms by writing the corresponding Python code and
+adding a few extra lines to supply additional information needed to define the semantics of the algorithm.
+You can find a <em class="guilabel">Create new script</em> menu under the <em class="guilabel">Tools</em>
+group in the <em class="guilabel">Script</em> algorithms block of the toolbox. Double-click on
+it to open the script editing dialog. That&#8217;s where you should type your code.
+Saving the script from there in the <tt class="file docutils literal"><span class="pre">scripts</span></tt> folder (the default folder when
+you open the save file dialog) with <tt class="file docutils literal"><span class="pre">.py</span></tt> extension will automatically
+create the corresponding algorithm.</p>
+<p>The name of the algorithm (the one you will see in the toolbox) is created from
+the filename, removing its extension and replacing low hyphens with blank spaces.</p>
+<p>Let&#8217;s have a look at the following code, which calculates the Topographic Wetness Index
+(TWI) directly from a DEM.</p>
+<div class="highlight-python"><pre>##dem=raster
+##twi=output
+ret_slope = processing.runalg("saga:slopeaspectcurvature", dem, 0, None,
+                None, None, None, None)
+ret_area = processing.runalg("saga:catchmentarea(mass-fluxmethod)", dem,
+                0, False, False, False, False, None, None, None, None, None)
+processing.runalg("saga:topographicwetnessindex(twi), ret_slope['SLOPE'],
+                ret_area['AREA'], None, 1, 0, twi)</pre>
+</div>
+<p>As you can see, the calculation involves three algorithms, all of them coming from SAGA. The last
+one calculates the TWI, but it needs a slope layer and a flow accumulation
+layer. We do not have these layers, but since we have the DEM, we can calculate them by
+calling the corresponding SAGA algorithms.</p>
+<p>The part of the code where this processing takes place is not difficult to
+understand if you have read the previous sections in this chapter. The first
+lines, however, need some additional explanation. They provide the
+information that is needed to turn your code into an algorithm that can be run from any
+of the GUI components, like the toolbox or the graphical modeler.</p>
+<p>These lines start with a double Python comment symbol (<tt class="docutils literal"><span class="pre">##</span></tt>) and have the
+following structure:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="n">parameter_name</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">parameter_type</span><span class="p">]</span> <span class="p">[</span><span class="n">optional_values</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here is a list of all the parameter types that are supported in processing scripts,
+their syntax and some examples.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">raster</span></tt>. A raster layer.</li>
+<li><tt class="docutils literal"><span class="pre">vector</span></tt>. A vector layer.</li>
+<li><tt class="docutils literal"><span class="pre">table</span></tt>. A table.</li>
+<li><tt class="docutils literal"><span class="pre">number</span></tt>. A numerical value. A default value must be provided. For instance,
+<tt class="docutils literal"><span class="pre">depth=number</span> <span class="pre">2.4</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">string</span></tt>. A text string. As in the case of numerical values, a default value
+must be added. For instance, <tt class="docutils literal"><span class="pre">name=string</span> <span class="pre">Victor</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">boolean</span></tt>. A boolean value. Add <tt class="docutils literal"><span class="pre">True</span></tt> or <tt class="docutils literal"><span class="pre">False</span></tt> after it to set the
+default value. For example, <tt class="docutils literal"><span class="pre">verbose=boolean</span> <span class="pre">True</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">multiple</span> <span class="pre">raster</span></tt>. A set of input raster layers.</li>
+<li><tt class="docutils literal"><span class="pre">multiple</span> <span class="pre">vector</span></tt>. A set of input vector layers.</li>
+<li><tt class="docutils literal"><span class="pre">field</span></tt>. A field in the attributes table of a vector layer. The name of the
+layer has to be added after the <tt class="docutils literal"><span class="pre">field</span></tt> tag. For instance, if you have
+declared a vector input with <tt class="docutils literal"><span class="pre">mylayer=vector</span></tt>, you could use <tt class="docutils literal"><span class="pre">myfield=field</span>
+<span class="pre">mylayer</span></tt> to add a field from that layer as parameter.</li>
+<li><tt class="docutils literal"><span class="pre">folder</span></tt>. A folder.</li>
+<li><tt class="docutils literal"><span class="pre">file</span></tt>. A filename.</li>
+</ul>
+<p>The parameter name is the name that will be shown to the user when executing the
+algorithm, and also the variable name to use in the script code. The value entered
+by the user for that parameter will be assigned to a variable with that name.</p>
+<p>When showing the name of the parameter to the user, the name will be edited to
+improve its appearance, replacing low hyphens with spaces. So, for instance,
+if you want the user to see a parameter named <tt class="docutils literal"><span class="pre">A</span> <span class="pre">numerical</span> <span class="pre">value</span></tt>, you can use
+the variable name <tt class="docutils literal"><span class="pre">A_numerical_value</span></tt>.</p>
+<p>Layers and table values are strings containing the file path of the corresponding
+object. To turn them into a QGIS object, you can use the <tt class="docutils literal"><span class="pre">processing.getObjectFromUri()</span></tt>
+function. Multiple inputs also have a string value, which contains the file paths
+to all selected object, separated by semicolons (<tt class="docutils literal"><span class="pre">;</span></tt>).</p>
+<p>Outputs are defined in a similar manner, using the following tags:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">output</span> <span class="pre">raster</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">output</span> <span class="pre">vector</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">output</span> <span class="pre">table</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">output</span> <span class="pre">html</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">output</span> <span class="pre">file</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">output</span> <span class="pre">number</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">output</span> <span class="pre">string</span></tt></li>
+</ul>
+<p>The value assigned to the output variables is always a string with a file path.
+It will correspond to a temporary file path in case the user has not entered any
+output filename.</p>
+<p>When you declare an output, the algorithm will try to add it to QGIS once it
+is finished. That is why, although the <tt class="docutils literal"><span class="pre">runalg()</span></tt> method does not
+load the layers it produces, the final TWI layer will be loaded (using the case
+of our previous example), since it is saved
+to the file entered by the user, which is the value of the corresponding output.</p>
+<p>Do not use the <tt class="docutils literal"><span class="pre">load()</span></tt> method in your script algorithms, just when working
+with the console line. If a layer is created as output of an algorithm, it should
+be declared as such. Otherwise, you will not be able to properly use the algorithm
+in the modeler, since its syntax (as defined by the tags explained above) will
+not match what the algorithm really creates.</p>
+<p>Hidden outputs (numbers and strings) do not have a value. Instead, you
+have to assign a value to them. To do so, just set the value of a variable with
+the name you used to declare that output. For instance, if you have used this
+declaration,</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##average=output number</span>
+</pre></div>
+</div>
+<p>the following line will set the value of the output to 5:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">average</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>In addition to the tags for parameters and outputs, you can also define the group
+under which the algorithm will be shown, using the <tt class="docutils literal"><span class="pre">group</span></tt> tag.</p>
+<p>If your algorithm takes a long time to process, it is a good idea to inform the
+user. You have a global named <tt class="docutils literal"><span class="pre">progress</span></tt> available, with two possible methods:
+<tt class="docutils literal"><span class="pre">setText(text)</span></tt> and <tt class="docutils literal"><span class="pre">setPercentage(percent)</span></tt> to modify the progress text and
+the progress bar.</p>
+<p>Several examples are provided. Please check them to see real
+examples of how to create algorithms using the processing framework classes. You can
+right-click on any script algorithm and select <em class="guilabel">Edit script</em> to edit
+its code or just to see it.</p>
+</div>
+<div class="section" id="documenting-your-scripts">
+<h2><a class="toc-backref" href="#id4">Documenting your scripts</a><a class="headerlink" href="#documenting-your-scripts" title="Permalink to this headline">¶</a></h2>
+<p>As in the case of models, you can create additional documentation for your scripts,
+to explain what they do and how to use them. In the script editing dialog, you will
+find an <strong>[Edit script help]</strong> button. Click on it and it will take you to the help
+editing dialog. Check the section about the graphical modeler to know more about
+this dialog and how to use it.</p>
+<p>Help files are saved in the same folder as the script itself, adding the
+<tt class="file docutils literal"><span class="pre">.help</span></tt> extension to the filename. Notice that you can edit your script&#8217;s
+help before saving the script for the first time. If you later close the script editing
+dialog without saving the script (i.e., you discard it), the help content you
+wrote will be lost. If your script was already saved and is associated to a
+filename, saving the help content is done automatically.</p>
+</div>
+<div class="section" id="pre-and-post-execution-script-hooks">
+<h2><a class="toc-backref" href="#id5">Pre- and post-execution script hooks</a><a class="headerlink" href="#pre-and-post-execution-script-hooks" title="Permalink to this headline">¶</a></h2>
+<p>Scripts can also be used to set pre- and post-execution hooks that are run before
+and after an algorithm is run. This can be used to automate tasks that should be
+performed whenever an algorithm is executed.</p>
+<p>The syntax is identical to the syntax explained above, but an additional global
+variable named <tt class="docutils literal"><span class="pre">alg</span></tt> is available, representing the algorithm that has just
+been (or is about to be) executed.</p>
+<p>In the <em class="guilabel">General</em> group of the processing configuration dialog, you will find two
+entries named <em class="guilabel">Pre-execution script file</em> and <em class="guilabel">Post-execution
+script file</em> where the filename of the scripts to be run in each case can be
+entered.</p>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="history.html" title="The history manager"
+             >next</a></li>
+        <li class="right" >
+          <a href="batch.html" title="The batch processing interface"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >QGIS processing framework</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Map Item</title>
+    
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../../index.html" />
+    <link rel="up" title="Composer Items" href="index.html" />
+    <link rel="next" title="The Label Item" href="composer_label.html" />
+    <link rel="prev" title="Composer Items Common Options" href="composer_items_options.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/print_composer/composer_items/composer_map.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../../index.html">Documentation</a></li>-->
+            <li><a href="../../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="composer_label.html" title="The Label Item"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="composer_items_options.html" title="Composer Items Common Options"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html"></a> &raquo;</li>
+          <li><a href="../../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="../index.html" >Print Composer</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Composer Items</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="composer_items_options.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="composer_label.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="the-map-item">
+<span id="index-0"></span><h1>The Map Item<a class="headerlink" href="#the-map-item" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#main-properties" id="id1">Main properties</a></li>
+<li><a class="reference internal" href="#extents" id="id2">Extents</a></li>
+<li><a class="reference internal" href="#grids" id="id3">Grids</a></li>
+<li><a class="reference internal" href="#overviews" id="id4">Overviews</a></li>
+</ul>
+</div>
+<p>Click on the <a class="reference internal" href="../../../../_images/mActionAddMap.png"><img alt="addMap" src="../../../../_images/mActionAddMap.png" style="width: 1.5em;" /></a> <sup>Add new map</sup> toolbar button in the Print
+Composer toolbar to add the QGIS map canvas. Now, drag a rectangle onto the Composer
+canvas with the left mouse button to add the map. To display the current map, you
+can choose between three different modes in the map <em class="guilabel">Item Properties</em>
+tab:</p>
+<ul class="simple">
+<li><strong>Rectangle</strong> is the default setting. It only displays an empty box with a
+message &#8216;Map will be printed here&#8217;.</li>
+<li><strong>Cache</strong> renders the map in the current screen resolution. If you zoom
+the Composer window in or out, the map is not rendered again but the image will
+be scaled.</li>
+<li><strong>Render</strong> means that if you zoom the Composer window in or out, the map will
+be rendered again, but for space reasons, only up to a maximum resolution.</li>
+</ul>
+<p><strong>Cache</strong> is the default preview mode for newly added Print Composer maps.</p>
+<p>You can resize the map item by clicking on the <a class="reference internal" href="../../../../_images/mActionSelect.png"><img alt="select" src="../../../../_images/mActionSelect.png" style="width: 1.5em;" /></a> <sup>Select/Move item</sup>
+button, selecting the element, and dragging one of the blue handles in the
+corner of the map.  This button also helps to move the map to another place.
+Select the item and while holding the left mouse button, move to the new place
+and release the mouse button. After you have found the right place for an item,
+you can lock the item position within the Print Composer canvas. Select the
+map item and use the toolbar <a class="reference internal" href="../../../../_images/locked.png"><img alt="locked" src="../../../../_images/locked.png" style="width: 1.5em;" /></a> <sup>Lock Selected Items</sup> or the
+<em class="menuselection">Items</em> tab to Lock the item. A locked item can only be selected
+using the <em class="menuselection">Items</em> tab. Once selected you can use the
+<em class="menuselection">Items</em> tab to unlock individual items. The <a class="reference internal" href="../../../../_images/unlocked.png"><img alt="unlocked" src="../../../../_images/unlocked.png" style="width: 1.5em;" /></a>
+<sup>Unlock All Items</sup> icon will unlock all locked composer items. With the
+map selected, you can now adapt more properties in the map
+<em class="guilabel">Item Properties</em> tab.</p>
+<p>To move layers within the map element, select the map element, click the
+<a class="reference internal" href="../../../../_images/mActionMoveItemContent.png"><img alt="moveItemContent" src="../../../../_images/mActionMoveItemContent.png" style="width: 1.5em;" /></a> <sup>Move item content</sup> icon and move the layers within
+the map item frame with the left mouse button.</p>
+<div class="section" id="main-properties">
+<span id="composer-main-properties"></span><h2><a class="toc-backref" href="#id1">Main properties</a><a class="headerlink" href="#main-properties" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Main properties</em> dialog of the map <em class="guilabel">Item Properties</em> tab provides the
+following functionalities (see <a class="reference internal" href="#figure-composer-map-1">figure_composer_map_1</a>):</p>
+<p id="figure-composer-map-1"><strong>Figure Composer Map 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/map_mainproperties.png" src="../../../../_images/map_mainproperties.png" />
+<p class="caption">Map Item properties Tab</p>
+</div>
+<ul>
+<li><p class="first">The <strong>Preview</strong> area allows you to define the preview modes &#8216;Rectangle&#8217;, &#8216;Cache&#8217;
+and &#8216;Render&#8217;, as described above. If you change the view on the QGIS map canvas by changing
+vector or raster properties, you can update the Print Composer view by selecting the
+map element in the Print Composer and clicking the <strong>[Update preview]</strong> button.</p>
+</li>
+<li><p class="first">The field <em class="guilabel">Scale</em> <a class="reference internal" href="../../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../../_images/selectnumber.png" style="width: 2.8em;" /></a> sets a manual scale.</p>
+</li>
+<li><p class="first">The field <em class="guilabel">Map rotation</em> <a class="reference internal" href="../../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../../_images/selectnumber.png" style="width: 2.8em;" /></a> allows you to
+rotate the map element content clockwise in degrees. The rotation of the map view can be imitated
+here. Note that a correct coordinate frame can only be added with the default value 0 and that
+once you defined a <em class="guilabel">Map rotation</em> it currently cannot be changed.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Draw map canvas items</em> lets you show annotations that may be placed
+on the map canvas in the main QGIS window.</p>
+</li>
+<li><p class="first">You can choose to lock the layers shown on a map item. Check <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+<em class="guilabel">Lock layers for map item</em>.
+After this is checked, any layer that would be displayed or hidden in the main QGIS window
+will not appear or be hidden in the map item of the Composer. But style and labels of a
+locked layer are still refreshed according to the main QGIS interface.
+You can prevent this by using <em class="guilabel">Lock layer styles for map item</em>.</p>
+</li>
+<li><p class="first">The <a class="reference internal" href="../../../../_images/mActionShowPresets.png"><img alt="showPresets" src="../../../../_images/mActionShowPresets.png" style="width: 1.5em;" /></a> button allows you to add quickly all the presets views you
+have prepared in QGIS.
+Clicking on the <a class="reference internal" href="../../../../_images/mActionShowPresets.png"><img alt="showPresets" src="../../../../_images/mActionShowPresets.png" style="width: 1.5em;" /></a> button you will see the list of all the preset views:
+just select the preset you want to display.
+The map canvas will automatically lock the preset layers by enabling the <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+<em class="guilabel">Lock layers for map item</em>: if you want to unselect the preset, just uncheck the
+<a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> and press the <a class="reference internal" href="../../../../_images/mActionDraw.png"><img alt="draw" src="../../../../_images/mActionDraw.png" style="width: 1.5em;" /></a> button. See <a class="reference internal" href="../../introduction/general_tools.html#label-legend"><em>Layers Panel</em></a> to find out how to
+create presets views.</p>
+<p>Locked layers in the map can also be <a class="reference internal" href="../../introduction/general_tools.html#data-defined"><em>data-defined</em></a>, using
+the <a class="reference internal" href="../../../../_images/mIconDataDefine.png"><img alt="dataDefined" src="../../../../_images/mIconDataDefine.png" style="width: 1.5em;" /></a> icon beside the option. When used, this overrides the
+selection set in the drop-down list. You need to pass a list of layers separated
+by <tt class="docutils literal"><span class="pre">|</span></tt> character.
+The following example locks the map item to use only layers <tt class="docutils literal"><span class="pre">layer</span> <span class="pre">1</span></tt> and
+<tt class="docutils literal"><span class="pre">layer</span> <span class="pre">2</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">concat</span> <span class="p">(</span><span class="s">&#39;layer 1&#39;</span><span class="p">,</span> <span class="s">&#39;|&#39;</span><span class="p">,</span> <span class="s">&#39;layer 2&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="extents">
+<h2><a class="toc-backref" href="#id2">Extents</a><a class="headerlink" href="#extents" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Extents</em> dialog of the map item tab provides the following
+functionalities (see <a class="reference internal" href="#figure-composer-map-2">figure_composer_map_2</a>):</p>
+<p id="figure-composer-map-2"><strong>Figure Composer Map 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/map_extents.png" src="../../../../_images/map_extents.png" />
+<p class="caption">Map Extents Dialog</p>
+</div>
+<ul class="simple">
+<li>The <strong>Map extents</strong> area allows you to specify the map extent using X and Y min/max
+values and by clicking the <strong>[Set to map canvas extent]</strong> button. This button sets
+the map extent of the composer map item to the extent of the current map view in the
+main QGIS application. The button <strong>[View extent in map canvas]</strong> does exactly the
+opposite, it updates the extent of the map view in the QGIS application to the extent
+of the composer map item.</li>
+</ul>
+<p>If you change the view on the QGIS map canvas by changing
+vector or raster properties, you can update the Print Composer view by selecting
+the map element in the Print Composer and clicking the <strong>[Update preview]</strong> button
+in the map <em class="guilabel">Item Properties</em> tab (see <a class="reference internal" href="#figure-composer-map-1">figure_composer_map_1</a>).</p>
+</div>
+<div class="section" id="grids">
+<span id="index-1"></span><h2><a class="toc-backref" href="#id3">Grids</a><a class="headerlink" href="#grids" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Grids</em> dialog of the map <em class="guilabel">Item Properties</em> tab provides the
+possibility to add several grids to a map item.</p>
+<ul class="simple">
+<li>With the plus and minus button you can add or remove a selected grid.</li>
+<li>With the up and down button you can move a grid in the list and set the drawing priority.</li>
+</ul>
+<p>When you double click on the added grid you can give it another name.</p>
+<p id="figure-composer-map-3"><strong>Figure Composer Map 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/map_grids.png" src="../../../../_images/map_grids.png" />
+<p class="caption">Map Grids Dialog</p>
+</div>
+<p>After you have added a grid, you can activate the checkbox <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+<em class="guilabel">Draw grid</em> to overlay a grid onto the map element. Expand this option to provide
+a lot of configuration options, see <a class="reference internal" href="#figure-composer-map-4">Figure_composer_map_4</a>.</p>
+<p id="figure-composer-map-4"><strong>Figure Composer Map 4:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/map_draw_grid.png" src="../../../../_images/map_draw_grid.png" />
+<p class="caption">Draw Grid Dialog</p>
+</div>
+<p>As grid type, you can specify to use a &#8216;Solid&#8217;, &#8216;Cross&#8217;, &#8216;Markers&#8217; or &#8216;Frame and annotations only&#8217;.
+&#8216;Frame and annotations only&#8217; is especially useful when working with rotated maps or reprojected
+grids. In the divisions section of the Grid Frame Dialog mentioned below you then have a corresponding setting.
+Symbology of the grid and its rendering mode can be chosen. See <a class="reference internal" href="composer_items_options.html#composer-rendering-mode"><em>Rendering mode</em></a>.
+Furthermore, you can define an interval in the X and Y directions, an X and Y offset,
+and the width used for the cross or line grid type.</p>
+<p id="figure-composer-map-5"><strong>Figure Composer Map 5:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/map_grid_frame.png" src="../../../../_images/map_grid_frame.png" />
+<p class="caption">Grid Frame Dialog</p>
+</div>
+<ul class="simple">
+<li>There are different options to style the frame that holds the map. Following options are
+available: No Frame, Zebra, Interior ticks, Exterior ticks, Interior and Exterior ticks and Lineborder.</li>
+<li>With &#8216;Latitude/Y only&#8217; and &#8216;Longitude/X only&#8217; setting in the divisions section you have the possibility
+to prevent a mix of latitude/y and longitude/x coordinates showing on a side when working with
+rotated maps or reprojected grids.</li>
+<li>Advanced rendering mode is also available for grids.</li>
+<li>The <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Draw coordinates</em> checkbox allows you to add coordinates
+to the map frame. You can choose the annotation numeric format, the options range from decimal
+to degrees, minute and seconds, with or without suffix, aligned or not and a
+custom format using the expression dialog.
+You can choose which annotation to show. The options are: show all, latitude only, longitude only,
+or disable(none). This is useful when the map is rotated. The annotation can be drawn inside or
+outside the map frame. The annotation direction can be defined as horizontal,
+vertical ascending or vertical descending.
+Finally, you can define the annotation font, the annotation font color, the annotation
+distance from the map frame and the precision of the drawn coordinates.</li>
+</ul>
+<p id="figure-composer-map-6"><strong>Figure Composer map 6:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/map_grid_draw_coordinates.png" src="../../../../_images/map_grid_draw_coordinates.png" />
+<p class="caption">Grid Draw Coordinates dialog</p>
+</div>
+</div>
+<div class="section" id="overviews">
+<h2><a class="toc-backref" href="#id4">Overviews</a><a class="headerlink" href="#overviews" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Overviews</em> dialog of the map <em class="guilabel">Item Properties</em> tab provides the
+following functionalities:</p>
+<p id="figure-composer-map-7"><strong>Figure Composer Map 7:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/map_overview.png" src="../../../../_images/map_overview.png" />
+<p class="caption">Map Overviews Dialog</p>
+</div>
+<p>You can choose to create an overview map, which shows the extents of the other map(s)
+that are available in the composer. First you need to create the map(s) you want to
+include in the overview map and the map you want to use as the overview
+map, just like a normal map.</p>
+<p>Then expand <em class="guilabel">Overviews</em> option and press the green plus icon-button to add an overview.
+Initially this overview is named &#8216;Overview 1&#8217; (see <a class="reference internal" href="#figure-composer-map-7">Figure_composer_map_7</a>).
+You can change the name when you double-click on the overview item in the list
+named &#8216;Overview 1&#8217; and change it to another name.</p>
+<ul class="simple">
+<li>With the plus and minus button you can add or remove an overview.</li>
+<li>With the up and down button you can move an overview in the list and set the drawing priority.</li>
+</ul>
+<p>When you select the overview item in the list you can customize it.</p>
+<ul class="simple">
+<li>The <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Draw &#8220;&lt;name_overview&gt;&#8221; overview</em> needs to be activated to
+draw the extent of selected map frame.</li>
+<li>The <em class="guilabel">Map frame</em> combo list can be used to select the map item whose extents
+will be drawn on the present map item.</li>
+<li>The <em class="guilabel">Frame Style</em> allows you to change the style of the overview frame.</li>
+<li>The <em class="guilabel">Blending mode</em> allows you to set different transparency blend modes.</li>
+<li>The <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Invert overview</em> creates a mask around the extents when
+activated: the referenced map extents are shown clearly, whereas everything else
+is blended with the frame color.</li>
+<li>The <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Center on overview</em> puts the extent of the overview frame in
+the center of the overview map. You can only activate one overview item to center, when
+you have added several overviews.</li>
+</ul>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="composer_label.html" title="The Label Item"
+             >next</a></li>
+        <li class="right" >
+          <a href="composer_items_options.html" title="Composer Items Common Options"
+             >previous</a> |</li>
+        <li><a href="../../../index.html"></a> &raquo;</li>
+          <li><a href="../../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="../index.html" >Print Composer</a> &raquo;</li>
+          <li><a href="index.html" >Composer Items</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

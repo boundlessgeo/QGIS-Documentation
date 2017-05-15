@@ -1,0 +1,554 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Attribute Table Item</title>
+    
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../../index.html" />
+    <link rel="up" title="Composer Items" href="index.html" />
+    <link rel="next" title="The Image Item" href="composer_image.html" />
+    <link rel="prev" title="The Scale Bar Item" href="composer_scale_bar.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/print_composer/composer_items/composer_attribute_table.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../../index.html">Documentation</a></li>-->
+            <li><a href="../../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="composer_image.html" title="The Image Item"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="composer_scale_bar.html" title="The Scale Bar Item"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html"></a> &raquo;</li>
+          <li><a href="../../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="../index.html" >Print Composer</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Composer Items</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="composer_scale_bar.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="composer_image.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="the-attribute-table-item">
+<span id="index-0"></span><h1>The Attribute Table Item<a class="headerlink" href="#the-attribute-table-item" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#main-properties" id="id1">Main properties</a></li>
+<li><a class="reference internal" href="#feature-filtering" id="id2">Feature filtering</a></li>
+<li><a class="reference internal" href="#appearance" id="id3">Appearance</a></li>
+<li><a class="reference internal" href="#show-grid" id="id4">Show grid</a></li>
+<li><a class="reference internal" href="#fonts-and-text-styling" id="id5">Fonts and text styling</a></li>
+<li><a class="reference internal" href="#frames" id="id6">Frames</a></li>
+</ul>
+</div>
+<p>It is possible to add parts of a vector attribute table to the Print Composer
+canvas: Click the <a class="reference internal" href="../../../../_images/mActionOpenTable.png"><img alt="openTable" src="../../../../_images/mActionOpenTable.png" style="width: 1.5em;" /></a> <sup>Add attribute table</sup> icon, click and drag
+with the left mouse button on the Print Composer canvas to place and size the item.
+You can better position and customize its appearance in the <em class="guilabel">Item Properties</em> tab.</p>
+<p>The <em class="guilabel">Item properties</em> tab of an attribute table provides the following
+functionalities (see <a class="reference internal" href="#figure-composer-table-1">figure_composer_table_1</a>):</p>
+<p id="figure-composer-table-1"><strong>Figure Composer Attribute Table 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_properties.png" src="../../../../_images/attribute_properties.png" />
+<p class="caption">Attribute table Item properties Tab <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<div class="section" id="main-properties">
+<h2><a class="toc-backref" href="#id1">Main properties</a><a class="headerlink" href="#main-properties" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Main properties</em> dialog of the attribute table` provides the
+following functionalities (see <a class="reference internal" href="#figure-composer-table-2">figure_composer_table_2</a>):</p>
+<p id="figure-composer-table-2"><strong>Figure Composer Attribute Table 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_mainproperties.png" src="../../../../_images/attribute_mainproperties.png" />
+<p class="caption">Attribute table Main properties Dialog <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<ul class="simple">
+<li>For <em class="guilabel">Source</em> you can normally select only &#8216;Layer features&#8217;.</li>
+<li>With <em class="guilabel">Layer</em> you can choose from the vector layers loaded in the project.</li>
+<li>In case you activated the <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a><em class="guilabel">Generate an atlas</em> option in the
+<em class="guilabel">Atlas generation</em> tab, there are two additional <em class="guilabel">Source</em> possible:
+&#8216;Current atlas feature&#8217; (see <a class="reference internal" href="#figure-composer-table-2b">figure_composer_table_2b</a>) and &#8216;Relation children&#8217;
+(see <a class="reference internal" href="#figure-composer-table-2c">figure_composer_table_2c</a>). Choosing the &#8216;Current atlas feature&#8217;
+you won&#8217;t see any option to choose the layer, and the table item will only
+show a row with the attributes from the current feature of the atlas coverage layer.
+Choosing &#8216;Relation children&#8217;, an option with the relation names will show up.
+The &#8216;Relation children&#8217; option can only be used if you have defined a relation using
+your atlas coverage layer as parent, and the table will show the children rows of
+the atlas coverage layer&#8217;s current feature (for further information about the atlas generation, see <a class="reference internal" href="../create_output.html#atlas-generation"><em>Generate an Atlas</em></a>).</li>
+<li>The button <strong>[Refresh table data]</strong> can be used to refresh the table when the actual
+contents of the table has changed.</li>
+</ul>
+<p id="figure-composer-table-2b"><strong>Figure Composer Attribute Table 2b:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_mainatlas.png" src="../../../../_images/attribute_mainatlas.png" />
+<p class="caption">Attribute table Main properties for &#8216;Current atlas feature&#8217; <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<p id="figure-composer-table-2c"><strong>Figure Composer Attribute Table 2c:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_mainrelation.png" src="../../../../_images/attribute_mainrelation.png" />
+<p class="caption">Attribute table Main properties for &#8216;Relation children&#8217; <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<ul>
+<li><p class="first">The button <strong>[Attributes...]</strong> starts the <em class="guilabel">Select attributes</em> menu, see
+<a class="reference internal" href="#figure-composer-table-3">figure_composer_table_3</a>, that can be used to change the visible contents of the table.
+After making changes use the <strong>[OK]</strong> button to apply changes to the table. The upper part of
+the window shows the list of the attributes to display and the lower part helps to set the way the data is sorted.</p>
+<p id="figure-composer-table-3"><strong>Figure Composer Attribute Table 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_select.png" src="../../../../_images/attribute_select.png" />
+<p class="caption">Attribute table Select attributes Dialog <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<p>In the <em class="guilabel">Columns</em> section you can:</p>
+<ul class="simple">
+<li>Remove an attribute, just select an attribute row by clicking anywhere in the row
+and press the minus button to remove the selected attribute.</li>
+<li>Add a new attribute use the plus button. At the end a new empty row appears and you can
+select empty cell of the column <em class="guilabel">Attribute</em>. You can select a field attribute from
+the list or you can select to build a new attribute using a regular expression
+(<a class="reference internal" href="../../../../_images/mIconExpression.png"><img alt="expression" src="../../../../_images/mIconExpression.png" style="width: 1.5em;" /></a> button). Of course you can modify every already existing attribute
+by means of a regular expression.</li>
+<li>Use the up and down arrows to change the order of the attributes in the table.</li>
+<li>Select a cell in the Headings column and, to change the heading, just type in a new name.</li>
+<li>set a precise Alignment (mixing vertical and horizontal alignment options) for each column.</li>
+<li>Select a cell in the Width column and change it from Automatic to a width in mm, just
+type a number. When you want to change it back to Automatic, use the cross.</li>
+<li>The <strong>[Reset]</strong> button can always be used to restore it to the original attribute settings.</li>
+</ul>
+<p>In the <em class="guilabel">Sorting</em> section you can:</p>
+<ul class="simple">
+<li>Add an attribute to sort the table with. Select an attribute and set the sorting order
+to &#8216;Ascending&#8217; or &#8216;Descending&#8217; and press the plus button. A new line is added to the sort order list.</li>
+<li>select a row in the list and use the up and down button to change the sort priority on attribute level.
+Selecting a cell in the Sort Order column helps you change the sorting order of the attribute field.</li>
+<li>use the minus button to remove an attribute from the sort order list.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="feature-filtering">
+<h2><a class="toc-backref" href="#id2">Feature filtering</a><a class="headerlink" href="#feature-filtering" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Feature filtering</em> dialog of the attribute table provides
+the following functionalities (see <a class="reference internal" href="#figure-composer-table-4">figure_composer_table_4</a>):</p>
+<p id="figure-composer-table-4"><strong>Figure Composer Attribute Table 4:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_filter.png" src="../../../../_images/attribute_filter.png" />
+<p class="caption">Attribute table Feature filtering Dialog <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<p>You can:</p>
+<ul>
+<li><p class="first">Define the <em class="guilabel">Maximum rows</em> to be displayed.</p>
+</li>
+<li><p class="first">Activate <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Remove duplicate rows from table</em> to show unique records only.</p>
+</li>
+<li><p class="first">Activate <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Show only visible features within a map</em> and select the
+corresponding <em class="guilabel">Composer map</em> to display the attributes of features only visible
+on selected map.</p>
+</li>
+<li><p class="first">Activate <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Show only features intersecting Atlas feature</em> is only
+available when <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Generate an atlas</em> is activated. When activated it will
+show a table with only the features shown on the map of that particular page of the atlas.</p>
+</li>
+<li><p class="first">Activate <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Filter with</em> and provide a filter by typing in the input line
+or insert a regular expression using the given <a class="reference internal" href="../../../../_images/mIconExpression.png"><img alt="expression" src="../../../../_images/mIconExpression.png" style="width: 1.5em;" /></a> expression button.
+A few examples of filtering statements you can use when you have loaded the airports
+layer from the Sample dataset:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ELEV</span> <span class="pre">&gt;</span> <span class="pre">500</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">NAME</span> <span class="pre">=</span> <span class="pre">'ANIAK'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">NAME</span> <span class="pre">NOT</span> <span class="pre">LIKE</span> <span class="pre">'AN%'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">regexp_match(</span> <span class="pre">attribute(</span> <span class="pre">$currentfeature,</span> <span class="pre">'USE'</span> <span class="pre">)</span>&nbsp; <span class="pre">,</span> <span class="pre">'[i]')</span></tt></li>
+</ul>
+<p>The last regular expression will include only the airports that have a letter &#8216;i&#8217;
+in the attribute field &#8216;USE&#8217;.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="appearance">
+<h2><a class="toc-backref" href="#id3">Appearance</a><a class="headerlink" href="#appearance" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Appearance</em> dialog of the attribute table provides
+the following functionalities  (see <a class="reference internal" href="#figure-composer-table-5">figure_composer_table_5</a>):</p>
+<p id="figure-composer-table-5"><strong>Figure Composer Attribute Table 5:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_appearance.png" src="../../../../_images/attribute_appearance.png" />
+<p class="caption">Attribute table appearance Dialog <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<ul>
+<li><p class="first">Click <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Show empty rows</em> to fill the attribute table with empty cells.
+This option can also be used to provide additional empty cells when you have a result to show!</p>
+</li>
+<li><p class="first">With <em class="guilabel">Cell margins</em> you can define the margin around text in each cell of the table.</p>
+</li>
+<li><p class="first">With <em class="guilabel">Display header</em> you can select from a list one of &#8216;On first frame&#8217;,
+&#8216;On all frames&#8217; default option, or &#8216;No header&#8217;.</p>
+</li>
+<li><p class="first">The option <em class="guilabel">Empty table</em> controls what will be displayed when the result selection is empty.</p>
+<ul class="simple">
+<li><strong>Draw headers only</strong>, will only draw the header except if you have chosen &#8216;No header&#8217; for <em class="guilabel">Display header</em>.</li>
+<li><strong>Hide entire table</strong>, will only draw the background of the table. You can
+activate <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Don&#8217;t draw background if frame is empty</em> in <em class="guilabel">Frames</em>
+to completely hide the table.</li>
+<li><strong>Show set message</strong>, will draw the header and adds a cell spanning all columns and
+display a message like &#8216;No result&#8217; that can be provided in the option <em class="guilabel">Message to display</em></li>
+</ul>
+</li>
+<li><p class="first">The option <em class="guilabel">Message to display</em> is only activated when you have selected
+<strong>Show set message</strong> for <em class="guilabel">Empty table</em>. The message provided will be shown in
+the table in the first row, when the result is an empty table.</p>
+</li>
+<li><p class="first">With <em class="guilabel">Background color</em> you can set the background color of the table.
+The <em class="guilabel">Advanced customization</em> option helps you define different background colors
+for each cell (see <a class="reference internal" href="#figure-composer-table-6">figure_composer_table_6</a>)</p>
+<blockquote>
+<div></div></blockquote>
+</li>
+</ul>
+<p id="figure-composer-table-6"><strong>Figure Composer Attribute Table 6:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_background.png" src="../../../../_images/attribute_background.png" />
+<p class="caption">Attribute table Advanced Background Dialog <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<ul class="simple">
+<li>With the <em class="guilabel">Wrap text on</em> option, you can define a character on which
+the cell content will be wraped each time it is met</li>
+<li>With <em class="guilabel">Oversized text</em> you define the behaviour when the width set for a column is
+smaller than its content&#8217;s length. It can be <strong>Wrap text</strong> or <strong>Truncate text</strong>.</li>
+</ul>
+</div>
+<div class="section" id="show-grid">
+<h2><a class="toc-backref" href="#id4">Show grid</a><a class="headerlink" href="#show-grid" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Show grid</em> dialog of the attribute table provides
+the following functionalities (see <a class="reference internal" href="#figure-composer-table-7">figure_composer_table_7</a>):</p>
+<blockquote>
+<div></div></blockquote>
+<p id="figure-composer-table-7"><strong>Figure Composer Attribute Table 7:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_grid.png" src="../../../../_images/attribute_grid.png" />
+<p class="caption">Attribute table Show grid Dialog <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<ul class="simple">
+<li>Activate <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Show grid</em> when you want to display the grid, the outlines of the table cells.</li>
+<li>With <em class="guilabel">Line width</em> you can set the thickness of the lines used in the grid.</li>
+<li>The <em class="guilabel">Color</em> of the grid can be set using the color selection dialog.</li>
+</ul>
+</div>
+<div class="section" id="fonts-and-text-styling">
+<h2><a class="toc-backref" href="#id5">Fonts and text styling</a><a class="headerlink" href="#fonts-and-text-styling" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Fonts and text styling</em> dialog of the attribute table
+provides the following functionalities (see <a class="reference internal" href="#figure-composer-table-8">figure_composer_table_8</a>):</p>
+<blockquote>
+<div></div></blockquote>
+<p id="figure-composer-table-8"><strong>Figure Composer Attribute Table 8:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_fonts.png" src="../../../../_images/attribute_fonts.png" />
+<p class="caption">Attribute table Fonts and text styling Dialog <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<ul class="simple">
+<li>You can define <em class="guilabel">Font</em> and <em class="guilabel">Color</em> for <em class="guilabel">Table heading</em> and <em class="guilabel">Table contents</em>.</li>
+<li>For <em class="guilabel">Table heading</em> you can additionally set the <em class="guilabel">Alignment</em> to
+<cite>Follow column alignment</cite> or override this setting by choosing <cite>Left</cite>, <cite>Center</cite> or <cite>Right</cite>.
+The column alignment is set using the <em class="guilabel">Select Attributes</em> dialog (see <a class="reference internal" href="#figure-composer-table-3">Figure_composer_table_3</a> ).</li>
+</ul>
+</div>
+<div class="section" id="frames">
+<h2><a class="toc-backref" href="#id6">Frames</a><a class="headerlink" href="#frames" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Frames</em> dialog of the attribute table provides
+the following functionalities (see <a class="reference internal" href="#figure-composer-table-9">figure_composer_table_9</a>):</p>
+<blockquote>
+<div></div></blockquote>
+<p id="figure-composer-table-9"><strong>Figure Composer Attribute Table 9:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/attribute_frame.png" src="../../../../_images/attribute_frame.png" />
+<p class="caption">Attribute table Frames Dialog <a class="reference internal" href="../../../../_images/nix.png"><img alt="nix" src="../../../../_images/nix.png" style="width: 1em;" /></a></p>
+</div>
+<ul class="simple">
+<li>With <em class="guilabel">Resize mode</em> you can select how to render the attribute table contents:<ul>
+<li><cite>Use existing frames</cite> displays the result in the first frame and added frames only.</li>
+<li><cite>Extend to next page</cite> will create as many frames (and corresponding pages) as necessary
+to display the full selection of attribute table. Each frame can be moved around on the layout.
+If you resize a frame, the resulting table will be divided up between the other frames.
+The last frame will be trimmed to fit the table.</li>
+<li><cite>Repeat until finished</cite> will also create as many frames as the <cite>Extend to next page</cite> option,
+except all frames will have the same size.</li>
+</ul>
+</li>
+<li>Use the <strong>[Add Frame]</strong> button to add another frame with the same size as selected frame.
+The result of the table that will not fit in the first frame will continue in the next frame
+when you use the Resize mode <cite>Use existing frames</cite>.</li>
+<li>Activate <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Don&#8217;t export page if frame is empty</em> prevents the page
+to be exported when the table frame has no contents. This means all other composer items,
+maps, scalebars, legends etc. will not be visible in the result.</li>
+<li>Activate <a class="reference internal" href="../../../../_images/checkbox.png"><img alt="checkbox" src="../../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Don&#8217;t draw background if frame is empty</em> prevents the background
+to be drawn when the table frame has no contents.</li>
+</ul>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="composer_image.html" title="The Image Item"
+             >next</a></li>
+        <li class="right" >
+          <a href="composer_scale_bar.html" title="The Scale Bar Item"
+             >previous</a> |</li>
+        <li><a href="../../../index.html"></a> &raquo;</li>
+          <li><a href="../../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="../index.html" >Print Composer</a> &raquo;</li>
+          <li><a href="index.html" >Composer Items</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

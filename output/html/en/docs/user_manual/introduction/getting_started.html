@@ -1,0 +1,669 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="QGIS User Guide" href="../index.html" />
+    <link rel="next" title="QGIS GUI" href="qgis_gui.html" />
+    <link rel="prev" title="What’s new in QGIS testing" href="../preamble/whats_new.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/introduction/getting_started.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="qgis_gui.html" title="QGIS GUI"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../preamble/whats_new.html" title="What’s new in QGIS testing"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="../preamble/whats_new.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="qgis_gui.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="getting-started">
+<span id="label-getstarted"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#installation" id="id1">Installation</a><ul>
+<li><a class="reference internal" href="#installation-from-source" id="id2">Installation from source</a></li>
+<li><a class="reference internal" href="#installation-on-external-media" id="id3">Installation on external media</a></li>
+<li><a class="reference internal" href="#sample-data" id="id4">Sample Data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#launching-qgis" id="id5">Launching QGIS</a><ul>
+<li><a class="reference internal" href="#starting-and-stopping-qgis" id="id6">Starting and Stopping QGIS</a></li>
+<li><a class="reference internal" href="#command-line-options" id="id7">Command Line Options</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sample-session-load-raster-and-vector-layers" id="id8">Sample Session: Load raster and vector layers</a></li>
+<li><a class="reference internal" href="#projects" id="id9">Projects</a></li>
+<li><a class="reference internal" href="#output" id="id10">Output</a></li>
+</ul>
+</div>
+<p>This chapter gives a quick overview of installing QGIS, some sample data from
+the QGIS web page, and running a first and simple session visualizing raster
+and vector layers.</p>
+<div class="section" id="installation">
+<span id="label-installation"></span><h2><a class="toc-backref" href="#id1">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Installation of QGIS is very simple. Standard installer packages are available
+for MS Windows and Mac OS X. For many flavors of GNU/Linux, binary packages (rpm
+and deb) or software repositories are provided to add to your installation manager.
+Get the latest information on binary packages at the QGIS website at
+<a class="reference external" href="http://download.qgis.org">http://download.qgis.org</a>.</p>
+<div class="section" id="installation-from-source">
+<h3><a class="toc-backref" href="#id2">Installation from source</a><a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h3>
+<p>If you need to build QGIS from source, please refer to the installation
+instructions. They are distributed with the QGIS source code in a file
+called <tt class="file docutils literal"><span class="pre">INSTALL</span></tt>. You can also find them online at
+<a class="reference external" href="http://htmlpreview.github.io/?https://raw.github.com/qgis/QGIS/master/doc/INSTALL.html">http://htmlpreview.github.io/?https://raw.github.com/qgis/QGIS/master/doc/INSTALL.html</a></p>
+</div>
+<div class="section" id="installation-on-external-media">
+<h3><a class="toc-backref" href="#id3">Installation on external media</a><a class="headerlink" href="#installation-on-external-media" title="Permalink to this headline">¶</a></h3>
+<p>QGIS allows you to define a <tt class="docutils literal"><span class="pre">--configpath</span></tt> option that overrides the default
+path for user configuration (e.g., <tt class="file docutils literal"><span class="pre">~/.qgis2</span></tt> under Linux) and forces
+<strong>QSettings</strong> to use this directory, too. This allows you to, for instance, carry a
+QGIS installation on a flash drive together with all plugins and settings.
+See section <a class="reference internal" href="qgis_configuration.html#env-options"><em>System Tab</em></a> for additional information.</p>
+</div>
+<div class="section" id="sample-data">
+<span id="label-sampledata"></span><h3><a class="toc-backref" href="#id4">Sample Data</a><a class="headerlink" href="#sample-data" title="Permalink to this headline">¶</a></h3>
+<p>The user guide contains examples based on the QGIS sample dataset.</p>
+<p><a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a> The Windows installer has an option to download the QGIS sample dataset.
+If checked, the data will be downloaded to your <tt class="file docutils literal"><span class="pre">My</span> <span class="pre">Documents</span></tt> folder and
+placed in a folder called <tt class="file docutils literal"><span class="pre">GIS</span> <span class="pre">Database</span></tt>. You may use Windows Explorer to
+move this folder to any convenient location. If you did not select the checkbox
+to install the sample dataset during the initial QGIS installation,
+you may do one of the following:</p>
+<ul class="simple">
+<li>Use GIS data that you already have</li>
+<li>Download sample data from
+<a class="reference external" href="http://qgis.org/downloads/data/qgis_sample_data.zip">http://qgis.org/downloads/data/qgis_sample_data.zip</a></li>
+<li>Uninstall QGIS and reinstall with the data download option checked (only recommended if
+the above solutions are unsuccessful)</li>
+</ul>
+<p><a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> For GNU/Linux and Mac OS X, there are not yet dataset installation
+packages available as rpm, deb or dmg. To use the sample dataset, download the
+file <tt class="file docutils literal"><span class="pre">qgis_sample_data</span></tt> as a ZIP archive from
+<a class="reference external" href="http://qgis.org/downloads/data/">http://qgis.org/downloads/data/</a> and unzip the archive
+on your system.</p>
+<p>The Alaska dataset includes all GIS data that are used for examples and
+screenshots in the user guide; it also includes a small GRASS database.
+The projection for the QGIS sample dataset is Alaska Albers Equal Area with
+units feet. The EPSG code is 2964.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PROJCS</span><span class="p">[</span><span class="s">&quot;Albers Equal Area&quot;</span><span class="p">,</span>
+<span class="n">GEOGCS</span><span class="p">[</span><span class="s">&quot;NAD27&quot;</span><span class="p">,</span>
+<span class="n">DATUM</span><span class="p">[</span><span class="s">&quot;North_American_Datum_1927&quot;</span><span class="p">,</span>
+<span class="n">SPHEROID</span><span class="p">[</span><span class="s">&quot;Clarke 1866&quot;</span><span class="p">,</span><span class="mf">6378206.4</span><span class="p">,</span><span class="mf">294.978698213898</span><span class="p">,</span>
+<span class="n">AUTHORITY</span><span class="p">[</span><span class="s">&quot;EPSG&quot;</span><span class="p">,</span><span class="s">&quot;7008&quot;</span><span class="p">]],</span>
+<span class="n">TOWGS84</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">142</span><span class="p">,</span><span class="mi">183</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="n">AUTHORITY</span><span class="p">[</span><span class="s">&quot;EPSG&quot;</span><span class="p">,</span><span class="s">&quot;6267&quot;</span><span class="p">]],</span>
+<span class="n">PRIMEM</span><span class="p">[</span><span class="s">&quot;Greenwich&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>
+<span class="n">AUTHORITY</span><span class="p">[</span><span class="s">&quot;EPSG&quot;</span><span class="p">,</span><span class="s">&quot;8901&quot;</span><span class="p">]],</span>
+<span class="n">UNIT</span><span class="p">[</span><span class="s">&quot;degree&quot;</span><span class="p">,</span><span class="mf">0.0174532925199433</span><span class="p">,</span>
+<span class="n">AUTHORITY</span><span class="p">[</span><span class="s">&quot;EPSG&quot;</span><span class="p">,</span><span class="s">&quot;9108&quot;</span><span class="p">]],</span>
+<span class="n">AUTHORITY</span><span class="p">[</span><span class="s">&quot;EPSG&quot;</span><span class="p">,</span><span class="s">&quot;4267&quot;</span><span class="p">]],</span>
+<span class="n">PROJECTION</span><span class="p">[</span><span class="s">&quot;Albers_Conic_Equal_Area&quot;</span><span class="p">],</span>
+<span class="n">PARAMETER</span><span class="p">[</span><span class="s">&quot;standard_parallel_1&quot;</span><span class="p">,</span><span class="mi">55</span><span class="p">],</span>
+<span class="n">PARAMETER</span><span class="p">[</span><span class="s">&quot;standard_parallel_2&quot;</span><span class="p">,</span><span class="mi">65</span><span class="p">],</span>
+<span class="n">PARAMETER</span><span class="p">[</span><span class="s">&quot;latitude_of_center&quot;</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span>
+<span class="n">PARAMETER</span><span class="p">[</span><span class="s">&quot;longitude_of_center&quot;</span><span class="p">,</span><span class="o">-</span><span class="mi">154</span><span class="p">],</span>
+<span class="n">PARAMETER</span><span class="p">[</span><span class="s">&quot;false_easting&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="n">PARAMETER</span><span class="p">[</span><span class="s">&quot;false_northing&quot;</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="n">UNIT</span><span class="p">[</span><span class="s">&quot;us_survey_feet&quot;</span><span class="p">,</span><span class="mf">0.3048006096012192</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>If you intend to use QGIS as a graphical front end for GRASS, you can find a
+selection of sample locations (e.g., Spearfish or South Dakota) at the
+official GRASS GIS website, <a class="reference external" href="http://grass.osgeo.org/download/sample-data/">http://grass.osgeo.org/download/sample-data/</a>.</p>
+</div>
+</div>
+<div class="section" id="launching-qgis">
+<h2><a class="toc-backref" href="#id5">Launching QGIS</a><a class="headerlink" href="#launching-qgis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="starting-and-stopping-qgis">
+<span id="label-startingqgis"></span><h3><a class="toc-backref" href="#id6">Starting and Stopping QGIS</a><a class="headerlink" href="#starting-and-stopping-qgis" title="Permalink to this headline">¶</a></h3>
+<p>Starting QGIS is done as you usually do for any other application on your
+platform. It means that you can launch QGIS by:</p>
+<ul class="simple">
+<li>typing <tt class="docutils literal"><span class="pre">qgis</span></tt> at a command prompt, assuming that QGIS is added to your PATH
+or you&#8217;re in its installation folder</li>
+<li>using <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> the Applications menu if using a precompiled binary,
+<a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a> the Start menu or <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> the Dock</li>
+<li>double clicking the icon in your Applications folder or desktop shortcut</li>
+<li>double clicking an existing QGIS project (<tt class="docutils literal"><span class="pre">.qgs</span></tt>) file. Note that this will
+also open the project</li>
+</ul>
+<p>To stop QGIS, click:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> <a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a> the menu option <em class="menuselection">Project ‣ Exit QGIS</em> or use the shortcut
+<tt class="kbd docutils literal"><span class="pre">Ctrl+Q</span></tt></li>
+<li><a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> <em class="menuselection">QGIS ‣ Quit QGIS</em>, or use the shortcut <tt class="kbd docutils literal"><span class="pre">Cmd+Q</span></tt></li>
+<li>or use the red cross at the right top corner of the main interface of the application.</li>
+</ul>
+</div>
+<div class="section" id="command-line-options">
+<span id="label-commandline"></span><h3><a class="toc-backref" href="#id7">Command Line Options</a><a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
+<p id="index-0">In previous section you learned how to start QGIS.
+You will see that QGIS also provides further command line options.</p>
+<p>QGIS supports a number of options when started from the command line. To
+get a list of the options, enter <tt class="docutils literal"><span class="pre">qgis</span> <span class="pre">--help</span></tt> on the command line. The usage
+statement for QGIS is:</p>
+<div class="highlight-python"><pre>qgis --help
+QGIS - 2.6.0-Brighton 'Brighton' (exported)
+QGIS is a user friendly Open Source Geographic Information System.
+Usage: /usr/bin/qgis.bin [OPTION] [FILE]
+OPTION:
+  [--snapshot filename]   emit snapshot of loaded datasets to given file
+  [--width width] width of snapshot to emit
+  [--height height]       height of snapshot to emit
+  [--lang language]       use language for interface text
+  [--project projectfile] load the given QGIS project
+  [--extent xmin,ymin,xmax,ymax]  set initial map extent
+  [--nologo]      hide splash screen
+  [--noversioncheck]      don't check for new version of QGIS at startup
+  [--noplugins]   don't restore plugins on startup
+  [--nocustomization]     don't apply GUI customization
+  [--customizationfile]   use the given ini file as GUI customization
+  [--optionspath path]    use the given QSettings path
+  [--configpath path]     use the given path for all user configuration
+  [--authdbdirectory path] use the given directory for authentication database
+  [--code path]   run the given python file on load
+  [--defaultui]   start by resetting user ui settings to default
+  [--dxf-export filename.dxf]     emit dxf output of loaded datasets to given file
+  [--dxf-extent xmin,ymin,xmax,ymax]      set extent to export to dxf
+  [--dxf-symbology-mode none|symbollayer|feature] symbology mode for dxf output
+  [--dxf-scale-denom scale]       scale for dxf output
+  [--dxf-encoding encoding]       encoding to use for dxf output
+  [--dxf-preset visiblity-preset] layer visibility preset to use for dxf output
+  [--help]                this text
+  [--]            treat all following arguments as FILEs
+
+FILE:
+  Files specified on the command line can include rasters,
+  vectors, and QGIS project files (.qgs):
+   1. Rasters - supported formats include GeoTiff, DEM
+      and others supported by GDAL
+   2. Vectors - supported formats include ESRI Shapefiles
+      and others supported by OGR and PostgreSQL layers using
+      the PostGIS extension</pre>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Example Using command line arguments</strong></p>
+<p class="last">You can start QGIS by specifying one or more data files on the command
+line. For example, assuming you are in the <tt class="file docutils literal"><span class="pre">qgis_sample_data</span></tt>
+directory, you could start QGIS with a vector layer and a raster file
+set to load on startup using the following command:
+<tt class="docutils literal"><span class="pre">qgis</span> <span class="pre">./raster/landcover.img</span> <span class="pre">./gml/lakes.gml</span></tt></p>
+</div>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--snapshot</span></tt></p>
+<p>This option allows you to create a snapshot in PNG format from the current view.
+This comes in handy when you have a lot of projects and want to generate
+snapshots from your data.</p>
+<p>Currently, it generates a PNG file with 800x600 pixels. This can be adjusted
+using the <tt class="docutils literal"><span class="pre">--width</span></tt> and <tt class="docutils literal"><span class="pre">--height</span></tt> command line arguments. A filename can
+be added after <tt class="docutils literal"><span class="pre">--snapshot</span></tt>.</p>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--lang</span></tt></p>
+<p>Based on your locale, QGIS selects the correct localization. If you would like
+to change your language, you can specify a language code. For example,
+<tt class="docutils literal"><span class="pre">qgis</span> <span class="pre">--lang</span> <span class="pre">it</span></tt> starts QGIS in Italian localization.</p>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--project</span></tt></p>
+<p>Starting QGIS with an existing project file is also possible. Just add the
+command line option <tt class="docutils literal"><span class="pre">--project</span></tt> followed by your project name and QGIS will
+open with all layers in the given file loaded.</p>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--extent</span></tt></p>
+<p>To start with a specific map extent use this option. You need to add the
+bounding box of your extent in the following order separated by a comma:</p>
+<div class="highlight-python"><pre>--extent xmin,ymin,xmax,ymax</pre>
+</div>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--nologo</span></tt></p>
+<p>This command line argument hides the splash screen when you start QGIS.</p>
+<p><strong>command line option</strong> <tt class="docutils literal"><span class="pre">--noversioncheck</span></tt></p>
+<p>Don&#8217;t check for new version of QGIS at startup.</p>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--noplugins</span></tt></p>
+<p>If you have trouble at start-up with plugins, you can avoid loading them at
+start-up with this option. They will still be available from the Plugins Manager afterwards.</p>
+<p id="custom-commandline"><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--customizationfile</span></tt></p>
+<p>Using this command line argument, you can define a GUI customization file, that will
+be used at startup.</p>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--nocustomization</span></tt></p>
+<p>Using this command line argument, existing GUI customization will not be applied
+at startup.</p>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--optionspath</span></tt></p>
+<p>You can have multiple configurations and decide which one to use when starting
+QGIS with this option. See <a class="reference internal" href="qgis_configuration.html#gui-options"><em>Options</em></a> to confirm where the
+operating system saves the settings files. Presently, there is no way to specify
+a file to write settings to; therefore, you can create a copy of
+the original settings file and rename it. The option specifies path to directory
+with settings. For example, to use <tt class="file docutils literal"><span class="pre">/path/to/config/QGIS/QGIS2.ini</span></tt> settings file,
+use option:</p>
+<div class="highlight-python"><pre>--optionspath /path/to/config/</pre>
+</div>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--configpath</span></tt></p>
+<p>This option is similar to the one above, but furthermore overrides the default
+path for user configuration (<tt class="file docutils literal"><span class="pre">~/.qgis2</span></tt>) and forces <strong>QSettings</strong> to use
+this directory, too. This allows users to, for instance, carry a QGIS installation on a
+flash drive together with all plugins and settings.</p>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--authdbdirectory</span></tt></p>
+<p>Again, this option is similar to the one above but define the path to the
+directory where the authentication database will be stored.</p>
+<p><strong>Command line option</strong> <tt class="docutils literal"><span class="pre">--code</span></tt></p>
+<p>This option can be used to run a given python file directly after QGIS has started.</p>
+<p>For example, when you have a python file named <tt class="file docutils literal"><span class="pre">load_alaska.py</span></tt> with following content:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">qgis.utils</span> <span class="kn">import</span> <span class="n">iface</span>
+<span class="n">raster_file</span> <span class="o">=</span> <span class="s">&quot;/home/gisadmin/Documents/qgis_sample_data/raster/landcover.img&quot;</span>
+<span class="n">layer_name</span> <span class="o">=</span> <span class="s">&quot;Alaska&quot;</span>
+<span class="n">iface</span><span class="o">.</span><span class="n">addRasterLayer</span><span class="p">(</span><span class="n">raster_file</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Assuming you are in the directory where the file <tt class="file docutils literal"><span class="pre">load_alaska.py</span></tt> is located, you
+can start QGIS, load the raster file <tt class="file docutils literal"><span class="pre">landcover.img</span></tt> and give the layer the name
+&#8216;Alaska&#8217; using the following command:
+<tt class="docutils literal"><span class="pre">qgis</span> <span class="pre">--code</span> <span class="pre">load_alaska.py</span></tt></p>
+<p><strong>Command line options</strong> <tt class="docutils literal"><span class="pre">--dxf-*</span></tt></p>
+<p>These options can be used to export QGIS project into a DXF file. Several
+options are available:</p>
+<ul class="simple">
+<li><em>&#8211;dxf-export</em>: the DXF filename into which to export the layers;</li>
+<li><em>&#8211;dxf-extent</em>: the extent of the final DXF file;</li>
+<li><em>&#8211;dxf-symbology-mode</em>: several values can be used here: none (no symbology),
+symbollayer (Symbol layer symbology), feature (feature symbology);</li>
+<li><em>&#8211;dxf-scale-deno</em>: the scale denominator of the symbology;</li>
+<li><em>&#8211;dxf-encoding</em>: the file encoding;</li>
+<li><em>&#8211;dxf-preset</em>: choose a visibility preset. These presets are defined in the
+layer tree, see <a class="reference internal" href="general_tools.html#label-legend"><em>Layers Panel</em></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="sample-session-load-raster-and-vector-layers">
+<span id="samplesession"></span><h2><a class="toc-backref" href="#id8">Sample Session: Load raster and vector layers</a><a class="headerlink" href="#sample-session-load-raster-and-vector-layers" title="Permalink to this headline">¶</a></h2>
+<p>Now that you have QGIS installed and a sample dataset available, we would
+like to demonstrate a short and simple QGIS sample session. We will visualize
+a raster and a vector layer. We will use:</p>
+<ul class="simple">
+<li>the <tt class="file docutils literal"><span class="pre">landcover</span></tt> raster layer i.e., <tt class="file docutils literal"><span class="pre">qgis_sample_data/raster/landcover.img</span></tt></li>
+<li>and the <tt class="file docutils literal"><span class="pre">lakes</span></tt> vector layer i.e., <tt class="file docutils literal"><span class="pre">qgis_sample_data/gml/lakes.gml</span></tt>.</li>
+</ul>
+<ol class="arabic simple">
+<li>Start QGIS as seen in <a class="reference internal" href="#label-startingqgis"><em>Starting and Stopping QGIS</em></a></li>
+<li>Click on the <a class="reference internal" href="../../../_images/mActionAddRasterLayer.png"><img alt="addRasterLayer" src="../../../_images/mActionAddRasterLayer.png" style="width: 1.5em;" /></a> <sup>Add Raster Layer</sup> icon.</li>
+<li>Browse to the folder <tt class="file docutils literal"><span class="pre">qgis_sample_data/raster/</span></tt>, select
+the ERDAS IMG file <tt class="file docutils literal"><span class="pre">landcover.img</span></tt> and click <strong>[Open]</strong>.</li>
+<li>If the file is not listed, check if the <em class="guilabel">Files of type</em>
+<a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> combo box at the bottom of the dialog is set on the right
+type, in this case <strong>Erdas Imagine Images (*.img *.IMG)</strong>.</li>
+<li>Now click on the <a class="reference internal" href="../../../_images/mActionAddOgrLayer.png"><img alt="addOgrLayer" src="../../../_images/mActionAddOgrLayer.png" style="width: 1.5em;" /></a> <sup>Add Vector Layer</sup> icon.</li>
+<li><img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">File</em> should be selected as <em class="guilabel">Source Type</em>
+in the new <em class="guilabel">Add vector layer</em> dialog. Now click <strong>[Browse]</strong> to
+select the vector layer.</li>
+<li>Browse to the folder <tt class="file docutils literal"><span class="pre">qgis_sample_data/gml/</span></tt>, select <strong>Geography Markup
+Language [GML] [OGR] (*.gml *.GML)</strong> from the <em class="guilabel">Filter</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>
+combo box, then select the GML file <tt class="file docutils literal"><span class="pre">lakes.gml</span></tt> and
+click <strong>[Open]</strong>. In the <em class="guilabel">Add vector layer</em> dialog, click <strong>[OK]</strong>.
+The <em class="guilabel">Coordinate Reference System Selector</em> dialog opens with
+<em class="guilabel">NAD27 / Alaska Alberts</em> selected, click <strong>[OK]</strong>.</li>
+<li>Zoom in a bit to your favourite area with some lakes.</li>
+<li>Double click the <tt class="file docutils literal"><span class="pre">lakes</span></tt> layer in the map legend to open the
+<em class="guilabel">Properties</em> dialog.</li>
+<li>Click on the <em class="guilabel">Style</em> tab and select a blue as fill color.</li>
+<li>Click on the <em class="guilabel">Labels</em> tab and select <em class="guilabel">Show labels for
+this layer</em> in the drop-down menu to enable labeling. Then from the
+<em class="guilabel">Label with</em> list, choose the <tt class="docutils literal"><span class="pre">NAMES</span></tt> field as the field containing labels.</li>
+<li>To improve readability of labels, you can add a white buffer around them
+by clicking <em class="guilabel">Buffer</em> in the list on the left, checking <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+<em class="guilabel">Draw text buffer</em> and choosing 3 as buffer size.</li>
+<li>Click <strong>[Apply]</strong>. Check if the result looks good, and finally click <strong>[OK]</strong>.</li>
+</ol>
+<p>You can see how easy it is to visualize raster and vector layers in QGIS. Let&#8217;s
+move on to the sections that follow to learn more about the available
+functionality, features and settings, and how to use them.</p>
+</div>
+<div class="section" id="projects">
+<span id="sec-projects"></span><h2><a class="toc-backref" href="#id9">Projects</a><a class="headerlink" href="#projects" title="Permalink to this headline">¶</a></h2>
+<p>The state of your QGIS session is considered a project. QGIS works on one
+project at a time. Settings are considered as being either per-project or as a
+default for new projects (see section <a class="reference internal" href="qgis_configuration.html#gui-options"><em>Options</em></a>). QGIS can save the
+state of your workspace into a project file using the menu options
+<em class="menuselection">Project ‣</em> <a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a> <em class="menuselection">Save</em>
+or <em class="menuselection">Project ‣</em> <a class="reference internal" href="../../../_images/mActionFileSaveAs.png"><img alt="fileSaveAs" src="../../../_images/mActionFileSaveAs.png" style="width: 1.5em;" /></a> <em class="menuselection">Save As...</em>.
+If the loaded project file on disk was meanwhile changed, by default, QGIS will
+ask you if you want to overwrite the changes into the project file. This behavior
+is set by checking <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Prompt to save project and data source
+changes when required</em> under <em class="menuselection">Settings ‣ Options ‣ General</em>
+menu .</p>
+<p>Load saved projects into a QGIS session using <em class="menuselection">Project ‣</em>
+<a class="reference internal" href="../../../_images/mActionFileOpen.png"><img alt="fileOpen" src="../../../_images/mActionFileOpen.png" style="width: 1.5em;" /></a> <em class="menuselection">Open...</em>,
+<em class="menuselection">Project ‣ New from template</em> or
+<em class="menuselection">Project ‣ Open Recent ‣</em>.</p>
+<p>At startup, a list of screenshot with the name and path of each of the most recent
+projects (up to ten) is shown instead of a white and empty map canvas. This is
+a handy and quicker way to remember what a project was about and double-click
+a row opens the selected project.
+If you&#8217;re willing to create a new project, just add new layers and the list disappears.</p>
+<p>If you wish to clear your session and start fresh, choose
+<em class="menuselection">Project ‣</em> <a class="reference internal" href="../../../_images/mActionFileNew.png"><img alt="fileNew" src="../../../_images/mActionFileNew.png" style="width: 1.5em;" /></a> <em class="menuselection">New</em>.
+Either of these menu options will prompt you to save the existing project if
+changes have been made since it was opened or last saved.</p>
+<p>The kinds of information saved in a project file include:</p>
+<ul class="simple">
+<li>Layers added</li>
+<li>Which layers can be queried</li>
+<li>Layer properties, including symbolization and styles</li>
+<li>Projection for the map view</li>
+<li>Last viewed extent</li>
+<li>Print Composers</li>
+<li>Print Composer elements with settings</li>
+<li>Print Composer atlas settings</li>
+<li>Digitizing settings</li>
+<li>Table Relations</li>
+<li>Project Macros</li>
+<li>Project default styles</li>
+<li>Plugins settings</li>
+<li>QGIS Server settings from the OWS settings tab in the Project properties</li>
+<li>Queries stored in the DB Manager</li>
+</ul>
+<p>The project file is saved in XML format, so it is possible to edit the file
+outside QGIS if you know what you are doing. The file format has been updated several
+times compared with earlier QGIS versions. Project files from older QGIS versions
+may not work properly any more. To be made aware of this, in the
+<em class="guilabel">General</em> tab under <em class="menuselection">Settings ‣ Options</em> you should
+tick <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Warn when opening a project file saved with an older
+version of QGIS</em>.</p>
+<p>Whenever you save a project in QGIS a backup of the project file is made with the
+extension <tt class="docutils literal"><span class="pre">.qgs~</span></tt>.</p>
+</div>
+<div class="section" id="output">
+<span id="sec-output"></span><h2><a class="toc-backref" href="#id10">Output</a><a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-1"></span><p id="index-2">There are several ways to generate output from your QGIS session. We have
+discussed one already in section <a class="reference internal" href="#sec-projects"><em>Projects</em></a>, saving as a project file.
+Here is a sampling of other ways to produce output files:</p>
+<ul class="simple">
+<li>Menu option <em class="menuselection">Project ‣</em> <a class="reference internal" href="../../../_images/mActionSaveMapAsImage.png"><img alt="saveMapAsImage" src="../../../_images/mActionSaveMapAsImage.png" style="width: 1.5em;" /></a> <em class="menuselection">Save
+as Image...</em> opens a file dialog where you select the name, path and type of
+image (PNG, JPG and many other formats). A world file with extension <tt class="docutils literal"><span class="pre">PNGW</span></tt>
+or <tt class="docutils literal"><span class="pre">JPGW</span></tt> saved in the same folder georeferences the image.</li>
+<li>Menu option <em class="menuselection">Project ‣ DXF Export...</em> opens
+a dialog where you can define the &#8216;Symbology mode&#8217;, the &#8216;Symbology scale&#8217; and
+vector layers you want to export to DXF. Through the &#8216;Symbology mode&#8217; symbols
+from the original QGIS Symbology can be exported with high fidelity.</li>
+<li>Menu option <em class="menuselection">Project ‣</em> <a class="reference internal" href="../../../_images/mActionNewComposer.png"><img alt="newComposer" src="../../../_images/mActionNewComposer.png" style="width: 1.5em;" /></a>
+<em class="menuselection">New Print Composer...</em> opens a dialog where you can layout and
+print the current map canvas (see section <a class="reference internal" href="../print_composer/index.html#label-printcomposer"><em>Print Composer</em></a>).</li>
+</ul>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="qgis_gui.html" title="QGIS GUI"
+             >next</a></li>
+        <li class="right" >
+          <a href="../preamble/whats_new.html" title="What’s new in QGIS testing"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

@@ -1,0 +1,2084 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Index</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/qgis-site.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="index.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="docs/index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'genindex.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="site/about/index.html">Discover QGIS</a></li>
+            <li><a href="site/forusers/index.html">For Users</a></li>
+            <li><a href="site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="docs/index.html">Documentation</a></li>-->
+            <li><a href="docs/index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li><a href="docs/index.html"></a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="docs/index.html">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docs/user_manual/index.html">User guide/Manual (QGIS Testing!)</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#Symbols"><strong>Symbols</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
+ 
+</div>
+<h2 id="Symbols">Symbols</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-41">%%</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-23">2.5 D</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-22">2.5 D Rendering</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-39">Actions</a>, <a href="docs/user_manual/introduction/general_tools.html#index-30">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-29">Add Part</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_ftools.html#index-0">Analysis tools</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-31">Annotation</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-3">apache</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-3">apache2</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/supported_data.html#index-1">Arc/Info_ASCII_Grid</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/supported_data.html#index-1">Arc/Info_Binary_Grid</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-1">ArcInfo Binary Coverage</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/create_output.html#index-2">Atlas_Generation</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-39">Attribute Actions</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-0">Attribute table</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_attribute_table.html#index-0">Attribute_Table</a>
+  </dt>
+
+      
+  <dt>
+    Attributes
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-1">Columns</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-2">Selection</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-8">Avoid Intersections</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-20">Blending modes</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-32">bookmarks</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/qgis_browser/qgis_browser.html#index-0">Browse_Maps</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-34">built-in forms</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-5">calculation bar</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-1">CAT</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-6">Categorized</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-5">Categorized Renderer</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-2">CGI</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-7">classes</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-18">color</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-3">Color_interpolation</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/style_library.html#index-1">color_Ramp</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/style_library.html#index-1">colorBrewer</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-2">Colormap</a>
+  </dt>
+
+      
+  <dt>
+    Columns
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-1">Attributes</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-4">Comma Separated Values</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/getting_started.html#index-0">command line options</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-2">Common_Gateway_Interface</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/index.html#index-0">Compose_Maps</a>, <a href="docs/user_manual/print_composer/composer_items/index.html#index-1">[1]</a>
+  </dt>
+
+      
+  <dt>
+    Composer Item
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_items_shape.html#index-0">Arrow</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_items_shape.html#index-1">Basic Shape</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_items_shape.html#index-2">Node-Based Shape</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/print_composer/composer_items/index.html#index-0">Composer_Items</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/overview_composer.html#index-2">Composer_Manager</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_map.html#index-0">composer_map</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/overview_composer.html#index-0">Composer_Template</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-9">conditional formatting</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-8">Conditional Formatting</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-1">Context help</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-1">Contrast_enhancement</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-0">Coordinate_Reference_System</a>, <a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-6">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-15">create a rule</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-13">create features</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/index.html#index-0">Create_Maps</a>, <a href="docs/user_manual/print_composer/composer_items/index.html#index-1">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-45">Create_New_Layers</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-13">crossing the 180 degrees longitude line</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-0">CRS</a>, <a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-6">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-19">CSV</a>, <a href="docs/user_manual/working_with_vector/supported_data.html#index-4">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-20">Current_Edits</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/style_library.html#index-1">Custom_color_Ramp</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-5">Custom_CRS</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/qgis_configuration.html#index-1">customization</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-32">data-defined override</a>, <a href="docs/user_manual/introduction/general_tools.html#index-28">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-7">Datum_transformation</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-18">DB2 Spatial</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-15">DB_Manager</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-3">Debian_Squeeze</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-3">default_CRS</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-40">define an action</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-31">delete parts</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-3">Derived Fields</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
+    Deselect
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-26">Select</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-37">diagram</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_checker.html#index-0">Digitizing</a>, <a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-10">[1]</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-24">Add Part</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-32">Add Ring</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-44">Advanced panel</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-43">Automatic tracing</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-30">Delete Part</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-35">Delete Ring</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-34">Fill Ring</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-41">Merge Attributes</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-40">Merge Selected Features</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-37">Offset Curves</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-21">Redo</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-36">Reshape Feature, Digitizing; Extend lines</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-22">Rotate Feature</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-42">Rotate Point Symbols</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-23">Simplify Feature</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-1">Snapping</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-38">Split Features</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-39">Split Parts</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-21">Undo</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-11">digitizing tools</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-3">Discrete</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-18">displacement circle</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-17">Displacement plugin</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/preamble/foreword.html#index-0">documentation</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-0">editing</a>, <a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-12">[1]</a>
+  </dt>
+
+      
+  <dt>
+    environment
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-5">QGIS Server</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-1">EPSG</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-9">Equal Interval</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/supported_data.html#index-2">Erdas Imagine</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_checker.html#index-0">Errors</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-2">ESRI</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-1">European_Petroleom_Search_Group</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-42">example actions</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/create_output.html#index-1">Export_as_image</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/create_output.html#index-1">Export_as_PDF</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/create_output.html#index-1">Export_as_SVG</a>
+  </dt>
+
+      
+  <dt>
+    Expression
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_vector/expression.html#index-2">Named parameters, Function; Named parameters</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-31">Expression based labeling</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-36">expressions</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/expression.html#index-0">Expressions</a>, <a href="docs/user_manual/working_with_vector/expression.html#index-1">[1]</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-2">FastCGI</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-4">field calculator</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-3">Field Calculator</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/expression.html#index-3">Field Calculator Functions</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_raster/supported_data.html#index-3">GDAL</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-44">generalisation</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_snapper.html#index-0">Geometry</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_checker.html#index-0">Geometry Checker</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_snapper.html#index-0">Geometry snapper plugin</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_checker.html#index-0">Geometry validity</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-28">geometryless
+feature</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-7">Geometryless Data</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-17">geometryless feature</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_georeferencer.html#index-0">Georeferencer tools</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/supported_data.html#index-1">GeoTIFF</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_raster/supported_data.html#index-4">GeoTiff</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-11">GiST (Generalized Search Tree)
+index</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-1">GML</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/appendices/appendices.html#index-1">GNU General Public License</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/style_library.html#index-1">Gradient_color_Ramp</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-8">Graduated Renderer</a>, <a href="docs/user_manual/working_with_vector/vector_properties.html#index-10">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-0">GRASS</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-3">attribute linkage</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-2">attribute storage</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-5">digitizing tools</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-11">display results</a>, <a href="docs/user_manual/grass_integration/grass_integration.html#index-12">[1]</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-7">region</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-8">region display</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-9">region editing</a>
+  </dt>
+
+        
+  <dt>
+    see Creating new vectors;editing;creating a new layer
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-6">style</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-13">toolbox</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-10">GRASS toolbox</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-14">customize</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/grass_integration/grass_integration.html#index-1">GRASS vector data model</a>
+  </dt>
+
+      
+  <dt>
+    Grid
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_map.html#index-1">Grids;Map_Grid</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-21">heatmap</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-20">Heatmap Renderer</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-6">Histogram</a>, <a href="docs/user_manual/working_with_vector/vector_properties.html#index-11">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_html_frame.html#index-0">HTML_Frame</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-29">Identify features</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-1">IGNF</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/qgis_browser/qgis_browser.html#index-0">Import_Maps</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-1">Institut_Geographique_National_de_France</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-11">InteProxy</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-19">Inverted Polygon Renderer</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_items_options.html#index-1">Items_Alignment</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-35">join</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-36">join layer</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-0">Keyboard shortcuts</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-46">keyword lists</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-30">label placement</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-29">labeling</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-26">layer rendering</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-5">Layer visibility</a>
+  </dt>
+
+      
+  <dt>
+    Layers
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-7">Order</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    Layout toolbars, Toolbars
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/qgis_gui.html#index-3">Layout</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/print_composer/index.html#index-0">Layout_Maps</a>, <a href="docs/user_manual/print_composer/composer_items/index.html#index-1">[1]</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-4">Legend</a>
+  </dt>
+
+      
+  <dt>
+    legend_composer
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_legend.html#index-0">Map_Legend</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/appendices/appendices.html#index-0">license document</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-0">load a shapefile</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/supported_data.html#index-5">loading_raster</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-10">Log messages</a>
+  </dt>
+
+      
+  <dt>
+    logging
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-4">QGIS Server</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/introduction/qgis_gui.html#index-0">main window</a>
+  </dt>
+
+      
+  <dt>
+    Map
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-9">Overview</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-43">Map Tips</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-21">Map_Navigation</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/overview_composer.html#index-1">Map_Template</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-0">MapInfo</a>
+  </dt>
+
+      
+  <dt>
+    Measure
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-25">Angles</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-24">Areas</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-23">Line length</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-22">Tools</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    Menu
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-38">Actions</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/introduction/qgis_gui.html#index-1">menus</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-7">Metadata</a>, <a href="docs/user_manual/working_with_vector/vector_properties.html#index-45">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-16">MSSQL Spatial</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-0">Multi_Band_Raster</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-26">multiline</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-25">multipoint</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-27">multipolygon</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-12">Multivariate analysis</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-9">Natural Breaks (Jenks)</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-34">nesting projects</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-45">New_GPX_Layer</a>, <a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-47">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-45">New_Shapefile_Layer</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-46">New_Spatialite_Layer</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-45">New_SpatiaLite_Layer</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-48">New_Temporary_Scratch_Layer</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-4">No Symbols Renderer</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-15">Node_Tool</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-16">Nodes</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-7">Non Spatial Attribute Tables</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-0">OGC</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-2">OGR</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-3">OGR Simple Feature Library</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-9">ogr2ogr</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-0">Open_Geospatial_Consortium</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-5">OpenStreetMap</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-17">Oracle Spatial</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-5">OSM</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/getting_started.html#index-1">output save as image</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-28">Paint effects</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-21">Pan</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/qgis_gui.html#index-6">pan arrow keys</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/qgis_gui.html#index-4">Panels</a>, <a href="docs/user_manual/introduction/general_tools.html#index-2">[1]</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-3">Layers</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-10">Log messages</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-9">Overview</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-11">Redo</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-8">Statistic</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-11">Undo</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-8">pgsql2shp</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_image.html#index-0">Picture_database</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_snapper.html#index-0">Plugin</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins.html#index-0">plugins</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-16">Point Displacement Renderer</a>
+  </dt>
+
+      
+  <dt>
+    polygon_to_line
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-18">line_to_polygon</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-6">PostGIS</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-10">PostGIS spatial index</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-6">PostgreSQL</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-9">Pretty Breaks</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/getting_started.html#index-2">print composer quick print</a>
+  </dt>
+
+      
+  <dt>
+    print_composer
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/print_composer/overview_composer.html#index-3">tools</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    Printing
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/print_composer/create_output.html#index-0">Export_Map</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-6">Proj.4</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-4">Proj4</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-4">Proj4_text</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-0">Projections</a>
+  </dt>
+
+      
+  <dt>
+    Properties
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/qgis_configuration.html#index-0">project</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-12">Proportional symbol</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-4">Proxy</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-4">proxy-server</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-5">Pyramids</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
+    QGIS Server
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-0">WMS Server; WFS Server; WCS Server</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-5">environment</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-4">logging</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-12">QGIS_mapserver</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-2">QGIS_Server</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-47">QML</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-15">QSpatiaLite</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-9">Quantile</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-0">Query Builder</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_raster/supported_data.html#index-0">Raster</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_analysis.html#index-0">Raster_Calculator</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-11">Redo</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-10">Relations</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-12">Rendering</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-15">Halting</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-16">Quality</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-17">Speed-up</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-19">rendering effects</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-13">Rendering scale dependent</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_items_options.html#index-0">Rendering_Mode</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_ftools.html#index-1">Research tools</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/print_composer/overview_composer.html#index-4">Revert_Layout_Actions</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-33">ring polygons</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_image.html#index-1">Rotated_North_Arrow</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-14">Rubber band</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-14">rule-based</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-33">Rule-based labeling</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-13">Rule-based Rendering</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-25">rules of ordering</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-47">Save properties</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-47">Save style</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-14">Scale</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/qgis_gui.html#index-7">scale calculate</a>
+  </dt>
+
+      
+  <dt>
+    Scalebar
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/print_composer/composer_items/composer_scale_bar.html#index-0">Map_Scalebar</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-5">Search radius</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-4">Search Radius</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-11">Secured_OGC_Authentication</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-26">Select</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-26">All, Select; Invert, Select; Expression, Select; Form</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-27">By Value</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-26">Deselect</a>
+  </dt>
+
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-26">Polygon, Select; Freehand, Select; Rectangle, Select; Radius</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    Selection
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-2">Attributes</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    Settings
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/qgis_configuration.html#index-0">project</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-1">SFS</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-0">Shapefile</a>, <a href="docs/user_manual/working_with_vector/supported_data.html#index-2">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-7">Shared Polygon Boundaries</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-7">shp2pgsql</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-3">Single Symbol Renderer</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-0">Single_Band_Raster</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-12">Size assistant</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-1">SLD</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_server_support.html#index-1">SLD/SE</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_snapper.html#index-0">Snapping</a>, <a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-1">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-9">Snapping On Intersections</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-3">Snapping tolerance</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-2">Snapping Tolerance</a>
+  </dt>
+
+      
+  <dt>
+    spatial bookmarks
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-33">see bookmarks</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-14">Spatialite</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-15">Spatialite_Manager</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-14">SQLite</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-6">SRS</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-12">ST_Shift_Longitude</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-8">Statistic</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/style_library.html#index-0">Style</a>, <a href="docs/user_manual/working_with_vector/vector_properties.html#index-2">[1]</a>, <a href="docs/user_manual/introduction/general_tools.html#index-6">[2]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-0">Symbology</a>, <a href="docs/user_manual/working_with_vector/vector_properties.html#index-1">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-27">Symbols levels</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-0">Three_Band_Color_Raster</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-1">Tiger Format</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/qgis_gui.html#index-2">toolbar</a>
+  </dt>
+
+      
+  <dt>
+    Tools
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-22">Measure</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-6">Topological Editing</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/plugins/plugins_geometry_snapper.html#index-0">Topology</a>, <a href="docs/user_manual/plugins/plugins_geometry_checker.html#index-0">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_raster/raster_properties.html#index-4">Transparency</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-1">UK_National Transfer Format</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-11">Undo</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-1">US Census Bureau</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-35">variable</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-35">variables</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/supported_data.html#index-0">vector file</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-16">Vertex</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-16">Vertices</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-6">virtual field</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/attribute_table.html#index-3">Virtual Fields</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_vector/virtual_layers.html#index-0">Virtual_Layers</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-1">WCS</a>, <a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-13">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-13">Web Coverage Service</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-1">WFS</a>, <a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-14">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-14">WFS-T</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-14">WFS_Transactional</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_projections/working_with_projections.html#index-2">WKT</a>, <a href="docs/user_manual/working_with_vector/editing_geometry_attributes.html#index-19">[1]</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-1">WMS</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-7">WMS-C</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-12">WMS_1.3.0</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-2">WMS_client</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-8">WMS_identify</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-5">WMS_layer_transparency</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-10">WMS_metadata</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-9">WMS_properties</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-7">WMS_tiles</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-7">WMTS</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/working_with_ogc/ogc_client_support.html#index-3">WMTS_client</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/working_with_vector/vector_properties.html#index-24">z-order</a>
+  </dt>
+
+      
+  <dt><a href="docs/user_manual/introduction/qgis_gui.html#index-5">zoom mouse wheel</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="docs/user_manual/introduction/general_tools.html#index-21">Zoom_In Zoom_Out</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+
+
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li><a href="docs/index.html"></a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

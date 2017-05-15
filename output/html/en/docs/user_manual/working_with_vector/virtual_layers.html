@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Virtual layers</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Working with Vector Data" href="index.html" />
+    <link rel="next" title="Working with Raster Data" href="../working_with_raster/index.html" />
+    <link rel="prev" title="Editing" href="editing_geometry_attributes.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/working_with_vector/virtual_layers.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../working_with_raster/index.html" title="Working with Raster Data"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="editing_geometry_attributes.html" title="Editing"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Working with Vector Data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="editing_geometry_attributes.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="../working_with_raster/index.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="virtual-layers">
+<span id="vector-virtual-layers"></span><span id="index-0"></span><h1>Virtual layers<a class="headerlink" href="#virtual-layers" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#creating-a-virtual-layer" id="id1">Creating a virtual layer</a></li>
+<li><a class="reference internal" href="#supported-language" id="id2">Supported language</a></li>
+<li><a class="reference internal" href="#performance-issues" id="id3">Performance issues</a></li>
+<li><a class="reference internal" href="#special-comments" id="id4">Special comments</a></li>
+<li><a class="reference internal" href="#use-of-indexes" id="id5">Use of indexes</a></li>
+</ul>
+</div>
+<p>A special kind of vector layer allows you to define a layer as the result of an
+advanced query, using the SQL language on any number of other vector layers that
+QGIS is able to open. These layers are called virtual layers: they do not carry
+data by themselves and can be seen as views to other layers.</p>
+<div class="section" id="creating-a-virtual-layer">
+<h2><a class="toc-backref" href="#id1">Creating a virtual layer</a><a class="headerlink" href="#creating-a-virtual-layer" title="Permalink to this headline">¶</a></h2>
+<p>Open the virtual layer creation dialog by clicking on
+<em class="guilabel">Add Virtual Layer</em> in the <em class="guilabel">Layer</em> menu or from the
+corresponding toolbar.</p>
+<p>The dialog allows you to specify an SQL query. The query can use the name (or
+id) of existing vector layers as well as field names of these layers.</p>
+<p>For example, if you have a layer called <tt class="docutils literal"><span class="pre">regions</span></tt>, you can create a new
+virtual layer with an SQL query like <tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">regions</span> <span class="pre">WHERE</span> <span class="pre">id</span> <span class="pre">&lt;</span> <span class="pre">100</span></tt>.
+The SQL query will be executed, whatever the underlying provider of the
+<tt class="docutils literal"><span class="pre">regions</span></tt> layer is and even if this provider does not directly support SQL
+queries.</p>
+<p>Joins and complex queries can also be created simply by directly using the
+names of the layers that are to be joined.</p>
+</div>
+<div class="section" id="supported-language">
+<h2><a class="toc-backref" href="#id2">Supported language</a><a class="headerlink" href="#supported-language" title="Permalink to this headline">¶</a></h2>
+<p>The underlying engine uses SQLite and Spatialite to operate.</p>
+<p>It means you can use all of the SQL your local installation of SQLite
+understands.</p>
+<p>Functions from SQLite and spatial functions from Spatialite
+can also be used in a virtual layer query. For instance, creating a point
+layer out of a attribute-only layer can be done with a query similar to:
+<tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">id,</span> <span class="pre">MakePoint(x,</span> <span class="pre">y,</span> <span class="pre">4326)</span> <span class="pre">as</span> <span class="pre">geometry</span> <span class="pre">FROM</span> <span class="pre">coordinates</span></tt></p>
+<p><a class="reference internal" href="expression.html#functions-list"><em>Functions of QGIS expressions</em></a> can also be used in a
+virtual layer query.</p>
+<p>To refer the geometry column of a layer, use the name <tt class="docutils literal"><span class="pre">geometry</span></tt>.</p>
+<p>Contrary to a pure SQL query, all the fields of a virtual layer query must
+be named. Don&#8217;t forget to use the <tt class="docutils literal"><span class="pre">as</span></tt> keyword to name your columns if they
+are the result of a computation or function call.</p>
+</div>
+<div class="section" id="performance-issues">
+<h2><a class="toc-backref" href="#id3">Performance issues</a><a class="headerlink" href="#performance-issues" title="Permalink to this headline">¶</a></h2>
+<p>With default parameters set, the virtual layer engine will try its best to
+detect the type of the different columns of the query, including the type of the
+geometry column if one is present.</p>
+<p>This is done by introspecting the query when possible or by fetching the first
+row of the query (LIMIT 1) at last resort.
+Fetching the first row of the result just to create the layer may be undesirable
+for performance reasons.</p>
+<p>The creation dialog allows to specify different parameters:</p>
+<ul class="simple">
+<li><strong>unique identifier column</strong>: this option allows to specify which field of
+the query represents unique integer values that QGIS can use as row
+identifiers. By default, an autoincrementing integer value is used.
+Specifying a unique identifier column allows to speed up selection of rows by
+id.</li>
+<li><strong>no geometry</strong>: this option forces the virtual layer to ignore any geometry
+field. The resulting layer is an attribute-only layer.</li>
+<li><strong>geometry column</strong>: this option allows to specify the name of the column
+that is to be used as the geometry of the layer.</li>
+<li><strong>geometry type</strong>: this option allows to specify the type of the geometry of
+the virtual layer.</li>
+<li><strong>geometry CRS</strong>: this option allows to specify the coordinate reference
+system of the virtual layer.</li>
+</ul>
+</div>
+<div class="section" id="special-comments">
+<h2><a class="toc-backref" href="#id4">Special comments</a><a class="headerlink" href="#special-comments" title="Permalink to this headline">¶</a></h2>
+<p>The virtual layer engine tries to determine the type of each column of the
+query. If it fails, the first row of the query is fetched to determine
+column types.</p>
+<p>The type of a particular column can be specified directly in the query by
+using some special comments.</p>
+<p>The syntax is the following: <tt class="docutils literal"><span class="pre">/*:type*/</span></tt>. It has to be placed just after
+the name of a column. <tt class="docutils literal"><span class="pre">type</span></tt> can be either <tt class="docutils literal"><span class="pre">int</span></tt> for integers, <tt class="docutils literal"><span class="pre">real</span></tt>
+for floating point numbers or <tt class="docutils literal"><span class="pre">text</span></tt>.</p>
+<p>For instance:
+<tt class="docutils literal"><span class="pre">SELECT</span> <span class="pre">id+1</span> <span class="pre">as</span> <span class="pre">nid</span> <span class="pre">/*:int*/</span> <span class="pre">FROM</span> <span class="pre">table</span></tt></p>
+<p>The type and coordinate reference system of the geometry column can also be set
+thanks to special comments with the following syntax <tt class="docutils literal"><span class="pre">/*:gtype:srid*/</span></tt> where
+<tt class="docutils literal"><span class="pre">gtype</span></tt> is the geometry type (<tt class="docutils literal"><span class="pre">point</span></tt>, <tt class="docutils literal"><span class="pre">linestring</span></tt>, <tt class="docutils literal"><span class="pre">polygon</span></tt>,
+<tt class="docutils literal"><span class="pre">multipoint</span></tt>, <tt class="docutils literal"><span class="pre">multilinestring</span></tt> or <tt class="docutils literal"><span class="pre">multipolygon</span></tt>) and <tt class="docutils literal"><span class="pre">srid</span></tt> an
+integer representing the EPSG code of a coordinate reference system.</p>
+</div>
+<div class="section" id="use-of-indexes">
+<h2><a class="toc-backref" href="#id5">Use of indexes</a><a class="headerlink" href="#use-of-indexes" title="Permalink to this headline">¶</a></h2>
+<p>When requesting a layer through a virtual layer, indexes of this source layer
+will be used in the following ways:</p>
+<ul class="simple">
+<li>if an <tt class="docutils literal"><span class="pre">=</span></tt> predicate is used on the primary key column of the layer, the
+underlying data provider will be asked for a particular id (FilterFid)</li>
+<li>for any other predicates (<tt class="docutils literal"><span class="pre">&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;=</span></tt>, <tt class="docutils literal"><span class="pre">!=</span></tt>, etc.) or on a column without
+primary key, a request built from an expression will be used to request the
+underlying vector data provider. It means indexes may be used on database
+providers if they exist.</li>
+</ul>
+<p>A specific syntax exists to handle spatial predicates in requests and trigger
+the use of a spatial index: a hidden column named <tt class="docutils literal"><span class="pre">_search_frame_</span></tt> exists
+for each virtual layer. This column can be compared for equality to a bounding
+box. Example:
+<tt class="docutils literal"><span class="pre">select</span> <span class="pre">*</span> <span class="pre">from</span> <span class="pre">vtab</span> <span class="pre">where</span> <span class="pre">_search_frame_=BuildMbr(-2.10,49.38,-1.3,49.99,4326)</span></tt></p>
+<p>Spatial binary predicates like <tt class="docutils literal"><span class="pre">ST_Intersects</span></tt> are greatly sped up when used
+in conjunction with this spatial index syntax.</p>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../working_with_raster/index.html" title="Working with Raster Data"
+             >next</a></li>
+        <li class="right" >
+          <a href="editing_geometry_attributes.html" title="Editing"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >Working with Vector Data</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

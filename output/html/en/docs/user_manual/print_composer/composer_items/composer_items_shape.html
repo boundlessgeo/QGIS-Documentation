@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Shape Items</title>
+    
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../../index.html" />
+    <link rel="up" title="Composer Items" href="index.html" />
+    <link rel="next" title="Creating an Output" href="../create_output.html" />
+    <link rel="prev" title="The HTML Frame Item" href="composer_html_frame.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/print_composer/composer_items/composer_items_shape.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../../index.html">Documentation</a></li>-->
+            <li><a href="../../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../create_output.html" title="Creating an Output"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="composer_html_frame.html" title="The HTML Frame Item"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../../index.html"></a> &raquo;</li>
+          <li><a href="../../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="../index.html" >Print Composer</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Composer Items</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="composer_html_frame.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="../create_output.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="shape-items">
+<h1>Shape Items<a class="headerlink" href="#shape-items" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#the-arrow-item" id="id1">The Arrow Item</a><ul>
+<li><a class="reference internal" href="#item-properties" id="id2">Item Properties</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-basic-shape-items" id="id3">The Basic Shape Items</a></li>
+<li><a class="reference internal" href="#the-node-based-shape-items" id="id4">The Node-Based Shape Items</a></li>
+</ul>
+</div>
+<div class="section" id="the-arrow-item">
+<span id="arrow-item"></span><span id="index-0"></span><h2><a class="toc-backref" href="#id1">The Arrow Item</a><a class="headerlink" href="#the-arrow-item" title="Permalink to this headline">¶</a></h2>
+<p>To add an arrow, click the <a class="reference internal" href="../../../../_images/mActionAddArrow.png"><img alt="addArrow" src="../../../../_images/mActionAddArrow.png" style="width: 1.5em;" /></a> <sup>Add Arrow</sup> icon, place the element holding
+down the left mouse button and drag a line to draw the arrow on the Print Composer canvas and
+position and customize the appearance in the scale bar <em class="guilabel">Item Properties</em> tab.</p>
+<p>When you also hold down the <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> key while placing the arrow, it is placed in an angle
+of exactly 45° .</p>
+<p>The arrow item can be used to add a line or a simple arrow that can be used, for example, to
+show the relation between other print composer items. To create a north arrow, the image item should
+be considered first. QGIS has a set of North arrows in SVG format. Furthermore you can connect
+an image item with a map so it can rotate automatically with the map (see <a class="reference internal" href="composer_image.html#image-item"><em>The Image Item</em></a>).</p>
+<p id="figure-composer-arrow"><strong>Figure Composer Arrow:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/arrow_properties.png" src="../../../../_images/arrow_properties.png" />
+<p class="caption">Arrow Item properties Tab</p>
+</div>
+<div class="section" id="item-properties">
+<h3><a class="toc-backref" href="#id2">Item Properties</a><a class="headerlink" href="#item-properties" title="Permalink to this headline">¶</a></h3>
+<p>The <em class="guilabel">Arrow</em> item properties tab allows you to configure an arrow item.</p>
+<p>The  <strong>[Line style ...]</strong> button can be used to set the line style using the line style symbol editor.</p>
+<p>In <em class="guilabel">Arrows markers</em> you can select one of three radio buttons.</p>
+<ul class="simple">
+<li><em class="guilabel">Default</em>: To draw a regular arrow, gives you options to style the arrow head</li>
+<li><em class="guilabel">None</em>: To draw a line without arrow head</li>
+<li><em class="guilabel">SVG Marker</em>: To draw a line with an SVG <em class="guilabel">Start marker</em>
+and/or <em class="guilabel">End marker</em></li>
+</ul>
+<p>For <em class="guilabel">Default</em> Arrow marker you can use following options to style the arrow head.</p>
+<ul class="simple">
+<li><em class="guilabel">Arrow outline color</em>: Set the outline color of the arrow head</li>
+<li><em class="guilabel">Arrow fill color</em>: Set the fill color of the arrow head</li>
+<li><em class="guilabel">Arrow outline width</em>: Set the outline width of the arrow head</li>
+<li><em class="guilabel">Arrow head width</em>: Set the size of the arrow head</li>
+</ul>
+<p>For <em class="guilabel">SVG Marker</em> you can use following options.</p>
+<ul class="simple">
+<li><em class="guilabel">Start marker</em>: Choose an SVG image to draw at the beginning of the line</li>
+<li><em class="guilabel">End marker</em>: Choose an SVG image to draw at the end of the line</li>
+<li><em class="guilabel">Arrow head width</em>: Set the size of Start and/or End marker</li>
+</ul>
+<p>SVG images are automatically rotated with the line. Outline and fill colors of QGIS
+predefined SVG images can be changed using the corresponding options. Custom SVG
+may require some tags following this <a class="reference internal" href="composer_image.html#parameterized-svg"><em>instruction</em></a>.</p>
+</div>
+</div>
+<div class="section" id="the-basic-shape-items">
+<span id="basic-shape-item"></span><span id="index-1"></span><h2><a class="toc-backref" href="#id3">The Basic Shape Items</a><a class="headerlink" href="#the-basic-shape-items" title="Permalink to this headline">¶</a></h2>
+<p>To add a basic shape (ellipse, rectangle, triangle), click the <a class="reference internal" href="../../../../_images/mActionAddBasicShape.png"><img alt="addBasicShape" src="../../../../_images/mActionAddBasicShape.png" style="width: 1.5em;" /></a>
+<sup>Add basic shape</sup> icon,  place the element holding down the left mouse.
+Customize the appearance in the <em class="guilabel">Item Properties</em> tab.</p>
+<p>When you also hold down the <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> key while placing the basic shape you can create a perfect square,
+circle or triangle.</p>
+<p id="figure-composer-basic-shape"><strong>Figure Composer Basic Shape:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/shape_properties.png" src="../../../../_images/shape_properties.png" />
+<p class="caption">Shape Item properties Tab</p>
+</div>
+<p>The <em class="guilabel">Shape</em> item properties tab allows you to select if you want to draw an ellipse,
+rectangle or triangle inside the given frame.</p>
+<p>You can set the style of the shape using the advanced symbol style dialog with which you can
+define its outline and fill color, fill pattern, use markers etcetera.</p>
+<p>For the rectangle shape, you can set the value of the corner radius to round of the corners.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Unlike other items, you can not style the frame or the background color of the frame.</p>
+</div>
+</div>
+<div class="section" id="the-node-based-shape-items">
+<span id="node-based-shape-item"></span><span id="index-2"></span><h2><a class="toc-backref" href="#id4">The Node-Based Shape Items</a><a class="headerlink" href="#the-node-based-shape-items" title="Permalink to this headline">¶</a></h2>
+<p>While arrow and basic shape items offer you simple and predefined geometric item to use,
+a node-based shape (polygon or polyline) helps you create a custom and more advanced
+geometric item. You can add as many lines or sides as you want to the item and
+independently and directly interact with each of its vertices.</p>
+<p>To add a node-based shape, click the
+<a class="reference internal" href="../../../../_images/mActionAddNodesShape.png"><img alt="addNodesShape" src="../../../../_images/mActionAddNodesShape.png" style="width: 1.5em;" /></a> <sup>Add nodes item</sup> icon. Then perform left clicks to
+add nodes to your current shape. When you&#8217;re done, a simple right click
+terminates the shape. Customize the appearance in the <em class="guilabel">Item Properties</em>
+tab.</p>
+<p id="figure-composer-nodes-shape"><strong>Figure Composer Nodes Shape:</strong></p>
+<div class="figure align-center">
+<img alt="../../../../_images/shape_nodes_properties.png" src="../../../../_images/shape_nodes_properties.png" />
+<p class="caption">Nodes Shape Item properties Tab</p>
+</div>
+<p>You can set the style of the shape using the advanced symbol style dialog
+available thanks to the <strong>[Change ...]</strong> button in <em class="guilabel">Main properties</em>.</p>
+<p>A specific tool is provided to edit node-based shapes through
+<a class="reference internal" href="../../../../_images/mActionEditNodesShape.png"><img alt="editNodesShape" src="../../../../_images/mActionEditNodesShape.png" style="width: 1.5em;" /></a> <sup>Edit Nodes Item</sup>. Within this mode, you can select
+a node by clicking on it (a marker is displayed on the selected node). A
+selected node can be moved either by dragging it or by using the arrow keys.
+Moreover, in this mode, you are able to add nodes to an existing shape. You
+just have to do a left click near a segment and if you are not too far from the
+shape, a node is added. Finally, you can remove the currently selected node by
+hitting the <tt class="kbd docutils literal"><span class="pre">DEL</span></tt> key.</p>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../create_output.html" title="Creating an Output"
+             >next</a></li>
+        <li class="right" >
+          <a href="composer_html_frame.html" title="The HTML Frame Item"
+             >previous</a> |</li>
+        <li><a href="../../../index.html"></a> &raquo;</li>
+          <li><a href="../../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="../index.html" >Print Composer</a> &raquo;</li>
+          <li><a href="index.html" >Composer Items</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

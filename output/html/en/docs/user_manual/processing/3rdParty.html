@@ -1,0 +1,803 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuring external applications</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="QGIS processing framework" href="index.html" />
+    <link rel="next" title="The QGIS Commander" href="commander.html" />
+    <link rel="prev" title="Writing new Processing algorithms as python scripts" href="scripts.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/processing/3rdParty.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="commander.html" title="The QGIS Commander"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="scripts.html" title="Writing new Processing algorithms as python scripts"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">QGIS processing framework</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="scripts.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="commander.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="configuring-external-applications">
+<span id="processing-results"></span><h1>Configuring external applications<a class="headerlink" href="#configuring-external-applications" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#a-note-for-windows-users" id="id1">A note for Windows users</a></li>
+<li><a class="reference internal" href="#a-note-on-file-formats" id="id2">A note on file formats</a></li>
+<li><a class="reference internal" href="#a-note-on-vector-layer-selections" id="id3">A note on vector layer selections</a></li>
+<li><a class="reference internal" href="#saga" id="id4">SAGA</a><ul>
+<li><a class="reference internal" href="#about-saga-grid-system-limitations" id="id5">About SAGA grid system limitations</a></li>
+<li><a class="reference internal" href="#limitations-for-multi-band-layers" id="id6">Limitations for multi-band layers</a></li>
+<li><a class="reference internal" href="#limitations-in-cell-size" id="id7">Limitations in cell size</a></li>
+<li><a class="reference internal" href="#logging" id="id8">Logging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#r-creating-r-scripts" id="id9">R. Creating R scripts</a></li>
+<li><a class="reference internal" href="#grass" id="id10">GRASS</a></li>
+<li><a class="reference internal" href="#gdal" id="id11">GDAL</a></li>
+<li><a class="reference internal" href="#orfeo-toolbox" id="id12">Orfeo Toolbox</a></li>
+<li><a class="reference internal" href="#taudem" id="id13">TauDEM</a><ul>
+<li><a class="reference internal" href="#installing-taudem-under-windows" id="id14">Installing TauDEM under Windows</a></li>
+<li><a class="reference internal" href="#installing-taudem-under-linux" id="id15">Installing TauDEM under Linux</a></li>
+<li><a class="reference internal" href="#configuring-taudem-provider" id="id16">Configuring TauDEM provider</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The processing framework can be extended using additional applications.
+Currently, SAGA, GRASS, OTB (Orfeo Toolbox) and R are supported, along
+with some other command-line applications that provide spatial data analysis
+functionalities. Algorithms relying on an external applications are managed by
+their own algorithm provider.</p>
+<p>This section will show you how to configure the processing framework to include these additional
+applications, and it will explain some particular features of the algorithms based
+on them. Once you have correctly configured the system, you will be able to
+execute external algorithms from any component like the toolbox or the
+graphical modeler, just like you do with any other geoalgorithm.</p>
+<p>By default, all algorithms that rely on an external application not shipped with
+QGIS are not enabled. You can enable them in the settings dialog.
+Make sure that the corresponding application is already installed in your system.</p>
+<div class="section" id="a-note-for-windows-users">
+<h2><a class="toc-backref" href="#id1">A note for Windows users</a><a class="headerlink" href="#a-note-for-windows-users" title="Permalink to this headline">¶</a></h2>
+<p>If you are not an advanced user and you are running QGIS on Windows, you might
+not be interested in reading the rest of this chapter. Make sure you install
+QGIS in your system using the standalone installer. That will automatically
+install SAGA, GRASS and OTB in your system and configure them so they can be
+run from QGIS. All the algorithms from these providers will
+be ready to be run without needing any further configuration. If installing
+through OSGeo4W application, make sure you select for installation SAGA, GRASS and
+OTB as well.</p>
+<p>If you want to know more about how these providers work, or if you want to use some
+algorithms not included in the simplified toolbox (such as R scripts), keep on
+reading.</p>
+</div>
+<div class="section" id="a-note-on-file-formats">
+<h2><a class="toc-backref" href="#id2">A note on file formats</a><a class="headerlink" href="#a-note-on-file-formats" title="Permalink to this headline">¶</a></h2>
+<p>When using an external software, opening a file in QGIS does not mean that it can
+be opened and processed as well in that other software. In most cases, other software can read
+what you have opened in QGIS, but in some cases, that might not be true. When
+using databases or uncommon file formats, whether for raster or vector layers,
+problems might arise. If that happens, try to use well-known file formats that
+you are sure are understood by both programs, and check the console output
+(in the history and log dialog) to know more about what is going wrong.</p>
+<p>Using GRASS raster layers is, for instance, one case in which you might have
+trouble and not be able to complete your work if you call an external algorithm
+using such a layer as input. For this reason, these layers will not appear as
+available to algorithms.</p>
+<p>You should, however, find no problems at all with vector layers, since QGIS
+automatically converts from the original file format to one accepted by the
+external application before passing the layer to it. This adds extra processing
+time, which might be significant if the layer has a large size, so do not be
+surprised if it takes more time to process a layer from a DB connection than it does to process one of a
+similar size stored in a shapefile.</p>
+<p>Providers not using external applications can process any layer that you can open
+in QGIS, since they open it for analysis through QGIS.</p>
+<p>Regarding output formats, all formats supported by QGIS as output can be used,
+both for raster and vector layers. Some providers do not support certain formats,
+but all can export to common  formats that can later be transformed
+by QGIS automatically. As in the case of input layers, if this conversion is
+needed, that might increase the processing time.</p>
+</div>
+<div class="section" id="a-note-on-vector-layer-selections">
+<h2><a class="toc-backref" href="#id3">A note on vector layer selections</a><a class="headerlink" href="#a-note-on-vector-layer-selections" title="Permalink to this headline">¶</a></h2>
+<p>External applications may also be made aware of the selections that exist in vector layers
+within QGIS. However, that requires rewriting all input vector layers, just as
+if they were originally in a format not supported by the external application.
+Only when no selection exists, or the <em>Use only selected features</em> option is not
+enabled in the processing general configuration, can a layer be directly passed to
+an external application.</p>
+<p>In other cases, exporting only selected features is needed, which causes execution
+times to be longer.</p>
+</div>
+<div class="section" id="saga">
+<h2><a class="toc-backref" href="#id4">SAGA</a><a class="headerlink" href="#saga" title="Permalink to this headline">¶</a></h2>
+<p>SAGA algorithms can be run from QGIS if you have SAGA installed in your system
+and you configure the processing framework properly so it can find SAGA executables. In particular,
+the SAGA command-line executable is needed to run SAGA algorithms.</p>
+<p>If you are running Windows, both the stand-alone installer and the OSGeo4W installer
+include SAGA along with QGIS, and the path is automatically configured, so there is
+no need to do anything else.</p>
+<p>If you have installed SAGA yourself and your QGIS installer did not include it, the path to the
+SAGA executable must be configured. To do this, open the
+configuration dialog. In the <em class="guilabel">SAGA</em> block, you will find a setting named
+<em class="guilabel">SAGA Folder</em>. Enter the path to the folder where SAGA is installed.
+Close the configuration dialog, and now you are ready to run SAGA algorithms from
+QGIS.</p>
+<p>If you are running Linux, SAGA binaries
+are not included with Processing, so you have to download and install the software
+yourself. Please check the SAGA website for more information.</p>
+<p>In this case, there is no need to configure the path to the SAGA executable, and you will not
+see those folder entries. Instead, you must make sure that SAGA is properly installed
+and its folder is added to the PATH environment variable. Just open a console and
+type <tt class="docutils literal"><span class="pre">saga_cmd</span></tt> to check that the system can find where the SAGA binaries are
+located.</p>
+<div class="section" id="about-saga-grid-system-limitations">
+<h3><a class="toc-backref" href="#id5">About SAGA grid system limitations</a><a class="headerlink" href="#about-saga-grid-system-limitations" title="Permalink to this headline">¶</a></h3>
+<p>Most SAGA algorithms that require several input raster layers require them to
+have the same grid system. That is, they must cover the same geographic area and have
+the same cell size, so their corresponding grids match. When calling SAGA
+algorithms from QGIS, you can use any layer, regardless of its cell size and
+extent. When multiple raster layers are used as input for a SAGA algorithm,
+QGIS resamples them to a common grid system and then passes them to SAGA
+(unless the SAGA algorithm can operate with layers from different grid systems).</p>
+<p>The definition of that common grid system is controlled by the user, and you will
+find several parameters in the SAGA group of the settings window to do so. There
+are two ways of setting the target grid system:</p>
+<ul>
+<li><p class="first">Setting it manually. You define the extent by setting the values of the following
+parameters:</p>
+<ul class="simple">
+<li><em class="guilabel">Resampling min X</em></li>
+<li><em class="guilabel">Resampling max X</em></li>
+<li><em class="guilabel">Resampling min Y</em></li>
+<li><em class="guilabel">Resampling max Y</em></li>
+<li><em class="guilabel">Resampling cellsize</em></li>
+</ul>
+<p>Notice that QGIS will resample input layers to that extent, even if they
+do not overlap with it.</p>
+</li>
+<li><p class="first">Setting it automatically from input layers. To select this option, just check
+the <em class="guilabel">Use min covering grid system for resampling</em> option. All the
+other settings will be ignored and the minimum extent that covers all the input
+layers will be used. The cell size of the target layer is the maximum of all
+cell sizes of the input layers.</p>
+</li>
+</ul>
+<p>For algorithms that do not use multiple raster layers, or for those that do not
+need a unique input grid system, no resampling is performed before calling SAGA,
+and those parameters are not used.</p>
+</div>
+<div class="section" id="limitations-for-multi-band-layers">
+<h3><a class="toc-backref" href="#id6">Limitations for multi-band layers</a><a class="headerlink" href="#limitations-for-multi-band-layers" title="Permalink to this headline">¶</a></h3>
+<p>Unlike QGIS, SAGA has no support for multi-band layers. If you want to use a
+multiband layer (such as an RGB or multispectral image), you first have to split
+it into single-banded images. To do so, you can use the &#8216;SAGA/Grid - Tools/Split
+RGB image&#8217; algorithm (which creates three images from an RGB image) or the &#8216;SAGA/Grid
+- Tools/Extract band&#8217; algorithm (to extract a single band).</p>
+</div>
+<div class="section" id="limitations-in-cell-size">
+<h3><a class="toc-backref" href="#id7">Limitations in cell size</a><a class="headerlink" href="#limitations-in-cell-size" title="Permalink to this headline">¶</a></h3>
+<p>SAGA assumes that raster layers have the same cell size in the X and Y axis. If
+you are working with a layer with different values for horizontal and vertical
+cell size, you might get unexpected results. In this case, a warning will be added
+to the processing log, indicating that an input layer might not be suitable to be
+processed by SAGA.</p>
+</div>
+<div class="section" id="logging">
+<h3><a class="toc-backref" href="#id8">Logging</a><a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
+<p>When QGIS calls SAGA, it does so using its command-line interface, thus
+passing a set of commands to perform all the required operations. SAGA shows its
+progress by writing information to the console, which includes the percentage
+of processing already done, along with additional content. This output is
+filtered and used to update the progress bar while the algorithm
+is running.</p>
+<p>Both the commands sent by QGIS and the additional information printed by
+SAGA can be logged along with other processing log messages, and you might find
+them useful to track in detail what is going on when QGIS runs a SAGA
+algorithm. You will find two settings, namely <em class="guilabel">Log console output</em> and
+<em class="guilabel">Log execution commands</em>, to activate that logging mechanism.</p>
+<p>Most other providers that use an external application and call it through the
+command-line have similar options, so you will find them as well in other places
+in the processing settings list.</p>
+</div>
+</div>
+<div class="section" id="r-creating-r-scripts">
+<span id="creating-r-scripts"></span><h2><a class="toc-backref" href="#id9">R. Creating R scripts</a><a class="headerlink" href="#r-creating-r-scripts" title="Permalink to this headline">¶</a></h2>
+<p>R integration in QGIS is different from that of SAGA in that there is not a
+predefined set of algorithms you can run (except for a few examples). Instead,
+you should write your scripts and call R commands, much like you would do from R,
+and in a very similar manner to what we saw in the section dedicated to processing
+scripts. This section shows you the syntax to use to call those R commands from
+QGIS and how to use QGIS objects (layers, tables) in them.</p>
+<p>The first thing you have to do, as we saw in the case of SAGA, is to tell QGIS
+where your R binaries are located. You can do this using the <em class="guilabel">R folder</em>
+entry in the processing configuration dialog. Once you have set that parameter,
+you can start creating and executing your own R scripts.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">for <strong>Windows</strong> user, usually the R executable file is in the
+<tt class="file docutils literal"><span class="pre">C:Program</span> <span class="pre">FilesRR-3.2</span></tt> folder. Add just the folder and <strong>NOT</strong> the
+binary!</p>
+</div>
+<p>Once again, this is different in Linux, and you just have to make sure that the
+R folder is included in the PATH environment variable. If you can start R just
+typing <tt class="docutils literal"><span class="pre">R</span></tt> in a console, then you are ready to go.</p>
+<p>To add a new algorithm that calls an R function (or a more complex R script that
+you have developed and you would like to have available from QGIS), you have
+to create a script file that tells the processing framework how to perform that operation and the
+corresponding R commands to do so.</p>
+<p>R script files have the extension <tt class="file docutils literal"><span class="pre">.rsx</span></tt>, and creating them is pretty easy
+if you just have a basic knowledge of R syntax and R scripting. They should be
+stored in the R scripts folder. You can set this folder in the <em class="guilabel">R</em>
+settings group (available from the processing settings dialog), just like you do
+with the folder for regular processing scripts.</p>
+<p>Let’s have a look at a very simple script file, which calls the R method
+<tt class="docutils literal"><span class="pre">spsample</span></tt> to create a random grid within the boundary of the polygons in a
+given polygon layer. This method belongs to the <tt class="docutils literal"><span class="pre">maptools</span></tt> package. Since almost
+all the algorithms that you might like to incorporate into QGIS will use or
+generate spatial data, knowledge of spatial packages like <tt class="docutils literal"><span class="pre">maptools</span></tt> and,
+especially, <tt class="docutils literal"><span class="pre">sp</span></tt>, is mandatory.</p>
+<div class="highlight-python"><pre>##polyg=vector
+##numpoints=number 10
+##output=output vector
+##sp=group
+pts=spsample(polyg,numpoints,type="random")
+output=SpatialPointsDataFrame(pts, as.data.frame(pts))</pre>
+</div>
+<p>The first lines, which start with a double Python comment sign (<tt class="docutils literal"><span class="pre">##</span></tt>), tell
+QGIS the inputs of the algorithm described in the file and the outputs that
+it will generate. They work with exactly the same syntax as the Processing scripts
+that we have already seen, so they will not be described here again.</p>
+<p>Please have a look at the <em class="xref std std-ref">R Intro</em> and the <em class="xref std std-ref">R Syntax</em>
+Training Manual Chapters to have more information on how to write your own R scripts-</p>
+<p>When you declare an input parameter, QGIS uses that information for two
+things: creating the user interface to ask the user for the value of that
+parameter and creating a corresponding R variable that can later be used as input
+for R commands.</p>
+<p>In the above example, we are declaring an input of type <tt class="docutils literal"><span class="pre">vector</span></tt> named <tt class="docutils literal"><span class="pre">polyg</span></tt>.
+When executing the algorithm, QGIS will open in R the layer selected by the
+user and store it in a variable also named <tt class="docutils literal"><span class="pre">polyg</span></tt>. So, the name of a parameter
+is also the name of the variable that we can use in R for accessing the value of
+that parameter (thus, you should avoid using reserved R words as parameter names).</p>
+<p>Spatial elements such as vector and raster layers are read using the <tt class="docutils literal"><span class="pre">readOGR()</span></tt>
+and <tt class="docutils literal"><span class="pre">brick()</span></tt> commands (you do not have to worry about adding those commands
+to your description file &#8211; QGIS will do it), and they are stored as <tt class="docutils literal"><span class="pre">Spatial*DataFrame</span></tt>
+objects. Table fields are stored as strings containing the name of the selected
+field.</p>
+<p>Tables are opened using the <tt class="docutils literal"><span class="pre">read.csv()</span></tt> command. If a table entered by the
+user is not in CSV format, it will be converted prior to importing it into R.</p>
+<p>Additionally, raster files can be read using the <tt class="docutils literal"><span class="pre">readGDAL()</span></tt> command instead
+of <tt class="docutils literal"><span class="pre">brick()</span></tt> by using the <tt class="docutils literal"><span class="pre">##usereadgdal</span></tt>.</p>
+<p>If you are an advanced user and do not want QGIS to create the object
+representing the layer, you can use the <tt class="docutils literal"><span class="pre">##passfilenames</span></tt> tag to indicate
+that you prefer a string with the filename instead. In this case, it is up to you
+to open the file before performing any operation on the data it contains.</p>
+<p>With the above information, we can now understand the first line of our first
+example script (the first line not starting with a Python comment).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pts</span><span class="o">=</span><span class="n">spsample</span><span class="p">(</span><span class="n">polyg</span><span class="p">,</span><span class="n">numpoints</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s">&quot;random&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The variable <tt class="docutils literal"><span class="pre">polygon</span></tt> already contains a <tt class="docutils literal"><span class="pre">SpatialPolygonsDataFrame</span></tt> object,
+so it can be used to call the <tt class="docutils literal"><span class="pre">spsample</span></tt> method, just like the <tt class="docutils literal"><span class="pre">numpoints</span></tt>
+one, which indicates the number of points to add to the created sample grid.</p>
+<p>Since we have declared an output of type vector named <tt class="docutils literal"><span class="pre">out</span></tt>, we have to create
+a variable named <tt class="docutils literal"><span class="pre">out</span></tt> and store a <tt class="docutils literal"><span class="pre">Spatial*DataFrame</span></tt> object in it (in this
+case, a <tt class="docutils literal"><span class="pre">SpatialPointsDataFrame</span></tt>). You can use any name for your intermediate
+variables. Just make sure that the variable storing your final result has the
+same name that you used to declare it, and that it contains a suitable value.</p>
+<p>In this case, the result obtained from the <tt class="docutils literal"><span class="pre">spsample</span></tt> method has to be converted
+explicitly into a <tt class="docutils literal"><span class="pre">SpatialPointsDataFrame</span></tt> object, since it is itself an object
+of class <tt class="docutils literal"><span class="pre">ppp</span></tt>, which is not a suitable class to be returned to QGIS.</p>
+<p>If your algorithm generates raster layers, the way they are saved will depend on
+whether or not you have used the <tt class="docutils literal"><span class="pre">##dontuserasterpackage</span></tt> option. If you have
+used it, layers are saved using the <tt class="docutils literal"><span class="pre">writeGDAL()</span></tt> method. If not, the
+<tt class="docutils literal"><span class="pre">writeRaster()</span></tt> method from the <tt class="docutils literal"><span class="pre">raster</span></tt> package will be used.</p>
+<p>If you have used the <tt class="docutils literal"><span class="pre">##passfilenames</span></tt> option, outputs are generated using the
+<tt class="docutils literal"><span class="pre">raster</span></tt> package (with <tt class="docutils literal"><span class="pre">writeRaster()</span></tt>), even though it is not used for the
+inputs.</p>
+<p>If your algorithm does not generate any layer, but rather a text result in the console
+instead, you have to indicate that you want the console to be shown once the
+execution is finished. To do so, just start the command lines that produce the
+results you want to print with the <tt class="docutils literal"><span class="pre">&gt;</span></tt> (&#8216;greater&#8217;) sign. The output of all other
+lines will not be shown. For instance, here is the description file of an
+algorithm that performs a normality test on a given field (column) of the
+attributes of a vector layer:</p>
+<div class="highlight-python"><pre>##layer=vector
+##field=field layer
+##nortest=group
+library(nortest)
+&gt;lillie.test(layer[[field]])</pre>
+</div>
+<p>The output of the last line is printed, but the output of the first is not (and
+neither are the outputs from other command lines added automatically by QGIS).</p>
+<p>If your algorithm creates any kind of graphics (using the <tt class="docutils literal"><span class="pre">plot()</span></tt> method), add
+the following line:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">##showplots</span>
+</pre></div>
+</div>
+<p>This will cause QGIS to redirect all R graphical outputs to a temporary file,
+which will be opened once R execution has finished.</p>
+<p>Both graphics and console results will be shown in the processing results manager.</p>
+<p>For more information, please check the script files provided with Processing. Most
+of them are rather simple and will greatly help you understand how to create your
+own scripts.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">rgdal</span></tt> and <tt class="docutils literal"><span class="pre">raster</span></tt> libraries are loaded by default, so you do not have
+to add the corresponding <tt class="docutils literal"><span class="pre">library()</span></tt> commands (you just have to make sure
+that those two packages are installed in your R distribution). However, other
+additional libraries that you might need have to be explicitly loaded by typing,
+<tt class="docutils literal"><span class="pre">library(ggplot2)</span></tt>. If the package is not already installed on your machine,
+Processing will download and install it. In this way the package will be also
+available in R Standalone. <strong>Be aware</strong> that if the package has to be downloaded,
+the first time you run the script it might take a long time.</p>
+</div>
+</div>
+<div class="section" id="grass">
+<h2><a class="toc-backref" href="#id10">GRASS</a><a class="headerlink" href="#grass" title="Permalink to this headline">¶</a></h2>
+<p>Configuring GRASS is not much different from configuring SAGA. First, the path
+to the GRASS folder has to be defined, but only if you are running Windows.
+Additionally, a shell interpreter (usually <tt class="file docutils literal"><span class="pre">msys.exe</span></tt>, which can be found
+in most GRASS for Windows distributions) has to be defined and its path set up
+as well.</p>
+<p>By default, the processing framework tries to configure its GRASS connector to use the GRASS
+distribution that ships along with QGIS. This should work without problems in
+most systems, but if you experience problems, you might have to configure the GRASS connector manually.
+Also, if you want to use a different GRASS installation, you can change that setting
+and point to the folder where the other version is installed. GRASS 6.4 is needed
+for algorithms to work correctly.</p>
+<p>If you are running Linux, you just have to make sure that GRASS is correctly
+installed, and that it can be run without problem from a console.</p>
+<p>GRASS algorithms use a region for calculations. This region can be defined
+manually using values similar to the ones found in the SAGA configuration, or
+automatically, taking the minimum extent that covers all the input layers used
+to execute the algorithm each time. If the latter approach is the behavior you prefer, just
+check the <em class="guilabel">Use min covering region</em> option in the GRASS configuration
+parameters.</p>
+</div>
+<div class="section" id="gdal">
+<h2><a class="toc-backref" href="#id11">GDAL</a><a class="headerlink" href="#gdal" title="Permalink to this headline">¶</a></h2>
+<p>No additional configuration is needed to run GDAL algorithms. Since they are already
+incorporated into QGIS, the algorithms can infer their configuration from it.</p>
+</div>
+<div class="section" id="orfeo-toolbox">
+<h2><a class="toc-backref" href="#id12">Orfeo Toolbox</a><a class="headerlink" href="#orfeo-toolbox" title="Permalink to this headline">¶</a></h2>
+<p>Orfeo Toolbox (OTB) algorithms can be run from QGIS if you have OTB installed
+in your system and you have configured QGIS properly, so it can find all
+necessary files (command-line tools and libraries).</p>
+<p>As in the case of SAGA, OTB binaries are included in the stand-alone installer for
+Windows, but they are not included if you are running Linux, so you have to download
+and install the software yourself. Please check the OTB website for more
+information.</p>
+<p>Once OTB is installed, start QGIS, open the processing configuration dialog and
+configure the OTB algorithm provider. In the <em class="guilabel">Orfeo Toolbox (image analysis)</em>
+block, you will find all settings related to OTB. First, ensure that algorithms are
+enabled.</p>
+<p>Then, configure the path to the folder where OTB command-line tools and libraries
+are installed:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> Usually <em class="guilabel">OTB applications folder</em> points to <tt class="docutils literal"><span class="pre">/usr/lib/otb/applications</span></tt>
+and <em class="guilabel">OTB command line tools folder</em> is <tt class="docutils literal"><span class="pre">/usr/bin</span></tt>.</li>
+<li><a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a> If you use any of the installers that include OTB, such as OSGeo4W,
+there is no need for further configuration. Processing will detect the path
+automatically and will not show the corresponding configuration entries.
+Otherwise, fill the <em class="guilabel">OTB applications folder</em> and <em class="guilabel">OTB
+command line tools folder</em> parameters with the to the corresponding values for
+your installation.</li>
+</ul>
+</div>
+<div class="section" id="taudem">
+<h2><a class="toc-backref" href="#id13">TauDEM</a><a class="headerlink" href="#taudem" title="Permalink to this headline">¶</a></h2>
+<p>TauDEM (Terrain Analysis Using Digital Elevation Models) is a tools for the
+extraction and analysis of hydrological information from Digital Elevation Models
+(DEM). TauDEM can be used from QGIS if you have it installed in your system and
+configured QGIS properly, so it can find all necessary files.</p>
+<p>There are two versions of TauDEM tools: singlefile (TauDEM 5.0.6 or 5.1.2) and
+multifile (TauDEM 5.2.0). The difference between these versions in the supported
+inputs/outputs. Single files version accepts only single raster file and write
+single file as output. Multifile version accepts a directory with rasters and
+writes directory with rasters as output. Such directory should contain rasters
+that will be treated as a single DEM grid.</p>
+<p>TauDEM Processing provider supports both single- and multifile versions of TauDEM
+and even allows to use them simultaneously.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While TauDEM Processing provider supports TauDEM 5.0.6, 5.1.2 and 5.2.0 we
+recommend to use 5.1.2 and/or 5.2.0 as this versions have some new tools
+available, like Gage Watershed and TWI.</p>
+</div>
+<div class="section" id="installing-taudem-under-windows">
+<h3><a class="toc-backref" href="#id14">Installing TauDEM under Windows</a><a class="headerlink" href="#installing-taudem-under-windows" title="Permalink to this headline">¶</a></h3>
+<p>Please visit the <a class="reference external" href="http://hydrology.usu.edu/taudem/taudem5/downloads.html">TauDEM homepage</a>
+and download desired version of the precompiled binaries for your platform
+(32-bit or 64-bit), usually this is &#8220;Command Line Executables&#8221;. Also you need
+to download <a class="reference external" href="http://www.microsoft.com/en-us/download/details.aspx?id=36045">Microsoft HPC Pack 2012 MS-MPI</a>.
+First install Microsoft HPC Pack 2012 MS-MPI by runing <tt class="file docutils literal"><span class="pre">mpi_x64.Msi</span></tt> for
+64-bit platforms and <tt class="file docutils literal"><span class="pre">mpi_x86.Msi</span></tt> for 32-bit platforms.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you want to use TauDEM 5.0.6</p>
+</div>
+</div>
+<div class="section" id="installing-taudem-under-linux">
+<h3><a class="toc-backref" href="#id15">Installing TauDEM under Linux</a><a class="headerlink" href="#installing-taudem-under-linux" title="Permalink to this headline">¶</a></h3>
+<p>Unfortunately there are no packages for most Linux distributions, so you should
+compile TauDEM by yourself. As TauDEM uses MPI it is necessary to install first
+any MPI implementation e.g MPICH or OpenMPI. Use your favorite package manager
+to install MPICH or OpenMPI.</p>
+<p>Download TauDEM 5.2.0 source code package from <a class="reference external" href="https://github.com/dtarb/TauDEM/releases">GitHub repository</a>
+and extract archive contents. Open terminal and cd into <tt class="file docutils literal"><span class="pre">src</span></tt> directory inside
+extracted folder. Create build directory and cd into it</p>
+<div class="highlight-python"><pre>mkdir build
+cd build</pre>
+</div>
+<p>Configure your build (change install prefix if necessary) and compile</p>
+<div class="highlight-python"><pre>CXX=mpicxx cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+make</pre>
+</div>
+<p>When compilation finished install TauDEM tools by running</p>
+<div class="highlight-python"><pre>sudo make install</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Executable files will be installed into <tt class="file docutils literal"><span class="pre">bin</span></tt> subdirectory inside
+prefix you specified at the configure stage. For example if you specified
+prefix <tt class="file docutils literal"><span class="pre">/opt/taudem5.2</span></tt> than binaries will be installed into
+<tt class="file docutils literal"><span class="pre">/opt/taudem5.2/bin</span></tt>.</p>
+</div>
+<p>To use singlefile version &#8212; download source package <a class="reference external" href="http://hydrology.usu.edu/taudem/taudem5/TauDEM5PCsrc_512.zip">here</a>
+and perform above mentioned steps to compile and install it.</p>
+<p>Old TauDEM 5.0.6 also <a class="reference external" href="http://hydrology.usu.edu/taudem/taudem5/downloads5.0.html">available</a>.
+But before compiling this version it is necessary to edit some source files.</p>
+<p>Open the <tt class="file docutils literal"><span class="pre">linearpart.h</span></tt> file, and after line</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#include &quot;mpi.h&quot;</span>
+</pre></div>
+</div>
+<p>add a new line with</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#include &lt;stdint.h&gt;</span>
+</pre></div>
+</div>
+<p>so you&#8217;ll get</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#include &quot;mpi.h&quot;</span>
+<span class="c">#include &lt;stdint.h&gt;</span>
+</pre></div>
+</div>
+<p>Save the changes and close the file. Now open <tt class="file docutils literal"><span class="pre">tiffIO.h</span></tt>, find line <tt class="docutils literal"><span class="pre">#include</span> <span class="pre">&quot;stdint.h&quot;</span></tt>
+and replace quotes (<tt class="docutils literal"><span class="pre">&quot;&quot;</span></tt>) with <tt class="docutils literal"><span class="pre">&lt;&gt;</span></tt>, so you&#8217;ll get</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#include &lt;stdint.h&gt;</span>
+</pre></div>
+</div>
+<p>Save the changes and close the file.</p>
+<p>Now configure, compile and install TauDEM 5.0.6 using same commands as described
+above.</p>
+</div>
+<div class="section" id="configuring-taudem-provider">
+<h3><a class="toc-backref" href="#id16">Configuring TauDEM provider</a><a class="headerlink" href="#configuring-taudem-provider" title="Permalink to this headline">¶</a></h3>
+<p>Once TauDEM is installed, start QGIS, open the Processing options dialog from
+<em class="menuselection">Processing ‣ Options...</em> and configure the TauDEM algorithm
+provider. In the <em class="guilabel">Providers</em> group find <em class="guilabel">TauDEM (hydrologic analysis)</em>
+block, and expand it. Here you will see all settings related to TauDEM.</p>
+<p>First, ensure that algorithms are enabled, and activate provider if necessary.</p>
+<p>Next step is to configure MPI. The <em class="guilabel">MPICH/OpenMPI bin directory</em>
+setting used to define location of the <tt class="file docutils literal"><span class="pre">mpiexec</span></tt> program. In most Linux
+distributions you can safely leave this empty, as <tt class="file docutils literal"><span class="pre">mpiexec</span></tt> available in
+your <tt class="docutils literal"><span class="pre">PATH</span></tt>.</p>
+<p>The <em class="guilabel">Number of MPI parallel processes to use</em> is a second setting
+related to MPI. It defines number of processes that will be used to execute
+TauDEM commands. If you don&#8217;t know which value to use, it is better to leave
+this value unchanged.</p>
+<p>Now we need to configure the path to the folder(s) where TauDEM command-line
+tools are installed. As we already mention TauDEM provider supports both single-
+and multifile TauDEM, so there are two settings for TauDEM folders:</p>
+<ul class="simple">
+<li><em class="guilabel">TauDEM command line tools folder</em> used to set location of the
+singlefile tools</li>
+<li><em class="guilabel">TauDEM multifile command line tools folder</em> used to set location
+of the multifile tools</li>
+</ul>
+<p>If you have both TauDEM versions installed in different directories it is possible
+to specify both options.</p>
+<p>The last step is to define which TauDEM version to use:</p>
+<ul class="simple">
+<li>with <em class="guilabel">Enable multifile TauDEM tools</em> option checked you will use
+multifile TauDEM tools from directory, specified in the
+<em class="guilabel">TauDEM multifile command line tools folder</em>. Multifile tools have
+same name as singlefile with &#8220;(multifile)&#8221; suffix added</li>
+<li>with <em class="guilabel">Enable single TauDEM tools</em> option checked you will use
+multifile TauDEM tools from directory, specified in the
+<em class="guilabel">TauDEM command line tools folder</em>.</li>
+</ul>
+<p>It is possible to enable both tools simultaneously. In this case you will have
+two instances of each tool in toolbox and can use them in your analysis.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>Be careful with developing Processing models using TauDEM!</strong></p>
+<p class="last">As single- and multifile versions have different inputs, model created with
+singlefile algorithms will not work if only multifile algorithms are available.
+If you plan to share your model please specify which TauDEM version should be
+used or, better, provide two versions of your model: for single- and multifile
+TauDEM.</p>
+</div>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="commander.html" title="The QGIS Commander"
+             >next</a></li>
+        <li class="right" >
+          <a href="scripts.html" title="Writing new Processing algorithms as python scripts"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >QGIS processing framework</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

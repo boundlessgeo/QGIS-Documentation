@@ -1,0 +1,1257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Supported Data Formats</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Working with Vector Data" href="index.html" />
+    <link rel="next" title="The Symbol Library" href="style_library.html" />
+    <link rel="prev" title="Working with Vector Data" href="index.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/working_with_vector/supported_data.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="style_library.html" title="The Symbol Library"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Working with Vector Data"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Working with Vector Data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="index.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="style_library.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="supported-data-formats">
+<span id="supported-format"></span><h1>Supported Data Formats<a class="headerlink" href="#supported-data-formats" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#loading-a-layer-from-a-file" id="id3">Loading a layer from a file</a><ul>
+<li><a class="reference internal" href="#loading-specific-directory-based-layer" id="id4">Loading specific directory based layer</a></li>
+<li><a class="reference internal" href="#esri-shapefiles" id="id5">ESRI Shapefiles</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#delimited-text-files" id="id6">Delimited Text Files</a><ul>
+<li><a class="reference internal" href="#others-valuable-informations-for-advanced-users" id="id7">Others valuable informations for advanced users</a></li>
+<li><a class="reference internal" href="#loading-a-delimited-text-file" id="id8">Loading a delimited text file</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#openstreetmap-data" id="id9">OpenStreetMap data</a><ul>
+<li><a class="reference internal" href="#loading-openstreetmap-vectors" id="id10">Loading OpenStreetMap Vectors</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#postgis-layers" id="id11">PostGIS Layers</a><ul>
+<li><a class="reference internal" href="#creating-a-stored-connection" id="id12">Creating a stored Connection</a></li>
+<li><a class="reference internal" href="#loading-a-postgis-layer" id="id13">Loading a PostGIS Layer</a><ul>
+<li><a class="reference internal" href="#service-connection-file" id="id14">Service connection file</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#some-details-about-postgresql-layers" id="id15">Some details about PostgreSQL layers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#importing-data-into-postgresql" id="id16">Importing Data into PostgreSQL</a><ul>
+<li><a class="reference internal" href="#db-manager" id="id17">DB Manager</a></li>
+<li><a class="reference internal" href="#shp2pgsql" id="id18">shp2pgsql</a></li>
+<li><a class="reference internal" href="#ogr2ogr" id="id19">ogr2ogr</a></li>
+<li><a class="reference internal" href="#improving-performance" id="id20">Improving Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vector-layers-crossing-180-degrees-longitude" id="id21">Vector layers crossing 180° longitude</a><ul>
+<li><a class="reference internal" href="#usage" id="id22">Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#spatialite-layers" id="id23">SpatiaLite Layers</a><ul>
+<li><a class="reference internal" href="#creating-a-new-spatialite-layer" id="id24">Creating a new SpatiaLite layer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mssql-spatial-layers" id="id25">MSSQL Spatial Layers</a></li>
+<li><a class="reference internal" href="#oracle-spatial-layers" id="id26">Oracle Spatial Layers</a><ul>
+<li><a class="reference internal" href="#id1" id="id27">Creating a stored Connection</a></li>
+<li><a class="reference internal" href="#loading-an-oracle-spatial-layer" id="id28">Loading an Oracle Spatial Layer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#db2-spatial-layers" id="id29">DB2 Spatial Layers</a><ul>
+<li><a class="reference internal" href="#configuring-qgis-for-db2" id="id30">Configuring QGIS for DB2</a></li>
+<li><a class="reference internal" href="#id2" id="id31">Creating a stored Connection</a></li>
+<li><a class="reference internal" href="#loading-a-db2-spatial-layer" id="id32">Loading a DB2 Spatial Layer</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>QGIS uses the OGR library to read and write vector data formats,
+including ESRI shapefiles, MapInfo and MicroStation file formats, AutoCAD DXF,
+PostGIS, SpatiaLite, DB2, Oracle Spatial and MSSQL Spatial databases, and many more.
+GRASS vector and PostgreSQL support is supplied by native QGIS data provider
+plugins. Vector data can also be loaded in read mode from zip and gzip archives
+into QGIS. As of the date of this document, 69 vector formats are supported by
+the OGR library (see OGR-SOFTWARE-SUITE in <a class="reference internal" href="../literature_web/literature_and_web_references.html#literature-and-web"><em>Literature and Web References</em></a>). The
+complete list is available at <a class="reference external" href="http://www.gdal.org/ogr/ogr_formats.html">http://www.gdal.org/ogr/ogr_formats.html</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not all of the listed formats may work in QGIS for various reasons. For
+example, some require external commercial libraries, or the GDAL/OGR
+installation of your OS may not have been built to support the format you
+want to use. Only those formats that have been well tested will appear in
+the list of file types when loading a vector into QGIS. Other untested
+formats can be loaded by selecting <tt class="docutils literal"><span class="pre">*.*</span></tt>.</p>
+</div>
+<p>Working with GRASS vector data is described in Section <a class="reference internal" href="../grass_integration/grass_integration.html#sec-grass"><em>GRASS GIS Integration</em></a>.</p>
+<p>This section describes how to work with several common formats: ESRI
+shapefiles, PostGIS layers, SpatiaLite layers, OpenStreetMap vectors, and Comma
+Separated data (CSV). Many of the features available in QGIS work the same,
+regardless of the vector data source. This is by design, and it includes the
+identify, select, labelling and attributes functions.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>QGIS supports (multi)point, (multi)line, (multi)polygon, CircularString,
+CompoundCurve, CurvePolygon, MultiCurve, MultiSurface feature types, all
+with Z and/or M values.</p>
+<p class="last">You should note also that some drivers don&#8217;t support some of these feature
+types like CircularString, CompoundCurve, CurvePolygon, MultiCurve,
+MultiSurface feature type. QGIS will convert them to (multi)polygon feature.</p>
+</div>
+<div class="section" id="loading-a-layer-from-a-file">
+<span id="vector-loading-file"></span><span id="index-0"></span><h2><a class="toc-backref" href="#id3">Loading a layer from a file</a><a class="headerlink" href="#loading-a-layer-from-a-file" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../../_images/mActionAddOgrLayer.png"><img alt="addOgrLayer" src="../../../_images/mActionAddOgrLayer.png" style="width: 1.5em;" /></a> To load a layer from a file (like a Shapefile, a Mapinfo or a dxf
+layer), click on the <a class="reference internal" href="../../../_images/mActionAddOgrLayer.png"><img alt="addOgrLayer" src="../../../_images/mActionAddOgrLayer.png" style="width: 1.5em;" /></a> <sup>Add Vector Layer</sup> toolbar button; or
+type <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+V</span></tt>. This will bring up a new window (see
+<a class="reference internal" href="#figure-vector-1">figure_vector_1</a>).</p>
+<p id="figure-vector-1"><strong>Figure Vector 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/addvectorlayerdialog.png" src="../../../_images/addvectorlayerdialog.png" />
+<p class="caption">Add Vector Layer Dialog</p>
+</div>
+<p>From the available options check <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">File</em>. Click on
+<strong>[Browse]</strong>. That will bring up a standard open file dialog
+(see <a class="reference internal" href="#figure-vector-2">figure_vector_2</a>), which allows you to navigate the file system and load a
+shapefile or other supported data source. The selection box <em class="guilabel">Filter</em>
+<a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> allows you to preselect some OGR-supported file formats.</p>
+<p>You can also select the encoding for the file if desired.</p>
+<p id="figure-vector-2"><strong>Figure Vector 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/shapefileopendialog.png" src="../../../_images/shapefileopendialog.png" />
+<p class="caption">Open an OGR Supported Vector Layer Dialog</p>
+</div>
+<p>Selecting a file from the list and clicking <strong>[Open]</strong> loads it into QGIS.
+<a class="reference internal" href="#figure-vector-3">Figure_vector_3</a> shows QGIS after loading the <tt class="file docutils literal"><span class="pre">alaska.shp</span></tt> file.</p>
+<p id="figure-vector-3"><strong>Figure Vector 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/shapefileloaded.png" src="../../../_images/shapefileloaded.png" />
+<p class="caption">QGIS with Shapefile of Alaska loaded</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Layer Colors</strong></p>
+<p class="last">When you add a layer to the map, it is assigned a random color. When adding
+more than one layer at a time, different colors are assigned to each layer.</p>
+</div>
+<p>Once a file is loaded, you can zoom around it using the map navigation tools.
+To change the style of a layer, open the <em class="guilabel">Layer Properties</em> dialog
+by double clicking on the layer name or by right-clicking on the name in the
+legend and choosing <em class="menuselection">Properties</em> from the context menu. See
+section <a class="reference internal" href="vector_properties.html#vector-style-menu"><em>Style Menu</em></a> for more information on setting symbology of
+vector layers.</p>
+<div class="admonition tip" id="tip-load-from-external-drive-osx">
+<p class="first admonition-title">Tip</p>
+<p><strong>Load layer and project from mounted external drives on OS X</strong></p>
+<p class="last">On OS X, portable drives that are mounted beside the primary hard drive
+do not show up as expected under <em class="menuselection">File ‣ Open Project</em>.
+We are working on a more OSX-native open/save dialog to fix this.
+As a workaround, you can type <tt class="docutils literal"><span class="pre">/Volumes</span></tt> in the <em class="guilabel">File name</em> box
+and press <tt class="kbd docutils literal"><span class="pre">Enter</span></tt>. Then you can navigate to external drives and network
+mounts.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">DXF files containing several geometry types (point, line and/or
+polygon), the name of the layer will be made from <em>&lt;filename.dxf&gt; entities
+&lt;geometry type&gt;</em>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also drag and drop the file(s) into the <em class="guilabel">Layers
+Panel</em> from either the files browser or the QGIS Browser panel. If the layer
+contains several geometry types, a new windows will ask you to select the
+sublayer. This often occurs with GPX, Mapinfo or DXF files format.</p>
+</div>
+<div class="section" id="loading-specific-directory-based-layer">
+<span id="vector-loading-directory-based-layer"></span><span id="index-1"></span><h3><a class="toc-backref" href="#id4">Loading specific directory based layer</a><a class="headerlink" href="#loading-specific-directory-based-layer" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionAddOgrLayer.png"><img alt="addOgrLayer" src="../../../_images/mActionAddOgrLayer.png" style="width: 1.5em;" /></a> To load some specific format like ArcInfo Binary Coverage, UK.
+National Transfer Format, as well as the raw TIGER format of the US Census
+Bureau or OpenfileGDB, click on the <a class="reference internal" href="../../../_images/mActionAddOgrLayer.png"><img alt="addOgrLayer" src="../../../_images/mActionAddOgrLayer.png" style="width: 1.5em;" /></a> <sup>Add Vector Layer</sup>
+toolbar button or press <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+V</span></tt> to open the
+<em class="guilabel">Add Vector Layer</em> dialog. Select <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" />
+<em class="guilabel">Directory</em> as <em class="guilabel">Source type</em>. Change the file type filter
+<em class="guilabel">Files of type</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> to the format you want to open, for
+example &#8216;Arc/Info Binary Coverage&#8217;. Navigate to the directory that contains the
+coverage file or the file, and select it.</p>
+</div>
+<div class="section" id="esri-shapefiles">
+<span id="vector-shapefiles"></span><span id="index-2"></span><h3><a class="toc-backref" href="#id5">ESRI Shapefiles</a><a class="headerlink" href="#esri-shapefiles" title="Permalink to this headline">¶</a></h3>
+<p>The ESRI shapefile is still one of the most used vector file format in QGIS.
+However, this file format has some limitation that some other file format have
+not (like Geopackage, spatialite). Support is provided by the
+<span class="target" id="index-3"></span>OGR Simple Feature Library (<a class="reference external" href="http://www.gdal.org/ogr/">http://www.gdal.org/ogr/</a>).</p>
+<p>A shapefile actually consists of several files. The following three are
+required:</p>
+<ol class="arabic simple">
+<li><tt class="file docutils literal"><span class="pre">.shp</span></tt> file containing the feature geometries</li>
+<li><tt class="file docutils literal"><span class="pre">.dbf</span></tt> file containing the attributes in dBase format</li>
+<li><tt class="file docutils literal"><span class="pre">.shx</span></tt> index file</li>
+</ol>
+<p>Shapefiles also can include a file with a <tt class="file docutils literal"><span class="pre">.prj</span></tt> suffix, which contains
+the projection information. While it is very useful to have a projection file,
+it is not mandatory. A shapefile dataset can contain additional files. For
+further details, see the ESRI technical specification at
+<a class="reference external" href="http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf</a>.</p>
+<p><strong>Improving Performance for Shapefiles</strong></p>
+<p>To improve the performance of drawing a shapefile, you can create a spatial
+index. A spatial index will improve the speed of both zooming and panning.
+Spatial indexes used by QGIS have a <tt class="file docutils literal"><span class="pre">.qix</span></tt> extension.</p>
+<p>Use these steps to create the index:</p>
+<ul class="simple">
+<li>Load a shapefile by clicking on the <a class="reference internal" href="../../../_images/mActionAddOgrLayer.png"><img alt="addOgrLayer" src="../../../_images/mActionAddOgrLayer.png" style="width: 1.5em;" /></a> <sup>Add Vector Layer</sup>
+toolbar button or pressing <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+V</span></tt>.</li>
+<li>Open the <em class="guilabel">Layer Properties</em> dialog by double-clicking on the
+shapefile name in the legend or by right-clicking and choosing
+<em class="menuselection">Properties</em> from the context menu.</li>
+<li>In the <em class="guilabel">General</em> tab, click the <strong>[Create Spatial Index]</strong> button.</li>
+</ul>
+<p><strong>Problem loading a shape .prj file</strong></p>
+<p>If you load a shapefile with a <tt class="file docutils literal"><span class="pre">.prj</span></tt> file and QGIS is not able to read the
+coordinate reference system from that file, you will need to define the proper
+projection manually within the <em class="guilabel">General</em> tab of the
+<em class="guilabel">Layer Properties</em> dialog of the layer by clicking the
+<strong>[Specify...]</strong>  button. This is due to the fact that <tt class="file docutils literal"><span class="pre">.prj</span></tt> files
+often do not provide the complete projection parameters as used in QGIS and
+listed in the <em class="guilabel">CRS</em> dialog.</p>
+<p>For the same reason, if you create a new shapefile with QGIS, two different
+projection files are created: a <tt class="file docutils literal"><span class="pre">.prj</span></tt> file with limited projection
+parameters, compatible with ESRI software, and a <tt class="file docutils literal"><span class="pre">.qpj</span></tt> file, providing
+the complete parameters of the used CRS. Whenever QGIS finds a <tt class="file docutils literal"><span class="pre">.qpj</span></tt>
+file, it will be used instead of the <tt class="file docutils literal"><span class="pre">.prj</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="delimited-text-files">
+<span id="vector-csv"></span><span id="index-4"></span><h2><a class="toc-backref" href="#id6">Delimited Text Files</a><a class="headerlink" href="#delimited-text-files" title="Permalink to this headline">¶</a></h2>
+<p>Tabular data is a very common and widely used format because of its simplicity
+and readability &#8211; data can be viewed and edited even in a plain text editor.
+A delimited text file is an attribute table with each column separated by a
+defined character and each row separated by a line break. The first row usually
+contains the column names. A common type of delimited text file is a CSV
+(Comma Separated Values), with each column separated by a comma.</p>
+<p>Such data files can also contain positional information in two main forms:</p>
+<ul class="simple">
+<li>As point coordinates in separate columns</li>
+<li>As well-known text (WKT) representation of geometry</li>
+</ul>
+<p>QGIS allows you to load a delimited text file as a layer or ordinal table. But
+first check that the file meets the following requirements:</p>
+<ol class="arabic simple">
+<li>The file must have a delimited header row of field names. This must be the first line in the
+text file.</li>
+<li>The header row must contain field(s) with geometry definition. These field(s)
+can have any name.</li>
+<li>The X and Y coordinates (if geometry is defined by coordinates) must be
+specified as numbers. The coordinate system is not important.</li>
+</ol>
+<p>As an example of a valid text file, we import the elevation point data file
+<tt class="file docutils literal"><span class="pre">elevp.csv</span></tt> that comes with the QGIS sample dataset (see section
+<a class="reference internal" href="../introduction/getting_started.html#label-sampledata"><em>Sample Data</em></a>):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">X</span><span class="p">;</span><span class="n">Y</span><span class="p">;</span><span class="n">ELEV</span>
+<span class="o">-</span><span class="mi">300120</span><span class="p">;</span><span class="mi">7689960</span><span class="p">;</span><span class="mi">13</span>
+<span class="o">-</span><span class="mi">654360</span><span class="p">;</span><span class="mi">7562040</span><span class="p">;</span><span class="mi">52</span>
+<span class="mi">1640</span><span class="p">;</span><span class="mi">7512840</span><span class="p">;</span><span class="mi">3</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Some items to note about the text file:</p>
+<ol class="arabic simple">
+<li>The example text file uses <tt class="docutils literal"><span class="pre">;</span></tt> (semicolon) as delimiter. Any character can
+be used to delimit the fields.</li>
+<li>The first row is the header row. It contains the fields <tt class="docutils literal"><span class="pre">X</span></tt>, <tt class="docutils literal"><span class="pre">Y</span></tt> and
+<tt class="docutils literal"><span class="pre">ELEV</span></tt>.</li>
+<li>No quotes (<tt class="docutils literal"><span class="pre">&quot;</span></tt>) are used to delimit text fields.</li>
+<li>The X coordinates are contained in the <tt class="docutils literal"><span class="pre">X</span></tt> field.</li>
+<li>The Y coordinates are contained in the <tt class="docutils literal"><span class="pre">Y</span></tt> field.</li>
+</ol>
+<div class="section" id="others-valuable-informations-for-advanced-users">
+<h3><a class="toc-backref" href="#id7">Others valuable informations for advanced users</a><a class="headerlink" href="#others-valuable-informations-for-advanced-users" title="Permalink to this headline">¶</a></h3>
+<p>Features with curved geometries (CircularString, CurvePolygon and CompoundCurve) are
+supported. Here are three examples of such geometry types as a delimited text
+with WKT geometries:</p>
+<div class="highlight-python"><pre>Label;WKT_geom
+CircularString;CIRCULARSTRING(268 415,227 505,227 406)
+CurvePolygon;CURVEPOLYGON(CIRCULARSTRING(1 3, 3 5, 4 7, 7 3, 1 3))
+CompoundCurve;COMPOUNDCURVE((5 3, 5 13), CIRCULARSTRING(5 13, 7 15,
+  9 13), (9 13, 9 3), CIRCULARSTRING(9 3, 7 1, 5 3))</pre>
+</div>
+<p>Delimited Text supports also Z and M coordinates in geometries:</p>
+<div class="highlight-python"><pre>LINESTRINGM(10.0 20.0 30.0, 11.0 21.0 31.0)</pre>
+</div>
+</div>
+<div class="section" id="loading-a-delimited-text-file">
+<span id="vector-loading-csv"></span><h3><a class="toc-backref" href="#id8">Loading a delimited text file</a><a class="headerlink" href="#loading-a-delimited-text-file" title="Permalink to this headline">¶</a></h3>
+<p>Click the toolbar icon <a class="reference internal" href="../../../_images/delimited_text.png"><img alt="delimitedText" src="../../../_images/delimited_text.png" style="width: 1.5em;" /></a> <sup>Add Delimited Text Layer</sup> in the
+<em class="guilabel">Manage layers</em> toolbar to open the <em class="guilabel">Create a Layer from a
+Delimited Text File</em> dialog, as shown in <a class="reference internal" href="#figure-delimited-text-1">figure_delimited_text_1</a>.</p>
+<p id="figure-delimited-text-1"><strong>Figure Delimited Text 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/delimited_text_dialog.png" src="../../../_images/delimited_text_dialog.png" />
+<p class="caption">Delimited Text Dialog</p>
+</div>
+<p>First, select the file to import (e.g., <tt class="file docutils literal"><span class="pre">qgis_sample_data/csv/elevp.csv</span></tt>)
+by clicking on the <strong>[Browse]</strong> button. Once the file is selected, QGIS
+attempts to parse the file with the most recently used delimiter. To enable QGIS to properly parse the
+file, it is important to select the correct delimiter. You can specify a
+delimiter by activating <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Custom delimiters</em>, or by activating
+<img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Regular expression delimiter</em> and entering
+text into the <em class="guilabel">Expression</em> field. For example, to
+change the delimiter to tab, use <tt class="docutils literal"><span class="pre">\t</span></tt> (this is a regular expression for the
+tab character).</p>
+<p>Once the file is parsed, set <em class="guilabel">Geometry definition</em> to
+<img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /><em class="guilabel">Point coordinates</em> and choose the <tt class="docutils literal"><span class="pre">X</span></tt> and <tt class="docutils literal"><span class="pre">Y</span></tt>
+fields from the dropdown lists. If the coordinates are defined as
+degrees/minutes/seconds, activate the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">DMS coordinates</em>
+checkbox.</p>
+<p>Finally, enter a layer name (e.g., <tt class="file docutils literal"><span class="pre">elevp</span></tt>), as shown in
+<a class="reference internal" href="#figure-delimited-text-1">figure_delimited_text_1</a>. To add the layer to the map, click <strong>[OK]</strong>. The
+delimited text file now behaves as any other map layer in QGIS.</p>
+<p>There is also a helper option that allows you to trim leading and trailing
+spaces from fields &#8212; <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Trim fields</em>. Also, it is possible
+to <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Discard empty fields</em>. If necessary, you can force a comma
+to be the decimal separator by activating <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Decimal separator is
+comma</em>.</p>
+<p>If spatial information is represented by WKT, activate the <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" />
+<em class="guilabel">Well Known Text</em> option and select the field with the WKT definition for
+point, line or polygon objects. If the file contains non-spatial data, activate
+<img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">No geometry (attribute only table)</em> and it will be
+loaded as an ordinal table.</p>
+<p>Additionally, you can enable:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use spatial index</em> to improve the performance of displaying
+and spatially selecting features.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use subset index</em>.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Watch file</em> to watch for changes to the file by other
+applications while QGIS is running.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="openstreetmap-data">
+<span id="vector-osm"></span><span id="index-5"></span><h2><a class="toc-backref" href="#id9">OpenStreetMap data</a><a class="headerlink" href="#openstreetmap-data" title="Permalink to this headline">¶</a></h2>
+<p>In recent years, the OpenStreetMap project has gained popularity because in many
+countries no free geodata such as digital road maps are available. The objective
+of the OSM project is to create a free editable map of the world from GPS data,
+aerial photography or local knowledge. To support this objective, QGIS
+provides support for OSM data.</p>
+<div class="section" id="loading-openstreetmap-vectors">
+<span id="open-street-map"></span><h3><a class="toc-backref" href="#id10">Loading OpenStreetMap Vectors</a><a class="headerlink" href="#loading-openstreetmap-vectors" title="Permalink to this headline">¶</a></h3>
+<p>QGIS integrates OpenStreetMap import as a core functionality.</p>
+<ul class="simple">
+<li>To connect to the OSM server and download data, open the menu
+<em class="menuselection">Vector ‣ Openstreetmap ‣ Load data</em>. You can skip this
+step if you already obtained an <tt class="file docutils literal"><span class="pre">.osm</span></tt> XML file using JOSM, Overpass API or
+any other source.</li>
+<li>The menu <em class="menuselection">Vector ‣ Openstreetmap ‣ Import topology from
+an XML file</em> will convert your <tt class="file docutils literal"><span class="pre">.osm</span></tt> file into a SpatiaLite database
+and create a corresponding database connection.</li>
+<li>The menu <em class="menuselection">Vector ‣ Openstreetmap ‣ Export topology to
+SpatiaLite</em> then allows you to open the database connection, select the type
+of data you want (points, lines, or polygons) and choose tags to import.
+This creates a SpatiaLite geometry layer that you can add to your
+project by clicking on the <a class="reference internal" href="../../../_images/mActionAddSpatiaLiteLayer.png"><img alt="addSpatiaLiteLayer" src="../../../_images/mActionAddSpatiaLiteLayer.png" style="width: 1.5em;" /></a>
+<sup>Add SpatiaLite Layer</sup> toolbar button or by selecting the
+<a class="reference internal" href="../../../_images/mActionAddSpatiaLiteLayer.png"><img alt="addSpatiaLiteLayer" src="../../../_images/mActionAddSpatiaLiteLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Add SpatiaLite Layer...</em> option
+from the <em class="menuselection">Layer</em> menu (see section <a class="reference internal" href="#label-spatialite"><em>SpatiaLite Layers</em></a>).</li>
+</ul>
+</div>
+</div>
+<div class="section" id="postgis-layers">
+<span id="label-postgis"></span><span id="index-6"></span><h2><a class="toc-backref" href="#id11">PostGIS Layers</a><a class="headerlink" href="#postgis-layers" title="Permalink to this headline">¶</a></h2>
+<p>PostGIS layers are stored in a PostgreSQL database. The advantages of PostGIS
+are the spatial indexing, filtering and query capabilities it provides. Using
+PostGIS, vector functions such as select and identify work more accurately than they do
+with OGR layers in QGIS.</p>
+<div class="section" id="creating-a-stored-connection">
+<span id="vector-create-stored-connection"></span><h3><a class="toc-backref" href="#id12">Creating a stored Connection</a><a class="headerlink" href="#creating-a-stored-connection" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionAddPostgisLayer.png"><img alt="addPostgisLayer" src="../../../_images/mActionAddPostgisLayer.png" style="width: 1.5em;" /></a> The first time you use a PostGIS data source, you must
+create a connection to the PostgreSQL database that contains the data. Begin by
+clicking on the <a class="reference internal" href="../../../_images/mActionAddPostgisLayer.png"><img alt="addPostgisLayer" src="../../../_images/mActionAddPostgisLayer.png" style="width: 1.5em;" /></a> <sup>Add PostGIS Layer</sup> toolbar
+button, selecting the <a class="reference internal" href="../../../_images/mActionAddPostgisLayer.png"><img alt="addPostgisLayer" src="../../../_images/mActionAddPostgisLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Add PostGIS Layer...</em>
+option from the <em class="menuselection">Layer</em> menu, or typing <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+D</span></tt>. You
+can also open the <em class="guilabel">Add Vector Layer</em> dialog and select
+<img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Database</em>. The <em class="guilabel">Add PostGIS Table(s)</em>
+dialog will be displayed. To access the connection manager, click on the
+<strong>[New]</strong> button to display the <em class="guilabel">Create a New PostGIS Connection</em>
+dialog. The parameters required for a connection are:</p>
+<ul class="simple">
+<li><strong>Name</strong>: A name for this connection. It can be the same as <em>Database</em>.</li>
+<li><strong>Service</strong>: Service parameter to be used alternatively to hostname/port (and
+potentially database). This can be defined in <tt class="file docutils literal"><span class="pre">pg_service.conf</span></tt>.
+Check the <a class="reference internal" href="#pg-service-file"><em>Service connection file</em></a> section for more details.</li>
+<li><strong>Host</strong>: Name of the database host. This must be a resolvable host name
+such as would be used to open a telnet connection or ping the host. If the
+database is on the same computer as QGIS, simply enter <em>&#8216;localhost&#8217;</em> here.</li>
+<li><strong>Port</strong>: Port number the PostgreSQL database server listens on. The default
+port is 5432.</li>
+<li><strong>Database</strong>: Name of the database.</li>
+<li><strong>SSL mode</strong>: How the SSL connection will be negotiated with the server. Note
+that massive speed-ups in PostGIS layer rendering can be achieved by disabling
+SSL in the connection editor. The following options are available:<ul>
+<li>Disable: Only try an unencrypted SSL connection.</li>
+<li>Allow: Try a non-SSL connection. If that fails, try an SSL connection.</li>
+<li>Prefer (the default): Try an SSL connection. If that fails, try a
+non-SSL connection.</li>
+<li>Require: Only try an SSL connection.</li>
+</ul>
+</li>
+<li><strong>Username</strong>: User name used to log in to the database.</li>
+<li><strong>Password</strong>: Password used with <em>Username</em> to connect to the database.</li>
+</ul>
+<p>Optionally, you can activate the following checkboxes:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Save Username</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Save Password</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Only look in the geometry_columns table</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Don&#8217;t resolve type of unrestricted columns (GEOMETRY)</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Only look in the &#8216;public&#8217; schema</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Also list tables with no geometry</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use estimated table metadata</em></li>
+</ul>
+<p>Once all parameters and options are set, you can test the connection
+by clicking on the <strong>[Test Connect]</strong> button.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Use estimated table metadata to speed up operations</strong></p>
+<p class="last">When initializing layers, various queries may be needed to establish the
+characteristics of the geometries stored in the database table. When the
+<em class="guilabel">Use estimated table metadata</em> option is checked, these queries
+examine only a sample of the rows and use the table statistics, rather than
+the entire table. This can drastically speed up operations on large datasets,
+but may result in incorrect characterization of layers (eg. the feature count
+of filtered layers will not be accurately determined) and may even cause strange
+behaviour in case columns that are supposed to be unique actually are not.</p>
+</div>
+</div>
+<div class="section" id="loading-a-postgis-layer">
+<span id="vector-loading-postgis"></span><h3><a class="toc-backref" href="#id13">Loading a PostGIS Layer</a><a class="headerlink" href="#loading-a-postgis-layer" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionAddPostgisLayer.png"><img alt="addPostgisLayer" src="../../../_images/mActionAddPostgisLayer.png" style="width: 1.5em;" /></a> Once you have one or more connections defined, you can
+load layers from the PostgreSQL database. Of course, this requires having data in
+PostgreSQL. See section <a class="reference internal" href="#vector-import-data-in-postgis"><em>Importing Data into PostgreSQL</em></a> for a discussion on
+importing data into the database.</p>
+<p>To load a layer from PostGIS, perform the following steps:</p>
+<ul class="simple">
+<li>If the <em class="guilabel">Add PostGIS layers</em> dialog is not already open,
+selecting the <a class="reference internal" href="../../../_images/mActionAddPostgisLayer.png"><img alt="addPostgisLayer" src="../../../_images/mActionAddPostgisLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Add PostGIS Layer...</em>
+option from the <em class="menuselection">Layer</em> menu or typing <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+D</span></tt>
+opens the dialog.</li>
+<li>Choose the connection from the drop-down list and click <strong>[Connect]</strong>.</li>
+<li>Select or unselect <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Also list tables with no geometry</em>.</li>
+<li>Optionally, use some <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Search Options</em> to define
+which features to load from the layer, or use the <strong>[Build query]</strong> button
+to start the <em class="guilabel">Query builder</em> dialog.</li>
+<li>Find the layer(s) you wish to add in the list of available layers.</li>
+<li>Select it by clicking on it. You can select multiple layers by holding
+down the <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> key while clicking. See section
+<a class="reference internal" href="vector_properties.html#vector-query-builder"><em>Query Builder</em></a> for information on using the PostgreSQL
+Query Builder to further define the layer.</li>
+<li>Click on the <strong>[Add]</strong> button to add the layer to the map.</li>
+</ul>
+<div class="admonition tip" id="tip-postgis-layers">
+<p class="first admonition-title">Tip</p>
+<p><strong>PostGIS Layers</strong></p>
+<p class="last">Normally, a PostGIS layer is defined by an entry in the geometry_columns
+table. QGIS can load layers that do not have an entry in the geometry_columns
+table. This includes both tables and views. Defining a spatial view provides
+a powerful means to visualize your data. Refer to your PostgreSQL manual for
+information on creating views.</p>
+</div>
+<div class="section" id="service-connection-file">
+<span id="pg-service-file"></span><h4><a class="toc-backref" href="#id14">Service connection file</a><a class="headerlink" href="#service-connection-file" title="Permalink to this headline">¶</a></h4>
+<p>The service connection file allows PostgreSQL connection parameters to be
+associated with a single service name. That service name can then be specified
+by a client and the associated settings will be used.</p>
+<p>It&#8217;s called <tt class="file docutils literal"><span class="pre">.pg_service.conf</span></tt> under *nix systems (GNU/Linux, macOS etc.) and
+<tt class="file docutils literal"><span class="pre">pg_service.conf</span></tt> on Windows.</p>
+<p>The service file looks like:</p>
+<div class="highlight-python"><pre>[water_service]
+host=192.168.0.45
+port=5433
+dbname=gisdb
+user=paul
+password=paulspass
+
+[wastewater_service]
+host=dbserver.com
+dbname=water
+user=waterpass</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There are two services in the above example: <tt class="docutils literal"><span class="pre">water_service</span></tt>
+and <tt class="docutils literal"><span class="pre">wastewater_service</span></tt>. You can use these to connect from QGIS,
+pgAdmin etc. by specifying only the name of the service you want to
+connect to (without the enclosing brackets).
+If you want to use the service with <tt class="docutils literal"><span class="pre">psql</span></tt> you need to do something
+like <tt class="docutils literal"><span class="pre">export</span> <span class="pre">PGSERVICE=water_service</span></tt> before doing your psql commands.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can find all the parameters <a class="reference external" href="https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-PARAMKEYWORDS">here</a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you don&#8217;t want to save the passwords in the service file you can
+use the <a class="reference external" href="https://www.postgresql.org/docs/current/static/libpq-pgpass.html">.pg_pass</a>
+option.</p>
+</div>
+<p>On *nix operating systems (GNU/Linux, macOS etc.) you can save the
+<tt class="file docutils literal"><span class="pre">.pg_service.conf</span></tt> file in the user&#8217;s home directory and
+the PostgreSQL clients will automatically be aware of it.
+For example, if the logged user is <tt class="docutils literal"><span class="pre">web</span></tt>, <tt class="file docutils literal"><span class="pre">.pg_service.conf</span></tt> should
+be saved in the <tt class="file docutils literal"><span class="pre">/home/web/</span></tt> directory in order to directly work (without
+specifying any other environment variables).</p>
+<p>You can specify the location of the service file by creating a <tt class="docutils literal"><span class="pre">PGSERVICEFILE</span></tt>
+environment variable (e.g. run the <tt class="docutils literal"><span class="pre">export</span> <span class="pre">PGSERVICEFILE=/home/web/.pg_service.conf</span></tt>
+command under your *nix OS to temporarily set the <tt class="docutils literal"><span class="pre">PGSERVICEFILE</span></tt> variable)</p>
+<p>You can also make the service file available system-wide (all users) either by
+placing it at <tt class="docutils literal"><span class="pre">pg_config</span> <span class="pre">--sysconfdir``**/.pg_service.conf**</span>&nbsp; <span class="pre">or</span> <span class="pre">by</span> <span class="pre">adding</span> <span class="pre">the</span>
+<span class="pre">``PGSYSCONFDIR</span></tt> environment variable to specify the directory containing
+the service file. If service definitions with the same name exist in the user
+and the system file, the user file takes precedence.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>There are some caveats under Windows:</p>
+<ul class="last simple">
+<li>The service file should be saved as <tt class="file docutils literal"><span class="pre">pg_service.conf</span></tt>
+and not as <tt class="file docutils literal"><span class="pre">.pg_service.conf</span></tt>.</li>
+<li>The service file should be saved in Unix format in order to work.
+One way to do it is to open it with <a class="reference external" href="https://notepad-plus-plus.org/">Notepad++</a>
+and <tt class="docutils literal"><span class="pre">Edit</span> <span class="pre">-&gt;</span> <span class="pre">EOL</span> <span class="pre">Conversion</span> <span class="pre">-&gt;</span> <span class="pre">UNIX</span> <span class="pre">Format</span> <span class="pre">-&gt;</span> <span class="pre">File</span> <span class="pre">save</span></tt>.</li>
+<li>After adding an environment variable you may also need to restart
+the computer.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="some-details-about-postgresql-layers">
+<span id="sec-postgis-details"></span><h3><a class="toc-backref" href="#id15">Some details about PostgreSQL layers</a><a class="headerlink" href="#some-details-about-postgresql-layers" title="Permalink to this headline">¶</a></h3>
+<p>This section contains some details on how QGIS accesses PostgreSQL layers.
+Most of the time, QGIS should simply provide you with a list of database
+tables that can be loaded, and it will load them on request. However, if you have
+trouble loading a PostgreSQL table into QGIS, the information below may
+help you understand any QGIS messages and give you direction on changing
+the PostgreSQL table or view definition to allow QGIS to load it.</p>
+<p>QGIS requires that PostgreSQL layers contain a column that can be used
+as a unique key for the layer. For tables, this usually means that the table
+needs a primary key, or a column with a unique constraint on it. In QGIS,
+this column needs to be of type int4 (an integer of size 4 bytes).
+Alternatively, the ctid column can be used as primary key. If a table lacks
+these items, the oid column will be used instead. Performance will be
+improved if the column is indexed (note that primary keys are automatically
+indexed in PostgreSQL).</p>
+<p>If the PostgreSQL layer is a view, the same requirement exists, but views
+do not have primary keys or columns with unique constraints on them. You have to
+define a primary key field (has to be integer) in the QGIS dialog before you
+can load the view. If a suitable column does not exist in the view, QGIS
+will not load the layer. If this occurs, the solution is to alter the view so
+that it does include a suitable column (a type of integer and either a primary
+key or with a unique constraint, preferably indexed).</p>
+<p>QGIS offers a checkbox <strong>Select at id</strong> that is activated by default. This
+option gets the ids without the attributes which is faster in most cases. It
+can make sense to disable this option when you use expensive views.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Backup of PostGIS database with layers saved by QGIS</strong></p>
+<p class="last">If you want to make a backup of your PostGIS database using the <tt class="file docutils literal"><span class="pre">pg_dump</span></tt> and
+<tt class="file docutils literal"><span class="pre">pg_restore</span></tt> commands, and the default layer styles as saved by QGIS fail to
+restore afterwards, you need to set the XML option to <tt class="file docutils literal"><span class="pre">DOCUMENT</span></tt> and the
+restore will work.</p>
+</div>
+<p>QGIS allows to filter features already on server side. Check the
+<a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Execute expressions on postgres server-side if
+possible (Experimental)</em> checkbox to do so. Only supported expressions will be
+sent to the database. Expressions using unsupported operators or functions will
+gracefully fallback to local evaluation.</p>
+</div>
+</div>
+<div class="section" id="importing-data-into-postgresql">
+<span id="vector-import-data-in-postgis"></span><span id="index-7"></span><h2><a class="toc-backref" href="#id16">Importing Data into PostgreSQL</a><a class="headerlink" href="#importing-data-into-postgresql" title="Permalink to this headline">¶</a></h2>
+<p>Data can be imported into PostgreSQL/PostGIS using several tools, including the
+DB Manager plugin and the command line tools shp2pgsql and ogr2ogr.</p>
+<div class="section" id="db-manager">
+<h3><a class="toc-backref" href="#id17">DB Manager</a><a class="headerlink" href="#db-manager" title="Permalink to this headline">¶</a></h3>
+<p>QGIS comes with a core plugin named <a class="reference internal" href="../../../_images/dbmanager.png"><img alt="dbManager" src="../../../_images/dbmanager.png" style="width: 1.5em;" /></a> <sup>DB Manager</sup>. It can
+be used to load shapefiles and other data formats, and it includes support for
+schemas. See section <a class="reference internal" href="../plugins/plugins_db_manager.html#dbmanager"><em>DB Manager Plugin</em></a> for more information.</p>
+</div>
+<div class="section" id="shp2pgsql">
+<h3><a class="toc-backref" href="#id18">shp2pgsql</a><a class="headerlink" href="#shp2pgsql" title="Permalink to this headline">¶</a></h3>
+<p>PostGIS includes an utility called <strong>shp2pgsql</strong> that can be used to import
+shapefiles into a PostGIS-enabled database. For example, to import a
+shapefile named <tt class="file docutils literal"><span class="pre">lakes.shp</span></tt> into a PostgreSQL database named
+<tt class="docutils literal"><span class="pre">gis_data</span></tt>, use the following command:</p>
+<div class="highlight-python"><pre>shp2pgsql -s 2964 lakes.shp lakes_new | psql gis_data</pre>
+</div>
+<p>This creates a new layer named <tt class="docutils literal"><span class="pre">lakes_new</span></tt> in the <tt class="docutils literal"><span class="pre">gis_data</span></tt> database.
+The new layer will have a spatial reference identifier (SRID) of 2964.
+See section <a class="reference internal" href="../working_with_projections/working_with_projections.html#label-projections"><em>Working with Projections</em></a> for more information on spatial
+reference systems and projections.</p>
+<div class="admonition tip" id="tip-export-from-postgis">
+<span id="index-8"></span><p class="first admonition-title">Tip</p>
+<p><strong>Exporting datasets from PostGIS</strong></p>
+<p class="last">Like the import tool <strong>shp2pgsql</strong>, there is also a tool to export
+PostGIS datasets as shapefiles: <strong>pgsql2shp</strong>. This is shipped within
+your PostGIS distribution.</p>
+</div>
+</div>
+<div class="section" id="ogr2ogr">
+<span id="index-9"></span><h3><a class="toc-backref" href="#id19">ogr2ogr</a><a class="headerlink" href="#ogr2ogr" title="Permalink to this headline">¶</a></h3>
+<p>Besides <strong>shp2pgsql</strong> and <strong>DB Manager</strong>, there is another tool for feeding geodata
+in PostGIS: <strong>ogr2ogr</strong>. This is part of your GDAL installation.</p>
+<p>To import a shapefile into PostGIS, do the following:</p>
+<div class="highlight-python"><pre>ogr2ogr -f "PostgreSQL" PG:"dbname=postgis host=myhost.de user=postgres
+password=topsecret" alaska.shp</pre>
+</div>
+<p>This will import the shapefile <tt class="file docutils literal"><span class="pre">alaska.shp</span></tt> into the PostGIS database
+<em>postgis</em> using the user <em>postgres</em> with the password <em>topsecret</em> on host
+server <em>myhost.de</em>.</p>
+<p>Note that OGR must be built with PostgreSQL to support PostGIS.
+You can verify this by typing (in <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a>)</p>
+<div class="highlight-python"><pre>ogrinfo --formats | grep -i post</pre>
+</div>
+<p>If you prefer to use PostgreSQL&#8217;s <strong>COPY</strong> command instead of the default
+<strong>INSERT INTO</strong> method, you can export the following environment variable
+(at least available on <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> and <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a>):</p>
+<div class="highlight-python"><pre>export PG_USE_COPY=YES</pre>
+</div>
+<p><strong>ogr2ogr</strong> does not create spatial indexes like <strong>shp2pgsl</strong> does. You
+need to create them manually, using the normal SQL command <strong>CREATE INDEX</strong>
+afterwards as an extra step (as described in the next section
+<a class="reference internal" href="#vector-improving-performance"><em>Improving Performance</em></a>).</p>
+</div>
+<div class="section" id="improving-performance">
+<span id="vector-improving-performance"></span><h3><a class="toc-backref" href="#id20">Improving Performance</a><a class="headerlink" href="#improving-performance" title="Permalink to this headline">¶</a></h3>
+<p>Retrieving features from a PostgreSQL database can be time-consuming, especially
+over a network. You can improve the drawing performance of PostgreSQL layers by
+ensuring that a <span class="target" id="index-10"></span>PostGIS spatial index exists on each layer in the
+database. PostGIS supports creation of a <span class="target" id="index-11"></span>GiST (Generalized Search Tree)
+index to speed up spatial searches of the data (GiST index information is taken
+from the PostGIS documentation available at <a class="reference external" href="http://postgis.net">http://postgis.net</a>).</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can use the DBManager to create an index to your layer. You should
+first select the layer and click on <em class="menuselection">Table &gt; Edit table</em>, go to
+<em class="menuselection">Indexes</em> tab and click on <strong>[Add spatial index]</strong>.</p>
+</div>
+<p>The syntax for creating a GiST index is:</p>
+<div class="highlight-python"><pre>CREATE INDEX [indexname] ON [tablename]
+  USING GIST ( [geometryfield] GIST_GEOMETRY_OPS );</pre>
+</div>
+<p>Note that for large tables, creating the index can take a long time. Once the
+index is created, you should perform a <tt class="docutils literal"><span class="pre">VACUUM</span> <span class="pre">ANALYZE</span></tt>. See the PostGIS
+documentation (POSTGIS-PROJECT <a class="reference internal" href="../literature_web/literature_and_web_references.html#literature-and-web"><em>Literature and Web References</em></a>) for more information.</p>
+<p>The following is an example of creating a GiST index:</p>
+<div class="highlight-python"><pre>gsherman@madison:~/current$ psql gis_data
+Welcome to psql 8.3.0, the PostgreSQL interactive terminal.
+
+Type:  \copyright for distribution terms
+       \h for help with SQL commands
+       \? for help with psql commands
+       \g or terminate with semicolon to execute query
+       \q to quit
+
+gis_data=# CREATE INDEX sidx_alaska_lakes ON alaska_lakes
+gis_data-# USING GIST (the_geom GIST_GEOMETRY_OPS);
+CREATE INDEX
+gis_data=# VACUUM ANALYZE alaska_lakes;
+VACUUM
+gis_data=# \q
+gsherman@madison:~/current$</pre>
+</div>
+</div>
+</div>
+<div class="section" id="vector-layers-crossing-180-degrees-longitude">
+<span id="index-12"></span><h2><a class="toc-backref" href="#id21">Vector layers crossing 180° longitude</a><a class="headerlink" href="#vector-layers-crossing-180-degrees-longitude" title="Permalink to this headline">¶</a></h2>
+<p>Many GIS packages don&#8217;t wrap vector maps with a geographic reference system
+(lat/lon) <span class="target" id="index-13"></span>crossing the 180 degrees longitude line
+(<a class="reference external" href="http://postgis.refractions.net/documentation/manual-2.0/ST_Shift_Longitude.html">http://postgis.refractions.net/documentation/manual-2.0/ST_Shift_Longitude.html</a>).
+As result, if we open such a map in QGIS, we will see two far, distinct locations,
+that should appear near each other. In <a class="reference internal" href="#figure-vector-4">Figure_vector_4</a>, the tiny point on the far
+left of the map canvas (Chatham Islands) should be within the grid, to the right of the
+New Zealand main islands.</p>
+<p id="figure-vector-4"><strong>Figure Vector 4:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/vectorNotWrapping.png" src="../../../_images/vectorNotWrapping.png" />
+<p class="caption">Map in lat/lon crossing the 180° longitude line</p>
+</div>
+<p>A work-around is to transform the longitude values using PostGIS and the
+<strong>ST_Shift_Longitude</strong> function. This function reads every point/vertex in every
+component of every feature in a geometry, and if the longitude coordinate is
+&lt; 0°, it adds 360° to it. The result is a 0° - 360°
+version of the data to be plotted in a 180°-centric map.</p>
+<p id="figure-vector-5"><strong>Figure Vector 5:</strong></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../../_images/vectorWrapping.png"><img alt="../../../_images/vectorWrapping.png" src="../../../_images/vectorWrapping.png" style="width: 25em;" /></a>
+<p class="caption">Crossing 180° longitude applying the <strong>ST_Shift_Longitude</strong>
+function</p>
+</div>
+<div class="section" id="usage">
+<h3><a class="toc-backref" href="#id22">Usage</a><a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Import data into PostGIS (<a class="reference internal" href="#vector-import-data-in-postgis"><em>Importing Data into PostgreSQL</em></a>) using,
+for example, the DB Manager plugin.</li>
+<li>Use the PostGIS command line interface to issue the following command
+(in this example, &#8220;TABLE&#8221; is the actual name of your PostGIS table):
+<tt class="docutils literal"><span class="pre">gis_data=#</span> <span class="pre">update</span> <span class="pre">TABLE</span> <span class="pre">set</span> <span class="pre">the_geom=ST_Shift_Longitude(the_geom);</span></tt></li>
+<li>If everything went well, you should receive a confirmation about the
+number of features that were updated. Then you&#8217;ll be able to load the
+map and see the difference (<a class="reference internal" href="#figure-vector-5">Figure_vector_5</a>).</li>
+</ul>
+</div>
+</div>
+<div class="section" id="spatialite-layers">
+<span id="label-spatialite"></span><span id="index-14"></span><h2><a class="toc-backref" href="#id23">SpatiaLite Layers</a><a class="headerlink" href="#spatialite-layers" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../../_images/mActionAddSpatiaLiteLayer.png"><img alt="addSpatiaLiteLayer" src="../../../_images/mActionAddSpatiaLiteLayer.png" style="width: 1.5em;" /></a> The first time you load data from a SpatiaLite
+database, begin by clicking on the <a class="reference internal" href="../../../_images/mActionAddSpatiaLiteLayer.png"><img alt="addSpatiaLiteLayer" src="../../../_images/mActionAddSpatiaLiteLayer.png" style="width: 1.5em;" /></a>
+<sup>Add SpatiaLite Layer</sup> toolbar button, or by selecting the
+<a class="reference internal" href="../../../_images/mActionAddSpatiaLiteLayer.png"><img alt="addSpatiaLiteLayer" src="../../../_images/mActionAddSpatiaLiteLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Add SpatiaLite Layer...</em> option
+from the <em class="menuselection">Layer</em> menu, or by typing <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+L</span></tt>.
+This will bring up a window that will allow you either to connect to a
+SpatiaLite database already known to QGIS, which you can choose from the
+drop-down menu, or to define a new connection to a new database. To define a
+new connection, click on <strong>[New]</strong> and use the file browser to point to
+your SpatiaLite database, which is a file with a <tt class="file docutils literal"><span class="pre">.sqlite</span></tt> extension.</p>
+<p>If you want to save a vector layer to SpatiaLite format, you can do this by
+right clicking the layer in the legend. Then, click on <em class="menuselection">Save as..</em>,
+define the name of the output file, and select &#8216;SpatiaLite&#8217; as format and the CRS.
+Also, you can select &#8216;SQLite&#8217; as format and then add <tt class="docutils literal"><span class="pre">SPATIALITE=YES</span></tt> in the
+OGR data source creation option field. This tells OGR to create a SpatiaLite
+database. See also <a class="reference external" href="http://www.gdal.org/ogr/drv_sqlite.html">http://www.gdal.org/ogr/drv_sqlite.html</a>.</p>
+<p>QGIS also supports editable views in SpatiaLite.</p>
+<div class="section" id="creating-a-new-spatialite-layer">
+<h3><a class="toc-backref" href="#id24">Creating a new SpatiaLite layer</a><a class="headerlink" href="#creating-a-new-spatialite-layer" title="Permalink to this headline">¶</a></h3>
+<p>If you want to create a new SpatiaLite layer, please refer to section
+<a class="reference internal" href="editing_geometry_attributes.html#vector-create-spatialite"><em>Creating a new SpatiaLite layer</em></a>.</p>
+<div class="admonition tip" id="tip-spatialite-management-plugin">
+<span id="index-15"></span><p class="first admonition-title">Tip</p>
+<p><strong>SpatiaLite data management Plugins</strong></p>
+<p class="last">For SpatiaLite data management, you can also use several Python plugins:
+QSpatiaLite, SpatiaLite Manager or <a class="reference internal" href="../plugins/plugins_db_manager.html#dbmanager"><em>DB Manager</em></a> (core plugin, recommended).
+If necessary, they can be downloaded and installed with the Plugin Installer.</p>
+</div>
+</div>
+</div>
+<div class="section" id="mssql-spatial-layers">
+<span id="label-mssql"></span><span id="index-16"></span><h2><a class="toc-backref" href="#id25">MSSQL Spatial Layers</a><a class="headerlink" href="#mssql-spatial-layers" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../../_images/mActionAddMssqlLayer.png"><img alt="addMssqlLayer" src="../../../_images/mActionAddMssqlLayer.png" style="width: 1.5em;" /></a> QGIS also provides native MS SQL support. The first
+time you load MSSQL Spatial data, begin by clicking on the
+<a class="reference internal" href="../../../_images/mActionAddMssqlLayer.png"><img alt="addMssqlLayer" src="../../../_images/mActionAddMssqlLayer.png" style="width: 1.5em;" /></a> <sup>Add MSSQL Spatial Layer</sup> toolbar button or by
+selecting the <a class="reference internal" href="../../../_images/mActionAddMssqlLayer.png"><img alt="addMssqlLayer" src="../../../_images/mActionAddMssqlLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Add MSSQL Spatial Layer...</em>
+option from the <em class="menuselection">Layer</em> menu, or by typing <tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+M</span></tt>.</p>
+<span class="target" id="label-oracle-spatial"></span></div>
+<div class="section" id="oracle-spatial-layers">
+<span id="index-17"></span><h2><a class="toc-backref" href="#id26">Oracle Spatial Layers</a><a class="headerlink" href="#oracle-spatial-layers" title="Permalink to this headline">¶</a></h2>
+<p>The spatial features in Oracle Spatial aid users in managing geographic and
+location data in a native type within an Oracle database. QGIS now has
+support for such layers.</p>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#id27">Creating a stored Connection</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionAddOracleLayer.png"><img alt="addOracleLayer" src="../../../_images/mActionAddOracleLayer.png" style="width: 1.5em;" /></a> The first time you use an Oracle Spatial data source,
+you must create a connection to the database that contains the data. Begin by
+clicking on the <a class="reference internal" href="../../../_images/mActionAddOracleLayer.png"><img alt="addOracleLayer" src="../../../_images/mActionAddOracleLayer.png" style="width: 1.5em;" /></a> <sup>Add Oracle Spatial Layer</sup> toolbar
+button, selecting the <a class="reference internal" href="../../../_images/mActionAddOracleLayer.png"><img alt="addOracleLayer" src="../../../_images/mActionAddOracleLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Add Oracle
+Spatial Layer...</em> option from the <em class="menuselection">Layer</em> menu, or typing
+<tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+O</span></tt>. To access the connection manager, click on the <strong>[New]</strong>
+button to display the <em class="guilabel">Create a New Oracle Spatial Connection</em> dialog.
+The parameters required for a connection are:</p>
+<ul class="simple">
+<li><strong>Name</strong>: A name for this connection. It can be the same as <em>Database</em></li>
+<li><strong>Database</strong>: SID or SERVICE_NAME of the Oracle instance.</li>
+<li><strong>Host</strong>: Name of the database host. This must be a resolvable host name
+such as would be used to open a telnet connection or ping the host. If the
+database is on the same computer as QGIS, simply enter <em>&#8216;localhost&#8217;</em> here.</li>
+<li><strong>Port</strong>: Port number the Oracle database server listens on. The default
+port is 1521.</li>
+<li><strong>Username</strong>: Username used to login to the database.</li>
+<li><strong>Password</strong>: Password used with <em>Username</em> to connect to the database.</li>
+</ul>
+<p>Optionally, you can activate following checkboxes:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Save Username</em> Indicates whether to save the database
+username in the connection configuration.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Save Password</em> Indicates whether to save the database
+password in the connection settings.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Only look in meta data table</em> Restricts the displayed
+tables to those that are in the all_sdo_geom_metadata view. This can speed
+up the initial display of spatial tables.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Only look for user&#8217;s tables</em> When searching for spatial
+tables, restrict the search to tables that are owned by the user.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Also list tables with no geometry</em> Indicates that
+tables without geometry should also be listed by default.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use estimated table statistics for the layer metadata</em>
+When the layer is set up, various metadata are required for the Oracle table.
+This includes information such as the table row count, geometry type and
+spatial extents of the data in the geometry column. If the table contains a
+large number of rows, determining this metadata can be time-consuming. By
+activating this option, the following fast table metadata operations are
+done: Row count is determined from <tt class="docutils literal"><span class="pre">all_tables.num_rows</span></tt>. Table extents
+are always determined with the SDO_TUNE.EXTENTS_OF function, even if a layer
+filter is applied. Table geometry is determined from the first 100
+non-null geometry rows in the table.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Only existing geometry types</em> Only list the existing
+geometry types and don&#8217;t offer to add others.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In the <em class="guilabel">Authentication</em> tab, saving <strong>username</strong> and <strong>password</strong>
+will keep unprotected credentials in the connection configuration. Those
+<strong>credentials will be visible</strong> if, for instance, you shared the project file
+with someone. Therefore, it&#8217;s advisable to save your credentials in a
+<em>Authentication configuration</em> instead (<em class="guilabel">configurations</em> tab).
+See <a class="reference internal" href="../auth_system/index.html#authentication-index"><em>Authentication System</em></a> for more details.</p>
+</div>
+<p>Once all parameters and options are set, you can test the connection by
+clicking on the <strong>[Test Connect]</strong> button.</p>
+<div class="admonition tip" id="tip-settings-security">
+<p class="first admonition-title">Tip</p>
+<p><strong>QGIS User Settings and Security</strong></p>
+<p>Depending on your computing environment, storing passwords in your QGIS
+settings may be a security risk. Passwords are saved in clear text in the
+system configuration and in the project files!
+Your customized settings for QGIS are stored based on the operating system:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> The settings are stored in your home directory in <tt class="file docutils literal"><span class="pre">~/.qgis2</span></tt>.</li>
+<li><a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a> The settings are stored in the registry.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="loading-an-oracle-spatial-layer">
+<h3><a class="toc-backref" href="#id28">Loading an Oracle Spatial Layer</a><a class="headerlink" href="#loading-an-oracle-spatial-layer" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionAddOracleLayer.png"><img alt="addOracleLayer" src="../../../_images/mActionAddOracleLayer.png" style="width: 1.5em;" /></a> Once you have one or more connections defined, you can
+load layers from the Oracle database. Of course, this requires having data in
+Oracle.</p>
+<p>To load a layer from Oracle Spatial, perform the following steps:</p>
+<ul class="simple">
+<li>If the <em class="guilabel">Add Oracle Spatial layers</em> dialog is not already open,
+click on the <a class="reference internal" href="../../../_images/mActionAddOracleLayer.png"><img alt="addOracleLayer" src="../../../_images/mActionAddOracleLayer.png" style="width: 1.5em;" /></a> <sup>Add Oracle Spatial Layer</sup> toolbar
+button.</li>
+<li>Choose the connection from the drop-down list and click <strong>[Connect]</strong>.</li>
+<li>Select or unselect <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Also list tables with no geometry</em>.</li>
+<li>Optionally, use some <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Search Options</em> to define
+which features to load from the layer or use the <strong>[Build query]</strong> button
+to start the <em class="guilabel">Query builder</em> dialog.</li>
+<li>Find the layer(s) you wish to add in the list of available layers.</li>
+<li>Select it by clicking on it. You can select multiple layers by holding
+down the <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> key while clicking. See section
+<a class="reference internal" href="vector_properties.html#vector-query-builder"><em>Query Builder</em></a> for information on using the Oracle
+Query Builder to further define the layer.</li>
+<li>Click on the <strong>[Add]</strong> button to add the layer to the map.</li>
+</ul>
+<div class="admonition tip" id="tip-oracle-spatial-layers">
+<p class="first admonition-title">Tip</p>
+<p><strong>Oracle Spatial Layers</strong></p>
+<p class="last">Normally, an Oracle Spatial layer is defined by an entry in the
+<strong>USER_SDO_METADATA</strong> table.</p>
+</div>
+<span class="target" id="label-db2-spatial"></span></div>
+</div>
+<div class="section" id="db2-spatial-layers">
+<span id="index-18"></span><h2><a class="toc-backref" href="#id29">DB2 Spatial Layers</a><a class="headerlink" href="#db2-spatial-layers" title="Permalink to this headline">¶</a></h2>
+<p>IBM DB2 for Linux, Unix and Windows (DB2 LUW), IBM DB2 for z/OS (mainframe)
+and IBM DashDB products allow
+users to store and analyse spatial data in relational table columns.
+The DB2 provider for QGIS supports the full range of visualization, analysis
+and manipulation of spatial data in these databases.</p>
+<p>User documentation on these capabilities can be found at the
+<a class="reference external" href="https://www.ibm.com/support/knowledgecenter/en/SSEPEK_11.0.0/spatl/src/tpc/spatl_db2sb03.html">DB2 z/OS KnowledgeCenter</a>
+,
+<a class="reference external" href="http://www.ibm.com/support/knowledgecenter/SSEPGG_11.1.0/com.ibm.db2.luw.spatial.topics.doc/doc/db2sb03.html">DB2 LUW KnowledgeCenter</a>
+and
+<a class="reference external" href="https://www.ibm.com/support/knowledgecenter/SS6NHC/com.ibm.db2.luw.spatial.topics.doc/doc/csbp1001.html">DB2 DashDB KnowledgeCenter</a>.</p>
+<p>For more information about working with the DB2 spatial capabilities, check out
+the <a class="reference external" href="https://www.ibm.com/developerworks/data/tutorials/dm-1202db2spatialdata1/">DB2 Spatial Tutorial</a> on IBM DeveloperWorks.</p>
+<div class="section" id="configuring-qgis-for-db2">
+<h3><a class="toc-backref" href="#id30">Configuring QGIS for DB2</a><a class="headerlink" href="#configuring-qgis-for-db2" title="Permalink to this headline">¶</a></h3>
+<p>The DB2 provider currently only supports the Windows environment through the Windows ODBC driver.</p>
+<p>The client running QGIS needs to have one of the following installed:</p>
+<ul class="simple">
+<li>DB2 LUW</li>
+<li>IBM Data Server Driver Package</li>
+<li>IBM Data Server Client</li>
+</ul>
+<p>If you are accessing a DB2 LUW database on the same machine or using DB2 LUW as a client,
+the DB2 executables and supporting files need to be included in the Windows path.
+This can be done by creating a batch file like the following with the name <strong>db2.bat</strong> and including it in the directory
+<strong>%OSGEO4W_ROOT%/etc/ini</strong>.</p>
+<div class="highlight-python"><pre>@echo off
+REM Point the following to where DB2 is installed
+SET db2path=C:\Program Files (x86)\sqllib
+REM This should usually be ok - modify if necessary
+SET gskpath=C:\Program Files (x86)\ibm\gsk8
+SET Path=%db2path%\BIN;%db2path%\FUNCTION;%gskpath%\lib64;%gskpath%\lib;%path%</pre>
+</div>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id31">Creating a stored Connection</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionAddDb2Layer.png"><img alt="addDb2Layer" src="../../../_images/mActionAddDb2Layer.png" style="width: 1.5em;" /></a> The DB2 provider uses ODBC to connect to a DB2 database.
+Windows includes ODBC by default.</p>
+<p>The first time you use an DB2 Spatial data source,
+you must create a connection to the database that contains the data.
+A connection can be created by:</p>
+<ul class="simple">
+<li>Right-clicking on  <a class="reference internal" href="../../../_images/mIconDb2.png"><img alt="db2" src="../../../_images/mIconDb2.png" style="width: 1.5em;" /></a> <em class="menuselection">DB2</em> in the QGIS Browser panel
+and selecting <em class="menuselection">New connection</em></li>
+</ul>
+<p>or</p>
+<ul class="simple">
+<li>Selecting the <a class="reference internal" href="../../../_images/mActionAddDb2Layer.png"><img alt="addDb2Layer" src="../../../_images/mActionAddDb2Layer.png" style="width: 1.5em;" /></a> <em class="menuselection">Add DB2
+Spatial Layer...</em> option from the <em class="menuselection">Layer</em> menu.
+To access the connection manager, click on the <strong>[New]</strong>
+button to display the <em class="guilabel">Create a New DB2 Connection</em> dialog.</li>
+</ul>
+<p>The connection can be specified using either a Service/DSN name defined to ODBC
+or using the driver, host and port information.</p>
+<p>All connections require:</p>
+<ul class="simple">
+<li><strong>Connection Name</strong>: A name for this connection. It can be the same as <em>Database</em></li>
+<li><strong>Database</strong>: The DB2 database name.</li>
+<li>User name and password. See more information below.</li>
+</ul>
+<p>An ODBC Service/DSN connection requires in addition:</p>
+<ul class="simple">
+<li><strong>Service/DSN</strong>: The service name defined to ODBC</li>
+</ul>
+<p>A driver / host / host connection requires in addition:</p>
+<ul class="simple">
+<li><strong>Driver</strong>: Name of the DB2 driver. Typically this would be IBM DB2 ODBC DRIVER.</li>
+<li><strong>DB2 Host</strong>: Name of the database host. This must be a resolvable host name
+such as would be used to open a telnet connection or ping the host. If the
+database is on the same computer as QGIS, simply enter <em>&#8216;localhost&#8217;</em> here.</li>
+<li><strong>DB2 Port</strong>: Port number the DB2 database server listens on. The default
+DB2 LUW port is 50000. The default DB2 z/OS port is 446.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">In the <em class="guilabel">Authentication</em> tab, saving <strong>username</strong> and <strong>password</strong>
+will keep unprotected credentials in the connection configuration. Those
+<strong>credentials will be visible</strong> if, for instance, you shared the project file
+with someone. Therefore, it&#8217;s advisable to save your credentials in a
+<em>Authentication configuration</em> instead (<em class="guilabel">configurations</em> tab).
+See <a class="reference internal" href="../auth_system/index.html#authentication-index"><em>Authentication System</em></a> for more details.</p>
+</div>
+<p>Once all parameters and options are set, you can test the connection by
+clicking on the <strong>[Test connection]</strong> button.</p>
+</div>
+<div class="section" id="loading-a-db2-spatial-layer">
+<h3><a class="toc-backref" href="#id32">Loading a DB2 Spatial Layer</a><a class="headerlink" href="#loading-a-db2-spatial-layer" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionAddDb2Layer.png"><img alt="addDb2Layer" src="../../../_images/mActionAddDb2Layer.png" style="width: 1.5em;" /></a> Once you have one or more connections defined, you can
+load layers from the DB2 database. A DB2 Spatial layer is defined by a row in the
+<strong>DB2GSE.ST_GEOMETRY_COLUMNS</strong> view.</p>
+<p>To load a layer from DB2 Spatial, perform the following steps:</p>
+<ul class="simple">
+<li>If the <em class="guilabel">Add DB2 Spatial layers</em> dialog is not already open,
+click on the <a class="reference internal" href="../../../_images/mActionAddDb2Layer.png"><img alt="addDb2Layer" src="../../../_images/mActionAddDb2Layer.png" style="width: 1.5em;" /></a> <sup>Add DB2 Spatial Layer</sup> toolbar
+button.</li>
+<li>Choose the connection from the drop-down list and click <strong>[Connect]</strong>.</li>
+<li>Optionally, use some <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Search Options</em> to define
+which features to load from the layer or use the <strong>[Build query]</strong> button
+to start the <em class="guilabel">Query builder</em> dialog.</li>
+<li>Find the layer(s) you wish to add in the list of available layers.</li>
+<li>Select it by clicking on it. You can select multiple layers by holding
+down the <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> key while clicking. See section
+<a class="reference internal" href="vector_properties.html#vector-query-builder"><em>Query Builder</em></a> for information on using the
+Query Builder to further define the layer.</li>
+<li>Click on the <strong>[Add]</strong> button to add the layer to the map.</li>
+</ul>
+<p>Or more simply, expand the <a class="reference internal" href="../../../_images/mIconDb2.png"><img alt="db2" src="../../../_images/mIconDb2.png" style="width: 1.5em;" /></a> <em class="menuselection">DB2</em> connection in the QGIS Browser panel
+and double-click the name of the layer.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In order to work effectively with DB2 spatial tables in QGIS, it is important that
+tables have an INTEGER or BIGINT column defined as PRIMARY KEY and if new features
+are going to be added, this column should also have the GENERATED characteristic.</p>
+<p class="last">It is also helpful for the spatial column to be registered with a specific spatial
+reference identifier (most often 4326 for WGS84 coordinates).
+A spatial column can be registered by calling the ST_Register_Spatial_Column stored
+procedure.</p>
+</div>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="style_library.html" title="The Symbol Library"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Working with Vector Data"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >Working with Vector Data</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

@@ -1,0 +1,1459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>QGIS GUI</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="QGIS User Guide" href="../index.html" />
+    <link rel="next" title="General Tools" href="general_tools.html" />
+    <link rel="prev" title="Getting Started" href="getting_started.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/introduction/qgis_gui.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="general_tools.html" title="General Tools"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="getting_started.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="general_tools.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="qgis-gui">
+<span id="label-qgismainwindow"></span><h1>QGIS GUI<a class="headerlink" href="#qgis-gui" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#menu-bar" id="id1">Menu Bar</a><ul>
+<li><a class="reference internal" href="#project" id="id2">Project</a></li>
+<li><a class="reference internal" href="#edit" id="id3">Edit</a></li>
+<li><a class="reference internal" href="#edit-extra" id="id4">Edit (extra)</a></li>
+<li><a class="reference internal" href="#view" id="id5">View</a></li>
+<li><a class="reference internal" href="#layer" id="id6">Layer</a></li>
+<li><a class="reference internal" href="#settings" id="id7">Settings</a></li>
+<li><a class="reference internal" href="#plugins" id="id8">Plugins</a></li>
+<li><a class="reference internal" href="#vector" id="id9">Vector</a></li>
+<li><a class="reference internal" href="#raster" id="id10">Raster</a></li>
+<li><a class="reference internal" href="#database" id="id11">Database</a></li>
+<li><a class="reference internal" href="#web" id="id12">Web</a></li>
+<li><a class="reference internal" href="#processing" id="id13">Processing</a></li>
+<li><a class="reference internal" href="#help" id="id14">Help</a><ul>
+<li><a class="reference internal" href="#qgis" id="id15">QGIS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#panels-and-toolbars" id="id16">Panels and Toolbars</a><ul>
+<li><a class="reference internal" href="#toolbars" id="id17">Toolbars</a></li>
+<li><a class="reference internal" href="#panels" id="id18">Panels</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#map-view" id="id19">Map View</a></li>
+<li><a class="reference internal" href="#status-bar" id="id20">Status Bar</a></li>
+</ul>
+</div>
+<p id="index-0">When QGIS starts, you are presented with the GUI as shown in the figure (the
+numbers 1 through 5 in yellow circles are discussed below).</p>
+<p id="fig-startup"><strong>Figure QGIS GUI 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/startup.png" src="../../../_images/startup.png" />
+<p class="caption">QGIS GUI with Alaska sample data</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Your window decorations (title bar, etc.) may appear different depending
+on your operating system and window manager.</p>
+</div>
+<p>The QGIS GUI is divided into five areas:</p>
+<ol class="arabic simple">
+<li>Menu Bar</li>
+<li>Toolbars</li>
+<li>Panels</li>
+<li>Map View</li>
+<li>Status Bar</li>
+</ol>
+<p>These five components of the QGIS interface are described in more detail in
+the following sections. Two more sections present keyboard shortcuts and
+context help.</p>
+<div class="section" id="menu-bar">
+<span id="label-menubar"></span><h2><a class="toc-backref" href="#id1">Menu Bar</a><a class="headerlink" href="#menu-bar" title="Permalink to this headline">¶</a></h2>
+<p id="index-1">The menu bar provides access to various QGIS features using a standard
+hierarchical menu. The top-level menus and a summary of some of the menu
+options are listed below, together with the associated icons as
+they appear on the toolbar, and keyboard shortcuts. The shortcuts presented in
+this section are the defaults; however, keyboard shortcuts can also be configured
+manually using the <em class="guilabel">Configure shortcuts</em> dialog, opened from
+<em class="menuselection">Settings ‣ Configure Shortcuts...</em>.</p>
+<p>Although most menu options have a corresponding tool and vice-versa, the menus
+are not organized exactly like the toolbars. The toolbar containing the tool is
+listed after each menu option as a checkbox entry. Some menu options only
+appear if the corresponding plugin is loaded. For more information about tools
+and toolbars, see section <a class="reference internal" href="#label-toolbars"><em>Toolbars</em></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">QGIS is a cross-platform application meaning that though it provides you
+with the same tools, they may be placed in different menus according to the
+operating system specification. The lists below show the most common location
+and precise when there is a variation.</p>
+</div>
+<div class="section" id="project">
+<h3><a class="toc-backref" href="#id2">Project</a><a class="headerlink" href="#project" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="14%" />
+<col width="28%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionFileNew.png"><img alt="fileNew" src="../../../_images/mActionFileNew.png" style="width: 1.5em;" /></a> <em class="guilabel">New</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+N</span></tt></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-projects"><em>Projects</em></a></td>
+<td><em class="guilabel">Project</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionFileOpen.png"><img alt="fileOpen" src="../../../_images/mActionFileOpen.png" style="width: 1.5em;" /></a> <em class="guilabel">Open</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+O</span></tt></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-projects"><em>Projects</em></a></td>
+<td><em class="guilabel">Project</em></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">New from template ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-projects"><em>Projects</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Open Recent ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-projects"><em>Projects</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a> <em class="guilabel">Save</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+S</span></tt></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-projects"><em>Projects</em></a></td>
+<td><em class="guilabel">Project</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionFileSaveAs.png"><img alt="fileSaveAs" src="../../../_images/mActionFileSaveAs.png" style="width: 1.5em;" /></a> <em class="guilabel">Save As...</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+S</span></tt></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-projects"><em>Projects</em></a></td>
+<td><em class="guilabel">Project</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionSaveMapAsImage.png"><img alt="saveMapAsImage" src="../../../_images/mActionSaveMapAsImage.png" style="width: 1.5em;" /></a> <em class="guilabel">Save as Image...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-output"><em>Output</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">DXF Export...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-output"><em>Output</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionProjectProperties.png"><img alt="projectProperties" src="../../../_images/mActionProjectProperties.png" style="width: 1.5em;" /></a> <em class="guilabel">Project Properties...</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+P</span></tt></td>
+<td>see <a class="reference internal" href="getting_started.html#sec-projects"><em>Projects</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionNewComposer.png"><img alt="newComposer" src="../../../_images/mActionNewComposer.png" style="width: 1.5em;" /></a> <em class="guilabel">New Print Composer</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+P</span></tt></td>
+<td>see <a class="reference internal" href="../print_composer/index.html#label-printcomposer"><em>Print Composer</em></a></td>
+<td><em class="guilabel">Project</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionComposerManager.png"><img alt="composerManager" src="../../../_images/mActionComposerManager.png" style="width: 1.5em;" /></a> <em class="guilabel">Composer manager...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../print_composer/index.html#label-printcomposer"><em>Print Composer</em></a></td>
+<td><em class="guilabel">Project</em></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Print Composers ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../print_composer/index.html#label-printcomposer"><em>Print Composer</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><img alt="fileExit" src="../../../_images/mActionFileExit.png" /> <em class="guilabel">Exit QGIS</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Q</span></tt></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Under <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> Mac OSX, the <em class="guilabel">Exit QGIS</em> command corresponds to
+<em class="menuselection">QGIS ‣ Quit QGIS</em> (<tt class="kbd docutils literal"><span class="pre">Cmd+Q</span></tt>).</p>
+</div>
+<div class="section" id="edit">
+<h3><a class="toc-backref" href="#id3">Edit</a><a class="headerlink" href="#edit" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="12%" />
+<col width="26%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionUndo.png"><img alt="undo" src="../../../_images/mActionUndo.png" style="width: 1.5em;" /></a> <em class="guilabel">Undo</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Z</span></tt></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionRedo.png"><img alt="redo" src="../../../_images/mActionRedo.png" style="width: 1.5em;" /></a> <em class="guilabel">Redo</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+Z</span></tt></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionEditCut.png"><img alt="editCut" src="../../../_images/mActionEditCut.png" style="width: 1.5em;" /></a> <em class="guilabel">Cut Features</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+X</span></tt></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionEditCopy.png"><img alt="editCopy" src="../../../_images/mActionEditCopy.png" style="width: 1.5em;" /></a> <em class="guilabel">Copy Features</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+C</span></tt></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionEditPaste.png"><img alt="editPaste" src="../../../_images/mActionEditPaste.png" style="width: 1.5em;" /></a> <em class="guilabel">Paste Features</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+V</span></tt></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Paste features as ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/attribute_table.html#sec-attribute-table"><em>Working with the Attribute Table</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionCapturePoint.png"><img alt="capturePoint" src="../../../_images/mActionCapturePoint.png" style="width: 1.5em;" /></a> <em class="guilabel">Add Feature</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+.</span></tt></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionMoveFeature.png"><img alt="moveFeature" src="../../../_images/mActionMoveFeature.png" style="width: 1.5em;" /></a> <em class="guilabel">Move Feature(s)</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionDeleteSelected.png"><img alt="deleteSelected" src="../../../_images/mActionDeleteSelected.png" style="width: 1.5em;" /></a> <em class="guilabel">Delete Selected</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionRotateFeature.png"><img alt="rotateFeature" src="../../../_images/mActionRotateFeature.png" style="width: 1.5em;" /></a> <em class="guilabel">Rotate Feature(s)</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionSimplify.png"><img alt="simplifyFeatures" src="../../../_images/mActionSimplify.png" style="width: 2em;" /></a> <em class="guilabel">Simplify Feature</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAddRing.png"><img alt="addRing" src="../../../_images/mActionAddRing.png" style="width: 2em;" /></a> <em class="guilabel">Add Ring</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionAddPart.png"><img alt="addPart" src="../../../_images/mActionAddPart.png" style="width: 1.5em;" /></a> <em class="guilabel">Add Part</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionFillRing.png"><img alt="fillRing" src="../../../_images/mActionFillRing.png" style="width: 1.5em;" /></a> <em class="guilabel">Fill Ring</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionDeleteRing.png"><img alt="deleteRing" src="../../../_images/mActionDeleteRing.png" style="width: 2em;" /></a> <em class="guilabel">Delete Ring</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionDeletePart.png"><img alt="deletePart" src="../../../_images/mActionDeletePart.png" style="width: 2em;" /></a> <em class="guilabel">Delete Part</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionReshape.png"><img alt="reshape" src="../../../_images/mActionReshape.png" style="width: 1.5em;" /></a> <em class="guilabel">Reshape Features</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionOffsetCurve.png"><img alt="offsetCurve" src="../../../_images/mActionOffsetCurve.png" style="width: 1.5em;" /></a> <em class="guilabel">Offset Curve</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionSplitFeatures.png"><img alt="splitFeatures" src="../../../_images/mActionSplitFeatures.png" style="width: 1.5em;" /></a> <em class="guilabel">Split Features</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionSplitParts.png"><img alt="splitParts" src="../../../_images/mActionSplitParts.png" style="width: 1.5em;" /></a> <em class="guilabel">Split Parts</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionMergeFeatures.png"><img alt="mergeFeatures" src="../../../_images/mActionMergeFeatures.png" style="width: 1.5em;" /></a> <em class="guilabel">Merge Selected Features</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionMergeFeatureAttributes.png"><img alt="mergeFeatAttributes" src="../../../_images/mActionMergeFeatureAttributes.png" style="width: 1.5em;" /></a> <em class="guilabel">Merge Attr. of Selected Features</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionNodeTool.png"><img alt="nodeTool" src="../../../_images/mActionNodeTool.png" style="width: 1.5em;" /></a> <em class="guilabel">Node Tool</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionRotatePointSymbols.png"><img alt="rotatePointSymbols" src="../../../_images/mActionRotatePointSymbols.png" style="width: 1.5em;" /></a> <em class="guilabel">Rotate Point Symbols</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a></td>
+<td><em class="guilabel">Advanced Digitizing</em></td>
+</tr>
+</tbody>
+</table>
+<p>After activating <a class="reference internal" href="../../../_images/mActionToggleEditing.png"><img alt="toggleEditing" src="../../../_images/mActionToggleEditing.png" style="width: 1.5em;" /></a> <sup>Toggle editing</sup> mode for a layer,
+you will enable the <tt class="docutils literal"><span class="pre">Add</span> <span class="pre">Feature</span></tt> icon in the <em class="menuselection">Edit</em> menu
+depending on the layer type (point, line or polygon).</p>
+</div>
+<div class="section" id="edit-extra">
+<h3><a class="toc-backref" href="#id4">Edit (extra)</a><a class="headerlink" href="#edit-extra" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="14%" />
+<col width="28%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionCapturePoint.png"><img alt="capturePoint" src="../../../_images/mActionCapturePoint.png" style="width: 1.5em;" /></a> <em class="guilabel">Add Feature</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionCaptureLine.png"><img alt="captureLine" src="../../../_images/mActionCaptureLine.png" style="width: 1.5em;" /></a> <em class="guilabel">Add Feature</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionCapturePolygon.png"><img alt="capturePolygon" src="../../../_images/mActionCapturePolygon.png" style="width: 1.5em;" /></a> <em class="guilabel">Add Feature</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="view">
+<h3><a class="toc-backref" href="#id5">View</a><a class="headerlink" href="#view" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="14%" />
+<col width="28%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionPan.png"><img alt="pan" src="../../../_images/mActionPan.png" style="width: 1.5em;" /></a> <em class="guilabel">Pan Map</em></td>
+<td></td>
+<td>see <a class="reference internal" href="general_tools.html#zoom-pan"><em>Zooming and Panning</em></a></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionPanToSelected.png"><img alt="panToSelected" src="../../../_images/mActionPanToSelected.png" style="width: 1.5em;" /></a> <em class="guilabel">Pan Map to Selection</em></td>
+<td></td>
+<td></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionZoomIn.png"><img alt="zoomIn" src="../../../_images/mActionZoomIn.png" style="width: 1.5em;" /></a> <em class="guilabel">Zoom In</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl++</span></tt></td>
+<td>see <a class="reference internal" href="general_tools.html#zoom-pan"><em>Zooming and Panning</em></a></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionZoomOut.png"><img alt="zoomOut" src="../../../_images/mActionZoomOut.png" style="width: 1.5em;" /></a> <em class="guilabel">Zoom Out</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+-</span></tt></td>
+<td>see <a class="reference internal" href="general_tools.html#zoom-pan"><em>Zooming and Panning</em></a></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Select ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="general_tools.html#sec-selection"><em>Select and deselect features</em></a></td>
+<td><em class="guilabel">Attributes</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionIdentify.png"><img alt="identify" src="../../../_images/mActionIdentify.png" style="width: 1.5em;" /></a> <em class="guilabel">Identify Features</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+I</span></tt></td>
+<td>see <a class="reference internal" href="general_tools.html#identify"><em>Identify features</em></a></td>
+<td><em class="guilabel">Attributes</em></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Measure ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="general_tools.html#sec-measure"><em>Measuring</em></a></td>
+<td><em class="guilabel">Attributes</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionSum.png"><img alt="sum" src="../../../_images/mActionSum.png" style="width: 1.5em;" /></a> <em class="guilabel">Statistical Summary</em></td>
+<td></td>
+<td>see <a class="reference internal" href="general_tools.html#statistical-summary"><em>Statistical Summary Panel</em></a></td>
+<td><em class="guilabel">Attributes</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionZoomFullExtent.png"><img alt="zoomFullExtent" src="../../../_images/mActionZoomFullExtent.png" style="width: 1.5em;" /></a> <em class="guilabel">Zoom Full</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+F</span></tt></td>
+<td></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionZoomToLayer.png"><img alt="zoomToLayer" src="../../../_images/mActionZoomToLayer.png" style="width: 1.5em;" /></a> <em class="guilabel">Zoom To Layer</em></td>
+<td></td>
+<td></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionZoomToSelected.png"><img alt="zoomToSelected" src="../../../_images/mActionZoomToSelected.png" style="width: 1.5em;" /></a> <em class="guilabel">Zoom To Selection</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+J</span></tt></td>
+<td></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionZoomLast.png"><img alt="zoomLast" src="../../../_images/mActionZoomLast.png" style="width: 1.5em;" /></a> <em class="guilabel">Zoom Last</em></td>
+<td></td>
+<td></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionZoomNext.png"><img alt="zoomNext" src="../../../_images/mActionZoomNext.png" style="width: 1.5em;" /></a> <em class="guilabel">Zoom Next</em></td>
+<td></td>
+<td></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionZoomActual.png"><img alt="zoomActual" src="../../../_images/mActionZoomActual.png" style="width: 1.5em;" /></a> <em class="guilabel">Zoom To Native Resolution</em></td>
+<td></td>
+<td></td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Decorations ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="general_tools.html#decorations"><em>Decorations</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Preview mode ‣</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionMapTips.png"><img alt="mapTips" src="../../../_images/mActionMapTips.png" style="width: 1.5em;" /></a> <em class="guilabel">Map Tips</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/vector_properties.html#maptips"><em>Display Menu</em></a></td>
+<td><em class="guilabel">Attributes</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionNewBookmark.png"><img alt="newBookmark" src="../../../_images/mActionNewBookmark.png" style="width: 1.5em;" /></a> <em class="guilabel">New Bookmark...</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+B</span></tt></td>
+<td>see <a class="reference internal" href="general_tools.html#sec-bookmarks"><em>Spatial Bookmarks</em></a></td>
+<td><em class="guilabel">Attributes</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionShowBookmarks.png"><img alt="showBookmarks" src="../../../_images/mActionShowBookmarks.png" style="width: 1.5em;" /></a> <em class="guilabel">Show Bookmarks</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+B</span></tt></td>
+<td>see <a class="reference internal" href="general_tools.html#sec-bookmarks"><em>Spatial Bookmarks</em></a></td>
+<td><em class="guilabel">Attributes</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionDraw.png"><img alt="draw" src="../../../_images/mActionDraw.png" style="width: 1.5em;" /></a> <em class="guilabel">Refresh</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">F5</span></tt></td>
+<td>&nbsp;</td>
+<td><em class="guilabel">Map Navigation</em></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Panels ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="#sec-panels-and-toolbars"><em>Panels and Toolbars</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Toolbars ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="#sec-panels-and-toolbars"><em>Panels and Toolbars</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">Toggle Full Screen Mode</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">F11</span></tt></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Under <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> Linux KDE, <em class="menuselection">Panels ‣</em>, <em class="menuselection">Toolbars ‣</em>
+and <em class="guilabel">Toggle Full Screen Mode</em> are rather placed in <em class="menuselection">Settings</em>
+menu.
+<em class="menuselection">Preview mode ‣</em> is not available under <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> Mac OS X.</p>
+</div>
+<div class="section" id="layer">
+<h3><a class="toc-backref" href="#id6">Layer</a><a class="headerlink" href="#layer" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="13%" />
+<col width="27%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><em class="menuselection">Create Layer ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-create-vector"><em>Creating new Vector layers</em></a></td>
+<td><em class="guilabel">Manage Layers</em></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Add Layer ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/supported_data.html#supported-format"><em>Supported Data Formats</em></a></td>
+<td><em class="guilabel">Manage Layers</em></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">Embed Layers and Groups...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="general_tools.html#nesting-projects"><em>Nesting Projects</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Add from Layer Definition File...</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionEditCopy.png"><img alt="editCopy" src="../../../_images/mActionEditCopy.png" style="width: 1.5em;" /></a> <em class="guilabel">Copy style</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/vector_properties.html#save-layer-property"><em>Save and Share Layer Properties</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionEditPaste.png"><img alt="editPaste" src="../../../_images/mActionEditPaste.png" style="width: 1.5em;" /></a> <em class="guilabel">Paste style</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/vector_properties.html#save-layer-property"><em>Save and Share Layer Properties</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionOpenTable.png"><img alt="openTable" src="../../../_images/mActionOpenTable.png" style="width: 1.5em;" /></a> <em class="guilabel">Open Attribute Table</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/attribute_table.html#sec-attribute-table"><em>Working with the Attribute Table</em></a></td>
+<td><em class="guilabel">Attributes</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionToggleEditing.png"><img alt="toggleEditing" src="../../../_images/mActionToggleEditing.png" style="width: 1.5em;" /></a> <em class="guilabel">Toggle Editing</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a> <em class="guilabel">Save Layer Edits</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAllEdits.png"><img alt="allEdits" src="../../../_images/mActionAllEdits.png" style="width: 1.5em;" /></a> <em class="menuselection">Current Edits ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-edit-existing-layer"><em>Digitizing an existing layer</em></a></td>
+<td><em class="guilabel">Digitizing</em></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Save As...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="general_tools.html#general-saveas"><em>Save layer into file</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Save As Layer Definition File...</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionRemoveLayer.png"><img alt="removeLayer" src="../../../_images/mActionRemoveLayer.png" style="width: 1.5em;" /></a> <em class="guilabel">Remove Layer/Group</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+D</span></tt></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionDuplicateLayer.png"><img alt="duplicateLayer" src="../../../_images/mActionDuplicateLayer.png" style="width: 1.5em;" /></a> <em class="guilabel">Duplicate Layers (s)</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">Set Scale Visibility of Layers</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Set CRS of Layer(s)</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+C</span></tt></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">Set project CRS from Layer</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Properties...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/vector_properties.html#vector-properties-dialog"><em>The Vector Properties Dialog</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">Filter...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/vector_properties.html#vector-query-builder"><em>Query Builder</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/labelingSingle.png"><img alt="labeling" src="../../../_images/labelingSingle.png" style="width: 1.5em;" /></a> <em class="guilabel">Labeling</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/vector_properties.html#vector-labels-tab"><em>Labels Menu</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionInOverview.png"><img alt="inOverview" src="../../../_images/mActionInOverview.png" style="width: 1.5em;" /></a> <em class="guilabel">Add to Overview</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+O</span></tt></td>
+<td></td>
+<td><em class="guilabel">Manage Layers</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionAddAllToOverview.png"><img alt="addAllToOverview" src="../../../_images/mActionAddAllToOverview.png" style="width: 1.5em;" /></a> <em class="guilabel">Add All To Overview</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionRemoveAllFromOverview.png"><img alt="removeAllOVerview" src="../../../_images/mActionRemoveAllFromOverview.png" style="width: 1.5em;" /></a> <em class="guilabel">Remove All From Overview</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionShowAllLayers.png"><img alt="showAllLayers" src="../../../_images/mActionShowAllLayers.png" style="width: 1.5em;" /></a> <em class="guilabel">Show All Layers</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+U</span></tt></td>
+<td></td>
+<td><em class="guilabel">Manage Layers</em></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionHideAllLayers.png"><img alt="hideAllLayers" src="../../../_images/mActionHideAllLayers.png" style="width: 1.5em;" /></a> <em class="guilabel">Hide All Layers</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+H</span></tt></td>
+<td></td>
+<td><em class="guilabel">Manage Layers</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionShowAllLayers.png"><img alt="showAllLayers" src="../../../_images/mActionShowAllLayers.png" style="width: 1.5em;" /></a> <em class="guilabel">Show selected Layers</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionHideAllLayers.png"><img alt="hideAllLayers" src="../../../_images/mActionHideAllLayers.png" style="width: 1.5em;" /></a> <em class="guilabel">Hide selected Layers</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="settings">
+<h3><a class="toc-backref" href="#id7">Settings</a><a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="14%" />
+<col width="28%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionCustomProjection.png"><img alt="customProjection" src="../../../_images/mActionCustomProjection.png" style="width: 1.5em;" /></a> <em class="guilabel">Custom CRS...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_projections/working_with_projections.html#sec-custom-projections"><em>Custom Coordinate Reference System</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Style Manager...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/style_library.html#vector-style-manager"><em>The Style Manager</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <em class="guilabel">Configure shortcuts...</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <em class="guilabel">Customization...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="qgis_configuration.html#sec-customization"><em>Customization</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <em class="guilabel">Options...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="qgis_configuration.html#gui-options"><em>Options</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Snapping Options...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#snapping-tolerance"><em>Setting the Snapping Tolerance and Search Radius</em></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Under <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> Linux KDE, you&#8217;ll find more tools in <em class="menuselection">Settings</em>
+menu such as <em class="guilabel">Project Properties</em>, <em class="menuselection">Panels ‣</em>,
+<em class="menuselection">Toolbars ‣</em> and <em class="guilabel">Toggle Full Screen Mode</em>.</p>
+</div>
+<div class="section" id="plugins">
+<h3><a class="toc-backref" href="#id8">Plugins</a><a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="13%" />
+<col width="22%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionShowPluginManager.png"><img alt="showPluginManager" src="../../../_images/mActionShowPluginManager.png" style="width: 1.5em;" /></a> <em class="guilabel">Manage and Install Plugins...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../plugins/plugins.html#managing-plugins"><em>The Plugins Dialog</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Python Console</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Alt+P</span></tt></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>When starting QGIS for the first time not all core plugins are loaded.</p>
+</div>
+<div class="section" id="vector">
+<h3><a class="toc-backref" href="#id9">Vector</a><a class="headerlink" href="#vector" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="13%" />
+<col width="27%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><em class="menuselection">Open Street Map ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_vector/supported_data.html#open-street-map"><em>Loading OpenStreetMap Vectors</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/analysis.png"><img alt="analysis" src="../../../_images/analysis.png" style="width: 1.5em;" /></a> <em class="menuselection">Analysis Tools ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../plugins/plugins_ftools.html#ftools"><em>fTools Plugin</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/sampling.png"><img alt="sampling" src="../../../_images/sampling.png" style="width: 1.5em;" /></a> <em class="menuselection">Research Tools ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../plugins/plugins_ftools.html#ftools"><em>fTools Plugin</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/geoprocessing.png"><img alt="geoprocessing" src="../../../_images/geoprocessing.png" style="width: 1.5em;" /></a> <em class="menuselection">Geoprocessing Tools ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../plugins/plugins_ftools.html#ftools"><em>fTools Plugin</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/geometry.png"><img alt="geometry" src="../../../_images/geometry.png" style="width: 1.5em;" /></a> <em class="menuselection">Geometry Tools ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../plugins/plugins_ftools.html#ftools"><em>fTools Plugin</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/management.png"><img alt="management" src="../../../_images/management.png" style="width: 1.5em;" /></a> <em class="menuselection">Data Management Tools ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../plugins/plugins_ftools.html#ftools"><em>fTools Plugin</em></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>When starting QGIS for the first time not all core plugins are loaded.</p>
+</div>
+<div class="section" id="raster">
+<h3><a class="toc-backref" href="#id10">Raster</a><a class="headerlink" href="#raster" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="13%" />
+<col width="27%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><em class="guilabel">Raster calculator...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_raster/raster_analysis.html#label-raster-calc"><em>Raster Calculator</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Align Raster...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../working_with_raster/raster_analysis.html#label-raster-align"><em>Raster Alignment</em></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>When starting QGIS for the first time not all core plugins are loaded.</p>
+</div>
+<div class="section" id="database">
+<h3><a class="toc-backref" href="#id11">Database</a><a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="14%" />
+<col width="30%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><em class="menuselection">Database ‣</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../plugins/plugins_db_manager.html#dbmanager"><em>DB Manager Plugin</em></a></td>
+<td><em class="guilabel">Database</em></td>
+</tr>
+</tbody>
+</table>
+<p>When starting QGIS for the first time not all core plugins are loaded.</p>
+</div>
+<div class="section" id="web">
+<h3><a class="toc-backref" href="#id12">Web</a><a class="headerlink" href="#web" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="14%" />
+<col width="30%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><em class="menuselection">Metasearch</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../plugins/plugins_metasearch.html#metasearch"><em>MetaSearch Catalogue Client</em></a></td>
+<td><em class="guilabel">Web</em></td>
+</tr>
+</tbody>
+</table>
+<p>When starting QGIS for the first time not all core plugins are loaded.</p>
+</div>
+<div class="section" id="processing">
+<h3><a class="toc-backref" href="#id13">Processing</a><a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="13%" />
+<col width="27%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/alg.png"><img alt="processingToolbox" src="../../../_images/alg.png" style="width: 1.5em;" /></a> <em class="guilabel">Toolbox</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../processing/toolbox.html#processing-toolbox"><em>The toolbox</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/model.png"><img alt="processingModel" src="../../../_images/model.png" style="width: 1.5em;" /></a> <em class="guilabel">Graphical Modeler...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../processing/modeler.html#processing-modeler"><em>The graphical modeler</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/history.png"><img alt="processingHistory" src="../../../_images/history.png" style="width: 2em;" /></a> <em class="guilabel">History and log...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../processing/history.html#processing-history"><em>The history manager</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/config.png"><img alt="processingOption" src="../../../_images/config.png" style="width: 1.5em;" /></a> <em class="guilabel">Options...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../processing/toolbox.html#processing-options"><em>Configuring the processing framework</em></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/results.png"><img alt="processingResult" src="../../../_images/results.png" style="width: 1.5em;" /></a> <em class="guilabel">Results viewer...</em></td>
+<td></td>
+<td>see <a class="reference internal" href="../processing/3rdParty.html#processing-results"><em>Configuring external applications</em></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/commander.png"><img alt="processingCommander" src="../../../_images/commander.png" style="width: 1.5em;" /></a> <em class="guilabel">Commander</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+Alt+M</span></tt></td>
+<td>see <a class="reference internal" href="../processing/commander.html#processing-commander"><em>The QGIS Commander</em></a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>When starting QGIS for the first time not all core plugins are loaded.</p>
+</div>
+<div class="section" id="help">
+<h3><a class="toc-backref" href="#id14">Help</a><a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="16%" />
+<col width="21%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+<th class="head">Toolbar</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionHelpContents.png"><img alt="helpContents" src="../../../_images/mActionHelpContents.png" style="width: 1.5em;" /></a> <em class="guilabel">Help Contents</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">F1</span></tt></td>
+<td></td>
+<td><em class="guilabel">Help</em></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/whats_this.png"><img alt="whatsThis" src="../../../_images/whats_this.png" style="width: 1.5em;" /></a> <em class="guilabel">What&#8217;s This?</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Shift+F1</span></tt></td>
+<td></td>
+<td><em class="guilabel">Help</em></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">API Documentation</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Report an Issue</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">Need commercial support?</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionQgisHomePage.png"><img alt="qgisHomePage" src="../../../_images/mActionQgisHomePage.png" style="width: 1.5em;" /></a> <em class="guilabel">QGIS Home Page</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Ctrl+H</span></tt></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionCheckQgisVersion.png"><img alt="checkQgisVersion" src="../../../_images/mActionCheckQgisVersion.png" style="width: 1.5em;" /></a> <em class="guilabel">Check QGIS Version</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionHelpAbout.png"><img alt="helpAbout" src="../../../_images/mActionHelpAbout.png" style="width: 1.5em;" /></a> <em class="guilabel">About</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionHelpSponsors.png"><img alt="helpSponsors" src="../../../_images/mActionHelpSponsors.png" style="width: 1.5em;" /></a> <em class="guilabel">QGIS Sponsors</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="qgis">
+<h4><a class="toc-backref" href="#id15">QGIS</a><a class="headerlink" href="#qgis" title="Permalink to this headline">¶</a></h4>
+<p>This menu is only available under <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> Mac OS X and contains some OS related
+commands.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="42%" />
+<col width="26%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Menu Option</th>
+<th class="head">Shortcut</th>
+<th class="head">Reference</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><em class="guilabel">Preferences</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">About QGIS</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">Hide QGIS</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Show All</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="guilabel">Hide Others</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="guilabel">Quit QGIS</em></td>
+<td><tt class="kbd docutils literal"><span class="pre">Cmd+Q</span></tt></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><em class="guilabel">Preferences</em> and <em class="guilabel">About QGIS</em> are the same commands as
+<em class="menuselection">Settings ‣ Options</em> and <em class="menuselection">Help ‣ About</em>.
+<em class="guilabel">Quit QGIS</em> corresponds to <em class="menuselection">Project ‣ Exit QGIS</em>
+under the other platforms.</p>
+</div>
+</div>
+</div>
+<div class="section" id="panels-and-toolbars">
+<span id="sec-panels-and-toolbars"></span><h2><a class="toc-backref" href="#id16">Panels and Toolbars</a><a class="headerlink" href="#panels-and-toolbars" title="Permalink to this headline">¶</a></h2>
+<p>From the <em class="menuselection">View</em> menu (<em class="menuselection">Settings</em> under KDE), you can
+switch on and off QGIS widgets (<em class="menuselection">Panels ‣</em>) or toolbars
+(<em class="menuselection">Toolbars ‣</em>). You can (de)activate any of them by
+right-clicking the menu bar or a toolbar and choose the item you want.
+Each panel or toolbar can be moved and placed wherever you feel comfortable
+with in QGIS interface.
+The list can also be extended with the activation of <a class="reference internal" href="../plugins/plugins.html#plugins"><em>Core or external
+plugins</em></a>.</p>
+<div class="section" id="toolbars">
+<span id="label-toolbars"></span><h3><a class="toc-backref" href="#id17">Toolbars</a><a class="headerlink" href="#toolbars" title="Permalink to this headline">¶</a></h3>
+<p id="index-2">The toolbar provides access to most of the same functions as the menus, plus
+additional tools for interacting with the map. Each toolbar item has pop-up help
+available. Hold your mouse over the item and a short description of the tool&#8217;s
+purpose will be displayed.</p>
+<p>Every toolbar can be moved around according to your needs. Additionally,
+they can be switched off using the right mouse button context menu, or by
+holding the mouse over the toolbars.</p>
+<p id="figure-toolbars"><strong>Figure Toolbars:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/toolbars.png" src="../../../_images/toolbars.png" />
+<p class="caption">The Toolbars menu</p>
+</div>
+<div class="admonition tip" id="index-3">
+<p class="first admonition-title">Tip</p>
+<p><strong>Restoring toolbars</strong></p>
+<p class="last">If you have accidentally hidden a toolbar, you can get it
+back by choosing menu option <em class="menuselection">View ‣ Toolbars ‣</em>
+(or <em class="menuselection">Settings ‣ Toolbars ‣</em> under Linux KDE).
+If for some reason a toolbar (or any other widget) totally disappears
+from the interface, you&#8217;ll find tips to get it back at <a class="reference internal" href="qgis_configuration.html#tip-restoring-configuration"><em>restoring
+initial GUI</em></a>.</p>
+</div>
+</div>
+<div class="section" id="panels">
+<span id="index-4"></span><h3><a class="toc-backref" href="#id18">Panels</a><a class="headerlink" href="#panels" title="Permalink to this headline">¶</a></h3>
+<p>QGIS provides by default many panels to work with.</p>
+<p id="figure-panels"><strong>Figure Panels:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/panels.png" src="../../../_images/panels.png" />
+<p class="caption">The Panels menu</p>
+</div>
+<p>Some of these panels are described
+below while others may be found in different parts of the document, namely:</p>
+<ul class="simple">
+<li>the <a class="reference internal" href="../qgis_browser/qgis_browser.html#label-qgis-browser"><em>Browser Panel</em></a></li>
+<li>the <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#advanced-digitizing-panel"><em>Advanced Digitizing Panel</em></a></li>
+<li>the <a class="reference internal" href="general_tools.html#sec-bookmarks"><em>Spatial Bookmarks Panel</em></a></li>
+<li>the <a class="reference internal" href="../working_with_gps/live_GPS_tracking.html#sec-gpstracking"><em>GPS Information Panel</em></a></li>
+<li>the <a class="reference internal" href="../working_with_ogc/ogc_client_support.html#tilesets"><em>Tile Scale Panel</em></a></li>
+<li>the <a class="reference internal" href="general_tools.html#identify"><em>Identify Panel</em></a></li>
+<li>the <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#rotate-feature"><em>User Input Panel</em></a></li>
+<li>the <a class="reference internal" href="general_tools.html#layer-order"><em>Working with the Legend independent layer order</em></a></li>
+<li>the <a class="reference internal" href="general_tools.html#statistical-summary"><em>Statistical Summary Panel</em></a></li>
+<li>the <a class="reference internal" href="general_tools.html#overview-panels"><em>QGIS Overview Panel</em></a></li>
+<li>the <a class="reference internal" href="general_tools.html#log-message-panel"><em>Log Messages Panel</em></a></li>
+<li>the <a class="reference internal" href="general_tools.html#undo-redo-panel"><em>Undo/Redo Panel</em></a></li>
+<li>the <a class="reference internal" href="../processing/index.html#label-processing"><em>QGIS processing framework</em></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="map-view">
+<span id="label-mapview"></span><h2><a class="toc-backref" href="#id19">Map View</a><a class="headerlink" href="#map-view" title="Permalink to this headline">¶</a></h2>
+<p>Also called <strong>Map canvas</strong>, this is the &#8220;business end&#8221; of QGIS &#8212;
+maps are displayed in this area. The map displayed in this window
+will depend on the vector and raster layers you have chosen to load
+(see sections that follow for more information on how to load layers).
+The map view can be panned, shifting the focus of the map display to
+another region, and it can be zoomed in and out. Various other operations can be
+performed on the map as described in the <a class="reference internal" href="#label-toolbars">label_toolbars</a> description above. The map
+view and the legend are tightly bound to each other &#8212; the maps in view reflect
+changes you make in the legend area.</p>
+<div class="admonition tip" id="index-5">
+<p class="first admonition-title">Tip</p>
+<p><strong>Zooming the Map with the Mouse Wheel</strong></p>
+<p class="last">You can use the mouse wheel to zoom in and out on the map. Place the mouse
+cursor inside the map area and roll the wheel forward (away from you) to
+zoom in and backwards (towards you) to zoom out. The zoom is centered on the
+mouse cursor position. You can customize the behavior of the
+mouse wheel zoom using the <em class="guilabel">Map tools</em> tab under the
+<em class="menuselection">Settings ‣ Options</em> menu.</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Panning the Map with the Arrow Keys and Space Bar</strong></p>
+<p class="last" id="index-6">You can use the arrow keys to pan the map. Place the mouse cursor inside
+the map area and click on the right arrow key to pan east, left arrow key to
+pan west, up arrow key to pan north and down arrow key to pan south. You can
+also pan the map using the space bar or the click on mouse wheel: just move
+the mouse while holding down space bar or click on mouse wheel.</p>
+</div>
+</div>
+<div class="section" id="status-bar">
+<span id="label-statusbar"></span><span id="label-mapoverview"></span><h2><a class="toc-backref" href="#id20">Status Bar</a><a class="headerlink" href="#status-bar" title="Permalink to this headline">¶</a></h2>
+<p>The status bar provides you with general information about the map view,
+and actions processed or available and offers you tools to manage the map view.</p>
+<p>On the left side of the status bar, you can get a summary of actions you&#8217;ve done
+(such as selecting features in a layer, removing layer) or a long description
+of the tool you are hovering over (not available for all tools).
+On startup, the bar status also informs you about availability of new or upgradeable
+plugins (if checked in <a class="reference internal" href="../plugins/plugins.html#setting-plugins"><em>Plugin Manager settings</em></a>).</p>
+<p>In case of lengthy operations, such as gathering of statistics in raster layers
+or rendering several layers in map view, a progress bar is displayed in the
+status bar to show the current progress of the action.</p>
+<p>The <a class="reference internal" href="../../../_images/tracking.png"><img alt="tracking" src="../../../_images/tracking.png" style="width: 1.5em;" /></a> <em class="guilabel">Coordinate</em> option shows the current position of the mouse,
+following it while moving across the map view. You can set the unit (and precision)
+to use in the project properties, General tab.
+Click on the small button at the left of the textbox to toggle between
+the Coordinate option and the <a class="reference internal" href="../../../_images/extents.png"><img alt="extents" src="../../../_images/extents.png" style="width: 1.5em;" /></a> <em class="guilabel">Extents</em> option that displays
+in map units, the coordinates of the current lower leftmost and upper rightmost
+points of the map view, as you pan and zoom in and out.</p>
+<p>Next to the coordinate display you will find the <em class="guilabel">Scale</em> display.
+It shows the scale of the map view. If you zoom in or out, QGIS shows you the
+current scale. There is a scale selector, which allows you to choose among
+<a class="reference internal" href="qgis_configuration.html#predefinedscales"><em>predefined and custom scales</em></a> to assign to the map view.</p>
+<p>To the right of the scale display you can define a current clockwise rotation for
+your map view in degrees.</p>
+<p>On the right side of the status bar, there is a small
+checkbox which can be used to temporarily prevent layers being rendered to the
+map view (see section <a class="reference internal" href="general_tools.html#redraw-events"><em>Rendering</em></a>).</p>
+<p>To the right of the render functions, you find the <a class="reference internal" href="../../../_images/mIconProjectionDisabled.png"><img alt="projectionDisabled" src="../../../_images/mIconProjectionDisabled.png" style="width: 1.5em;" /></a>
+<sup>Current CRS:</sup> icon with the EPSG code of the current
+project CRS. Clicking on this lets you <em class="guilabel">Enable &#8216;on the fly&#8217; CRS
+transformation</em> properties for the current project and apply another CRS to the
+map view.</p>
+<p>Finally, the <a class="reference internal" href="../../../_images/mMessageLog.png"><img alt="messageLog" src="../../../_images/mMessageLog.png" style="width: 1.5em;" /></a> <sup>Messages</sup> button opens the <em class="guilabel">Log
+Messages Panel</em> which informs you on underlying process (QGIS startup, plugins
+loading, processing tools...)</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Calculating the Correct Scale of Your Map Canvas</strong></p>
+<p id="index-7">When you start QGIS, the default CRS is <tt class="docutils literal"><span class="pre">WGS</span> <span class="pre">84</span> <span class="pre">(epsg</span> <span class="pre">4326)</span></tt> and
+units are degrees. This means that QGIS will interpret any
+coordinate in your layer as specified in degrees. To get correct scale values,
+you can either manually change this setting, e.g. to meters, in the <em class="guilabel">General</em>
+tab under <em class="menuselection">Project ‣ Project Properties</em>, or you can use
+the <a class="reference internal" href="../../../_images/mIconProjectionDisabled.png"><img alt="projectionDisabled" src="../../../_images/mIconProjectionDisabled.png" style="width: 1.5em;" /></a> <sup>Current CRS:</sup> icon seen above. In the latter case,
+the units are set to what the project projection specifies (e.g., <tt class="docutils literal"><span class="pre">+units=us-ft</span></tt>).</p>
+<p class="last">Note that CRS choice on startup can be set in <em class="menuselection">Settings ‣ Options ‣ CRS</em>.</p>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="general_tools.html" title="General Tools"
+             >next</a></li>
+        <li class="right" >
+          <a href="getting_started.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

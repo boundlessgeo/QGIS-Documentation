@@ -1,0 +1,1565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>General Tools</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="QGIS User Guide" href="../index.html" />
+    <link rel="next" title="QGIS Configuration" href="qgis_configuration.html" />
+    <link rel="prev" title="QGIS GUI" href="qgis_gui.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/introduction/general_tools.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="qgis_configuration.html" title="QGIS Configuration"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="qgis_gui.html" title="QGIS GUI"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="qgis_gui.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="qgis_configuration.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="general-tools">
+<span id="id1"></span><h1>General Tools<a class="headerlink" href="#general-tools" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#keyboard-shortcuts" id="id8">Keyboard shortcuts</a></li>
+<li><a class="reference internal" href="#context-help" id="id9">Context help</a></li>
+<li><a class="reference internal" href="#panels" id="id10">Panels</a><ul>
+<li><a class="reference internal" href="#layers-panel" id="id11">Layers Panel</a><ul>
+<li><a class="reference internal" href="#editing-vector-layer-style" id="id12">Editing vector layer style</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-the-legend-independent-layer-order" id="id13">Working with the Legend independent layer order</a></li>
+<li><a class="reference internal" href="#statistical-summary-panel" id="id14">Statistical Summary Panel</a></li>
+<li><a class="reference internal" href="#qgis-overview-panel" id="id15">QGIS Overview Panel</a></li>
+<li><a class="reference internal" href="#log-messages-panel" id="id16">Log Messages Panel</a></li>
+<li><a class="reference internal" href="#undo-redo-panel" id="id17">Undo/Redo Panel</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rendering" id="id18">Rendering</a><ul>
+<li><a class="reference internal" href="#scale-dependent-rendering" id="id19">Scale Dependent Rendering</a></li>
+<li><a class="reference internal" href="#controlling-map-rendering" id="id20">Controlling Map Rendering</a><ul>
+<li><a class="reference internal" href="#suspending-rendering" id="id21">Suspending Rendering</a></li>
+<li><a class="reference internal" href="#setting-layer-add-option" id="id22">Setting Layer Add Option</a></li>
+<li><a class="reference internal" href="#stopping-rendering" id="id23">Stopping Rendering</a></li>
+<li><a class="reference internal" href="#influence-rendering-quality" id="id24">Influence Rendering Quality</a></li>
+<li><a class="reference internal" href="#speed-up-rendering" id="id25">Speed-up rendering</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#color-selector" id="id26">Color Selector</a></li>
+<li><a class="reference internal" href="#blending-modes" id="id27">Blending Modes</a></li>
+<li><a class="reference internal" href="#zooming-and-panning" id="id28">Zooming and Panning</a><ul>
+<li><a class="reference internal" href="#with-the-mouse-wheel" id="id29">With the mouse wheel</a></li>
+<li><a class="reference internal" href="#with-the-arrow-keys" id="id30">With the arrow keys</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#measuring" id="id31">Measuring</a><ul>
+<li><a class="reference internal" href="#measure-length-areas-and-angles-interactive" id="id32">Measure length, areas and angles interactive</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#select-and-deselect-features" id="id33">Select and deselect features</a><ul>
+<li><a class="reference internal" href="#about-select-features-by-value" id="id34">About Select Features By Value</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-defined-override-setup" id="id35">Data defined override setup</a></li>
+<li><a class="reference internal" href="#identify" id="id36">Identify features</a></li>
+<li><a class="reference internal" href="#annotation-tools" id="id37">Annotation Tools</a><ul>
+<li><a class="reference internal" href="#html-annotations" id="id38">Html annotations</a></li>
+<li><a class="reference internal" href="#svg-annotations" id="id39">SVG annotations</a></li>
+<li><a class="reference internal" href="#form-annotations" id="id40">Form annotations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#spatial-bookmarks" id="id41">Spatial Bookmarks</a><ul>
+<li><a class="reference internal" href="#creating-a-bookmark" id="id42">Creating a Bookmark</a></li>
+<li><a class="reference internal" href="#working-with-bookmarks" id="id43">Working with Bookmarks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#nesting-projects" id="id44">Nesting Projects</a><ul>
+<li><a class="reference internal" href="#embedding-layers" id="id45">Embedding layers</a></li>
+<li><a class="reference internal" href="#removing-embedded-layers" id="id46">Removing embedded layers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decorations" id="id47">Decorations</a><ul>
+<li><a class="reference internal" href="#grid" id="id48">Grid</a></li>
+<li><a class="reference internal" href="#copyright-label" id="id49">Copyright Label</a></li>
+<li><a class="reference internal" href="#north-arrow" id="id50">North Arrow</a></li>
+<li><a class="reference internal" href="#scale-bar" id="id51">Scale Bar</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#authentication" id="id52">Authentication</a></li>
+<li><a class="reference internal" href="#save-layer-into-file" id="id53">Save layer into file</a></li>
+<li><a class="reference internal" href="#use-of-variables-for-dynamic-content" id="id54">Use of variables for dynamic content</a></li>
+</ul>
+</div>
+<div class="section" id="keyboard-shortcuts">
+<span id="shortcuts"></span><h2><a class="toc-backref" href="#id8">Keyboard shortcuts</a><a class="headerlink" href="#keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
+<p id="index-0">QGIS provides default keyboard shortcuts for many features. You can find them in
+section <a class="reference internal" href="qgis_gui.html#label-menubar"><em>Menu Bar</em></a>. Additionally, the menu option
+<em class="menuselection">Settings ‣ Configure Shortcuts...</em> allows you to change the default
+keyboard shortcuts and add new keyboard shortcuts to QGIS features.</p>
+<p id="figure-shortcuts"><strong>Figure Shortcuts 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/shortcuts.png" src="../../../_images/shortcuts.png" />
+<p class="caption">Define shortcut options</p>
+</div>
+<p>Configuration is very simple. Just select a feature from the list and click
+on :</p>
+<ul class="simple">
+<li><strong>[Change]</strong> and press the new combination you want to assign as new shortcut</li>
+<li><strong>[Set none]</strong> to clear any assigned shortcut</li>
+<li>or <strong>[Set default]</strong> to backup the shortcut to its original and default value.</li>
+</ul>
+<p>Once you have finished your configuration, you can save it as an XML file
+and load it to another QGIS installation.</p>
+</div>
+<div class="section" id="context-help">
+<span id="id2"></span><h2><a class="toc-backref" href="#id9">Context help</a><a class="headerlink" href="#context-help" title="Permalink to this headline">¶</a></h2>
+<p id="index-1">When you need help on a specific topic, you can access context help via the
+<strong>[Help]</strong> button available in most dialogs &#8212; please note that third-party
+plugins can point to dedicated web pages.</p>
+</div>
+<div class="section" id="panels">
+<span id="index-2"></span><h2><a class="toc-backref" href="#id10">Panels</a><a class="headerlink" href="#panels" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="layers-panel">
+<span id="label-legend"></span><span id="index-3"></span><h3><a class="toc-backref" href="#id11">Layers Panel</a><a class="headerlink" href="#layers-panel" title="Permalink to this headline">¶</a></h3>
+<p id="index-4">The layers panel lists all the layers in the project. The checkbox in each
+legend entry can be used to show or hide the layer. The toolbar in the layers
+panel allows you to:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/mActionAddGroup.png"><img alt="addGroup" src="../../../_images/mActionAddGroup.png" style="width: 1.5em;" /></a> Add new group</li>
+<li><a class="reference internal" href="../../../_images/mActionShowPresets.png"><img alt="showPresets" src="../../../_images/mActionShowPresets.png" style="width: 1.5em;" /></a> <sup>Manage Visibility</sup>: control visibility of layers and
+preset layers combination</li>
+<li><a class="reference internal" href="../../../_images/mActionFilterMap.png"><img alt="filterMap" src="../../../_images/mActionFilterMap.png" style="width: 1.5em;" /></a> <sup>Filter Legend by Map Content</sup>: only the layers that are set
+visible and whose features intersect the current map canvas have their style
+rendered in the layers panel. Otherwise, a generic NULL symbol is applied to the
+layer. Based on the layer symbology, this is a convenient way to identify which
+kind of features from which layers cover your area of interest.</li>
+<li><a class="reference internal" href="../../../_images/mIconExpressionFilter.png"><img alt="expressionFilter" src="../../../_images/mIconExpressionFilter.png" style="width: 1.5em;" /></a> <sup>Filter Legend by Expression</sup>: helps you apply an
+expression to remove from the selected layer tree styles that have no feature
+satisfying the condition. This can be used for example to highlight features that are
+within a given area/feature of another layer.
+From the drop-down list, you can edit and clear the expression set.</li>
+<li><a class="reference internal" href="../../../_images/mActionExpandTree.png"><img alt="expandTree" src="../../../_images/mActionExpandTree.png" style="width: 1.5em;" /></a> <sup>Expand All</sup> or <a class="reference internal" href="../../../_images/mActionCollapseTree.png"><img alt="collapseTree" src="../../../_images/mActionCollapseTree.png" style="width: 1.5em;" /></a> <sup>Collapse All</sup>
+layers and groups in the layers panel.</li>
+<li>and <a class="reference internal" href="../../../_images/mActionRemoveLayer.png"><img alt="removeLayer" src="../../../_images/mActionRemoveLayer.png" style="width: 1.5em;" /></a> <sup>Remove Layer/Group</sup> currently selected.</li>
+</ul>
+<p id="figure-layer-toolbar"><strong>Figure Layer tools Bar:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/layer_toolbar.png" src="../../../_images/layer_toolbar.png" />
+<p class="caption">Layer Toolbar in Layers Panel</p>
+</div>
+<p id="index-5">The button <a class="reference internal" href="../../../_images/mActionShowPresets.png"><img alt="showPresets" src="../../../_images/mActionShowPresets.png" style="width: 1.5em;" /></a> allows you to add <strong>Presets</strong> views in the legend.
+Presets are a way to save and easily restore a combination of layers with their
+current style. To add a preset view, just set visible the layers you want, with
+their desired symbology, and click on <a class="reference internal" href="../../../_images/mActionShowPresets.png"><img alt="showPresets" src="../../../_images/mActionShowPresets.png" style="width: 1.5em;" /></a> button.
+Choose <em class="menuselection">Add Preset...</em> from the drop-down menu and give a name to the preset.
+The added preset is listed at the bottom of the drop-down menu and is recalled by
+clicking on it.</p>
+<p>The <em class="menuselection">Replace Preset ‣</em> option helps you overwrite a preset content
+with the current map view while the <em class="menuselection">Remove Current Preset</em> button
+deletes the active preset.</p>
+<p>All the added presets are also present in the map composer in order to allow you
+to create a map layout based on your specific views (see <a class="reference internal" href="../print_composer/composer_items/composer_map.html#composer-main-properties"><em>Main properties</em></a>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Tools to manage the layers panel are also available to layout the map
+and legend items of the print composer</p>
+</div>
+<p>A layer can be selected and dragged up or down in the legend to change the
+Z-ordering. Z-ordering means that layers listed nearer the top of the legend
+are drawn over layers listed lower down in the legend.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This behavior can be overridden by the <a class="reference internal" href="#layer-order"><em>Layer Order</em></a> panel.</p>
+</div>
+<p>Layers in the legend window can be organized into groups. There are two ways to
+do this:</p>
+<ol class="arabic simple">
+<li>Press the <a class="reference internal" href="../../../_images/mActionFolder.png"><img alt="folder" src="../../../_images/mActionFolder.png" style="width: 1.5em;" /></a> icon to add a new group. Type in a name for
+the group and press <tt class="kbd docutils literal"><span class="pre">Enter</span></tt>. Now click on an existing layer and
+drag it onto the group.</li>
+<li>Select some layers, right click in the legend window and choose
+<em class="guilabel">Group Selected</em>. The selected layers will automatically be placed
+in a new group.</li>
+</ol>
+<p>To bring a layer out of a group, you can drag it out, or right click on it and
+choose <em class="guilabel">Make to toplevel item</em>. Groups can also be nested inside other
+groups.</p>
+<p>The checkbox for a group will show or hide all the layers in the group
+with one click.</p>
+<p>The content of the right mouse button context menu depends on whether the
+selected legend item is a raster or a vector layer. For GRASS vector layers,
+<a class="reference internal" href="../../../_images/mActionToggleEditing.png"><img alt="toggleEditing" src="../../../_images/mActionToggleEditing.png" style="width: 1.5em;" /></a> <sup>Toggle editing</sup> is not available. See section
+<a class="reference internal" href="../grass_integration/grass_integration.html#grass-digitizing"><em>Digitizing and editing a GRASS vector layer</em></a> for information on editing GRASS vector layers.</p>
+<p>Below are listed available options in context menu depending on the selected item.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="53%" />
+<col width="17%" />
+<col width="17%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Vector Layer</th>
+<th class="head">Raster Layer</th>
+<th class="head">Group</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionZoomToLayer.png"><img alt="zoomToLayer" src="../../../_images/mActionZoomToLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Zoom to Layer/Group</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/checkbox_unchecked.png"><img alt="unchecked" src="../../../_images/checkbox_unchecked.png" style="width: 1.3em;" /></a> <em class="menuselection">Show in Overview</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionZoomActual.png"><img alt="zoomActual" src="../../../_images/mActionZoomActual.png" style="width: 1.5em;" /></a> <em class="menuselection">Zoom to Native Resolution (100%)</em></td>
+<td></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Stretch Using Current Extent</em></td>
+<td></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionRemoveLayer.png"><img alt="removeLayer" src="../../../_images/mActionRemoveLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Remove</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionDuplicateLayer.png"><img alt="duplicateLayer" src="../../../_images/mActionDuplicateLayer.png" style="width: 1.5em;" /></a> <em class="menuselection">Duplicate</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Set Layer Scale Visibility</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Set Layer/Group CRS</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Set Project CRS from Layer</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Styles ‣</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Copy Style</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Paste Style</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionOpenTable.png"><img alt="openTable" src="../../../_images/mActionOpenTable.png" style="width: 1.5em;" /></a> <em class="menuselection">Open Attribute Table</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/mActionToggleEditing.png"><img alt="toggleEditing" src="../../../_images/mActionToggleEditing.png" style="width: 1.5em;" /></a> <em class="menuselection">Toggle Editing</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionAllEdits.png"><img alt="allEdits" src="../../../_images/mActionAllEdits.png" style="width: 1.5em;" /></a> <em class="menuselection">Current Edits ‣</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+(in Edit mode)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Save As...</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Save As Layer Definition File...</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Filter</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/checkbox_unchecked.png"><img alt="unchecked" src="../../../_images/checkbox_unchecked.png" style="width: 1.3em;" /></a> <em class="menuselection">Show Feature Count</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Properties</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Move to Top-level</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Rename</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Group Selected</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><em class="menuselection">Properties</em></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><em class="menuselection">Set Group WMS Data</em></td>
+<td></td>
+<td></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="../../../_images/checkbox_unchecked.png"><img alt="unchecked" src="../../../_images/checkbox_unchecked.png" style="width: 1.3em;" /></a> <em class="menuselection">Mutually Exclusive Group</em></td>
+<td></td>
+<td></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="../../../_images/mActionAddGroup.png"><img alt="addGroup" src="../../../_images/mActionAddGroup.png" style="width: 1.5em;" /></a> <em class="menuselection">Add Group</em></td>
+<td></td>
+<td></td>
+<td><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a></td>
+</tr>
+</tbody>
+</table>
+<p>Enabling the <strong>Mutually Exclusive Group</strong> option you can make a group have only
+one layer visible at the same time.
+Whenever a layer within the group is set visible the others will be toggled not visible.</p>
+<p>It is possible to select more than one layer or group at the same time by
+holding down the <tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> key while selecting the layers with the left mouse
+button. You can then move all selected layers to a new group at the same time.</p>
+<p>You may also delete more than one layer or group at once by selecting
+several items with the <tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> key and pressing <tt class="kbd docutils literal"><span class="pre">Ctrl+D</span></tt> afterwards.
+This way, all selected layers or groups will be removed from the layers list.</p>
+<div class="section" id="editing-vector-layer-style">
+<span id="editing-style-layer"></span><span id="index-6"></span><h4><a class="toc-backref" href="#id12">Editing vector layer style</a><a class="headerlink" href="#editing-vector-layer-style" title="Permalink to this headline">¶</a></h4>
+<p>From the Layers panel, you have shortcuts to easily and quickly edit the layer
+rendering.
+Right-click on a vector layer and select <em class="guilabel">Styles &#8211;&gt;</em> in the list
+in order to:</p>
+<ul class="simple">
+<li>see the currently applied <a class="reference internal" href="../working_with_vector/vector_properties.html#manage-custom-style"><em>styles</em></a> to the layer. In
+case you defined many styles for the layer, you can switch from one to another
+and have your layer rendering automatically updated in the map canvas.</li>
+<li>copy the current style, and when applicable, paste a copied style from another layer</li>
+<li>rename the current style, add a new one (which is actually a copy of the current
+one) or delete the current style (when multiple styles available).</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The previous options are also available for raster layer.</p>
+</div>
+<p>Whether the features in the vector layer have all the same unique symbol or they are
+classified (in that case, the layer is displayed in a tree structure with each class
+as sub-item), the following options are available at layer level or class level:</p>
+<ul class="simple">
+<li>a <em class="guilabel">Edit Symbol...</em> button to open the <a class="reference internal" href="../working_with_vector/style_library.html#symbol-selector"><em>The symbol Selector</em></a> dialog and
+update any property (symbol, size, color...) of the layer or feature symbol.
+Double-clicking on a feature does also open the <em class="guilabel">Symbol Selector</em> dialog.</li>
+<li>a <a class="reference internal" href="#color-selector"><em>Color Selector</em></a> widget with a <strong>Color Wheel</strong> from which you can click a
+color and have it automatically update the symbol fill color. For convenience,
+<strong>Recent colors</strong> are available at the bottom of the color wheel.</li>
+<li>a <a class="reference internal" href="../../../_images/mActionShowAllLayers.png"><img alt="showAllLayers" src="../../../_images/mActionShowAllLayers.png" style="width: 1.5em;" /></a> <em class="guilabel">Show All Items</em> and <a class="reference internal" href="../../../_images/mActionHideAllLayers.png"><img alt="hideAllLayers" src="../../../_images/mActionHideAllLayers.png" style="width: 1.5em;" /></a> <em class="guilabel">Hide All
+Items</em> to toggle on or off the visibility of all the classes of features. This avoids
+(un)checking items one by one.</li>
+</ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Quickly share a layer style</strong></p>
+<p class="last">From the context menu, copy the style of a layer and paste it to a group
+or a selection of layers: the style is applied to all the layers that
+are of the same type (vector vs raster) as the original layer and,
+in case of vector, have the same geometry type (point, line or polygon).</p>
+</div>
+</div>
+</div>
+<div class="section" id="working-with-the-legend-independent-layer-order">
+<span id="layer-order"></span><span id="index-7"></span><h3><a class="toc-backref" href="#id13">Working with the Legend independent layer order</a><a class="headerlink" href="#working-with-the-legend-independent-layer-order" title="Permalink to this headline">¶</a></h3>
+<p>There is a panel that allows you to define an independent drawing order for
+the layers panel. You can activate it in the menu
+<em class="menuselection">Settings ‣ Panels ‣ Layer Order Panel</em>. This feature allows you
+to, for instance, order your layers in order of importance, but still display
+them in the correct order (see <a class="reference internal" href="#figure-layer-order">figure_layer_order</a>). Checking the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a>
+<em class="guilabel">Control rendering order</em> box underneath the list of layers will
+cause a revert to default behavior.</p>
+<p id="figure-layer-order"><strong>Figure Layer Order:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/layer_order.png" src="../../../_images/layer_order.png" />
+<p class="caption">Define a legend independent layer order</p>
+</div>
+</div>
+<div class="section" id="statistical-summary-panel">
+<span id="statistical-summary"></span><span id="index-8"></span><h3><a class="toc-backref" href="#id14">Statistical Summary Panel</a><a class="headerlink" href="#statistical-summary-panel" title="Permalink to this headline">¶</a></h3>
+<p>This panel can show some statistics on a specific vector layers. The panel
+allows users to choose:</p>
+<ul class="simple">
+<li>the vector layer;</li>
+<li>the column or the expression;</li>
+<li>filter statistics to selected features;</li>
+<li>refresh the informations;</li>
+<li>the statistics information to display with the bottom right button.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The list of shown statistics depends on the type of the values (numeric,
+string or date) returned by the selected field or the entered expression.</p>
+</div>
+</div>
+<div class="section" id="qgis-overview-panel">
+<span id="overview-panels"></span><span id="index-9"></span><h3><a class="toc-backref" href="#id15">QGIS Overview Panel</a><a class="headerlink" href="#qgis-overview-panel" title="Permalink to this headline">¶</a></h3>
+<p>In QGIS, you can use an overview panel that provides a full extent view of
+layers added to it. Within the view is a rectangle showing the current map
+extent. This allows you to quickly determine which area of the map you are
+currently viewing. Note that labels are not rendered to the map overview even
+if the layers in the map overview have been set up for labelling. If you click
+and drag the red rectangle in the overview that shows your current extent, the
+main map view will update accordingly.</p>
+</div>
+<div class="section" id="log-messages-panel">
+<span id="log-message-panel"></span><span id="index-10"></span><h3><a class="toc-backref" href="#id16">Log Messages Panel</a><a class="headerlink" href="#log-messages-panel" title="Permalink to this headline">¶</a></h3>
+<p>When loading or processing some operations, you can track and follow messages
+that appear in different tabs using the <a class="reference internal" href="../../../_images/mMessageLog.png"><img alt="messageLog" src="../../../_images/mMessageLog.png" style="width: 1.5em;" /></a> Log Messages Panel.
+It can be activated using the most right icon in the bottom status bar.</p>
+</div>
+<div class="section" id="undo-redo-panel">
+<span id="index-11"></span><span id="id3"></span><h3><a class="toc-backref" href="#id17">Undo/Redo Panel</a><a class="headerlink" href="#undo-redo-panel" title="Permalink to this headline">¶</a></h3>
+<p>For each layer being edited, this panel shows the list of actions done, allowing
+to quickly undo a set of actions by simply selecting the action listed above.</p>
+</div>
+</div>
+<div class="section" id="rendering">
+<span id="redraw-events"></span><h2><a class="toc-backref" href="#id18">Rendering</a><a class="headerlink" href="#rendering" title="Permalink to this headline">¶</a></h2>
+<p id="index-12">By default, QGIS renders all visible layers whenever the map canvas is
+refreshed. The events that trigger a refresh of the map canvas include:</p>
+<ul class="simple">
+<li>Adding a layer</li>
+<li>Panning or zooming</li>
+<li>Resizing the QGIS window</li>
+<li>Changing the visibility of a layer or layers</li>
+</ul>
+<p>QGIS allows you to control the rendering process in a number of ways.</p>
+<div class="section" id="scale-dependent-rendering">
+<span id="label-scaledepend"></span><h3><a class="toc-backref" href="#id19">Scale Dependent Rendering</a><a class="headerlink" href="#scale-dependent-rendering" title="Permalink to this headline">¶</a></h3>
+<p id="index-13">Scale-dependent rendering allows you to specify the minimum and maximum scales
+at which a layer will be visible. To set scale-dependent rendering, open the
+<em class="guilabel">Properties</em> dialog by double-clicking on the layer in the legend. On
+the <em class="guilabel">General</em> tab, click on the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Scale
+dependent visibility</em> checkbox to activate the feature, then set the minimum and
+maximum scale values.</p>
+<p>You can determine the scale values by first zooming to the level you want to
+use and noting the scale value in the QGIS status bar.</p>
+</div>
+<div class="section" id="controlling-map-rendering">
+<span id="label-controlmap"></span><span id="index-14"></span><h3><a class="toc-backref" href="#id20">Controlling Map Rendering</a><a class="headerlink" href="#controlling-map-rendering" title="Permalink to this headline">¶</a></h3>
+<p>Map rendering can be controlled in various ways, as described below.</p>
+<div class="section" id="suspending-rendering">
+<span id="label-suspendrender"></span><h4><a class="toc-backref" href="#id21">Suspending Rendering</a><a class="headerlink" href="#suspending-rendering" title="Permalink to this headline">¶</a></h4>
+<p>To suspend rendering, click the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Render</em> checkbox in the
+lower right corner of the status bar. When the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Render</em>
+checkbox is not checked, QGIS does not redraw the canvas in response to any of
+the events described in section <a class="reference internal" href="#redraw-events"><em>Rendering</em></a>. Examples of when you
+might want to suspend rendering include:</p>
+<ul class="simple">
+<li>Adding many layers and symbolizing them prior to drawing</li>
+<li>Adding one or more large layers and setting scale dependency before drawing</li>
+<li>Adding one or more large layers and zooming to a specific view before drawing</li>
+<li>Any combination of the above</li>
+</ul>
+<p>Checking the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Render</em> checkbox enables rendering and
+causes an immediate refresh of the map canvas.</p>
+</div>
+<div class="section" id="setting-layer-add-option">
+<span id="label-settinglayer"></span><h4><a class="toc-backref" href="#id22">Setting Layer Add Option</a><a class="headerlink" href="#setting-layer-add-option" title="Permalink to this headline">¶</a></h4>
+<p>You can set an option to always load new layers without drawing them. This
+means the layer will be added to the map, but its visibility checkbox in the
+legend will be unchecked by default. To set this option, choose menu option
+<em class="menuselection">Settings ‣ Options</em> and click on the <em class="guilabel">Rendering</em>
+tab. Uncheck the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">By default new layers added to the map
+should be displayed</em> checkbox. Any layer subsequently added to the map will be off
+(invisible) by default.</p>
+</div>
+<div class="section" id="stopping-rendering">
+<h4><a class="toc-backref" href="#id23">Stopping Rendering</a><a class="headerlink" href="#stopping-rendering" title="Permalink to this headline">¶</a></h4>
+<p id="label-stoprender"><span id="index-15"></span>To stop the map drawing, press the <tt class="kbd docutils literal"><span class="pre">ESC</span></tt> key. This will halt the refresh of
+the map canvas and leave the map partially drawn. It may take a bit of time
+between pressing <tt class="kbd docutils literal"><span class="pre">ESC</span></tt> and the time the map drawing is halted.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is currently not possible to stop rendering &#8212; this was disabled in the Qt4
+port because of User Interface (UI) problems and crashes.</p>
+</div>
+</div>
+<div class="section" id="influence-rendering-quality">
+<span id="label-renderquality"></span><h4><a class="toc-backref" href="#id24">Influence Rendering Quality</a><a class="headerlink" href="#influence-rendering-quality" title="Permalink to this headline">¶</a></h4>
+<p id="index-16">QGIS has an option to influence the rendering quality of the map. Choose menu
+option <em class="menuselection">Settings ‣ Options</em>, click on the <em class="guilabel">Rendering</em>
+tab and select or deselect <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Make lines appear less jagged
+at the expense of some drawing performance</em>.</p>
+</div>
+<div class="section" id="speed-up-rendering">
+<span id="index-17"></span><h4><a class="toc-backref" href="#id25">Speed-up rendering</a><a class="headerlink" href="#speed-up-rendering" title="Permalink to this headline">¶</a></h4>
+<p>There are some settings that allow you to improve rendering speed. Open the QGIS options
+dialog using <em class="menuselection">Settings ‣ Options</em>, go to the <em class="guilabel">Rendering</em>
+tab and select or deselect the following checkboxes:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use render caching where possible to speed up redraws</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Render layers in parallel using many CPU cores</em> and then
+set the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Max cores to use</em>.</li>
+<li>The map renders in the background onto a separate image and each
+<a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Map Update interval</em>, the content from this
+(off-screen) image will be taken to update the visible screen representation.
+However, if rendering finishes faster than this duration, it will be shown
+instantaneously.</li>
+<li>With <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable Feature simplification by default for newly
+added layers</em>, you simplify features&#8217; geometry (less nodes) and as  a result,
+they quickly display.
+Be aware that you can also face rendering inconsistencies.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="color-selector">
+<span id="id4"></span><h2><a class="toc-backref" href="#id26">Color Selector</a><a class="headerlink" href="#color-selector" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">select color</em> dialog will appear whenever you push
+the <img alt="selectColor" src="../../../_images/selectcolor.png" /> icon to choose a <span class="target" id="index-18"></span>color. The features of this dialog
+depends on the state of the <em class="guilabel">Use native color chooser dialogs</em> parameter
+checkbox in <em class="menuselection">Settings ‣ Options ‣ General</em> menu.
+When checked, the color dialog used is the one of the OS being used. Otherwise,
+QGIS custom color chooser is used.</p>
+<p>This dialog has four different tabs which allow you to select colors by
+<a class="reference internal" href="../../../_images/mIconColorBox.png"><img alt="colorBox" src="../../../_images/mIconColorBox.png" style="width: 1.5em;" /></a> <sup>color ramp</sup>, <a class="reference internal" href="../../../_images/mIconColorWheel.png"><img alt="colorWheel" src="../../../_images/mIconColorWheel.png" style="width: 1.5em;" /></a> <sup>color wheel</sup>,
+<a class="reference internal" href="../../../_images/mIconColorSwatches.png"><img alt="colorSwatches" src="../../../_images/mIconColorSwatches.png" style="width: 1.5em;" /></a> <sup>color swatches</sup> or <a class="reference internal" href="../../../_images/mIconColorPicker.png"><img alt="colorPicker" src="../../../_images/mIconColorPicker.png" style="width: 1.5em;" /></a> <sup>color picker</sup>
+(not available under <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a>).</p>
+<p>Whatever method you use, the selected color is always described through color
+sliders for HSV  (Hue, Saturation, Value) and RGB (Red, Green, Blue) values.
+There is also an <em class="guilabel">opacity</em> slider to set transparency level.
+On the lower left part of the dialog you can see a comparison between the
+<em class="guilabel">current</em> and the <em class="guilabel">new</em> color you are presently
+selecting and on the lower right part you have the option to add the color
+you just tweaked into a color slot button.</p>
+<p id="figure-color-selector-1"><strong>Figure color selector 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/color_selector_ramp.png" src="../../../_images/color_selector_ramp.png" />
+<p class="caption">Color selector ramp tab</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Dynamically change the color with the live-updating option</strong></p>
+<p class="last">Check the <em class="guilabel">Use live-updating color chooser dialogs</em> option in
+the General Settings to have the color applied to your items as you change
+color parameters in the QGIS custom color chooser dialog.</p>
+</div>
+<p>With <a class="reference internal" href="../../../_images/mIconColorBox.png"><img alt="colorBox" src="../../../_images/mIconColorBox.png" style="width: 1.5em;" /></a> <sup>color ramp</sup> or with <a class="reference internal" href="../../../_images/mIconColorWheel.png"><img alt="colorWheel" src="../../../_images/mIconColorWheel.png" style="width: 1.5em;" /></a> <sup>color wheel</sup>,
+you can browse to all possible color combinations.
+There are other possibilities though. By using <a class="reference internal" href="../../../_images/mIconColorSwatches.png"><img alt="colorSwatches" src="../../../_images/mIconColorSwatches.png" style="width: 1.5em;" /></a> <sup>color swatches</sup>
+you can choose from a preselected list. This selected list is
+populated with one of three methods:</p>
+<ul class="simple">
+<li><em class="guilabel">Recent colors</em>,</li>
+<li><em class="guilabel">Standard colors</em>, a user-defined list of colors set under
+<em class="menuselection">Settings ‣ Options ‣ Colors</em> menu</li>
+<li>or <em class="guilabel">Project colors</em>, a user-defined list of colors set under <em class="menuselection">Project
+‣ Project Properties ‣ Default Styles</em>.</li>
+</ul>
+<p id="figure-color-selector-2"><strong>Figure color selector 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/color_selector_recent_colors.png" src="../../../_images/color_selector_recent_colors.png" />
+<p class="caption">Color selector switcher tab</p>
+</div>
+<p>Another option is to use the <a class="reference internal" href="../../../_images/mIconColorPicker.png"><img alt="colorPicker" src="../../../_images/mIconColorPicker.png" style="width: 1.5em;" /></a> <sup>color picker</sup> which allows
+you to sample a color from under your mouse pointer at any part of
+QGIS or even from another application by pressing the space bar. Please note
+that the color picker is OS dependent and is currently not supported by OSX.</p>
+<div class="admonition tip" id="tip-quick-color-picker-copy-paste-colors">
+<p class="first admonition-title">Tip</p>
+<p><strong>quick color picker + copy/paste colors</strong></p>
+<p class="last">You can quickly choose from <em class="guilabel">Recent colors</em>, from <em class="guilabel">Standard colors</em>
+or simply <em class="guilabel">copy</em> or <em class="guilabel">paste</em> a color by clicking
+the drop-down arrow that follows the <img alt="selectColor" src="../../../_images/selectcolor.png" /> color box.</p>
+</div>
+<p id="figure-color-selector-3"><strong>Figure color selector 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/quick_color_selector.png" src="../../../_images/quick_color_selector.png" />
+<p class="caption">Quick color selector menu</p>
+</div>
+</div>
+<div class="section" id="blending-modes">
+<span id="blend-modes"></span><h2><a class="toc-backref" href="#id27">Blending Modes</a><a class="headerlink" href="#blending-modes" title="Permalink to this headline">¶</a></h2>
+<p>QGIS offers different options for special <span class="target" id="index-19"></span>rendering effects with these tools that
+you may previously only know from graphics programs. <span class="target" id="index-20"></span>Blending modes can be applied
+on layers, on features but also on print composer items:</p>
+<ul class="simple">
+<li><strong>Normal</strong>: This is the standard blend mode, which uses the alpha channel of the top
+pixel to blend with the pixel beneath it. The colors aren&#8217;t mixed.</li>
+<li><strong>Lighten</strong>: This selects the maximum of each component from the foreground and
+background pixels. Be aware that the results tend to be jagged and harsh.</li>
+<li><strong>Screen</strong>: Light pixels from the source are painted over the destination, while
+dark pixels are not. This mode is most useful for mixing the texture of one item
+with another item (e.g., you can use a hillshade to texture another layer).</li>
+<li><strong>Dodge</strong>: Dodge will brighten and saturate underlying pixels based on the lightness
+of the top pixel. So, brighter top pixels cause the saturation and brightness of
+the underlying pixels to increase. This works best if the top pixels aren&#8217;t too
+bright; otherwise the effect is too extreme.</li>
+<li><strong>Addition</strong>: This blend mode simply adds pixel values of one item with the other.
+In case of values above one (in the case of RGB), white is displayed.
+This mode is suitable for highlighting features.</li>
+<li><strong>Darken</strong>: This creates a resultant pixel that retains the smallest components of the
+foreground and background pixels. Like lighten, the results tend to be jagged and harsh.</li>
+<li><strong>Multiply</strong>: Here, the numbers for each pixel of the top item are multiplied with
+the corresponding pixels for the bottom item. The results are darker pictures.</li>
+<li><strong>Burn</strong>: Darker colors in the top item cause the underlying items to darken.
+Burn can be used to tweak and colorise underlying layers.</li>
+<li><strong>Overlay</strong>: This mode combines the multiply and screen blending modes.
+In the resulting picture, light parts become lighter and dark parts become darker.</li>
+<li>Soft light: This is very similar to overlay, but instead of using multiply/screen
+it uses color burn/dodge. This is supposed to emulate shining a soft light onto an image.</li>
+<li><strong>Hard light</strong>: Hard light is also very similar to the overlay mode. It&#8217;s supposed
+to emulate projecting a very intense light onto an image.</li>
+<li><strong>Difference</strong>: Difference subtracts the top pixel from the bottom pixel, or the other
+way around, to always get a positive value. Blending with black produces no change,
+as the difference with all colors is zero.</li>
+<li><strong>Subtract</strong>: This blend mode simply subtracts pixel values of one item from the other.
+In case of negative values, black is displayed.</li>
+</ul>
+</div>
+<div class="section" id="zooming-and-panning">
+<span id="zoom-pan"></span><span id="index-21"></span><h2><a class="toc-backref" href="#id28">Zooming and Panning</a><a class="headerlink" href="#zooming-and-panning" title="Permalink to this headline">¶</a></h2>
+<p>QGIS provides tools to zoom and pan to your area of interest.</p>
+<p>Apart from using the <a class="reference internal" href="../../../_images/mActionPan.png"><img alt="pan" src="../../../_images/mActionPan.png" style="width: 1.5em;" /></a> <sup>pan</sup> and <a class="reference internal" href="../../../_images/mActionZoomIn.png"><img alt="zoomIn" src="../../../_images/mActionZoomIn.png" style="width: 1.5em;" /></a>
+<sup>zoom-in</sup> / <a class="reference internal" href="../../../_images/mActionZoomOut.png"><img alt="zoomOut" src="../../../_images/mActionZoomOut.png" style="width: 1.5em;" /></a> <sup>zoom-out</sup> icons on the toolbar
+with the mouse, navigating can also be done with the mouse wheel, spacebar
+and the arrow keys. A <em class="guilabel">Zoom factor</em> can be set under the
+<em class="menuselection">Settings ‣</em> <a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <em class="menuselection">Options ‣ Map tools</em>
+menu to define the scale behavior while zooming.</p>
+<div class="section" id="with-the-mouse-wheel">
+<h3><a class="toc-backref" href="#id29">With the mouse wheel</a><a class="headerlink" href="#with-the-mouse-wheel" title="Permalink to this headline">¶</a></h3>
+<p>You can press the mouse wheel to pan inside of the main window (on macOS,
+you may need to hold <tt class="kbd docutils literal"><span class="pre">cmd</span></tt> key).
+You can roll the mouse wheel to zoom in and out on the map; the mouse
+cursor position will be the center of the zoomed area of interest.
+Holding down <tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> while rolling the mouse wheel results in a finer zoom.</p>
+</div>
+<div class="section" id="with-the-arrow-keys">
+<h3><a class="toc-backref" href="#id30">With the arrow keys</a><a class="headerlink" href="#with-the-arrow-keys" title="Permalink to this headline">¶</a></h3>
+<p>Panning the map is possible with the arrow keys.
+Place the mouse cursor inside the map area, and click on the right arrow key
+to pan east, left arrow key to pan west, up arrow key to pan north, and down
+arrow key to pan south.</p>
+<p>You can also use the space bar to temporarily cause mouse movements to pan
+the map. The <tt class="kbd docutils literal"><span class="pre">PgUp</span></tt> and <tt class="kbd docutils literal"><span class="pre">PgDown</span></tt> keys on your keyboard will cause
+the map display to zoom in or out following the zoom factor set. Pressing
+<tt class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span></tt> or <tt class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">-</span></tt> also performs an immediate zoom in/out
+on the map canvas.</p>
+<p>When certain map tools are active (Identify, Measure...), you can perform a zoom by
+holding down <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> and dragging a rectangle on the map to zoom to that area.
+This is enabled for the map tools which are not selection tools (since they
+use <tt class="kbd docutils literal"><span class="pre">Shift</span></tt> for adding to selection) nor edit tools.</p>
+</div>
+</div>
+<div class="section" id="measuring">
+<span id="sec-measure"></span><h2><a class="toc-backref" href="#id31">Measuring</a><a class="headerlink" href="#measuring" title="Permalink to this headline">¶</a></h2>
+<p id="index-22">QGIS provides four means of measuring geometries:</p>
+<ul class="simple">
+<li>the interactive measurement tools <a class="reference internal" href="../../../_images/mActionMeasure.png"><img alt="measure" src="../../../_images/mActionMeasure.png" style="width: 1.5em;" /></a>,</li>
+<li>measuring in the <a class="reference internal" href="../../../_images/mActionCalculateField.png"><img alt="calculateField" src="../../../_images/mActionCalculateField.png" style="width: 1.5em;" /></a> <sup>Field Calculator</sup>,</li>
+<li>derived measures in the <a class="reference internal" href="#identify"><em>Identify features</em></a> tool,</li>
+<li>and a vector analysis tool: <em class="menuselection">Vector ‣ Geometry Tools ‣
+Export/Add Geometry Columns</em></li>
+</ul>
+<p>Measuring works within projected coordinate systems (e.g., UTM) and unprojected
+data. The first three measuring tools behave equally to global project settings:</p>
+<p>If &#8220;on the fly&#8221; CRS transformation is enabled, the default measurement metric is
+- different from most other GIS - ellipsoidal, using the ellipsoid defined in
+<em class="menuselection">File ‣ Project properties ‣ General</em>. This is true both
+when geographic and projected coordinate systems are defined for the project.
+If you want to calculate the projected / planimetric area or distance using cartesian
+maths, the measurement ellipsoid has to be set to &#8220;None / Planimetric&#8221;
+(<em class="menuselection">File ‣ Project properties ‣ CRS</em>). However,
+with a geographic (= unprojected) CRS defined for the data and project, area and
+distance measurement will be ellipsoidal.
+If &#8220;on the fly&#8221; CRS transformation is disabled, the measurement metric is planimetric
+when the project coordinate system is projected and ellipsoidal when the project
+coordinate system is unprojected / geographic.</p>
+<p>However, neither the identify tool nor the field calculator will transform your
+data to the project CRS before measuring. If you want to achieve this, you have
+to use the vector analysis tool: <em class="menuselection">Vector ‣ Geometry Tools ‣
+Export/Add Geometry Columns</em>. Here, measurement is by default planimetric except
+if you choose the ellipsoidal measure.</p>
+<div class="section" id="measure-length-areas-and-angles-interactive">
+<h3><a class="toc-backref" href="#id32">Measure length, areas and angles interactive</a><a class="headerlink" href="#measure-length-areas-and-angles-interactive" title="Permalink to this headline">¶</a></h3>
+<p>All measuring modules use the snapping settings from the digitizing module.
+This is useful, if you want to measure along lines or areas in vector layers.</p>
+<p>To select a measuring tool, click on <a class="reference internal" href="../../../_images/mActionMeasure.png"><img alt="measure" src="../../../_images/mActionMeasure.png" style="width: 1.5em;" /></a> and select the tool you want
+to use.</p>
+<span class="target" id="index-23"></span><span class="target" id="index-24"></span><p id="index-25">By default, <a class="reference internal" href="../../../_images/mActionMeasure.png"><img alt="measure" src="../../../_images/mActionMeasure.png" style="width: 1.5em;" /></a> <sup>Measure Line</sup>: QGIS measures real distances
+between given points according to a defined ellipsoid. You can define a rubberband
+color and your preferred measurement units (meters or feet) and angle units
+(degrees, radians and gon) in the menu option
+<em class="menuselection">Settings ‣ Options ‣ Map Tools</em>.
+The tool then allows you to click points on the map. Each segment length,
+as well as the total, shows up in the measure window.
+To stop measuring, click your right mouse button.
+Note that you can interactively change the measurement units in the measurement
+dialog. It overrides the <em class="guilabel">Preferred measurement units</em> in the options.
+There is an info section in the dialog that shows which CRS settings are being
+used during measurement calculations.</p>
+<p id="figure-measure-length"><strong>Figure Measure 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/measure_line.png" src="../../../_images/measure_line.png" />
+<p class="caption">Measure Distance</p>
+</div>
+<p><a class="reference internal" href="../../../_images/mActionMeasureArea.png"><img alt="measureArea" src="../../../_images/mActionMeasureArea.png" style="width: 1.5em;" /></a> <sup>Measure Area</sup>: Areas can also be measured. In the
+measure window, the accumulated area size appears. In addition, the measuring
+tool will snap to the currently selected layer, provided that layer has its
+snapping tolerance set (see section <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#snapping-tolerance"><em>Setting the Snapping Tolerance and Search Radius</em></a>). So, if you want
+to measure exactly along a line feature, or around a polygon feature, first set
+its snapping tolerance, then select the layer. Now, when using the measuring
+tools, each mouse click (within the tolerance setting) will snap to that layer.</p>
+<p id="figure-measure-area"><strong>Figure Measure 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/measure_area.png" src="../../../_images/measure_area.png" />
+<p class="caption">Measure Area</p>
+</div>
+<p><a class="reference internal" href="../../../_images/mActionMeasureAngle.png"><img alt="measureAngle" src="../../../_images/mActionMeasureAngle.png" style="width: 1.5em;" /></a> <sup>Measure Angle</sup>: You can also measure angles. The
+cursor becomes cross-shaped. Click to draw the first segment of the angle you
+wish to measure, then move the cursor to draw the desired angle. The measure
+is displayed in a pop-up dialog.</p>
+<p id="figure-measure-angle"><strong>Figure Measure 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/measure_angle.png" src="../../../_images/measure_angle.png" />
+<p class="caption">Measure Angle</p>
+</div>
+</div>
+</div>
+<div class="section" id="select-and-deselect-features">
+<span id="sec-selection"></span><span id="index-26"></span><h2><a class="toc-backref" href="#id33">Select and deselect features</a><a class="headerlink" href="#select-and-deselect-features" title="Permalink to this headline">¶</a></h2>
+<p>The QGIS toolbar provides several tools to select features in the map canvas.
+To select one or several features, just click on <a class="reference internal" href="../../../_images/mActionSelect.png"><img alt="select" src="../../../_images/mActionSelect.png" style="width: 1.5em;" /></a> and select your
+tool:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/mActionSelectRectangle.png"><img alt="selectRectangle" src="../../../_images/mActionSelectRectangle.png" style="width: 1.5em;" /></a> <sup>Select Features by area or single click</sup> to
+select feature(s) either by simple click or by rectangle</li>
+<li><a class="reference internal" href="../../../_images/mActionSelectPolygon.png"><img alt="selectPolygon" src="../../../_images/mActionSelectPolygon.png" style="width: 1.5em;" /></a> <sup>Select Features by Polygon</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionSelectFreehand.png"><img alt="selectFreehand" src="../../../_images/mActionSelectFreehand.png" style="width: 1.5em;" /></a> <sup>Select Features by Freehand</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionSelectRadius.png"><img alt="selectRadius" src="../../../_images/mActionSelectRadius.png" style="width: 1.5em;" /></a> <sup>Select Features by Radius</sup></li>
+</ul>
+<p>If you want to select from attribute table, you can choose one of these tools
+(note that attribute table and map canvas show the same information, so if you
+select one feature in attribute table, it will be selected in map canvas also):</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/mIconExpressionSelect.png"><img alt="expressionSelect" src="../../../_images/mIconExpressionSelect.png" style="width: 1.5em;" /></a> <sup>Select By Expression...</sup> allows user to select
+features using expression dialog. See <a class="reference internal" href="../working_with_vector/expression.html#vector-expressions"><em>Expressions</em></a> chapter for
+some example.</li>
+<li><a class="reference internal" href="../../../_images/mIconFormSelect.png"><img alt="formSelect" src="../../../_images/mIconFormSelect.png" style="width: 1.5em;" /></a> <sup>Select Features By Value...</sup> or press <tt class="kbd docutils literal"><span class="pre">F3</span></tt></li>
+<li><a class="reference internal" href="../../../_images/mActionDeselectAll.png"><img alt="deselectAll" src="../../../_images/mActionDeselectAll.png" style="width: 1.5em;" /></a> <sup>Deselect Features from All Layers</sup> or press
+<tt class="kbd docutils literal"><span class="pre">Ctrl+Shift+A</span></tt> to deselect all selected features in all layers.</li>
+<li><a class="reference internal" href="../../../_images/mActionSelectAll.png"><img alt="selectAll" src="../../../_images/mActionSelectAll.png" style="width: 1.5em;" /></a> <sup>Select All Features</sup> or press <tt class="kbd docutils literal"><span class="pre">Ctrl+A</span></tt> to select all
+features in the current layer.</li>
+<li><a class="reference internal" href="../../../_images/mActionInvertSelection.png"><img alt="invertSelection" src="../../../_images/mActionInvertSelection.png" style="width: 1.5em;" /></a> <sup>Invert Feature Selection</sup> to invert the selection in
+the current layer.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em class="menuselection">View ‣ Select</em> menu list the same possibilities.</p>
+</div>
+<p>Users can save selected features into a <strong>New Memory Vector Layer</strong> or a
+<strong>New Vector Layer</strong> using <em class="menuselection">Edit ‣ Copy Features</em> and
+<em class="menuselection">Edit ‣ Paste Features as</em> in the wanted format.</p>
+<div class="section" id="about-select-features-by-value">
+<span id="index-27"></span><h3><a class="toc-backref" href="#id34">About Select Features By Value</a><a class="headerlink" href="#about-select-features-by-value" title="Permalink to this headline">¶</a></h3>
+<p>This feature opens a window to allow the user to choose for each column of the
+attribute table which value to look for, if the search should be case sensitive
+and the operation that should be used. Operation can be one of:</p>
+<ul class="simple">
+<li><em class="guilabel">Exclude field</em>,</li>
+<li><em class="guilabel">Equal to (=)</em>,</li>
+<li><em class="guilabel">Not equal to</em>,</li>
+<li><em class="guilabel">Greater than (&gt;)</em> (only for fields of integer or decimal type),</li>
+<li><em class="guilabel">Less than (&lt;)</em> (only for fields of integer or decimal type),</li>
+<li><em class="guilabel">Greater than or equal to (&gt;=)</em> (only for fields of integer
+or decimal type),</li>
+<li><em class="guilabel">Less than or equal to (&lt;=)</em> (only for fields of integer or
+decimal type),</li>
+<li><em class="guilabel">Contains</em> (only for fields of type string),</li>
+<li><em class="guilabel">Not contains</em> (only for fields of type string),</li>
+<li><em class="guilabel">is missing (null)</em>,</li>
+<li><em class="guilabel">is not missing (null)</em></li>
+</ul>
+<p>The window allows user to <em class="guilabel">Reset form</em> or to <em class="guilabel">Select
+features</em>, <em class="guilabel">Add to current selection</em>, <em class="guilabel">Filter current
+selection</em>, <em class="guilabel">Remove from current selection</em>.</p>
+</div>
+</div>
+<div class="section" id="data-defined-override-setup">
+<span id="data-defined"></span><h2><a class="toc-backref" href="#id35">Data defined override setup</a><a class="headerlink" href="#data-defined-override-setup" title="Permalink to this headline">¶</a></h2>
+<p>Beside many options in the vector layer properties dialog or settings in the print
+composer, you can find a <a class="reference internal" href="../../../_images/mIconDataDefine.png"><img alt="dataDefined" src="../../../_images/mIconDataDefine.png" style="width: 1.5em;" /></a> <sup>Data defined override</sup> icon.
+Thanks to <a class="reference internal" href="../working_with_vector/expression.html#vector-expressions"><em>expressions</em></a> based on layer attributes or item
+settings, prebuild or custom functions and variables, this tool allows you to set
+dynamic value for the concerned parameter. When enabled, the value returned by
+this widget is applied to the parameter regardless its normal value (checkbox,
+textbox, slider...).</p>
+<p>Clicking the <a class="reference internal" href="../../../_images/mIconDataDefine.png"><img alt="dataDefined" src="../../../_images/mIconDataDefine.png" style="width: 1.5em;" /></a> <sup>Data defined override</sup> icon shows:</p>
+<ul class="simple">
+<li>a <em class="guilabel">Description ...</em> that indicates if it is enabled, which input
+expected, valid input type and the current definition,</li>
+<li>an entry to list the <em class="guilabel">Field type</em> available,</li>
+<li>an entry to list the <em class="guilabel">Variable</em> available,</li>
+<li><em class="guilabel">Edit ...</em> button to create or edit the expression to use,</li>
+<li><em class="guilabel">Paste</em> and <em class="guilabel">Copy</em> buttons,</li>
+<li><em class="guilabel">Clear</em> button to remove the setup.</li>
+</ul>
+<p>When the <span class="target" id="index-28"></span>data-defined override option is setup correctly the icon is yellow
+<a class="reference internal" href="../../../_images/mIconDataDefineOn.png"><img alt="dataDefineOn" src="../../../_images/mIconDataDefineOn.png" style="width: 1.5em;" /></a> or <a class="reference internal" href="../../../_images/mIconDataDefineExpressionOn.png"><img alt="dataDefineExpressionOn" src="../../../_images/mIconDataDefineExpressionOn.png" style="width: 1.5em;" /></a>; if it is broken, the icon is red
+<a class="reference internal" href="../../../_images/mIconDataDefineError.png"><img alt="dataDefineError" src="../../../_images/mIconDataDefineError.png" style="width: 1.5em;" /></a> or <a class="reference internal" href="../../../_images/mIconDataDefineExpressionError.png"><img alt="dataDefineExpressionError" src="../../../_images/mIconDataDefineExpressionError.png" style="width: 1.5em;" /></a>.</p>
+<p>Parameters that can be used with data-defined tools are:</p>
+<ul class="simple">
+<li>Style and symbols parameters</li>
+<li>Labels parameters</li>
+<li>Composer parameters</li>
+</ul>
+</div>
+<div class="section" id="identify">
+<span id="identify-features"></span><h2><a class="toc-backref" href="#id36">Identify features</a><a class="headerlink" href="#identify" title="Permalink to this headline">¶</a></h2>
+<p id="index-29">The Identify tool allows you to interact with the map canvas and get information
+on features in a pop-up window. To identify features, use <em class="menuselection">View ‣ Identify
+features</em> or press <tt class="kbd docutils literal"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">I</span></tt>, or click the <a class="reference internal" href="../../../_images/mActionIdentify.png"><img alt="identify" src="../../../_images/mActionIdentify.png" style="width: 1.5em;" /></a>
+<sup>Identify features</sup> icon on the Attributes toolbar.</p>
+<p>QGIS offers two ways to identify features with the <a class="reference internal" href="../../../_images/mActionIdentify.png"><img alt="identify" src="../../../_images/mActionIdentify.png" style="width: 1.5em;" /></a>
+<sup>Identify features</sup> tool:</p>
+<ul class="simple">
+<li><strong>left click</strong> will identify features according to the mode set in the
+<em class="guilabel">Identify results</em> panel</li>
+<li><strong>right click</strong> will fetch all the snapped features from all the visible layers.
+This will open a context menu, allowing the user to choose more precisely the
+features to identify.</li>
+</ul>
+<p>If you click on feature(s), the <em class="guilabel">Identify results</em> dialog will list
+information about the clicked feature(s). The default view is a tree view where
+the first item is the name of the layer and its children are its identified feature(s).
+Each feature is described by the name of a field along with its value.
+This field is the one set in <em class="menuselection">Properties ‣ Display</em>.
+Then follows all the other information about the feature.</p>
+<p>This window can be customized to display custom fields, but by default it will
+display three kinds of information:</p>
+<ul class="simple">
+<li><strong>Actions</strong>: <span class="target" id="index-30"></span>Actions can be added to the identify feature windows.
+The action is run by clicking on the action label. By default, only one action
+is added, namely <tt class="docutils literal"><span class="pre">view</span> <span class="pre">feature</span> <span class="pre">form</span></tt> for editing. You can define more actions
+in the layer&#8217;s properties dialog.</li>
+<li><strong>Derived</strong>: This information is calculated or derived from other information.
+This includes:<ul>
+<li>general information about the feature and its geometry: feature id, length or perimeter
+and area in map units depending on its geometry, the count of spatial parts and
+the number of the clicked part in case of multi-geometry, the count of vertices in
+the feature and the number of the closest one to the point clicked</li>
+<li>coordinates information: the X and Y (and Z/M if available) coordinate values of the
+clicked point, the feature closest vertex and its first and last vertices.
+In case you click on a curved line using the info tool, QGIS will also display the
+radius of that section in the panel result.</li>
+</ul>
+</li>
+<li><strong>Data attributes</strong>: This is the list of attribute fields and values for the feature that
+has been clicked.</li>
+</ul>
+<p id="figure-identify"><strong>Figure Identify 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/identify_features.png" src="../../../_images/identify_features.png" />
+<p class="caption">Identify features dialog</p>
+</div>
+<p>At the top of the window, you have seven icons:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/mActionExpandTree.png"><img alt="expandTree" src="../../../_images/mActionExpandTree.png" style="width: 1.5em;" /></a> <sup>Expand tree</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionCollapseTree.png"><img alt="collapseTree" src="../../../_images/mActionCollapseTree.png" style="width: 1.5em;" /></a> <sup>Collapse tree</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionExpandNewTree.png"><img alt="expandNewTree" src="../../../_images/mActionExpandNewTree.png" style="width: 1.5em;" /></a> <sup>Default behavior</sup> to define whether next
+identified features information should be collapsed or expanded</li>
+<li><a class="reference internal" href="../../../_images/mActionPropertyItem.png"><img alt="propertyItem" src="../../../_images/mActionPropertyItem.png" style="width: 1.5em;" /></a> <sup>View the feature form</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionDeselectAll.png"><img alt="deselectAll" src="../../../_images/mActionDeselectAll.png" style="width: 1.5em;" /></a> <sup>Clear Results</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionEditCopy.png"><img alt="editCopy" src="../../../_images/mActionEditCopy.png" style="width: 1.5em;" /></a> <sup>Copy selected feature to clipboard</sup></li>
+<li><a class="reference internal" href="../../../_images/mActionFilePrint.png"><img alt="filePrint" src="../../../_images/mActionFilePrint.png" style="width: 1.5em;" /></a> <sup>Print selected HTML response</sup></li>
+</ul>
+<p>At the bottom of the window, you have the <em class="guilabel">Mode</em> and <em class="guilabel">View</em>
+comboboxes.
+With the <em class="guilabel">Mode</em> combobox you can define from which layers features
+should be identified:</p>
+<ul class="simple">
+<li>&#8216;Current layer&#8217; : only features from the selected layer are identified. The
+layer may not be visible in the canvas.</li>
+<li>&#8216;Top down, stop at first&#8217;: for only features from the upper visible layer.</li>
+<li>&#8216;Top down&#8217;: for all features from the visible layers. The results are shown in
+the panel.</li>
+<li>and &#8216;Layer selection&#8217;: opens a context menu where the user selects the layer to
+identify features from. Operates like a right-click. Only the chosen features
+will be shown in the result panel.</li>
+</ul>
+<p>The <em class="guilabel">View</em> can be set as &#8216;Tree&#8217;, &#8216;Table&#8217; or &#8216;Graph&#8217;.
+&#8216;Table&#8217; and &#8216;Graph&#8217; views can only be set for raster layers.</p>
+<p>The identify tool allows you to <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a><em class="guilabel">auto open a form</em>.
+If checked, each time a single feature is identified QGIS will open a form
+showing its attributes. This is a handy way to quickly edit a feature&#8217;s attributes.</p>
+<p>Other functions can be found in the context menu of the identified item. For
+example, from the context menu you can:</p>
+<ul class="simple">
+<li>View the feature form</li>
+<li>Zoom to feature</li>
+<li>Copy feature: Copy all feature geometry and attributes</li>
+<li>Toggle feature selection: Adds identified feature to selection</li>
+<li>Copy attribute value: Copy only the value of the attribute that you click on</li>
+<li>Copy feature attributes: Copy the attributes of the feature</li>
+<li>Clear result: Remove results in the window</li>
+<li>Clear highlights: Remove features highlighted on the map</li>
+<li>Highlight all</li>
+<li>Highlight layer</li>
+<li>Activate layer: Choose a layer to be activated</li>
+<li>Layer properties: Open layer properties window</li>
+<li>Expand all</li>
+<li>Collapse all</li>
+</ul>
+<span class="target" id="sec-annotations"></span></div>
+<div class="section" id="annotation-tools">
+<span id="index-31"></span><h2><a class="toc-backref" href="#id37">Annotation Tools</a><a class="headerlink" href="#annotation-tools" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="../../../_images/mActionTextAnnotation.png"><img alt="textAnnotation" src="../../../_images/mActionTextAnnotation.png" style="width: 1.5em;" /></a> <sup>Text Annotation</sup> tool in the attribute
+toolbar provides the possibility to place formatted text in a balloon on the
+QGIS map canvas. Use the <em class="guilabel">Text Annotation</em> tool and click into the
+map canvas.</p>
+<p id="annotation"><strong>Figure annotation 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/annotation.png" src="../../../_images/annotation.png" />
+<p class="caption">Annotation text dialog</p>
+</div>
+<p>Double clicking on the item opens a dialog with various options. There is the
+text editor to enter the formatted text and other item settings. For instance,
+there is the choice of having the item placed on a map position (displayed by
+a marker symbol) or to have the item on a screen position (not related to the
+map). The item can be moved by map position (by dragging the map marker) or by
+moving only the balloon. The icons are part of the GIS theme, and they are used
+by default in the other themes, too.</p>
+<p>The <a class="reference internal" href="../../../_images/mActionAnnotation.png"><img alt="annotation" src="../../../_images/mActionAnnotation.png" style="width: 1.5em;" /></a> <sup>Move Annotation</sup> tool allows you to move the
+annotation on the map canvas.</p>
+<div class="section" id="html-annotations">
+<h3><a class="toc-backref" href="#id38">Html annotations</a><a class="headerlink" href="#html-annotations" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionFormAnnotation.png"><img alt="formAnnotation" src="../../../_images/mActionFormAnnotation.png" style="width: 1.5em;" /></a> <sup>Html Annotation</sup> tools in the attribute
+toolbar provides the possibility to place the content of an html file in a
+balloon on the QGIS map canvas. Using the <em class="guilabel">Html Annotation</em> tool,
+click into the map canvas and add the path to the html file into the dialog.</p>
+</div>
+<div class="section" id="svg-annotations">
+<h3><a class="toc-backref" href="#id39">SVG annotations</a><a class="headerlink" href="#svg-annotations" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="../../../_images/mActionSaveAsSVG.png"><img alt="saveAsSVG" src="../../../_images/mActionSaveAsSVG.png" style="width: 1.5em;" /></a> <sup>SVG Annotation</sup> tool in the attribute toolbar
+provides the possibility to place an SVG symbol in a balloon on the QGIS map
+canvas. Using the <em class="guilabel">SVG Annotation</em> tool, click into the map canvas and
+add the path to the SVG file into the dialog.</p>
+</div>
+<div class="section" id="form-annotations">
+<h3><a class="toc-backref" href="#id40">Form annotations</a><a class="headerlink" href="#form-annotations" title="Permalink to this headline">¶</a></h3>
+<p>Additionally, you can also create your own annotation forms. The
+<a class="reference internal" href="../../../_images/mActionFormAnnotation.png"><img alt="formAnnotation" src="../../../_images/mActionFormAnnotation.png" style="width: 1.5em;" /></a> <sup>Form Annotation</sup> tool is useful to display
+attributes of a vector layer in a customized Qt Designer form (see
+<a class="reference internal" href="#figure-custom-annotation">figure_custom_annotation</a>). This is similar to the designer forms for the
+<em class="guilabel">Identify features</em> tool, but displayed in an annotation item.
+Also see this video <a class="reference external" href="https://youtu.be/0pDBuSbQ02o?t=2m25s">https://youtu.be/0pDBuSbQ02o?t=2m25s</a> from
+Tim Sutton for more information.</p>
+<p id="figure-custom-annotation"><strong>Figure annotation 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/custom_annotation.png" src="../../../_images/custom_annotation.png" />
+<p class="caption">Customized qt designer annotation form</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you press <tt class="kbd docutils literal"><span class="pre">Ctrl+T</span></tt> while an <em class="guilabel">Annotation</em> tool is active
+(move annotation, text annotation, form annotation), the visibility states
+of the items are inverted.</p>
+</div>
+</div>
+</div>
+<div class="section" id="spatial-bookmarks">
+<span id="sec-bookmarks"></span><h2><a class="toc-backref" href="#id41">Spatial Bookmarks</a><a class="headerlink" href="#spatial-bookmarks" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-32"></span><p id="index-33">Spatial Bookmarks allow you to &#8220;bookmark&#8221; a geographic location and return to
+it later. By default, bookmarks are saved on the computer, meaning that they are available
+from any project in the same computer. If you wish to store the bookmark in the project
+file (<tt class="file docutils literal"><span class="pre">.qgs</span></tt>) then you can do this by selecting the <em class="guilabel">In Project</em> checkbox.</p>
+<div class="section" id="creating-a-bookmark">
+<h3><a class="toc-backref" href="#id42">Creating a Bookmark</a><a class="headerlink" href="#creating-a-bookmark" title="Permalink to this headline">¶</a></h3>
+<p>To create a bookmark:</p>
+<ol class="arabic simple">
+<li>Zoom or pan to the area of interest.</li>
+<li>Select the menu option <em class="menuselection">View ‣ New Bookmark</em> or press
+<tt class="kbd docutils literal"><span class="pre">Ctrl-B</span></tt>. The Spatial Bookmark panel opens with the newly created bookmark.</li>
+<li>Enter a descriptive name for the bookmark (up to 255 characters).</li>
+<li>Check the <em class="guilabel">In Project</em> box if you wish to save the bookmark in the project file.</li>
+<li>Press <tt class="kbd docutils literal"><span class="pre">Enter</span></tt> to add the bookmark or click elsewhere.</li>
+</ol>
+<p>Note that you can have multiple bookmarks with the same name.</p>
+</div>
+<div class="section" id="working-with-bookmarks">
+<h3><a class="toc-backref" href="#id43">Working with Bookmarks</a><a class="headerlink" href="#working-with-bookmarks" title="Permalink to this headline">¶</a></h3>
+<p>To use or manage bookmarks, select the menu option
+<em class="menuselection">View ‣ Show Bookmarks</em>. The <em class="guilabel">Spatial Bookmarks</em>
+panel allows you to:</p>
+<ul class="simple">
+<li>Zoom to a Bookmark: select the desired bookmark and then click
+<em class="guilabel">Zoom To Bookmark</em>. You can also zoom to a bookmark by
+double-clicking on it.</li>
+<li>Delete a Bookmark: select the bookmark and click <em class="guilabel">Delete Bookmark</em>.
+Confirm your choice.</li>
+<li>Import or Export a bookmark: To share or transfer your bookmarks between
+computers you can use the <em class="guilabel">Import/Export Bookmarks</em> pull down menu
+in the <em class="guilabel">Spatial Bookmarks</em> dialog. All the bookmarks are transferred.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="nesting-projects">
+<span id="id5"></span><h2><a class="toc-backref" href="#id44">Nesting Projects</a><a class="headerlink" href="#nesting-projects" title="Permalink to this headline">¶</a></h2>
+<p id="index-34">If you want to embed content from other project files into your project, you can
+choose <em class="menuselection">Layer ‣ Embed Layers and Groups</em>.</p>
+<div class="section" id="embedding-layers">
+<h3><a class="toc-backref" href="#id45">Embedding layers</a><a class="headerlink" href="#embedding-layers" title="Permalink to this headline">¶</a></h3>
+<p>The following dialog allows you to embed layers from other projects. Here is a
+small example:</p>
+<ol class="arabic simple">
+<li>Press <a class="reference internal" href="../../../_images/browsebutton.png"><img alt="browseButton" src="../../../_images/browsebutton.png" style="width: 2.3em;" /></a> to look for a project from the Alaska dataset.</li>
+<li>Select the project file <tt class="file docutils literal"><span class="pre">relations.qgs</span></tt>. You can see the content of the
+project (see <a class="reference internal" href="#figure-embed-dialog">figure_embed_dialog</a>).</li>
+<li>Press <tt class="kbd docutils literal"><span class="pre">Ctrl</span></tt> and click on the layers <tt class="file docutils literal"><span class="pre">airports</span></tt> and
+<tt class="file docutils literal"><span class="pre">regions</span></tt>. Press <strong>[OK]</strong>. The selected layers are embedded in the map
+legend and the map view now.</li>
+</ol>
+<p id="figure-embed-dialog"><strong>Figure Nesting 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/embed_dialog.png" src="../../../_images/embed_dialog.png" />
+<p class="caption">Select layers and groups to embed</p>
+</div>
+<p>While the embedded layers are editable, you can&#8217;t change their properties like
+style and labeling.</p>
+</div>
+<div class="section" id="removing-embedded-layers">
+<h3><a class="toc-backref" href="#id46">Removing embedded layers</a><a class="headerlink" href="#removing-embedded-layers" title="Permalink to this headline">¶</a></h3>
+<p>Right-click on the embedded layer and choose <a class="reference internal" href="../../../_images/mActionRemoveLayer.png"><img alt="removeLayer" src="../../../_images/mActionRemoveLayer.png" style="width: 1.5em;" /></a> <sup>Remove</sup>.</p>
+</div>
+</div>
+<div class="section" id="decorations">
+<span id="id6"></span><h2><a class="toc-backref" href="#id47">Decorations</a><a class="headerlink" href="#decorations" title="Permalink to this headline">¶</a></h2>
+<p>The Decorations of QGIS include the Grid, the Copyright Label, the North Arrow
+and the Scale Bar. They are used to &#8216;decorate&#8217; the map by adding cartographic
+elements.</p>
+<div class="section" id="grid">
+<h3><a class="toc-backref" href="#id48">Grid</a><a class="headerlink" href="#grid" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/transformed.png"><img alt="transformed" src="../../../_images/transformed.png" style="width: 1.5em;" /></a> <sup>Grid</sup> allows you to add a coordinate grid and coordinate
+annotations to the map canvas.</p>
+<p id="figure-decorations-1"><strong>Figure Decorations 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/grid_dialog.png" src="../../../_images/grid_dialog.png" />
+<p class="caption">The Grid Dialog</p>
+</div>
+<ol class="arabic simple">
+<li>Select from menu <em class="menuselection">View ‣ Decorations ‣ Grid</em>.
+The dialog starts (see <a class="reference internal" href="#figure-decorations-1">figure_decorations_1</a>).</li>
+<li>Activate the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable grid</em> checkbox and set grid
+definitions according to the layers loaded in the map canvas.</li>
+<li>Activate the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Draw annotations</em> checkbox and set
+annotation definitions according to the layers loaded in the map canvas.</li>
+<li>Click <strong>[Apply]</strong> to verify that it looks as expected or <strong>[OK]</strong> if you&#8217;re satisfied.</li>
+</ol>
+</div>
+<div class="section" id="copyright-label">
+<h3><a class="toc-backref" href="#id49">Copyright Label</a><a class="headerlink" href="#copyright-label" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/copyright_label.png"><img alt="copyrightLabel" src="../../../_images/copyright_label.png" style="width: 1.5em;" /></a> <sup>Copyright label</sup> adds a copyright label using the text
+you prefer to the map.</p>
+<p id="figure-decorations-2"><strong>Figure Decorations 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/copyright.png" src="../../../_images/copyright.png" />
+<p class="caption">The Copyright Dialog</p>
+</div>
+<ol class="arabic simple">
+<li>Select from menu <em class="menuselection">View ‣ Decorations ‣ Copyright Label</em>.
+The dialog starts (see <a class="reference internal" href="#figure-decorations-2">figure_decorations_2</a>).</li>
+<li>Make sure the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable Copyright Label</em> checkbox is
+checked.</li>
+<li>Enter the text you want to place on the map. You can use HTML as
+shown in the example.</li>
+<li>Choose the placement of the label from the <em class="guilabel">Placement</em>
+<a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> combo box.</li>
+<li>You can refine the placement of the item by setting a Horizontal and/or Vertical
+<cite>Marging from (Canvas) Edge</cite>. These values can be a distance in <strong>Millimeter</strong> or
+<strong>Pixels</strong> or set as <strong>Percentage</strong> of the width or height of the map canvas.</li>
+<li>You can change the color to apply.</li>
+<li>Click <strong>[Apply]</strong> to verify that it looks as expected or <strong>[OK]</strong> if you&#8217;re satisfied.</li>
+</ol>
+<p>In the example above, which is the default, QGIS places a copyright symbol
+followed by the date in the lower right-hand corner of the map canvas.</p>
+</div>
+<div class="section" id="north-arrow">
+<h3><a class="toc-backref" href="#id50">North Arrow</a><a class="headerlink" href="#north-arrow" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/north_arrow.png"><img alt="northArrow" src="../../../_images/north_arrow.png" style="width: 1.5em;" /></a> <sup>North Arrow</sup> places a simple north arrow on the map canvas.
+Currently, there is only one style available. You can adjust the angle of the
+arrow or let QGIS set the direction automatically.
+If you choose to let QGIS determine the direction, it makes its best guess
+as to how the arrow should be oriented.
+For placement of the arrow, you have four options, corresponding to
+the four corners of the map canvas.
+You can refine the placement of the arrow by setting a Horizontal and/or Vertical
+<cite>Marging from (Canvas) Edge</cite>. These values can be a distance in <strong>Millimeter</strong> or
+<strong>Pixels</strong> or set as <strong>Percentage</strong> of the width or height of the map canvas.</p>
+<p id="figure-decorations-3"><strong>Figure Decorations 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/north_arrow_dialog.png" src="../../../_images/north_arrow_dialog.png" />
+<p class="caption">The North Arrow Dialog</p>
+</div>
+</div>
+<div class="section" id="scale-bar">
+<h3><a class="toc-backref" href="#id51">Scale Bar</a><a class="headerlink" href="#scale-bar" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="../../../_images/mActionScaleBar.png"><img alt="scaleBar" src="../../../_images/mActionScaleBar.png" style="width: 1.5em;" /></a> <sup>Scale Bar</sup> adds a simple scale bar to the map canvas. You
+can control the style and placement, as well as the labelling of the bar.</p>
+<p id="figure-decorations-4"><strong>Figure Decorations 4:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/scale_bar_dialog.png" src="../../../_images/scale_bar_dialog.png" />
+<p class="caption">The Scale Bar Dialog</p>
+</div>
+<p>QGIS only supports displaying the scale in the same units as your map frame.
+So if the units of your layers are in meters, you can&#8217;t create a scale bar in
+feet. Likewise, if you are using decimal degrees, you can&#8217;t create a scale
+bar to display distance in meters.</p>
+<p>To add a scale bar:</p>
+<ol class="arabic simple">
+<li>Select from menu <em class="menuselection">View ‣ Decorations ‣ Scale Bar</em>.
+The dialog starts (see <a class="reference internal" href="#figure-decorations-4">figure_decorations_4</a>).</li>
+<li>Make sure the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable scale bar</em> checkbox is checked.</li>
+<li>Choose the style from the <em class="guilabel">Scale bar style</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>
+combo box.</li>
+<li>Select the color for the bar <em class="guilabel">Color of bar</em> <img alt="selectColor" src="../../../_images/selectcolor.png" /> or use
+the default black color.</li>
+<li>Set the <em class="guilabel">Size of bar</em> <a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a>.</li>
+<li>Optionally, check <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Automatically snap to round number
+on resize</em> to display values easy-to-read.</li>
+<li>Choose the placement from the <em class="guilabel">Placement</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> combo box.</li>
+<li>You can refine the placement of the item by setting a Horizontal and/or Vertical
+<cite>Marging from (Canvas) Edge</cite>. These values can be a distance in <strong>Millimeter</strong> or
+<strong>Pixels</strong> or set as <strong>Percentage</strong> of the width or height of the map canvas.</li>
+<li>Click <strong>[Apply]</strong> to verify that it looks as expected or <strong>[OK]</strong> if you&#8217;re satisfied.</li>
+</ol>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Settings of Decorations</strong></p>
+<p class="last">When you save a <tt class="file docutils literal"><span class="pre">.qgs</span></tt> project, any changes you have made to Grid,
+North Arrow, Scale Bar and Copyright will be saved in the project and restored
+the next time you load the project.</p>
+</div>
+</div>
+</div>
+<div class="section" id="authentication">
+<span id="id7"></span><h2><a class="toc-backref" href="#id52">Authentication</a><a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>QGIS has facility to store/retrieve authentication credentials in a secure
+manner. Users can securely save credentials into authentication configurations,
+which are stored in a portable database, can be applied to server or database
+connections, and safely referenced by their ID tokens in project or settings
+files. For more information see <a class="reference internal" href="../auth_system/index.html#authentication-index"><em>Authentication System</em></a>.</p>
+<p>A master password needs to be set up when initializing the authentication
+system and its portable database.</p>
+</div>
+<div class="section" id="save-layer-into-file">
+<span id="general-saveas"></span><h2><a class="toc-backref" href="#id53">Save layer into file</a><a class="headerlink" href="#save-layer-into-file" title="Permalink to this headline">¶</a></h2>
+<p>Layers (raster or vector) can be saved in another format with the
+<em class="guilabel">Save As...</em> feature in the layer contextual menu (by right-clicking
+in the layer in the layer tree) or in the <em class="menuselection">Layer ‣ Save As...</em>
+menu.</p>
+<p>The <em class="guilabel">Save As</em> dialog shows several parameters to change the behaviour
+when saving the layer. Common parameters (raster and vector) are:</p>
+<ul class="simple">
+<li>Format</li>
+<li>Filename</li>
+<li>CRS</li>
+<li>Add save file to map to add the new layer to the canvas</li>
+<li>Extent (possible values are layer, Map view or custom extent)</li>
+<li>Create (for raster), Layer or Custom (for vector) Options which allow you to
+change some advanced options. Advanced user can see the driver documentation
+in <a class="reference external" href="http://gdal.org">gdal-ogr</a> documentation.</li>
+</ul>
+<p>However, some parameters are specific to raster and vector formats:</p>
+<ul class="simple">
+<li>Raster specific parameters:<ul>
+<li>Resolution (horizontal and vertical)</li>
+<li>Pyramid creation</li>
+<li>Output mode (raw data or rendered image)</li>
+</ul>
+</li>
+<li>Vector specific parameters:<ul>
+<li>Encoding</li>
+<li>Save only selected features</li>
+<li>Skip attribute creation</li>
+<li>Symbology export: can be used mainly for DXF export and for all file
+formats who manage OGR feature styles (see note below) as DXF, KML, tab
+file formats:<ul>
+<li>No symbology: default style of the application that reads the data</li>
+<li>Feature symbology: save style with OGR Feature Styles (see note below)</li>
+<li>Symbol Layer symbology: save with OGR Feature Styles (see note below) but
+export the same geometry multiple times if there are multiple symbology
+symbol layers used</li>
+</ul>
+</li>
+<li>Geometry:<ul>
+<li>force to multi-geometry,</li>
+<li>add z-dimension,</li>
+<li>add or remove a geometry column with the drop-down list. This is not
+linked with the current geometry type of the layer. You can add an empty
+geometry column to an attribute table, remove the geometry column of
+a spatial layer.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>OGR Feature Styles</em> are a way to store style directly in
+the data as a hidden attribute. Only some format can handle this kind of
+information. KML, DXF and TAB files format are such format. For advanced
+user, you can read the <a class="reference external" href="http://www.gdal.org/ogr_feature_style.html">OGR Feature Styles specification</a> document.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><strong>About DXF files</strong></p>
+<p>Vector layers can be exported to DXF files using another tool, the
+<em class="guilabel">DXF Export ...</em> in <em class="menuselection">Project</em>. The windows allow the
+user to choose the layer file, the symbology mode (see the note above), the
+symbology scale, the encoding, the visibility preset and the layers to include
+in the DXF file.</p>
+<p class="last">As an option, you can <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use the layer title as name if
+set</em> or <em class="guilabel">Export features intersecting the current map extent</em>.</p>
+</div>
+</div>
+<div class="section" id="use-of-variables-for-dynamic-content">
+<span id="general-tools-variables"></span><span id="index-35"></span><h2><a class="toc-backref" href="#id54">Use of variables for dynamic content</a><a class="headerlink" href="#use-of-variables-for-dynamic-content" title="Permalink to this headline">¶</a></h2>
+<p>You can define custom variables for use in <span class="target" id="index-36"></span>expressions. Variables can
+be defined at the application global level, project level, layer level and
+composition level. Just like CSS cascading rules, variables can be overwritten
+- eg, a project level variable will overwrite any application level variables
+set. You can use these variables to build text strings or other custom
+expressions using &#64; character before the variable name. For example in composer
+creating a label with this content:</p>
+<div class="highlight-python"><pre>This map was made using QGIS [% @qgis_version %]. The project file for this map
+is:  [% @project_path %]</pre>
+</div>
+<p>Will render the label like this:</p>
+<div class="highlight-python"><pre>This map was made using QGIS |CURRENT|. The project file for this map is:
+/gis/qgis-user-conference-2015.qgs</pre>
+</div>
+<p>You can manage global variables from the <em class="menuselection">Settings -&gt; Options</em> menu,
+and project level variables from Project properties (including adding your own
+custom variables).</p>
+<p id="figure-variables-dialog"><strong>Figure Variables dialog 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/options_variables.png" src="../../../_images/options_variables.png" />
+<p class="caption">Edit variable at the project level</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">you can read more information and find examples here <a class="reference external" href="http://nyalldawson.net/2015/12/exploring-variables-in-qgis-2-12-part-1/">Exploring variables
+in QGIS 2.12, part 1</a>,
+<a class="reference external" href="http://nyalldawson.net/2015/12/exploring-variables-in-qgis-pt-2-project-management/">part 2</a>
+and <a class="reference external" href="http://nyalldawson.net/2015/12/exploring-variables-in-qgis-pt-3-layer-level-variables/">part 3</a>.</p>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="qgis_configuration.html" title="QGIS Configuration"
+             >next</a></li>
+        <li class="right" >
+          <a href="qgis_gui.html" title="QGIS GUI"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

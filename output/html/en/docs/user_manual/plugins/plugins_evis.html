@@ -1,0 +1,792 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>eVis Plugin</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Plugins" href="plugins_index.html" />
+    <link rel="next" title="fTools Plugin" href="plugins_ftools.html" />
+    <link rel="prev" title="Dxf2Shp Converter Plugin" href="plugins_dxf2shape_converter.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/plugins/plugins_evis.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="plugins_ftools.html" title="fTools Plugin"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="plugins_dxf2shape_converter.html" title="Dxf2Shp Converter Plugin"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="plugins_index.html" accesskey="U">Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="plugins_dxf2shape_converter.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="plugins_ftools.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="evis-plugin">
+<span id="evis"></span><h1>eVis Plugin<a class="headerlink" href="#evis-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#event-browser" id="id1">Event Browser</a><ul>
+<li><a class="reference internal" href="#launch-the-event-browser-module" id="id2">Launch the Event Browser module</a></li>
+<li><a class="reference internal" href="#understanding-the-display-window" id="id3">Understanding the Display window</a></li>
+<li><a class="reference internal" href="#understanding-the-options-window" id="id4">Understanding the Options window</a></li>
+<li><a class="reference internal" href="#understanding-the-configure-external-applications-window" id="id5">Understanding the Configure External Applications window</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#specifying-the-location-and-name-of-a-photograph" id="id6">Specifying the location and name of a photograph</a></li>
+<li><a class="reference internal" href="#specifying-the-location-and-name-of-other-supporting-documents" id="id7">Specifying the location and name of other supporting documents</a></li>
+<li><a class="reference internal" href="#using-the-event-browser" id="id8">Using the Event Browser</a></li>
+<li><a class="reference internal" href="#event-id-tool" id="id9">Event ID Tool</a><ul>
+<li><a class="reference internal" href="#launch-the-event-id-module" id="id10">Launch the Event ID module</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#database-connection" id="id11">Database connection</a><ul>
+<li><a class="reference internal" href="#launch-the-database-connection-module" id="id12">Launch the Database Connection module</a></li>
+<li><a class="reference internal" href="#connect-to-a-database" id="id13">Connect to a database</a></li>
+<li><a class="reference internal" href="#running-sql-queries" id="id14">Running SQL queries</a></li>
+<li><a class="reference internal" href="#running-predefined-queries" id="id15">Running predefined queries</a></li>
+<li><a class="reference internal" href="#xml-format-for-evis-predefined-queries" id="id16">XML format for eVis predefined queries</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>(This section is derived
+from Horning, N., K. Koy, P. Ersts. 2009. eVis (v1.1.0) User&#8217;s Guide. American
+Museum of Natural History, Center for Biodiversity and Conservation. Available
+from <a class="reference external" href="http://biodiversityinformatics.amnh.org/">http://biodiversityinformatics.amnh.org/</a>, and released under the GNU FDL.)</p>
+<p>The Biodiversity Informatics Facility at the American Museum of Natural History&#8217;s
+(AMNH) Center for Biodiversity and Conservation (CBC)
+has developed the Event Visualization Tool (eVis), another software tool to add
+to the suite of conservation monitoring and decision support tools for guiding
+protected area and landscape planning. This plugin enables users to easily link
+geocoded (i.e., referenced with latitude and longitude or X and Y coordinates)
+photographs, and other supporting documents, to vector data in QGIS.</p>
+<p>eVis is now automatically installed and enabled in new versions of QGIS, and as
+with all plugins, it can be disabled and enabled using the Plugin Manager
+(see <a class="reference internal" href="plugins.html#managing-plugins"><em>The Plugins Dialog</em></a>).</p>
+<p>The eVis plugin is made up of three modules: the &#8216;Database Connection tool&#8217;,
+&#8216;Event ID tool&#8217;, and the &#8216;Event Browser&#8217;. These work together to allow viewing of
+geocoded photographs and other documents that are linked to features stored in
+vector files, databases, or spreadsheets.</p>
+<div class="section" id="event-browser">
+<span id="evis-browser"></span><h2><a class="toc-backref" href="#id1">Event Browser</a><a class="headerlink" href="#event-browser" title="Permalink to this headline">¶</a></h2>
+<p>The Event Browser module provides the functionality to display geocoded
+photographs that are linked to vector features displayed in the QGIS map window.
+Point data, for example, can be from a vector file that can be input using QGIS
+or it can be from the result of a database query. The vector feature must have
+attribute information associated with it to describe the location and name of
+the file containing the photograph and, optionally, the compass direction the
+camera was pointed when the image was acquired. Your vector layer must be loaded
+into QGIS before running the Event Browser.</p>
+<div class="section" id="launch-the-event-browser-module">
+<span id="evis-launch-browser"></span><h3><a class="toc-backref" href="#id2">Launch the Event Browser module</a><a class="headerlink" href="#launch-the-event-browser-module" title="Permalink to this headline">¶</a></h3>
+<p>To launch the Event Browser module, click on <em class="menuselection">Database ‣ eVis ‣
+eVis Event Browser</em>. This will open the <em class="guilabel">Generic Event Browser</em> window.</p>
+<p>The <em class="guilabel">Event Browser</em> window has three tabs displayed at the top
+of the window. The <em class="guilabel">Display</em> tab is used to view the photograph and its
+associated attribute data. The <em class="guilabel">Options</em> tab provides a number of
+settings that can be adjusted to control the behavior of the eVis plugin. Lastly,
+the <em class="guilabel">Configure External Applications</em> tab is used to maintain a table
+of file extensions and their associated application to allow eVis to display
+documents other than images.</p>
+</div>
+<div class="section" id="understanding-the-display-window">
+<span id="evis-display-window"></span><h3><a class="toc-backref" href="#id3">Understanding the Display window</a><a class="headerlink" href="#understanding-the-display-window" title="Permalink to this headline">¶</a></h3>
+<p>To see the <em class="guilabel">Display</em> window, click on the <em class="guilabel">Display</em> tab in the
+<em class="guilabel">Event Browser</em> window. The <em class="guilabel">Display</em> window is used
+to view geocoded photographs and their associated attribute data.</p>
+<p id="figure-evis-1"><strong>Figure eVis 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/evisdisplay.png" src="../../../_images/evisdisplay.png" />
+<p class="caption">The <em>eVis</em> display window</p>
+</div>
+<ol class="upperalpha simple">
+<li><strong>Display window</strong>: A window where the photograph will appear.</li>
+<li><strong>Zoom in button</strong>: Zoom in to see more detail. If the entire image cannot be
+displayed in the display window, scroll bars will appear on the left and bottom
+sides of the window to allow you to pan around the image.</li>
+<li><strong>Zoom out button</strong>: Zoom out to see more area.</li>
+<li><strong>Zoom to full extent</strong> button: Displays the full extent of the photograph.</li>
+<li><strong>Attribute information window</strong>: All of the attribute information for the
+point associated with the photograph being viewed is displayed here. If the
+file type being referenced in the displayed record is not an image but is of
+a file type defined in the <em class="guilabel">Configure External Applications</em> tab,
+then when you double-click on the value of the field containing the path to
+the file, the application to open the file will be launched to view or hear
+the contents of the file. If the file extension is recognized, the attribute
+data will be displayed in green.</li>
+<li><strong>Navigation buttons</strong>: Use the Previous and Next buttons to load the previous
+or next feature when more than one feature is selected.</li>
+</ol>
+</div>
+<div class="section" id="understanding-the-options-window">
+<span id="evis-options-window"></span><h3><a class="toc-backref" href="#id4">Understanding the Options window</a><a class="headerlink" href="#understanding-the-options-window" title="Permalink to this headline">¶</a></h3>
+<p id="figure-evis-2"><strong>Figure eVis 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/evisoptions.png" src="../../../_images/evisoptions.png" />
+<p class="caption">The <em>eVis</em> Options window</p>
+</div>
+<ol class="upperalpha simple">
+<li><strong>File path</strong>: A drop-down list to specify the attribute field that contains
+the directory path or URL for the photographs or other documents being
+displayed. If the location is a relative path, then the checkbox must be
+clicked. The base path for a relative path can be entered in the <em class="guilabel">Base
+Path</em> text box below. Information about the different options for specifying
+the file location are noted in the section <a class="reference internal" href="#evis-specifying"><em>Specifying the location and name of a photograph</em></a> below.</li>
+<li><strong>Compass bearing</strong>: A drop-down list to specify the attribute
+field that contains the compass bearing associated with the photograph being
+displayed. If compass bearing information is available, it is necessary to
+click the checkbox below the drop-down menu title.</li>
+<li><strong>Compass offset</strong>: Compass offsets can be used to compensate for
+declination (to adjust bearings collected using magnetic bearings to true north
+bearings). Click the <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Manual</em> radio button to enter
+the offset in the text box or click the <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" />
+<em class="guilabel">From Attribute</em> radio button to select the attribute field
+containing the offsets. For both of these options, east declinations should
+be entered using positive values, and west declinations should use negative
+values.</li>
+<li><strong>Directory base path</strong>: The base path onto which the relative path defined
+in <a class="reference internal" href="#figure-evis-2">Figure_eVis_2</a> (A) will be appended.</li>
+<li><strong>Replace path</strong>: If this checkbox is checked, only the file name from A
+will be appended to the base path.</li>
+<li><strong>Apply rule to all documents</strong>: If checked, the same path rules that are
+defined for photographs will be used for non-image documents such as movies,
+text documents, and sound files. If not checked, the path rules will only
+apply to photographs, and other documents will ignore the base path parameter.</li>
+<li><strong>Remember settings</strong>: If the checkbox is checked, the values for the associated
+parameters will be saved for the next session when the window is closed or
+when the <strong>[Save]</strong> button below is pressed.</li>
+<li><strong>Reset values</strong>: Resets the values on this line to the default setting.</li>
+<li><strong>Restore defaults</strong>: This will reset all of the fields to their default
+settings. It has the same effect as clicking all of the <strong>[Reset]</strong> buttons.</li>
+<li><strong>Save</strong>: This will save the settings without closing the <em class="guilabel">Options</em>
+pane.</li>
+</ol>
+</div>
+<div class="section" id="understanding-the-configure-external-applications-window">
+<span id="evis-external-window"></span><h3><a class="toc-backref" href="#id5">Understanding the Configure External Applications window</a><a class="headerlink" href="#understanding-the-configure-external-applications-window" title="Permalink to this headline">¶</a></h3>
+<p id="figure-evis-3"><strong>Figure eVis 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/evisexternal.png" src="../../../_images/evisexternal.png" />
+<p class="caption">The <em>eVis</em> External Applications window</p>
+</div>
+<ol class="upperalpha simple">
+<li><strong>File reference table</strong>: A table containing file types that can be opened
+using eVis. Each file type needs a file extension and the path to an
+application that can open that type of file. This provides the capability
+of opening a broad range of files such as movies, sound recordings, and text
+documents instead of only images.</li>
+<li><strong>Add new file type</strong>: Add a new file type with a unique extension and the
+path for the application that can open the file.</li>
+<li><strong>Delete current row</strong>: Delete the file type highlighted in the table and
+defined by a file extension and a path to an associated application.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="specifying-the-location-and-name-of-a-photograph">
+<span id="evis-specifying"></span><h2><a class="toc-backref" href="#id6">Specifying the location and name of a photograph</a><a class="headerlink" href="#specifying-the-location-and-name-of-a-photograph" title="Permalink to this headline">¶</a></h2>
+<p>The location and name of the photograph can be stored using an absolute or
+relative path, or a URL if the photograph is available on a web server. Examples
+of the different approaches are listed in Table <a class="reference internal" href="#evis-examples">evis_examples</a>.</p>
+<div class="highlight-python" id="evis-examples"><pre>X        Y        FILE                                                BEARING
+780596   1784017  C:\Workshop\eVis_Data\groundphotos\DSC_0168.JPG     275
+780596   1784017  /groundphotos/DSC_0169.JPG                          80
+780819   1784015  http://biodiversityinformatics.amnh.org/\
+                  evis_testdata/DSC_0170.JPG                          10
+780596   1784017  pdf:http://www.testsite.com/attachments.php?\
+                  attachment_id-12                                    76</pre>
+</div>
+</div>
+<div class="section" id="specifying-the-location-and-name-of-other-supporting-documents">
+<span id="evis-location"></span><h2><a class="toc-backref" href="#id7">Specifying the location and name of other supporting documents</a><a class="headerlink" href="#specifying-the-location-and-name-of-other-supporting-documents" title="Permalink to this headline">¶</a></h2>
+<p>Supporting documents such as text documents, videos, and sound clips can also
+be displayed or played by eVis. To do this, it is necessary to add an entry in
+the file reference table that can be accessed from the <em class="guilabel">Configure External
+Applications</em> window in the <em class="guilabel">Generic Event Browser</em> that matches the
+file extension to an application that can be used to open the file. It is also
+necessary to have the path or URL to the file in the attribute table for the
+vector layer. One additional rule that can be used for URLs that don&#8217;t contain
+a file extension for the document you want to open is to specify the file
+extension before the URL. The format is &#8212; <tt class="docutils literal"><span class="pre">file</span> <span class="pre">extension:URL</span></tt>. The URL is
+preceded by the file extension and a colon; this is particularly useful for
+accessing documents from wikis and other web sites that use a database to
+manage the web pages (see Table <a class="reference internal" href="#evis-examples">evis_examples</a>).</p>
+</div>
+<div class="section" id="using-the-event-browser">
+<span id="evis-using-browser"></span><h2><a class="toc-backref" href="#id8">Using the Event Browser</a><a class="headerlink" href="#using-the-event-browser" title="Permalink to this headline">¶</a></h2>
+<p>When the <em class="guilabel">Event Browser</em> window opens, a photograph will appear in the
+display window if the document referenced in the vector file attribute table is
+an image and if the file location information in the <em class="guilabel">Options</em> window
+is properly set. If a photograph is expected and it does not appear, it will be
+necessary to adjust the parameters in the <em class="guilabel">Options</em> window.</p>
+<p>If a supporting document (or an image that does not have a file extension
+recognized by eVis) is referenced in the attribute table, the field containing
+the file path will be highlighted in green in the attribute information window
+if that file extension is defined in the file reference table located in the
+<em class="guilabel">Configure External Applications</em> window. To open the document,
+double-click on the green-highlighted line in the attribute information window.
+If a supporting document is referenced in the attribute information window and
+the file path is not highlighted in green, then it will be necessary to add an
+entry for the file&#8217;s filename extension in the <em class="guilabel">Configure External
+Applications</em> window. If the file path is highlighted in green but does not open
+when double-clicked, it will be necessary to adjust the parameters in the
+<em class="guilabel">Options</em> window so the file can be located by eVis.</p>
+<p>If no compass bearing is provided in the <em class="guilabel">Options</em> window, a red asterisk
+will be displayed on top of the vector feature that is associated with the
+photograph being displayed. If a compass bearing is provided, then an arrow will
+appear pointing in the direction indicated by the value in the compass bearing
+display field in the <em class="guilabel">Event Browser</em> window. The arrow will be
+centered over the point that is associated with the photograph or other document.</p>
+<p>To close the <em class="guilabel">Event Browser</em> window, click on the <strong>[Close]</strong>
+button from the <em class="guilabel">Display</em> window.</p>
+</div>
+<div class="section" id="event-id-tool">
+<span id="evis-id-tool"></span><h2><a class="toc-backref" href="#id9">Event ID Tool</a><a class="headerlink" href="#event-id-tool" title="Permalink to this headline">¶</a></h2>
+<p>The &#8216;Event ID&#8217; module allows you to display a photograph by clicking on a feature
+displayed in the QGIS map window. The vector feature must have attribute
+information associated with it to describe the location and name of the file
+containing the photograph and, optionally, the compass direction the camera was
+pointed when the image was acquired. This layer must be loaded into QGIS before
+running the &#8216;Event ID&#8217; tool.</p>
+<div class="section" id="launch-the-event-id-module">
+<span id="evis-launch-id"></span><h3><a class="toc-backref" href="#id10">Launch the Event ID module</a><a class="headerlink" href="#launch-the-event-id-module" title="Permalink to this headline">¶</a></h3>
+<p>To launch the &#8216;Event ID&#8217; module, either click on the <a class="reference internal" href="../../../_images/event_id.png"><img alt="eventId" src="../../../_images/event_id.png" style="width: 1.5em;" /></a> <sup>Event ID</sup>
+icon or click on <em class="menuselection">Database ‣ eVis ‣ Event ID Tool</em>. This will
+cause the cursor to change to an arrow with an &#8216;i&#8217; on top of it signifying that
+the ID tool is active.</p>
+<p>To view the photographs linked to vector features in the active vector layer
+displayed in the QGIS map window, move the Event ID cursor over the feature and
+then click the mouse. After clicking on the feature, the <em class="guilabel">Event
+Browser</em> window is opened and the photographs on or near the clicked locality are
+available for display in the browser. If more than one photograph is available,
+you can cycle through the different features using the <strong>[Previous]</strong> and
+<strong>[Next]</strong> buttons. The other controls are described in the <a class="reference internal" href="#evis-browser"><em>Event Browser</em></a>
+section of this guide.</p>
+</div>
+</div>
+<div class="section" id="database-connection">
+<span id="evis-database"></span><h2><a class="toc-backref" href="#id11">Database connection</a><a class="headerlink" href="#database-connection" title="Permalink to this headline">¶</a></h2>
+<p>The &#8216;Database Connection&#8217; module provides tools to connect to and query a
+database or other ODBC resource, such as a spreadsheet.</p>
+<p>eVis can directly connect to the following types of databases: PostgreSQL, MySQL, and SQLite;
+it can also read from ODBC connections (e.g., MS Access). When reading from an
+ODBC database (such as an Excel spreadsheet), it is necessary to configure your
+ODBC driver for the operating system you are using.</p>
+<div class="section" id="launch-the-database-connection-module">
+<span id="evis-launch-database"></span><h3><a class="toc-backref" href="#id12">Launch the Database Connection module</a><a class="headerlink" href="#launch-the-database-connection-module" title="Permalink to this headline">¶</a></h3>
+<p>To launch the &#8216;Database Connection&#8217; module, either click on the appropriate icon
+<a class="reference internal" href="../../../_images/evis_connect.png"><img alt="evisConnect" src="../../../_images/evis_connect.png" style="width: 1.5em;" /></a> <sup>eVis Database Connection</sup> or click on <em class="menuselection">Database ‣
+eVis ‣ Database Connection</em>. This will launch the <em class="guilabel">Database Connection</em>
+window. The window has three tabs: <em class="guilabel">Predefined Queries</em>,
+<em class="guilabel">Database Connection</em>, and <em class="guilabel">SQL Query</em>. The <em class="guilabel">Output
+Console</em> window at the bottom of the window displays the status of actions
+initiated by the different sections of this module.</p>
+</div>
+<div class="section" id="connect-to-a-database">
+<span id="evis-connect-database"></span><h3><a class="toc-backref" href="#id13">Connect to a database</a><a class="headerlink" href="#connect-to-a-database" title="Permalink to this headline">¶</a></h3>
+<p>Click on the <em class="guilabel">Database Connection</em> tab to open the database
+connection interface. Next, use the <em class="menuselection">Database Type</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>
+combo box to select the type of database that you want to connect to. If a
+password or username is required, that information can be entered in the
+<em class="guilabel">Username</em> and <em class="guilabel">Password</em> textboxes.</p>
+<p>Enter the database host in the <em class="guilabel">Database Host</em> textbox. This option is
+not available if you selected &#8216;MS Access&#8217; as the database type. If the database
+resides on your desktop, you should enter &#8220;localhost&#8221;.</p>
+<p>Enter the name of the database in the <em class="guilabel">Database Name</em> textbox. If you
+selected &#8216;ODBC&#8217; as the database type, you need to enter the data source name.</p>
+<p>When all of the parameters are filled in, click on the <strong>[Connect]</strong> button.
+If the connection is successful, a message will be written in the <em class="guilabel">Output
+Console</em> window stating that the connection was established. If a connection was
+not established, you will need to check that the correct parameters were entered
+above.</p>
+<p id="figure-evis-4"><strong>Figure eVis 4:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/evisdatabase.png" src="../../../_images/evisdatabase.png" />
+<p class="caption">The <em>eVis</em> Database connection window</p>
+</div>
+<ol class="upperalpha simple">
+<li><strong>Database Type</strong>: A drop-down list to specify the type of database that will
+be used.</li>
+<li><strong>Database Host</strong>: The name of the database host.</li>
+<li><strong>Port</strong>: The port number if a MySQL or PostgreSQL database type is selected.</li>
+<li><strong>Database Name</strong>: The name of the database.</li>
+<li><strong>Connect</strong>: A button to connect to the database using the parameters defined
+above.</li>
+<li><strong>Output Console</strong>: The console window where messages related to processing
+are displayed.</li>
+<li><strong>Username</strong>: Username for use when a database is password protected.</li>
+<li><strong>Password</strong>: Password for use when a database is password protected.</li>
+<li><strong>Predefined Queries</strong>: Tab to open the &#8220;Predefined Queries&#8221; window.</li>
+<li><strong>Database Connection</strong>: Tab to open the &#8220;Database Connection&#8221; window.</li>
+<li><strong>SQL Query</strong>: Tab to open the &#8220;SQL Query&#8221; window.</li>
+<li><strong>Help</strong>: Displays the online help.</li>
+<li><strong>OK</strong>: Closes the main &#8220;Database Connection&#8221; window.</li>
+</ol>
+</div>
+<div class="section" id="running-sql-queries">
+<span id="evis-running-sql"></span><h3><a class="toc-backref" href="#id14">Running SQL queries</a><a class="headerlink" href="#running-sql-queries" title="Permalink to this headline">¶</a></h3>
+<p>SQL queries are used to extract information from a database or ODBC resource.
+In eVis, the output from these queries is a vector layer added to the QGIS map
+window. Click on the <em class="guilabel">SQL Query</em> tab to display the SQL query
+interface. SQL commands can be entered in this text window. A helpful tutorial
+on SQL commands is available at <a class="reference external" href="http://www.w3schools.com/sql">http://www.w3schools.com/sql</a>. For example, to
+extract all of the data from a worksheet in an Excel file, <tt class="docutils literal"><span class="pre">select</span> <span class="pre">*</span> <span class="pre">from</span> <span class="pre">[sheet1$]</span></tt>
+where <tt class="docutils literal"><span class="pre">sheet1</span></tt> is the name of the worksheet.</p>
+<p>Click on the <strong>[Run Query]</strong> button to execute the command. If the query
+is successful, a <em class="guilabel">Database File Selection</em> window will be displayed. If
+the query is not successful, an error message will appear in the <em class="guilabel">Output
+Console</em> window.</p>
+<p>In the <em class="guilabel">Database File Selection</em> window, enter the name of the layer
+that will be created from the results of the query in the <em class="guilabel">Name of New
+Layer</em> textbox.</p>
+<p id="figure-evis-5"><strong>Figure eVis 5:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/evissql_query.png" src="../../../_images/evissql_query.png" />
+<p class="caption">The eVis SQL query tab</p>
+</div>
+<ol class="upperalpha simple">
+<li><strong>SQL Query Text Window</strong>: A screen to type SQL queries.</li>
+<li><strong>Run Query</strong>: Button to execute the query entered in the <em class="guilabel">SQL Query
+Window</em>.</li>
+<li><strong>Console Window</strong>: The console window where messages related to processing
+are displayed.</li>
+<li><strong>Help</strong>: Displays the online help.</li>
+<li><strong>OK</strong>: Closes the main <em class="guilabel">Database Connection</em> window.</li>
+</ol>
+<p>Use the <em class="guilabel">X Coordinate</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> and <em class="guilabel">Y Coordinate</em>
+<a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> combo boxes to select the fields from the database that stores the
+<tt class="docutils literal"><span class="pre">X</span></tt> (or longitude) and <tt class="docutils literal"><span class="pre">Y</span></tt> (or latitude) coordinates. Clicking on the <strong>[OK]</strong>
+button causes the vector layer created from the SQL query to be displayed in the
+QGIS map window.</p>
+<p>To save this vector file for future use, you can use the QGIS &#8216;Save as...&#8217;
+command that is accessed by right-clicking on the layer name in the QGIS map
+legend and then selecting &#8216;Save as...&#8217;</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Creating a vector layer from a Microsoft Excel Worksheet</strong></p>
+<p class="last">When creating a vector layer from a Microsoft Excel Worksheet, you might see
+that unwanted zeros (&#8220;0&#8221;) have been inserted in the attribute table rows
+beneath valid data. This can be caused by deleting the values for these cells
+in Excel using the <tt class="kbd docutils literal"><span class="pre">Backspace</span></tt> key. To correct this problem, you need to
+open the Excel file (you&#8217;ll need to close QGIS if you are connected
+to the file, to allow you to edit the file) and then use
+<em class="menuselection">Edit ‣ Delete</em> to remove the blank rows from the file. To
+avoid this problem, you can simply delete several rows in the Excel Worksheet
+using <em class="menuselection">Edit ‣ Delete</em> before saving the file.</p>
+</div>
+</div>
+<div class="section" id="running-predefined-queries">
+<span id="evis-predefined"></span><h3><a class="toc-backref" href="#id15">Running predefined queries</a><a class="headerlink" href="#running-predefined-queries" title="Permalink to this headline">¶</a></h3>
+<p>With predefined queries, you can select previously written queries stored in XML
+format in a file. This is particularly helpful if you are not familiar with SQL
+commands. Click on the <em class="guilabel">Predefined Queries</em> tab to display the
+predefined query interface.</p>
+<p>To load a set of predefined queries, click on the <a class="reference internal" href="../../../_images/evis_file.png"><img alt="evisFile" src="../../../_images/evis_file.png" style="width: 1.5em;" /></a> <sup>Open File</sup>
+icon. This opens the <em class="guilabel">Open File</em> window, which is used to locate the file
+containing the SQL queries. When the queries are loaded, their titles as
+defined in the XML file will appear in the drop-down menu located just below
+the <a class="reference internal" href="../../../_images/evis_file.png"><img alt="evisFile" src="../../../_images/evis_file.png" style="width: 1.5em;" /></a> <sup>Open File</sup> icon. The full description of the query is
+displayed in the text window under the drop-down menu.</p>
+<p>Select the query you want to run from the drop-down menu and then click on the
+<em class="guilabel">SQL Query</em> tab to see that the query has been loaded into the query
+window. If it is the first time you are running a predefined query or are
+switching databases, you need to be sure to connect to the database.</p>
+<p>Click on the <strong>[Run Query]</strong> button in the <em class="guilabel">SQL Query</em> tab to execute
+the command. If the query is successful, a <em class="guilabel">Database File Selection</em>
+window will be displayed. If the query is not successful, an error message will
+appear in the <em class="guilabel">Output Console</em> window.</p>
+<p id="figure-evis-6"><strong>Figure eVis 6:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/evispredefined.png" src="../../../_images/evispredefined.png" />
+<p class="caption">The <em>eVis</em> Predefined Queries tab</p>
+</div>
+<ol class="upperalpha simple">
+<li><strong>Open File</strong>: Launches the &#8220;Open File&#8221; file browser to search for
+the XML file holding the predefined queries.</li>
+<li><strong>Predefined Queries</strong>: A drop-down list with all of the queries defined by
+the predefined queries XML file.</li>
+<li><strong>Query description</strong>: A short description of the query. This description
+is from the predefined queries XML file.</li>
+<li><strong>Console Window</strong>: The console window where messages related to processing
+are displayed.</li>
+<li><strong>Help</strong>: Displays the online help.</li>
+<li><strong>OK</strong>: Closes the main &#8220;Database Connection&#8221; window.</li>
+</ol>
+</div>
+<div class="section" id="xml-format-for-evis-predefined-queries">
+<span id="evis-xml-format"></span><span id="evis-xml-tags"></span><h3><a class="toc-backref" href="#id16">XML format for eVis predefined queries</a><a class="headerlink" href="#xml-format-for-evis-predefined-queries" title="Permalink to this headline">¶</a></h3>
+<p>The XML tags read by eVis</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Tag</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>query</td>
+<td>Defines the beginning and end of a query statement.</td>
+</tr>
+<tr class="row-odd"><td>shortdescription</td>
+<td>A short description of the query that appears in the eVis drop-down menu.</td>
+</tr>
+<tr class="row-even"><td>description</td>
+<td>A more detailed description of the query displayed in the Predefined Query text window.</td>
+</tr>
+<tr class="row-odd"><td>databasetype</td>
+<td>The database type, defined in the Database Type drop-down menu in the Database Connection tab.</td>
+</tr>
+<tr class="row-even"><td>databaseport</td>
+<td>The port as defined in the Port text box in the Database Connection tab.</td>
+</tr>
+<tr class="row-odd"><td>databasename</td>
+<td>The database name as defined in the Database Name text box in the Database Connection tab.</td>
+</tr>
+<tr class="row-even"><td>databaseusername</td>
+<td>The database username as defined in the Username text box in the Database Connection tab.</td>
+</tr>
+<tr class="row-odd"><td>databasepassword</td>
+<td>The database password as defined in the Password text box in the Database Connection tab.</td>
+</tr>
+<tr class="row-even"><td>sqlstatement</td>
+<td>The SQL command.</td>
+</tr>
+<tr class="row-odd"><td>autoconnect</td>
+<td>A flag (&#8220;true&#8221;&#8221; or &#8220;false&#8221;) to specify if the above tags should be used to automatically
+connect to the database without running the database connection routine in the Database
+Connection tab.</td>
+</tr>
+</tbody>
+</table>
+<p>A complete sample XML file with three queries is displayed below:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0"?&gt;
+&lt;doc&gt;
+ &lt;query&gt;
+   &lt;shortdescription&gt;Import all photograph points&lt;/shortdescription&gt;
+   &lt;description&gt;This command will import all of the data in the SQLite database to QGIS
+      &lt;/description&gt;
+   &lt;databasetype&gt;SQLITE&lt;/databasetype&gt;
+   &lt;databasehost /&gt;
+   &lt;databaseport /&gt;
+   &lt;databasename&gt;C:\textbackslash Workshop/textbackslash
+eVis\_Data\textbackslash PhotoPoints.db&lt;/databasename&gt;
+   &lt;databaseusername /&gt;
+   &lt;databasepassword /&gt;
+   &lt;sqlstatement&gt;SELECT Attributes.*, Points.x, Points.y FROM Attributes LEFT JOIN
+      Points ON Points.rec_id=Attributes.point_ID&lt;/sqlstatement&gt;
+   &lt;autoconnect&gt;false&lt;/autoconnect&gt;
+ &lt;/query&gt;
+  &lt;query&gt;
+   &lt;shortdescription&gt;Import photograph points "looking across Valley"&lt;/shortdescription&gt;
+   &lt;description&gt;This command will import only points that have photographs "looking across
+      a valley" to QGIS&lt;/description&gt;
+   &lt;databasetype&gt;SQLITE&lt;/databasetype&gt;
+   &lt;databasehost /&gt;
+   &lt;databaseport /&gt;
+   &lt;databasename&gt;C:\Workshop\eVis_Data\PhotoPoints.db&lt;/databasename&gt;
+   &lt;databaseusername /&gt;
+   &lt;databasepassword /&gt;
+   &lt;sqlstatement&gt;SELECT Attributes.*, Points.x, Points.y FROM Attributes LEFT JOIN
+      Points ON Points.rec_id=Attributes.point_ID where COMMENTS='Looking across
+      valley'&lt;/sqlstatement&gt;
+   &lt;autoconnect&gt;false&lt;/autoconnect&gt;
+ &lt;/query&gt;
+ &lt;query&gt;
+   &lt;shortdescription&gt;Import photograph points that mention "limestone"&lt;/shortdescription&gt;
+   &lt;description&gt;This command will import only points that have photographs that mention
+      "limestone" to QGIS&lt;/description&gt;
+   &lt;databasetype&gt;SQLITE&lt;/databasetype&gt;
+   &lt;databasehost /&gt;
+   &lt;databaseport /&gt;
+   &lt;databasename&gt;C:\Workshop\eVis_Data\PhotoPoints.db&lt;/databasename&gt;
+   &lt;databaseusername /&gt;
+   &lt;databasepassword /&gt;
+   &lt;sqlstatement&gt;SELECT Attributes.*, Points.x, Points.y FROM Attributes LEFT JOIN
+      Points ON Points.rec_id=Attributes.point_ID where COMMENTS like '%limestone%'
+      &lt;/sqlstatement&gt;
+   &lt;autoconnect&gt;false&lt;/autoconnect&gt;
+ &lt;/query&gt;
+&lt;/doc&gt;</pre>
+</div>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="plugins_ftools.html" title="fTools Plugin"
+             >next</a></li>
+        <li class="right" >
+          <a href="plugins_dxf2shape_converter.html" title="Dxf2Shp Converter Plugin"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="plugins_index.html" >Plugins</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

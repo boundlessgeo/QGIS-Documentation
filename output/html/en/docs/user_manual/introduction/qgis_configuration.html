@@ -1,0 +1,895 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>QGIS Configuration</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="QGIS User Guide" href="../index.html" />
+    <link rel="next" title="Working with Projections" href="../working_with_projections/working_with_projections.html" />
+    <link rel="prev" title="General Tools" href="general_tools.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/introduction/qgis_configuration.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../working_with_projections/working_with_projections.html" title="Working with Projections"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="general_tools.html" title="General Tools"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="general_tools.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="../working_with_projections/working_with_projections.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general_tools.html">General Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_raster/index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="qgis-configuration">
+<h1>QGIS Configuration<a class="headerlink" href="#qgis-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#options" id="id1">Options</a><ul>
+<li><a class="reference internal" href="#general-tab" id="id2">General Tab</a></li>
+<li><a class="reference internal" href="#system-tab" id="id3">System Tab</a></li>
+<li><a class="reference internal" href="#data-sources-tab" id="id4">Data Sources Tab</a></li>
+<li><a class="reference internal" href="#rendering-tab" id="id5">Rendering Tab</a></li>
+<li><a class="reference internal" href="#colors-tab" id="id6">Colors Tab</a></li>
+<li><a class="reference internal" href="#canvas-and-legend-tab" id="id7">Canvas and Legend Tab</a></li>
+<li><a class="reference internal" href="#map-tools-tab" id="id8">Map tools Tab</a></li>
+<li><a class="reference internal" href="#composer-tab" id="id9">Composer Tab</a></li>
+<li><a class="reference internal" href="#digitizing-tab" id="id10">Digitizing Tab</a></li>
+<li><a class="reference internal" href="#gdal-tab" id="id11">GDAL Tab</a></li>
+<li><a class="reference internal" href="#crs-tab" id="id12">CRS Tab</a></li>
+<li><a class="reference internal" href="#locale-tab" id="id13">Locale Tab</a></li>
+<li><a class="reference internal" href="#authentication-tab" id="id14">Authentication Tab</a></li>
+<li><a class="reference internal" href="#network-tab" id="id15">Network Tab</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#project-properties" id="id16">Project Properties</a></li>
+<li><a class="reference internal" href="#customization" id="id17">Customization</a></li>
+</ul>
+</div>
+<p>QGIS is highly configurable through the <em class="menuselection">Settings</em> menu. Choose
+between Project Properties, Options and Customization.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">QGIS follows desktop guidelines for the location of options and project
+properties item. Consequently related to the OS you are using, location of some
+of items described below could be in the <em class="menuselection">Project</em>
+or the <em class="menuselection">Settings</em> menu.</p>
+</div>
+<div class="section" id="options">
+<span id="gui-options"></span><h2><a class="toc-backref" href="#id1">Options</a><a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> Some basic options for QGIS can be selected using the
+<em class="guilabel">Options</em> dialog. Select the menu option <em class="menuselection">Settings ‣</em>
+<a class="reference internal" href="../../../_images/mActionOptions.png"><img alt="options" src="../../../_images/mActionOptions.png" style="width: 1em;" /></a> <em class="menuselection">Options</em>. The tabs where you can customize your
+options are described below.</p>
+<div class="section" id="general-tab">
+<h3><a class="toc-backref" href="#id2">General Tab</a><a class="headerlink" href="#general-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>Application</strong></p>
+<ul class="simple">
+<li>Select the <em class="guilabel">Style (QGIS restart required)</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> and choose
+between &#8216;Oxygen&#8217;,&#8217;Windows&#8217;,&#8217;Motif&#8217;,&#8217;CDE&#8217;, &#8216;Plastique&#8217; and  &#8216;Cleanlooks&#8217; (<a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a>).</li>
+<li>Define the <em class="guilabel">Icon theme</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. Currently only &#8216;default&#8217; is
+possible.</li>
+<li>Define the <em class="guilabel">Icon size</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>.</li>
+<li>Define the <em class="guilabel">Font</em>. Choose between <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" />
+<em class="guilabel">Qt default</em> and a user-defined font.</li>
+<li>Change the <em class="guilabel">Timeout for timed messages or dialogs</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Hide splash screen at startup</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Show tips at startup</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Bold group box titles</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">QGIS-styled group boxes</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use native color chooser dialogs</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use live-updating color chooser dialogs</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Custom side bar style</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Experimental canvas rotation support (restart required)</em></li>
+</ul>
+<p><strong>Project files</strong></p>
+<ul class="simple">
+<li><em class="guilabel">Open project on launch</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> (choose between &#8216;New&#8217;,
+&#8216;Most recent&#8217; and &#8216;Specific&#8217;). When choosing &#8216;Specific&#8217; use the <a class="reference internal" href="../../../_images/browsebutton.png"><img alt="browseButton" src="../../../_images/browsebutton.png" style="width: 2.3em;" /></a>
+to define a project.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Create new project from default project</em>. You have the
+possibility to press on <em class="guilabel">Set current project as default</em> or on
+<em class="guilabel">Reset default</em>. You can browse through your files and define a
+directory where you find your user-defined project templates. This will be
+added to <em class="menuselection">Project ‣ New From Template</em>. If you first activate
+<a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Create new project from default project</em> and then save
+a project in the project templates folder.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Prompt to save project and data source changes when
+required</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Prompt for confirmation when a layer is to be removed</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Warn when opening a project file saved with an older
+version of QGIS</em></li>
+<li><em class="guilabel">Enable macros</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. This option was created to handle
+macros that are written to perform an action on project events. You can
+choose between &#8216;Never&#8217;, &#8216;Ask&#8217;, &#8216;For this session only&#8217; and
+&#8216;Always (not recommended)&#8217;.</li>
+</ul>
+</div>
+<div class="section" id="system-tab">
+<span id="env-options"></span><h3><a class="toc-backref" href="#id3">System Tab</a><a class="headerlink" href="#system-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>Environment</strong></p>
+<p>System environment variables can now be viewed, and many configured, in the
+<strong>Environment</strong> group (see <a class="reference internal" href="#figure-environment-variables">figure_environment_variables</a>). This is useful for
+platforms, such as Mac, where a GUI application does not necessarily inherit
+the user&#8217;s shell environment. It&#8217;s also useful for setting and viewing environment
+variables for the external tool sets controlled by the Processing toolbox (e.g.,
+SAGA, GRASS), and for turning on debugging output for specific sections of the
+source code.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use custom variables (restart required - include separators)</em>.
+You can <strong>[Add]</strong> and <strong>[Remove]</strong> variables. Already-defined environment
+variables are displayed in <em class="guilabel">Current environment variables</em>, and it&#8217;s
+possible to filter them by activating
+<a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Show only QGIS-specific variables</em>.</li>
+</ul>
+<p id="figure-environment-variables"><strong>Figure System Environment:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/sys-env-options.png" src="../../../_images/sys-env-options.png" />
+<p class="caption">System environment variables in QGIS</p>
+</div>
+<p><strong>Plugin paths</strong></p>
+<p><strong>[Add]</strong> or <strong>[Remove]</strong> <em class="guilabel">Path(s) to search for additional C++
+plugin libraries</em></p>
+</div>
+<div class="section" id="data-sources-tab">
+<h3><a class="toc-backref" href="#id4">Data Sources Tab</a><a class="headerlink" href="#data-sources-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>Feature attributes and table</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Open attribute table in a dock window (QGIS restart
+required)</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Copy geometry in WKT representation from attribute
+table</em>. When using <a class="reference internal" href="../../../_images/mActionCopySelected.png"><img alt="copySelected" src="../../../_images/mActionCopySelected.png" style="width: 1.5em;" /></a> <sup>Copy selected rows to
+clipboard</sup> from the <em class="guilabel">Attribute table</em> dialog, this has the
+result that the coordinates of points or vertices are also copied to the
+clipboard.</li>
+<li><em class="guilabel">Attribute table behavior</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. There are three
+possibilities: &#8216;Show all features&#8217;, &#8216;Show selected features&#8217; and &#8216;Show
+features visible on map&#8217;.</li>
+<li><em class="guilabel">Default view</em>: define the view mode of the attribute table at every
+opening. It can be &#8216;Remember last view&#8217;, &#8216;Table view&#8217; or &#8216;Form view&#8217;.</li>
+<li><em class="guilabel">Attribute table row cache</em> <a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a>. This row cache makes
+it possible to save the last loaded N attribute rows so that working with the
+attribute table will be quicker. The cache will be deleted when closing the
+attribute table.</li>
+<li><em class="guilabel">Representation for NULL values</em>. Here, you can define a value for
+data fields containing a NULL value.</li>
+</ul>
+<p><strong>Data source handling</strong></p>
+<ul class="simple">
+<li><em class="guilabel">Scan for valid items in the browser dock</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. You can
+choose between &#8216;Check extension&#8217; and &#8216;Check file contents&#8217;.</li>
+<li><em class="guilabel">Scan for contents of compressed files (.zip) in browser dock</em>
+<a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. &#8216;No&#8217;, &#8216;Basic scan&#8217; and &#8216;Full scan&#8217; are possible.</li>
+<li><em class="guilabel">Prompt for raster sublayers when opening</em>. Some rasters support
+sublayers &#8212; they are called subdatasets in GDAL. An example is netCDF files
+&#8212; if there are many netCDF variables, GDAL sees every variable as a
+subdataset. The option allows you to control how to deal with sublayers when a file
+with sublayers is opened. You have the following choices:<ul>
+<li>‘Always’: Always ask (if there are existing sublayers)</li>
+<li>‘If needed’: Ask if layer has no bands, but has sublayers</li>
+<li>‘Never’: Never prompt, will not load anything</li>
+<li>‘Load all’: Never prompt, but load all sublayers</li>
+</ul>
+</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Ignore shapefile encoding declaration</em>. If a shapefile
+has encoding information, this will be ignored by QGIS.</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Add PostGIS layers with double click and select in
+extended mode</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Add Oracle layers with double click and select in
+extended mode</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Execute expressions on server-side if possible</em></li>
+</ul>
+<p><strong>Hidden Browser Path</strong></p>
+<p>This widget lists all the folder you chose to hide from the Browser panel.
+Removing a folder from the list will make it available in the Browser panel.</p>
+</div>
+<div class="section" id="rendering-tab">
+<h3><a class="toc-backref" href="#id5">Rendering Tab</a><a class="headerlink" href="#rendering-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>Rendering behavior</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">By default new layers added to the map should be displayed</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use render caching where possible to speed up redraws</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Render layers in parallel using many CPU cores</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Max cores to use</em></li>
+<li><em class="guilabel">Map update interval (default to 250 ms)</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable feature simplification by default for newly added layers</em></li>
+<li><em class="guilabel">Simplification threshold</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Simplify on provider side if possible</em></li>
+<li><em class="guilabel">Maximum scale at which the layer should be simplified</em></li>
+</ul>
+<p><strong>Rendering quality</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Make lines appear less jagged at the expense of some
+drawing performance</em></li>
+</ul>
+<p><strong>Rasters</strong></p>
+<ul class="simple">
+<li>With <em class="guilabel">RGB band selection</em>, you can define the number for the Red,
+Green and Blue band.</li>
+</ul>
+<p><em>Contrast enhancement</em></p>
+<ul class="simple">
+<li><em class="guilabel">Single band gray</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. A single band gray can have
+&#8216;No stretch&#8217;, &#8216;Stretch to MinMax&#8217;, &#8216;Stretch and Clip to MinMax&#8217; and also
+&#8216;Clip to MinMax&#8217;.</li>
+<li><em class="guilabel">Multi band color (byte/band)</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. Options are &#8216;No stretch&#8217;,
+&#8216;Stretch to MinMax&#8217;, &#8216;Stretch and Clip to MinMax&#8217; and &#8216;Clip to MinMax&#8217;.</li>
+<li><em class="guilabel">Multi band color (&gt;byte/band)</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. Options are &#8216;No stretch&#8217;,
+&#8216;Stretch to MinMax&#8217;, &#8216;Stretch and Clip to MinMax&#8217; and &#8216;Clip to MinMax&#8217;.</li>
+<li><em class="guilabel">Limits (minimum/maximum)</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. Options are
+&#8216;Cumulative pixel count cut&#8217;, &#8216;Minimum/Maximum&#8217;, &#8216;Mean +/- standard deviation&#8217;.</li>
+<li><em class="guilabel">Cumulative pixel count cut limits</em></li>
+<li><em class="guilabel">Standard deviation multiplier</em></li>
+</ul>
+<p><strong>Debugging</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Map canvas refresh</em></li>
+</ul>
+</div>
+<div class="section" id="colors-tab">
+<h3><a class="toc-backref" href="#id6">Colors Tab</a><a class="headerlink" href="#colors-tab" title="Permalink to this headline">¶</a></h3>
+<p>This menu allows you to add some custom color that you can find in each color dialog
+window of the renderers. You will see a set of predefined colors in the tab: you can
+delete or edit all of them. Moreover you can add the color you want and perform some copy
+and paste operations. Finally you can export the color set as a <tt class="file docutils literal"><span class="pre">gpl</span></tt> file or import
+them.</p>
+</div>
+<div class="section" id="canvas-and-legend-tab">
+<h3><a class="toc-backref" href="#id7">Canvas and Legend Tab</a><a class="headerlink" href="#canvas-and-legend-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>Default map appearance (overridden by project properties)</strong></p>
+<ul class="simple">
+<li>Define a <em class="guilabel">Selection color</em> and a <em class="guilabel">Background color</em>.</li>
+</ul>
+<p><strong>Layer legend</strong></p>
+<ul class="simple">
+<li><em class="guilabel">Double click action in legend</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a>. You can either
+&#8216;Open layer properties&#8217; or &#8216;Open attribute table&#8217; with the double click.</li>
+<li>The following <em class="guilabel">Legend item styles</em> are possible:<ul>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Capitalise layer names</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Bold layer names</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Bold group names</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Display classification attribute names</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Create raster icons (may be slow)</em></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="map-tools-tab">
+<h3><a class="toc-backref" href="#id8">Map tools Tab</a><a class="headerlink" href="#map-tools-tab" title="Permalink to this headline">¶</a></h3>
+<p>This tab offers some options regarding the behavior of the <em class="guilabel">Identify tool</em>.</p>
+<ul class="simple">
+<li><em class="guilabel">Search radius for identifying and displaying map tips</em> is a tolerance factor
+expressed as a percentage of the map width. This means the identify tool will depict results
+as long as you click within this tolerance.</li>
+<li><em class="guilabel">Highlight color</em> allows you to choose with which color should features being
+identified are to be highlighted.</li>
+<li><em class="guilabel">Buffer</em> determines a buffer distance
+to be rendered from the outline of the identify highlight.</li>
+<li><em class="guilabel">Minimum width</em> determines how thick should
+the outline of a highlighted object be.</li>
+</ul>
+<p><strong>Measure tool</strong></p>
+<ul>
+<li><p class="first">Define <em class="guilabel">Rubberband color</em> for measure tools</p>
+</li>
+<li><p class="first">Define <em class="guilabel">Decimal places</em></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Keep base unit</em> to not automatically convert large numbers
+(e.g., meters to kilometers)</p>
+</li>
+<li><p class="first"><em class="guilabel">Preferred distance units</em> <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> (&#8216;Meters&#8217;, &#8216;Kilometers&#8217;, &#8216;Feet&#8217;,
+&#8216;Yards&#8217;, &#8216;Miles&#8217;, &#8216;Nautical Miles&#8217;, &#8216;Degrees&#8217; or &#8216;Map Units&#8217; )</p>
+</li>
+<li><dl class="first docutils">
+<dt><em class="guilabel">Preferred area units</em> <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> (&#8216;Square meters&#8217;, &#8216;Square</dt>
+<dd><p class="first last">kilometers&#8217;, &#8216;Square feet&#8217;, &#8216;Square yards&#8217;, &#8216;Square miles&#8217;, &#8216;Hectares&#8217;,
+&#8216;Acres&#8217;, &#8216;Square nautical miles&#8217;, &#8216;Square degrees&#8221; or &#8216;Map Units&#8217;)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><em class="guilabel">Preferred angle units</em> <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> (&#8216;Degrees&#8217;, &#8216;Radians&#8217;, &#8216;Gon/gradians&#8217;,
+&#8216;Minutes of arc&#8217;, &#8216;Seconds of arc&#8217; or &#8216;Turns/revolutions&#8217;)</p>
+</li>
+</ul>
+<p><strong>Panning and zooming</strong></p>
+<ul class="simple">
+<li>Define <em class="guilabel">Mouse wheel action</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> (&#8216;Zoom&#8217;, &#8216;Zoom and recenter&#8217;,
+&#8216;Zoom to mouse cursor&#8217;, &#8216;Nothing&#8217;)</li>
+<li>Define <em class="guilabel">Zoom factor</em> for wheel mouse</li>
+</ul>
+<p id="predefinedscales"><strong>Predefined scales</strong></p>
+<p>Here, you find a list of predefined scales. With the <a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a>
+and <a class="reference internal" href="../../../_images/symbologyRemove.png"><img alt="signMinus" src="../../../_images/symbologyRemove.png" style="width: 1.5em;" /></a> buttons you can add or remove your personal scales.
+You can also import or export scales from/to a <tt class="docutils literal"><span class="pre">.XML</span></tt> file. Note that you still have
+the possibility to remove your changes and reset to the predefined list.</p>
+</div>
+<div class="section" id="composer-tab">
+<h3><a class="toc-backref" href="#id9">Composer Tab</a><a class="headerlink" href="#composer-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>Composition defaults</strong></p>
+<p>You can define the <em class="guilabel">Default font</em> here.</p>
+<p><strong>Grid appearance</strong></p>
+<ul class="simple">
+<li>Define the <em class="guilabel">Grid style</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> (&#8216;Solid&#8217;, &#8216;Dots&#8217;, &#8216;Crosses&#8217;)</li>
+<li>Define the <em class="guilabel">Grid color</em></li>
+</ul>
+<p><strong>Grid and guide defaults</strong></p>
+<ul class="simple">
+<li>Define the <em class="guilabel">Grid spacing</em> <a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a></li>
+<li>Define the <em class="guilabel">Grid offset</em> <a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a> for x and y</li>
+<li>Define the <em class="guilabel">Snap tolerance</em> <a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a></li>
+</ul>
+</div>
+<div class="section" id="digitizing-tab">
+<h3><a class="toc-backref" href="#id10">Digitizing Tab</a><a class="headerlink" href="#digitizing-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>Feature creation</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Suppress attributes pop-up windows after each created feature</em></li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Reuse last entered attribute values</em></li>
+<li><em class="guilabel">Validate geometries</em>. Editing complex lines and polygons with many
+nodes can result in very slow rendering. This is because the default
+validation procedures in QGIS can take a lot of time. To speed up rendering, it
+is possible to select GEOS geometry validation (starting from GEOS 3.3) or to
+switch it off. GEOS geometry validation is much faster, but the disadvantage
+is that only the first geometry problem will be reported.</li>
+</ul>
+<p><strong>Rubberband</strong></p>
+<ul class="simple">
+<li>Define Rubberband <em class="guilabel">Line width</em> and <em class="guilabel">Line color</em></li>
+</ul>
+<p><strong>Snapping</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Open snapping options in a dock window (QGIS restart required)</em></li>
+<li>Define <em class="guilabel">Default snap mode</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> (&#8216;To vertex&#8217;, &#8216;To segment&#8217;,
+&#8216;To vertex and segment&#8217;, &#8216;Off&#8217;)</li>
+<li>Define <em class="guilabel">Default snapping tolerance</em> in map units or pixels</li>
+<li>Define the <em class="guilabel">Search radius for vertex edits</em> in map units or pixels</li>
+</ul>
+<p><strong>Vertex markers</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Show markers only for selected features</em></li>
+<li>Define vertex <em class="guilabel">Marker style</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> (&#8216;Cross&#8217; (default), &#8216;Semi
+transparent circle&#8217; or &#8216;None&#8217;)</li>
+<li>Define vertex <em class="guilabel">Marker size</em></li>
+</ul>
+<p><strong>Curve offset tool</strong></p>
+<p>The next 3 options refer to the <a class="reference internal" href="../../../_images/mActionOffsetCurve.png"><img alt="offsetCurve" src="../../../_images/mActionOffsetCurve.png" style="width: 1.5em;" /></a> <sup>Offset Curve</sup> tool
+in <a class="reference internal" href="../working_with_vector/editing_geometry_attributes.html#sec-advanced-edit"><em>Advanced digitizing</em></a>. Through the various settings, it is possible to
+influence the shape of the line offset. These options are possible starting from GEOS 3.3.</p>
+<ul class="simple">
+<li><em class="guilabel">Join style</em></li>
+<li><em class="guilabel">Quadrant segments</em></li>
+<li><em class="guilabel">Miter limit</em></li>
+</ul>
+</div>
+<div class="section" id="gdal-tab">
+<h3><a class="toc-backref" href="#id11">GDAL Tab</a><a class="headerlink" href="#gdal-tab" title="Permalink to this headline">¶</a></h3>
+<p>GDAL is a data exchange library for raster files. In this tab, you can
+<em class="guilabel">Edit create options</em> and <em class="guilabel">Edit Pyramids Options</em> of the
+raster formats. Define which GDAL driver is to be used for a raster format, as in
+some cases more than one GDAL driver is available.</p>
+</div>
+<div class="section" id="crs-tab">
+<h3><a class="toc-backref" href="#id12">CRS Tab</a><a class="headerlink" href="#crs-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>Default CRS for new projects</strong></p>
+<ul class="simple">
+<li><img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Don&#8217;t enable &#8216;on the fly&#8217; reprojection</em></li>
+<li><img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Automatically enable &#8216;on the fly&#8217; reprojection if
+layers have different CRS</em></li>
+<li><img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Enable &#8216;on the fly&#8217; reprojection by default</em></li>
+<li>Select a CRS and <em class="guilabel">Always start new projects with this CRS</em></li>
+</ul>
+<p><strong>CRS for new layers</strong></p>
+<p>This area allows you to define the action to take when a new layer is created, or when
+a layer without a CRS is loaded.</p>
+<ul class="simple">
+<li><img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Prompt for CRS</em></li>
+<li><img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Use project CRS</em></li>
+<li><img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Use default CRS</em></li>
+</ul>
+<p><strong>Default datum transformations</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Ask for datum transformation when no default is defined</em></li>
+<li>If you have worked with the &#8216;on-the-fly&#8217; CRS transformation you can see the result
+of the transformation in the window below. You can find information about &#8216;Source CRS&#8217;
+and &#8216;Destination CRS&#8217; as well as &#8216;Source datum transform&#8217; and &#8216;Destination datum transform&#8217;.</li>
+</ul>
+</div>
+<div class="section" id="locale-tab">
+<h3><a class="toc-backref" href="#id13">Locale Tab</a><a class="headerlink" href="#locale-tab" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Overwrite system locale</em> and <em class="guilabel">Locale to use instead</em></li>
+<li>Information about active system locale</li>
+</ul>
+</div>
+<div class="section" id="authentication-tab">
+<h3><a class="toc-backref" href="#id14">Authentication Tab</a><a class="headerlink" href="#authentication-tab" title="Permalink to this headline">¶</a></h3>
+<p>In the <em class="guilabel">Authentication</em> tab you can set authentication configurations
+and manage PKI certificates. See <a class="reference internal" href="../auth_system/index.html#authentication-index"><em>Authentication System</em></a> for more
+details.</p>
+</div>
+<div class="section" id="network-tab">
+<h3><a class="toc-backref" href="#id15">Network Tab</a><a class="headerlink" href="#network-tab" title="Permalink to this headline">¶</a></h3>
+<p><strong>General</strong></p>
+<ul class="simple">
+<li>Define <em class="guilabel">WMS search address</em>, default is
+<tt class="docutils literal"><span class="pre">http://geopole.org/wms/search?search=\%1\&amp;type=rss</span></tt></li>
+<li>Define <em class="guilabel">Timeout for network requests (ms)</em> - default is 60000</li>
+<li>Define <em class="guilabel">Default expiration period for WMSC/WMTS tiles (hours)</em> - default is 24</li>
+<li>Define <em class="guilabel">Max retry in case of tile request errors</em></li>
+<li>Define <em class="guilabel">User-Agent</em></li>
+</ul>
+<p id="figure-network-tab"><strong>Figure Network Tab:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/proxy-settings.png" src="../../../_images/proxy-settings.png" />
+<p class="caption">Proxy-settings in QGIS</p>
+</div>
+<p><strong>Cache settings</strong></p>
+<p>Define the <em class="guilabel">Directory</em> and a <em class="guilabel">Size</em> for the cache.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Use proxy for web access</em> and define &#8216;Host&#8217;, &#8216;Port&#8217;, &#8216;User&#8217;,
+and &#8216;Password&#8217;.</li>
+<li>Set the <em class="guilabel">Proxy type</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> according to your needs.<ul>
+<li><em class="menuselection">Default Proxy</em>: Proxy is determined based on the application
+proxy set using</li>
+<li><em class="menuselection">Socks5Proxy</em>: Generic proxy for any kind of connection.
+Supports TCP, UDP, binding to a port (incoming connections) and authentication.</li>
+<li><em class="menuselection">HttpProxy</em>: Implemented using the &#8220;CONNECT&#8221; command, supports
+only outgoing TCP connections; supports authentication.</li>
+<li><em class="menuselection">HttpCachingProxy</em>: Implemented using normal HTTP commands, it
+is useful only in the context of HTTP requests.</li>
+<li><em class="menuselection">FtpCachingProxy</em>: Implemented using an FTP proxy, it is
+useful only in the context of FTP requests.</li>
+</ul>
+</li>
+</ul>
+<p>Excluding some URLs can be added to the text box below the proxy settings (see
+<a class="reference internal" href="#figure-network-tab">Figure_Network_Tab</a>).</p>
+<p>If you need more detailed information about the different proxy settings,
+please refer to the manual of the underlying QT library documentation at
+<a class="reference external" href="http://doc.trolltech.com/4.5/qnetworkproxy.html#ProxyType-enum">http://doc.trolltech.com/4.5/qnetworkproxy.html#ProxyType-enum</a>.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Using Proxies</strong></p>
+<p class="last">Using proxies can sometimes be tricky. It is useful to proceed by &#8216;trial and
+error&#8217; with the above proxy types, to check to see if they succeed in your case.</p>
+</div>
+<p>You can modify the options according to your needs. Some of the changes may
+require a restart of QGIS before they will be effective.</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> Settings are saved in a text file: <tt class="file docutils literal"><span class="pre">$HOME/.config/QGIS/QGIS2.conf</span></tt></li>
+<li><a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> You can find your settings in: <tt class="file docutils literal"><span class="pre">$HOME/Library/Preferences/org.qgis.qgis.plist</span></tt></li>
+<li><a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a> Settings are stored in the registry under: <tt class="docutils literal"><span class="pre">HKEY\CURRENT_USER\Software\QGIS\qgis</span></tt></li>
+</ul>
+</div>
+</div>
+<div class="section" id="project-properties">
+<span id="index-0"></span><h2><a class="toc-backref" href="#id16">Project Properties</a><a class="headerlink" href="#project-properties" title="Permalink to this headline">¶</a></h2>
+<p>In the properties window for the project under <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a>
+<em class="menuselection">Settings ‣ Project Properties</em> (kde) or <a class="reference internal" href="../../../_images/nix.png"><img alt="nix" src="../../../_images/nix.png" style="width: 1em;" /></a> <a class="reference internal" href="../../../_images/osx.png"><img alt="osx" src="../../../_images/osx.png" style="width: 1em;" /></a> <a class="reference internal" href="../../../_images/win.png"><img alt="win" src="../../../_images/win.png" style="width: 1em;" /></a>
+<em class="menuselection">Project ‣ Project Properties</em> (Gnome, OS X or Windows), you
+can set project-specific options.</p>
+<p>The project-specific options overwrite their equivalent in the options
+described above.</p>
+<ul>
+<li><p class="first">In the <em class="guilabel">General</em> tab, the <strong>general settings</strong> let you:</p>
+<ul class="simple">
+<li>give a title to the project beside the project file path</li>
+<li>choose the color to use for features when they are selected</li>
+<li>choose the background color: the color to use for the map canvas</li>
+<li>set whether the path to layers in the project should be saved as absolute
+(full) or as relative to the project file location. You may prefer
+relative path when both layers and project files can be moved or shared
+or if the project is accessed from computers on different platforms.</li>
+<li>choose to avoid artifacts when project is rendered as map tiles. Note that
+checking this option can lead to performance degradation.</li>
+</ul>
+<p>Calculating areas and distances is a common need in GIS. However, these values
+are really tied to the underlying projection settings. The <strong>Measurements</strong>
+frame lets you control these parameters. You can indeed choose:</p>
+<ul class="simple">
+<li>the ellipsoid to use: it can be an existing one, a custom one
+(you&#8217;ll need to set values of the semi-major and semi-minor axis)
+or None/Planimetric.</li>
+<li>the <em class="guilabel">units for distance measurements</em> for length and perimeter and
+the <em class="guilabel">units for area measurements</em>. These settings, which default
+to the units set in QGIS options but then overrides it for the current project,
+are used in:<ul>
+<li>Attribute table field update bar</li>
+<li>Field calculator calculations</li>
+<li>Identify tool derived length, perimeter and area values</li>
+<li>Default unit shown in measure dialog</li>
+</ul>
+</li>
+</ul>
+<p>The <strong>Coordinate display</strong> allows you to choose and customize the format of units
+to use to display the mouse coordinate in the status bar and the derived coordinates
+shown via the identify tool.</p>
+<p>Finally, you can define a <strong>project scale</strong> list, which overrides the global
+predefined scales.</p>
+</li>
+</ul>
+<p id="figure-general-tab"><strong>Figure General Tab:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/project_general.png" src="../../../_images/project_general.png" />
+<p class="caption">General tab of Project Properties dialog</p>
+</div>
+<ul class="simple">
+<li>The <em class="guilabel">CRS</em> tab enables you to choose the Coordinate Reference
+System for this project, and to enable on-the-fly re-projection of raster and
+vector layers when displaying layers from a different CRS.</li>
+<li>With the <em class="guilabel">Identify layers</em> tab, you set (or disable) which
+layers will respond to the <a class="reference internal" href="general_tools.html#identify"><em>identify tool</em></a>. By default, layers
+are set queryable.</li>
+<li>The <em class="guilabel">Default Styles</em> tab lets you control how new layers will be
+drawn when they do not have an existing <tt class="file docutils literal"><span class="pre">.qml</span></tt> style defined. You can
+also set the default transparency level for new layers and whether symbols
+should have random colors assigned to them.
+There is also an additional section where you can define specific colors for the
+running project. You can find the added colors in the drop down menu of the color dialog
+window present in each renderer.</li>
+<li>The tab <em class="guilabel">OWS Server</em> allows you to define information about the QGIS
+Server WMS and WFS capabilities, extent and CRS restrictions.</li>
+<li>The <em class="guilabel">Macros</em> tab is used to edit Python macros for projects. Currently,
+only three macros are available: <tt class="docutils literal"><span class="pre">openProject()</span></tt>, <tt class="docutils literal"><span class="pre">saveProject()</span></tt> and
+<tt class="docutils literal"><span class="pre">closeProject()</span></tt>.</li>
+</ul>
+<p id="figure-macro-tab"><strong>Figure Macro Tab:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/macro.png" src="../../../_images/macro.png" />
+<p class="caption">Macro settings in QGIS</p>
+</div>
+<ul class="simple">
+<li>The <em class="guilabel">Relations</em> tab is used to define 1:n relations. The relations
+are defined in the project properties dialog. Once relations exist for a layer,
+a new user interface element in the form view (e.g. when identifying a feature
+and opening its form) will list the related entities. This provides a powerful
+way to express e.g. the inspection history on a length of pipeline or road segment.
+You can find out more about 1:n relations support in Section <a class="reference internal" href="../working_with_vector/attribute_table.html#vector-relations"><em>Creating one to many relations</em></a>.</li>
+<li>In the <em class="guilabel">Data Sources</em> tab, you can:<ul>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Evaluate default values on provider side</em>: When adding
+new features in a PostGreSQL table, fields with default value constraint are
+evaluated and populated at the form opening, and not at the commit moment.
+This means that instead of an expression like <tt class="docutils literal"><span class="pre">nextval('serial')</span></tt>, the field
+in the <em class="guilabel">Add Feature</em> form will display expected value (e.g., <tt class="docutils literal"><span class="pre">25</span></tt>).</li>
+<li><a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Automatically create transaction groups where possible</em>:
+When this mode is turned on, all
+(postgres) layers from the same database are synchronised in their edit state,
+i.e. when one layer is put into edit state, all are, when one layer is committed
+or one layer is rolled back, so are the others. Also, instead of buffering edit
+changes locally, they are directly sent to a transaction in the database which
+gets committed when the user clicks save layer.
+Note that you can (de)activate this option only if no layer is being edited
+in the project.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="customization">
+<span id="sec-customization"></span><h2><a class="toc-backref" href="#id17">Customization</a><a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h2>
+<p>The <span class="target" id="index-1"></span>customization dialog lets you (de)activate almost every element in the QGIS
+user interface. This can be very useful if you want to provide your end-users with a
+&#8216;light&#8217; version of QGIS, containing only the icons, menus or panels they need.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Before your changes are applied, you need to restart QGIS.</p>
+</div>
+<p id="figure-customization"><strong>Figure Customization 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/customization.png" src="../../../_images/customization.png" />
+<p class="caption">The Customization dialog</p>
+</div>
+<p>Ticking the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable customization</em> checkbox is the first step
+on the way to QGIS customization. This enables the toolbar and the widget
+panel from which you can uncheck and thus disable some GUI items.</p>
+<p>The configurable item can be:</p>
+<ul class="simple">
+<li>a <strong>Menu</strong> or some of its sub-menus from the <a class="reference internal" href="qgis_gui.html#label-menubar"><em>Menu Bar</em></a></li>
+<li>a whole <strong>Panel</strong> (see <a class="reference internal" href="qgis_gui.html#sec-panels-and-toolbars"><em>Panels and Toolbars</em></a>)</li>
+<li>the <strong>Status bar</strong> described in <a class="reference internal" href="qgis_gui.html#label-statusbar"><em>Status Bar</em></a> or some of its items</li>
+<li>a <strong>Toolbar</strong>: the whole bar or some of its icons</li>
+<li>or any <strong>widget</strong> from any dialog in QGIS: label, button, combobox...</li>
+</ul>
+<p>With <a class="reference internal" href="../../../_images/mActionSelect.png"><img alt="select" src="../../../_images/mActionSelect.png" style="width: 1.5em;" /></a> <sup>Switch to catching widgets in main application</sup>, you
+can click on an item in QGIS interface that you want to be hidden and
+QGIS automatically unchecks the corresponding entry in the Customization dialog.</p>
+<p>Once you setup your configuration, click <strong>[Apply]</strong> or <strong>[Ok]</strong> to validate your
+changes. This configuration becomes the one used by default by QGIS at the next startup.</p>
+<p>The modifications can also be saved in a <tt class="docutils literal"><span class="pre">.ini</span></tt> file using <a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a>
+<sup>Save To File</sup> button. This is a handy way to share a common QGIS
+interface among multiple users. Just click on <a class="reference internal" href="../../../_images/mActionFileOpen.png"><img alt="fileOpen" src="../../../_images/mActionFileOpen.png" style="width: 1.5em;" /></a> <sup>Load from File</sup>
+from the destination computer in order to import the <tt class="docutils literal"><span class="pre">.ini</span></tt> file.
+You can also run <a class="reference internal" href="getting_started.html#custom-commandline"><em>command line tools</em></a> and save various
+setups for different use cases as well.</p>
+<div class="admonition tip" id="tip-restoring-configuration">
+<p class="first admonition-title">Tip</p>
+<p><strong>Easily restore predefined QGIS</strong></p>
+<p>The initial QGIS GUI configuration can be restored by one of the methods below:</p>
+<ul class="simple">
+<li>unchecking <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Enable customization</em> option in the
+Customization dialog or click the <a class="reference internal" href="../../../_images/mActionSelectAllTree.png"><img alt="selectAllTree" src="../../../_images/mActionSelectAllTree.png" style="width: 1.5em;" /></a> <sup>Check All</sup> button</li>
+<li>pressing the <strong>[Reset]</strong> button in the <strong>QSettings</strong> frame under
+<em class="menuselection">Settings ‣ Options</em> menu, <em class="guilabel">System</em> tab</li>
+<li>launching QGIS at a command prompt with the following command line
+<tt class="docutils literal"><span class="pre">qgis</span> <span class="pre">--nocustomization</span></tt></li>
+<li>setting to <tt class="docutils literal"><span class="pre">false</span></tt> the value of <em class="guilabel">UI &#8211;&gt; Customization &#8211;&gt; Enabled</em>
+variable under <em class="menuselection">Settings ‣ Options</em> menu, <em class="guilabel">Advanced</em> tab.</li>
+</ul>
+<p class="last">In most cases, you need to restart QGIS in order to have the change applied.</p>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../working_with_projections/working_with_projections.html" title="Working with Projections"
+             >next</a></li>
+        <li class="right" >
+          <a href="general_tools.html" title="General Tools"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>

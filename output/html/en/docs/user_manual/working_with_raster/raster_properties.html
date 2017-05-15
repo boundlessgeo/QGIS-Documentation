@@ -1,0 +1,625 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Raster Properties Dialog</title>
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/qgis-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-2.3.2/css/bootstrap-responsive.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     'testing',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/qgis-site.js"></script>
+    <script type="text/javascript" src="../../../_static/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../../../_static/images/favicon.ico?1322140996"/>
+    <link rel="top" title="" href="../../../index.html" />
+    <link rel="up" title="Working with Raster Data" href="index.html" />
+    <link rel="next" title="Raster Analysis" href="raster_analysis.html" />
+    <link rel="prev" title="Working with Raster Data" href="supported_data.html" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+
+
+    
+  <div id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="brand" href="../../index.html">QGIS Documentation Project</a>
+        <span class="navbar-text pull-left"><b>testing</b></span>
+        
+          <select id="languages">
+  <!-- note on the options here: the 'title' string is to be translated in your
+  language, but the element text is supposed to stay in native lang/txt -->
+  <option value="en" title="English">English</option>
+<!--  <option value="ca_ES" title="Catalan">Catalan</option>
+  <option value="da_DK" title="Danish">Dansk</option>
+  <option value="de" title="German">Deutsch</option>
+  <option value="es" title="Spanish">Español</option>
+  <option value="fa" title="Persian">فارسی</option>
+  <option value="fi" title="Finnish">Suomalainen</option>
+  <option value="fr" title="French">Français</option>
+  <option value="id" title="Indonesian">Bahasa Indonesia</option>
+  <option value="it" title="Italian">Italiano</option>
+  <option value="ja" title="Japanese">日本語</option>
+  <option value="ko_KR" title="Korean">한국어</option>
+  <option value="nl" title="Dutch">Nederlands</option>
+  <option value="pt_PT" title="Portuguese">Português</option>
+  <option value="ro" title="Romanian">Română</option>
+  <option value="ru" title="Russian">Русский</option>
+  <option value="zh_CN" title="Chinese (China)">中文</option>
+  <option value="zh_TW" title="Chinese (Taiwan)">Chinese (Taiwan)</option> -->
+</select>
+
+<script>
+    var currentPage = 'docs/user_manual/working_with_raster/raster_properties.html'; // coming from sphinx, always without starting '/'
+    var currentLang = 'en';
+    // split index.html if currentUrl is ended by '/'
+    var currentUrl = window.location.href;
+    if (currentUrl.slice(-1) == '/' && currentPage.slice(-1) != '/'){
+      var pages = currentPage.split('/');
+      pages.pop();
+      currentPage = pages.join('/') + '/';
+    }
+    $(document).ready(function(){
+        var search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+        var langPlusPage = window.location.href.match(search);
+        // it's possible this is the index.html page called without 'index.html', try without the currentPage
+        if (langPlusPage==undefined){
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/$', 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // it's possible this is an index.html page called without 'index.html', try removing index.html
+        if (langPlusPage==undefined){
+            currentPage = currentPage.replace('index.html','')
+            search = new RegExp('\/[a-zA-Z_]{2,8}\/'+ currentPage, 'gi');
+            langPlusPage = window.location.href.match(search);
+        }
+        // still no langPlugPage: stop, because the language swicher will misbehave
+        if (langPlusPage == undefined || langPlusPage.length != 1){
+            alert('This is an documentation error, please report back to QGIS devs.');
+            return;
+        }
+        langPlusPage = langPlusPage[0];
+        currentLang = langPlusPage.replace(currentPage, '');
+
+        // TODO: links should come from conf.py
+        // TODO: all template pages have the actual translation in sphinc.conf
+        // documentation master only github links
+        /*
+        fix_translation_link = 'https://www.transifex.com/projects/p/qgis-website/translate/#' + 
+            currentLang.slice(1) + currentPage.replace(/\//g, "_").replace(/-/g, "_").replace(/\.html/g, "")
+        if ('/en/' != currentLang) {
+            $('#fix_translation_link').attr('href', fix_translation_link);
+        }
+        */
+        fix_text_link = 'https://github.com/qgis/QGIS-Documentation/edit/master/source/' +
+            currentPage.replace(/.html/g, ".rst")
+        // TODO: only on rst pages, here a list of pages which are actual templates?
+        if (true){
+            $('#fix_text_link').attr('href', fix_text_link);
+        }
+
+        $("#languages").val(currentLang.replace(/\//g,'')); // currentLang is something like '/nl/'
+
+        $("#languages").change(function() {
+            gotoLang($(this).val());
+        });
+
+    });
+
+    // load current page in a different language
+    function gotoLang(lang){
+        var currentUrl = window.location.href;
+        var newUrl = currentUrl.replace(currentLang, '/'+lang+'/');
+        window.location.href = newUrl;
+    }
+</script>
+        
+        <div class="nav-collapse collapse">
+          <ul class="unstyled nav main-menu">
+            <!--<li><a href="../../../site/about/index.html">Discover QGIS</a></li>
+            <li><a href="../../../site/forusers/index.html">For Users</a></li>
+            <li><a href="../../../site/getinvolved/index.html">Get Involved</a></li>
+            <li><a href="../../index.html">Documentation</a></li>-->
+            <li><a href="../../index.html">Documentation QGIS testing</a></li>
+            <li>
+          
+<form class="navbar-search" action="../../../search.html" method="get">
+  <input type="text" name="q" class="search-query" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="raster_analysis.html" title="Raster Analysis"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="supported_data.html" title="Working with Raster Data"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Working with Raster Data</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div style="display:none;" class="container" id="nextprev" >
+    
+    <a accesskey="p" href="supported_data.html">&lt;&lt; prev</a>
+    
+    
+    <a accesskey="n" href="raster_analysis.html">next &gt;&gt;</a>
+    
+    </div>
+
+
+
+
+    
+        <div class="container">
+            <div class="row">
+      <div class="span4">
+        <div id="sidebar" class="bs-sidenav well" data-spy="scroll">
+<h3><a href="../../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User guide/Manual (QGIS Testing!)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../preamble/preamble.html">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/conventions.html">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/foreword.html">Foreword</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/whats_new.html">What&#8217;s new in QGIS testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/getting_started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_gui.html">QGIS GUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/general_tools.html">General Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/qgis_configuration.html">QGIS Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_projections/working_with_projections.html">Working with Projections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../qgis_browser/qgis_browser.html">QGIS Browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_vector/index.html">Working with Vector Data</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Working with Raster Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_ogc/index.html">Working with OGC Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_gps/index.html">Working with GPS Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auth_system/index.html">Authentication System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../grass_integration/grass_integration.html">GRASS GIS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../processing/index.html">QGIS processing framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../print_composer/index.html">Print Composer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/plugins_index.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preamble/help_and_support.html">Help and Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../appendices/appendices.html">Appendix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../literature_web/literature_and_web_references.html">Literature and Web References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="http://docs.qgis.org/testing/pdf/">User guide/Manual PDF&#8217;s</a></li>
+</ul>
+
+        </div>
+      </div>
+                <div class="span8">
+                    
+                        
+                            <p><span class="disclaimer">Docs for &#8216;QGIS testing&#8217;. Visit http://docs.qgis.org/2.14 for QGIS 2.14 docs and translations.</span></p>
+<div class="section" id="raster-properties-dialog">
+<h1>Raster Properties Dialog<a class="headerlink" href="#raster-properties-dialog" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#general-menu" id="id1">General Menu</a><ul>
+<li><a class="reference internal" href="#layer-info" id="id2">Layer Info</a></li>
+<li><a class="reference internal" href="#coordinate-reference-system" id="id3">Coordinate reference system</a></li>
+<li><a class="reference internal" href="#scale-dependent-visibility" id="id4">Scale Dependent visibility</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#style-menu" id="id5">Style Menu</a><ul>
+<li><a class="reference internal" href="#band-rendering" id="id6">Band rendering</a></li>
+<li><a class="reference internal" href="#color-rendering" id="id7">Color rendering</a></li>
+<li><a class="reference internal" href="#resampling" id="id8">Resampling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#transparency-menu" id="id9">Transparency Menu</a></li>
+<li><a class="reference internal" href="#pyramids-menu" id="id10">Pyramids Menu</a></li>
+<li><a class="reference internal" href="#histogram-menu" id="id11">Histogram Menu</a></li>
+<li><a class="reference internal" href="#metadata-menu" id="id12">Metadata Menu</a></li>
+</ul>
+</div>
+<p>To view and set the properties for a raster layer, double click on the layer name
+in the map legend, or right click on the layer name and choose <em class="guilabel">Properties</em>
+from the context menu. This will open the <em class="guilabel">Raster Layer Properties</em> dialog (see <a class="reference internal" href="#figure-raster-1">figure_raster_1</a>).</p>
+<p>There are several menus in the dialog:</p>
+<ul class="simple">
+<li><em class="guilabel">General</em></li>
+<li><em class="guilabel">Style</em></li>
+<li><em class="guilabel">Transparency</em></li>
+<li><em class="guilabel">Pyramids</em></li>
+<li><em class="guilabel">Histogram</em></li>
+<li><em class="guilabel">Metadata</em></li>
+</ul>
+<p id="figure-raster-1"><strong>Figure Raster 1:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterPropertiesDialog.png" src="../../../_images/rasterPropertiesDialog.png" />
+<p class="caption">Raster Layers Properties Dialog</p>
+</div>
+<div class="section" id="general-menu">
+<span id="label-generaltab"></span><h2><a class="toc-backref" href="#id1">General Menu</a><a class="headerlink" href="#general-menu" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="layer-info">
+<h3><a class="toc-backref" href="#id2">Layer Info</a><a class="headerlink" href="#layer-info" title="Permalink to this headline">¶</a></h3>
+<p>The <em class="guilabel">General</em> menu displays basic information about the selected raster,
+including the layer source path, the display name in the legend (which can be
+modified), and the number of columns, rows and no-data values of the raster.</p>
+</div>
+<div class="section" id="coordinate-reference-system">
+<h3><a class="toc-backref" href="#id3">Coordinate reference system</a><a class="headerlink" href="#coordinate-reference-system" title="Permalink to this headline">¶</a></h3>
+<p>Here, you find the coordinate reference system (CRS) information printed as a
+PROJ.4 string. If this setting is not correct, it can be modified by clicking
+the <strong>[Specify]</strong> button.</p>
+</div>
+<div class="section" id="scale-dependent-visibility">
+<h3><a class="toc-backref" href="#id4">Scale Dependent visibility</a><a class="headerlink" href="#scale-dependent-visibility" title="Permalink to this headline">¶</a></h3>
+<p>Additionally scale-dependent visibility can be set in this tab. You will need to
+check the checkbox and set an appropriate scale where your data will be
+displayed in the map canvas.</p>
+<p>At the bottom, you can see a thumbnail of the layer, its legend symbol, and the palette.</p>
+</div>
+</div>
+<div class="section" id="style-menu">
+<span id="label-symbology"></span><span id="index-0"></span><h2><a class="toc-backref" href="#id5">Style Menu</a><a class="headerlink" href="#style-menu" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="band-rendering">
+<h3><a class="toc-backref" href="#id6">Band rendering</a><a class="headerlink" href="#band-rendering" title="Permalink to this headline">¶</a></h3>
+<p>QGIS offers four different <em class="guilabel">Render types</em>. The renderer chosen is dependent on the
+data type.</p>
+<ol class="arabic simple">
+<li>Multiband color - if the file comes as a multiband with several bands (e.g., used with a satellite image
+with several bands)</li>
+<li>Paletted - if a single band file comes with an indexed palette (e.g., used with a digital topographic map)</li>
+<li>Singleband gray - (one band of) the image will be rendered as gray; QGIS will choose this renderer
+if the file has neither multibands nor an indexed palette nor a continuous palette
+(e.g., used with a shaded relief map)</li>
+<li>Singleband pseudocolor - this renderer is possible for files with a continuous palette,
+or color map (e.g., used with an elevation map)</li>
+</ol>
+<p id="multiband-color"><strong>Multiband color</strong></p>
+<p>With the multiband color renderer, three selected bands from the image will be rendered, each band
+representing the red, green or blue component that will be used to create a color image. You can
+choose several <em class="guilabel">Contrast enhancement</em> methods: &#8216;No enhancement&#8217;, &#8216;Stretch to MinMax&#8217;,
+&#8216;Stretch and clip to MinMax&#8217; and &#8216;Clip to min max&#8217;.</p>
+<p id="figure-raster-2"><strong>Figure Raster 2:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterMultibandColor.png" src="../../../_images/rasterMultibandColor.png" />
+<p class="caption">Raster Renderer - Multiband color</p>
+</div>
+<p>This selection offers you a wide range of options to modify the appearance
+of your raster layer. First of all, you have to get the data range from your
+image. This can be done by choosing the <em class="guilabel">Extent</em> and pressing
+<strong>[Load]</strong>. QGIS can <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Estimate (faster)</em> the
+<em class="guilabel">Min</em> and <em class="guilabel">Max</em> values of the bands or use the
+<img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Actual (slower)</em> <em class="guilabel">Accuracy</em>.</p>
+<p>Now you can scale the colors with the help of the <em class="guilabel">Load min/max values</em> section.
+A lot of images have a few very low and high data. These outliers can be eliminated
+using the <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Cumulative count cut</em> setting. The standard data range is set
+from 2% to 98% of the data values and can be adapted manually. With this
+setting, the gray character of the image can disappear.
+With the scaling option <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Min/max</em>, QGIS creates a color table with all of
+the data included in the original image (e.g., QGIS creates a color table
+with 256 values, given the fact that you have 8 bit bands).
+You can also calculate your color table using the <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Mean +/- standard deviation x</em> <a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a>.
+Then, only the values within the standard deviation or within multiple standard deviations
+are considered for the color table. This is useful when you have one or two cells
+with abnormally high values in a raster grid that are having a negative impact on
+the rendering of the raster.</p>
+<p>All calculations can also be made for the <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Current</em> extent.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>Viewing a Single Band of a Multiband Raster</strong></p>
+<p class="last">If you want to view a single band of a multiband
+image (for example, Red), you might think you would set the Green and Blue bands to
+&#8220;Not Set&#8221;. But this is not the correct way. To display the Red band,
+set the image type to &#8216;Singleband gray&#8217;, then select Red as the band to use for Gray.</p>
+</div>
+<p><strong>Paletted</strong></p>
+<p>This is the standard render option for singleband files that already include a color table,
+where each pixel value is assigned to a certain color. In that case, the palette is
+rendered automatically. If you want to change colors assigned to certain values, just double-click
+on the color and the <em class="guilabel">Select color</em> dialog appears. Also, in QGIS it&#8217;s possible
+to assign a label to the color values. The label appears in the legend of the raster layer then.</p>
+<p id="figure-raster-3"><strong>Figure Raster 3:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterPaletted.png" src="../../../_images/rasterPaletted.png" />
+<p class="caption">Raster Renderer - Paletted</p>
+</div>
+<p id="index-1"><strong>Contrast enhancement</strong></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When adding GRASS rasters, the option <em>Contrast enhancement</em> will always be
+set automatically to <em>stretch to min max</em>, regardless of if this is set to another value
+in the QGIS general options.</p>
+</div>
+<p><strong>Singleband gray</strong></p>
+<p>This renderer allows you to render a single band layer with a <em class="guilabel">Color gradient</em>:
+&#8216;Black to white&#8217; or &#8216;White to black&#8217;. You can define a <em class="guilabel">Min</em>
+and a <em class="guilabel">Max</em> value by choosing the <em class="guilabel">Extent</em> first and
+then pressing <strong>[Load]</strong>. QGIS can <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Estimate (faster)</em> the
+<em class="guilabel">Min</em> and <em class="guilabel">Max</em> values of the bands or use the
+<img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Actual (slower)</em> <em class="guilabel">Accuracy</em>.</p>
+<p id="figure-raster-4"><strong>Figure Raster 4:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterSingleBandGray.png" src="../../../_images/rasterSingleBandGray.png" />
+<p class="caption">Raster Renderer - Singleband gray</p>
+</div>
+<p>With the <em class="guilabel">Load min/max values</em> section, scaling of the color table
+is possible. Outliers can be eliminated using the <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Cumulative count cut</em> setting.
+The standard data range is set from 2% to 98% of the data values and can
+be adapted manually. With this setting, the gray character of the image can disappear.
+Further settings can be made with <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Min/max</em> and
+<img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Mean +/- standard deviation x</em> <a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a>.
+While the first one creates a color table with all of the data included in the
+original image, the second creates a color table that only considers values
+within the standard deviation or within multiple standard deviations.
+This is useful when you have one or two cells with abnormally high values in
+a raster grid that are having a negative impact on the rendering of the raster.</p>
+<p><strong>Singleband pseudocolor</strong></p>
+<p>This is a render option for single-band files, including a continuous palette.
+You can also create individual color maps for the single bands here.</p>
+<p id="figure-raster-5"><strong>Figure Raster 5:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterSingleBandPseudocolor.png" src="../../../_images/rasterSingleBandPseudocolor.png" />
+<p class="caption">Raster Renderer - Singleband pseudocolor</p>
+</div>
+<span class="target" id="label-colormaptab"></span><span class="target" id="index-2"></span><p id="index-3">Three types of color interpolation are available:</p>
+<ol class="arabic simple">
+<li>Discrete</li>
+<li>Linear</li>
+<li>Exact</li>
+</ol>
+<p>In the left block, the button <a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> <sup>Add values manually</sup> adds a value to the
+individual color table. The button <a class="reference internal" href="../../../_images/symbologyRemove.png"><img alt="signMinus" src="../../../_images/symbologyRemove.png" style="width: 1.5em;" /></a> <sup>Remove selected row</sup>
+deletes a value from the individual color table, and the
+<a class="reference internal" href="../../../_images/mActionArrowDown.png"><img alt="arrowDown" src="../../../_images/mActionArrowDown.png" style="width: 1.5em;" /></a> <sup>Sort colormap items</sup> button sorts the color table according
+to the pixel values in the value column. Double clicking on the value column lets
+you insert a specific value. Double clicking on the color column opens the dialog
+<em class="guilabel">Change color</em>, where you can select a color to apply on that value. Further,
+you can also add labels for each color, but this value won&#8217;t be displayed when you use the identify
+feature tool.
+You can also click on the button <a class="reference internal" href="../../../_images/mActionDraw.png"><img alt="draw" src="../../../_images/mActionDraw.png" style="width: 1.5em;" /></a> <sup>Load color map from band</sup>,
+which tries to load the table from the band (if it has any). And you can use the
+buttons <a class="reference internal" href="../../../_images/mActionFileOpen.png"><img alt="fileOpen" src="../../../_images/mActionFileOpen.png" style="width: 1.5em;" /></a> <sup>Load color map from file</sup> or <a class="reference internal" href="../../../_images/mActionFileSaveAs.png"><img alt="fileSaveAs" src="../../../_images/mActionFileSaveAs.png" style="width: 1.5em;" /></a>
+<sup>Export color map to file</sup> to load an existing color table or to save the
+defined color table for other sessions.</p>
+<p>In the right block, <em class="guilabel">Generate new color map</em> allows you to create newly
+categorized color maps. For the <em class="guilabel">Classification mode</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> &#8216;Equal interval&#8217;,
+you only need to select the <em class="guilabel">number of classes</em>
+<a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a> and press the button <em class="guilabel">Classify</em>. You can invert the colors
+of the color map by clicking the <a class="reference internal" href="../../../_images/checkbox.png"><img alt="checkbox" src="../../../_images/checkbox.png" style="width: 1.3em;" /></a> <em class="guilabel">Invert</em>
+checkbox. In the case of the <em class="guilabel">Mode</em> <a class="reference internal" href="../../../_images/selectstring.png"><img alt="selectString" src="../../../_images/selectstring.png" style="width: 2.5em;" /></a> &#8216;Continous&#8217;, QGIS creates
+classes automatically depending on the <em class="guilabel">Min</em> and <em class="guilabel">Max</em>.
+Defining <em class="guilabel">Min/Max</em> values can be done with the help of the <em class="guilabel">Load min/max values</em> section.
+A lot of images have a few very low and high data. These outliers can be eliminated
+using the <img alt="radioButtonOn" src="../../../_images/radiobuttonon.png" /> <em class="guilabel">Cumulative count cut</em> setting. The standard data range is set
+from 2% to 98% of the data values and can be adapted manually. With this
+setting, the gray character of the image can disappear.
+With the scaling option <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Min/max</em>, QGIS creates a color table with all of
+the data included in the original image (e.g., QGIS creates a color table
+with 256 values, given the fact that you have 8 bit bands).
+You can also calculate your color table using the <img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Mean +/- standard deviation x</em> <a class="reference internal" href="../../../_images/selectnumber.png"><img alt="selectNumber" src="../../../_images/selectnumber.png" style="width: 2.8em;" /></a>.
+Then, only the values within the standard deviation or within multiple standard deviations
+are considered for the color table.</p>
+</div>
+<div class="section" id="color-rendering">
+<h3><a class="toc-backref" href="#id7">Color rendering</a><a class="headerlink" href="#color-rendering" title="Permalink to this headline">¶</a></h3>
+<p>For every <em class="guilabel">Band rendering</em>, a <em class="guilabel">Color rendering</em> is possible.</p>
+<p>You can also achieve special rendering effects for your raster file(s) using one
+of the blending modes (see <a class="reference internal" href="../working_with_vector/vector_properties.html#vector-properties-dialog"><em>The Vector Properties Dialog</em></a>).</p>
+<p>Further settings can be made in modifying the <em class="guilabel">Brightness</em>, the
+<em class="guilabel">Saturation</em> and the <em class="guilabel">Contrast</em>. You can also use a <em class="guilabel">Grayscale</em>
+option, where you can choose between &#8216;By lightness&#8217;, &#8216;By luminosity&#8217; and &#8216;By average&#8217;.
+For one hue in the color table, you can modify the &#8216;Strength&#8217;.</p>
+</div>
+<div class="section" id="resampling">
+<h3><a class="toc-backref" href="#id8">Resampling</a><a class="headerlink" href="#resampling" title="Permalink to this headline">¶</a></h3>
+<p>The <em class="guilabel">Resampling</em> option makes its appearance when you zoom in and out of an
+image. Resampling modes can optimize the appearance of the map. They calculate a new gray value
+matrix through a geometric transformation.</p>
+<p id="figure-raster-6"><strong>Figure Raster 6:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterRenderAndRessampling.png" src="../../../_images/rasterRenderAndRessampling.png" />
+<p class="caption">Raster Rendering - Resampling</p>
+</div>
+<p>When applying the &#8216;Nearest neighbour&#8217; method, the map can have a pixelated structure
+when zooming in. This appearance can be improved by using the &#8216;Bilinear&#8217; or &#8216;Cubic&#8217; method, which cause sharp features
+to be blurred. The effect is a smoother image. This method can be applied, for instance, to digital
+topographic raster maps.</p>
+</div>
+</div>
+<div class="section" id="transparency-menu">
+<span id="index-4"></span><h2><a class="toc-backref" href="#id9">Transparency Menu</a><a class="headerlink" href="#transparency-menu" title="Permalink to this headline">¶</a></h2>
+<p>QGIS has the ability to display each raster layer at a different transparency level.
+Use the transparency slider <img alt="slider" src="../../../_images/slider.png" /> to indicate to what extent the underlying layers
+(if any) should be visible though the current raster layer. This is very useful
+if you like to overlay more than one raster layer (e.g., a shaded relief map
+overlayed by a classified raster map). This will make the look of the map more
+three dimensional.</p>
+<p>Additionally, you can enter a raster value that should be treated as <em>NODATA</em> in
+the <em class="guilabel">Additional no data value</em> menu.</p>
+<p>An even more flexible way to customize the transparency can be done in the
+<em class="guilabel">Custom transparency options</em> section. The transparency of every pixel
+can be set here.</p>
+<p>As an example, we want to set the water of our example raster file <tt class="file docutils literal"><span class="pre">landcover.tif</span></tt>
+to a transparency of 20%. The following steps are necessary:</p>
+<ol class="arabic simple">
+<li>Load the raster file <tt class="file docutils literal"><span class="pre">landcover.tif</span></tt>.</li>
+<li>Open the <em class="guilabel">Properties</em> dialog by double-clicking on the raster
+name in the legend, or by right-clicking and choosing <em class="menuselection">Properties</em>
+from the pop-up menu.</li>
+<li>Select the <em class="guilabel">Transparency</em> menu.</li>
+<li>From the <em class="guilabel">Transparency band</em> menu, choose &#8216;None&#8217;.</li>
+<li>Click the <a class="reference internal" href="../../../_images/symbologyAdd.png"><img alt="signPlus" src="../../../_images/symbologyAdd.png" style="width: 1.5em;" /></a> <sup>Add values manually</sup>
+button. A new row will appear in the pixel list.</li>
+<li>Enter the raster value in the &#8216;From&#8217; and &#8216;To&#8217; column (we use 0 here), and adjust the transparency to 20%.</li>
+<li>Press the <strong>[Apply]</strong> button and have a look at the map.</li>
+</ol>
+<p>You can repeat steps 5 and 6 to adjust more values with custom transparency.</p>
+<p>As you can see, it is quite easy to set custom transparency, but it can be
+quite a lot of work. Therefore, you can use the button <a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a>
+<sup>Export to file</sup> to save your transparency list to a file. The button
+<a class="reference internal" href="../../../_images/mActionFileOpen.png"><img alt="fileOpen" src="../../../_images/mActionFileOpen.png" style="width: 1.5em;" /></a> <sup>Import from file</sup> loads your transparency settings and
+applies them to the current raster layer.</p>
+</div>
+<div class="section" id="pyramids-menu">
+<span id="index-5"></span><h2><a class="toc-backref" href="#id10">Pyramids Menu</a><a class="headerlink" href="#pyramids-menu" title="Permalink to this headline">¶</a></h2>
+<p>Large resolution raster layers can slow navigation in QGIS. By creating lower
+resolution copies of the data (pyramids), performance can be considerably
+improved, as QGIS selects the most suitable resolution to use depending on the
+level of zoom.</p>
+<p>You must have write access in the directory where the original data is stored
+to build pyramids.</p>
+<p>Several resampling methods can be used to calculate the pyramids:</p>
+<ul class="simple">
+<li>Nearest Neighbour</li>
+<li>Average</li>
+<li>Gauss</li>
+<li>Cubic</li>
+<li>Mode</li>
+<li>None</li>
+</ul>
+<p>If you choose &#8216;Internal (if possible)&#8217; from the <em class="guilabel">Overview format</em> menu,
+QGIS tries to build pyramids internally. You can also choose &#8216;External&#8217; and
+&#8216;External (Erdas Imagine)&#8217;.</p>
+<p id="figure-raster-7"><strong>Figure Raster 7:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterPyramids.png" src="../../../_images/rasterPyramids.png" />
+<p class="caption">The Pyramids Menu</p>
+</div>
+<p>Please note that building pyramids may alter the original data file, and once
+created they cannot be removed. If you wish to preserve a &#8216;non-pyramided&#8217;
+version of your raster, make a backup copy prior to building pyramids.</p>
+</div>
+<div class="section" id="histogram-menu">
+<span id="label-histogram"></span><h2><a class="toc-backref" href="#id11">Histogram Menu</a><a class="headerlink" href="#histogram-menu" title="Permalink to this headline">¶</a></h2>
+<p id="index-6">The <em class="guilabel">Histogram</em> menu allows you to view the distribution of the bands
+or colors in your raster. The histogram is generated automatically when you open the
+<em class="guilabel">Histogram</em> menu. All existing bands will be displayed together. You can
+save the histogram as an image with the <a class="reference internal" href="../../../_images/mActionFileSave.png"><img alt="fileSave" src="../../../_images/mActionFileSave.png" style="width: 1.5em;" /></a> button.
+With the <em class="guilabel">Visibility</em> option in the <a class="reference internal" href="../../../_images/mAction.png"><img alt="actionRun" src="../../../_images/mAction.png" style="width: 1.5em;" /></a> <em class="guilabel">Prefs/Actions</em> menu,
+you can display histograms of the individual bands. You will need to select the option
+<img alt="radioButtonOff" src="../../../_images/radiobuttonoff.png" /> <em class="guilabel">Show selected band</em>.
+The <em class="guilabel">Min/max options</em> allow you to &#8216;Always show min/max markers&#8217;, to &#8216;Zoom
+to min/max&#8217; and to &#8216;Update style to min/max&#8217;.
+With the <em class="guilabel">Actions</em> option, you can &#8216;Reset&#8217; and &#8216;Recompute histogram&#8217; after
+you have chosen the <em class="guilabel">Min/max options</em>.</p>
+<p id="figure-raster-8"><strong>Figure Raster 8:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterHistogram.png" src="../../../_images/rasterHistogram.png" />
+<p class="caption">Raster Histogram</p>
+</div>
+</div>
+<div class="section" id="metadata-menu">
+<span id="index-7"></span><h2><a class="toc-backref" href="#id12">Metadata Menu</a><a class="headerlink" href="#metadata-menu" title="Permalink to this headline">¶</a></h2>
+<p>The <em class="guilabel">Metadata</em> menu displays a wealth of information about the raster layer,
+including statistics about each band in the current raster layer. From this menu, entries may be
+made for the <em class="guilabel">Description</em>, <em class="guilabel">Attribution</em>, <em class="guilabel">MetadataUrl</em> and
+<em class="guilabel">Properties</em>. In <em class="guilabel">Properties</em>, statistics are gathered on a &#8216;need to know&#8217;
+basis, so it may well be that a given layer&#8217;s statistics have not yet been collected.</p>
+<p id="figure-raster-9"><strong>Figure Raster 9:</strong></p>
+<div class="figure align-center">
+<img alt="../../../_images/rasterMetadata.png" src="../../../_images/rasterMetadata.png" />
+<p class="caption">Raster Metadata</p>
+</div>
+</div>
+</div>
+
+                        
+                    
+                </div>
+                  
+            </div>
+        </div>
+    
+
+    <!--<a href="https://github.com/qgis/"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 10000;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>-->
+    <div class="related">
+       
+      
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="raster_analysis.html" title="Raster Analysis"
+             >next</a></li>
+        <li class="right" >
+          <a href="supported_data.html" title="Working with Raster Data"
+             >previous</a> |</li>
+        <li><a href="../../index.html"></a> &raquo;</li>
+          <li><a href="../index.html" >QGIS User Guide</a> &raquo;</li>
+          <li><a href="index.html" >Working with Raster Data</a> &raquo;</li> 
+      </ul>
+    </div>
+  <footer class="footer">
+
+    <div class="container">
+        <div>
+          <ul class="unstyled inline" id="social">
+            <li id="twitter"><a href="http://twitter.com/qgis" class="external"><div></div></a></li>
+            <li id="facebook"><a href="https://www.facebook.com/pages/QGIS-Quantum-GIS-/298112000235096" class="external"><div></div></a></li>
+            <li id="gplus"><a href="http://plus.google.com/communities/114776597176808981624" class="external"><div></div></a></li>
+            <li id="github"><a href="http://github.com/qgis/" class="external"><div></div></a></li>
+            <!--<li id="aboutcontact"><a href="../../../site/getinvolved/about.html"><div></div></a></li>-->
+            <li id="aboutcontact"><a href="http://www.qgis.org/en/site/getinvolved/about.html"><div></div></a></li>
+          </ul>
+        </div>
+
+        <p class="credit">If not stated otherwise, all content is licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 licence (CC BY-SA)</a></p>
+    </div>
+    <div class="container">
+      <p class="credit">
+        Select graphics from <a href="http://thenounproject.com" target="_blank">The Noun Project collection</a>
+        
+        
+      </p>
+      <p class="credit">
+        <!--
+        Untranslated page? Or you spot a translation error:
+        <a id="fix_translation_link" target="_blank" href="https://www.transifex.com/projects/p/qgis-documentation/">fix me</a>
+        <br/>
+        -->
+        Textual error, missing text or you know better:
+        <a id="fix_text_link" target="_blank" href="https://github.com/qgis/QGIS-Documentation">fix me</a>
+      </p>
+    </div>
+  </footer>
+
+  </body>
+</html>
