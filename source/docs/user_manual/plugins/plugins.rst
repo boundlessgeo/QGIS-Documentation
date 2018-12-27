@@ -246,18 +246,18 @@ directly from their repository.
    :width: 1em
 .. |plugin| image:: /static/common/plugin.png
    :width: 1.5em
-.. |pluginInstalled| image:: /static/common/plugin-installed.png
-   :width: 1.5em
-.. |pluginInvalid| image:: /static/common/plugin-incompatible.png
-   :width: 1.5em
 .. |plugin-new| image:: /static/common/plugin-new.png
    :width: 1.5em
 .. |plugin-upgrade| image:: /static/common/plugin-upgrade.png
+   :width: 1.5em
+.. |pluginInstalled| image:: /static/common/plugin-installed.png
+   :width: 1.5em
+.. |pluginInvalid| image:: /static/common/plugin-incompatible.png
    :width: 1.5em
 .. |showPluginManager| image:: /static/common/mActionShowPluginManager.png
    :width: 1.5em
 .. |transformSettings| image:: /static/common/mActionTransformSettings.png
    :width: 1.5em
-.. |updatedisclaimer| replace:: :disclaimer:`Docs in progress for 'QGIS testing'. Visit https://docs.qgis.org/2.18 for QGIS 2.18 docs and translations.`
+.. |updatedisclaimer| replace:: :disclaimer:`Community documentation. Still a work in progress for version QGIS 3.x. Some features descriptions may not be updated to the QGIS version shipped with Boundless Desktop.`
 .. |win| image:: /static/common/win.png
    :width: 1em

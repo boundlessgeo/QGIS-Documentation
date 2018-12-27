@@ -186,16 +186,16 @@ the Python console behavior:
    please add it also to the substitutions.txt file in the
    source folder.
 
-.. |helpContents| image:: /static/common/mActionHelpContents.png
-   :width: 1.5em
 .. |clearConsole| image:: /static/common/iconClearConsole.png
    :width: 1.5em
+.. |helpContents| image:: /static/common/mActionHelpContents.png
+   :width: 1.5em
+.. |options| image:: /static/common/mActionOptions.png
+   :width: 1em
 .. |runConsole| image:: /static/common/iconRunConsole.png
    :width: 1.5em
 .. |showEditorConsole| image:: /static/common/iconShowEditorConsole.png
    :width: 1.5em
-.. |options| image:: /static/common/mActionOptions.png
-   :width: 1em
 .. |start| image:: /static/common/mActionStart.png
    :width: 1.5em
-.. |updatedisclaimer| replace:: :disclaimer:`Docs in progress for 'QGIS testing'. Visit https://docs.qgis.org/2.18 for QGIS 2.18 docs and translations.`
+.. |updatedisclaimer| replace:: :disclaimer:`Community documentation. Still a work in progress for version QGIS 3.x. Some features descriptions may not be updated to the QGIS version shipped with Boundless Desktop.`

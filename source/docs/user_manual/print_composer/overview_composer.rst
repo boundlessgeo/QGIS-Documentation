@@ -891,7 +891,7 @@ the actions done after the selected one will be removed.
    :width: 1.5em
 .. |unlocked| image:: /static/common/unlocked.png
    :width: 1.5em
-.. |updatedisclaimer| replace:: :disclaimer:`Docs in progress for 'QGIS testing'. Visit https://docs.qgis.org/2.18 for QGIS 2.18 docs and translations.`
+.. |updatedisclaimer| replace:: :disclaimer:`Community documentation. Still a work in progress for version QGIS 3.x. Some features descriptions may not be updated to the QGIS version shipped with Boundless Desktop.`
 .. |vectorGrid| image:: /static/common/vector_grid.png
    :width: 1.5em
 .. |zoomActual| image:: /static/common/mActionZoomActual.png

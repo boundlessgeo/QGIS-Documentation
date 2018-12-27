@@ -622,7 +622,7 @@ viewing the field.
 
 .. |checkbox| image:: /static/common/checkbox.png
    :width: 1.3em
-.. |color|  image:: /static/common/color.png
+.. |color| image:: /static/common/color.png
 .. |dataDefined| image:: /static/common/mIconDataDefine.png
    :width: 1.5em
 .. |duplicateLayer| image:: /static/common/mActionDuplicateLayer.png
@@ -661,4 +661,4 @@ viewing the field.
    :width: 1.5em
 .. |unchecked| image:: /static/common/checkbox_unchecked.png
    :width: 1.3em
-.. |updatedisclaimer| replace:: :disclaimer:`Docs in progress for 'QGIS testing'. Visit https://docs.qgis.org/2.18 for QGIS 2.18 docs and translations.`
+.. |updatedisclaimer| replace:: :disclaimer:`Community documentation. Still a work in progress for version QGIS 3.x. Some features descriptions may not be updated to the QGIS version shipped with Boundless Desktop.`

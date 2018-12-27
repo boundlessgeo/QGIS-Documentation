@@ -552,13 +552,9 @@ collected.
 
 .. |actionRun| image:: /static/common/mAction.png
    :width: 1.5em
-.. |arrowDown| image:: /static/common/mActionArrowDown.png
-   :width: 1.5em
 .. |checkbox| image:: /static/common/checkbox.png
    :width: 1.3em
 .. |contextHelp| image:: /static/common/mActionContextHelp.png
-   :width: 1.5em
-.. |draw| image:: /static/common/mActionDraw.png
    :width: 1.5em
 .. |editMetadata| image:: /static/common/editmetadata.png
    :width: 1.5em
@@ -573,15 +569,15 @@ collected.
 .. |mapIdentification| image:: /static/common/mActionMapIdentification.png
    :width: 1.5em
 .. |metadata| image:: /static/common/metadata.png
-   :width: 1.5em
-.. |overlay| image:: /static/common/overlay.png
    :width: 2em
-.. |pyramids| image:: /static/common/pyramids.png
+.. |overlay| image:: /static/common/overlay.png
    :width: 1.5em
-.. |rasterHistogram| image:: /static/common/rasterHistogram.png
+.. |pyramids| image:: /static/common/pyramids.png
    :width: 1.5em
 .. |radioButtonOff| image:: /static/common/radiobuttonoff.png
 .. |radioButtonOn| image:: /static/common/radiobuttonon.png
+.. |rasterHistogram| image:: /static/common/rasterHistogram.png
+   :width: 1.5em
 .. |rendering| image:: /static/common/rendering.png
    :width: 1.5em
 .. |selectNumber| image:: /static/common/selectnumber.png
@@ -598,7 +594,7 @@ collected.
 .. |symbology| image:: /static/common/symbology.png
    :width: 2em
 .. |system| image:: /static/common/system.png
-   :width: 2em
+   :width: 1.5em
 .. |transparency| image:: /static/common/transparency.png
-   :width: 2em
-.. |updatedisclaimer| replace:: :disclaimer:`Docs in progress for 'QGIS testing'. Visit https://docs.qgis.org/2.18 for QGIS 2.18 docs and translations.`
+   :width: 1.5em
+.. |updatedisclaimer| replace:: :disclaimer:`Community documentation. Still a work in progress for version QGIS 3.x. Some features descriptions may not be updated to the QGIS version shipped with Boundless Desktop.`
