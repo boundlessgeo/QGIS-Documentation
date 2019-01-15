@@ -14,7 +14,8 @@ Please have a look into one of the documents below.
 
    User Guide/Manual <user_manual/index>
    PyQGIS Cookbook <pyqgis_developer_cookbook/index>
-   Developers Guide <developers_guide/index>
+
+.. Developers Guide <developers_guide/index>
    Documentation Guidelines <documentation_guidelines/index>
    A Gentle Introduction to GIS <gentle_gis_introduction/index>
    Training Manual <training_manual/index>
